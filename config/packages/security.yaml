@@ -13,7 +13,9 @@ security:
             entity:
                 class: App\Entity\Knjiznica
                 property: email
-
+        chain_provider:
+            chain:
+                providers: [ user_provider, library_provider ]
         users_in_memory: { memory: null }
     firewalls:
         dev:

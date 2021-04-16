@@ -1,26 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f7ad96ef-ef3d-49e5-b168-059c47d86df0" name="Default Changelist" comment="Crud">
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210416182456.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210416182759.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/KnjizniceAuthenticatorController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/KorisniciSecurityController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/ProfilController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Security/KnjizniceAuthenticator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Security/KorisniciAuthenticator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/korisnickiProfil/login.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/korisnickiProfil/mainProfile.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+    <list default="true" id="f7ad96ef-ef3d-49e5-b168-059c47d86df0" name="Default Changelist" comment="User Login Works">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AutoriController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AutoriController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DrzaveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DrzaveController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/KorisniciController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/KorisniciController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/StatusiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/StatusiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Knjiznice.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Knjiznice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Korisnici.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Korisnici.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +164,7 @@
       <updated>1618563051194</updated>
       <workItem from="1618563053199" duration="9633000" />
       <workItem from="1618575257180" duration="5161000" />
-      <workItem from="1618590738014" duration="13432000" />
+      <workItem from="1618590738014" duration="14759000" />
     </task>
     <task id="LOCAL-00001" summary="Crud">
       <created>1618593254167</created>
@@ -197,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618593268549</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="User Login Works">
+      <created>1618606325597</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618606325597</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +207,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Crud" />
-    <option name="LAST_COMMIT_MESSAGE" value="Crud" />
+    <MESSAGE value="User Login Works" />
+    <option name="LAST_COMMIT_MESSAGE" value="User Login Works" />
   </component>
 </project>
