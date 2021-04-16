@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pregled korisnika{% endblock %}
+
+{% block body %}
+    <h1>Korisnik</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ korisnici.id }}</td>
+            </tr>
+            <tr>
+                <th>Ime</th>
+                <td>{{ korisnici.ime }}</td>
+            </tr>
+            <tr>
+                <th>Prezime</th>
+                <td>{{ korisnici.prezime }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ korisnici.email }}</td>
+            </tr>
+            <tr>
+                <th>Lozinka</th>
+                <td>{{ korisnici.lozinka }}</td>
+            </tr>
+            <tr>
+                <th>Broj Telefona</th>
+                <td>{{ korisnici.brojTelefona }}</td>
+            </tr>
+            <tr>
+                <th>Fotografija</th>
+                <td>{{ korisnici.fotografija }}</td>
+            </tr>
+            <tr>
+                <th>Razred</th>
+                <td>{{ korisnici.razred }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('korisnici_index') }}">natrag na popis korisnika</a>
+
+    <a href="{{ path('korisnici_edit', {'id': korisnici.id}) }}">Uredi</a>
+
+    {{ include('korisnici/_delete_form.html.twig') }}
+{% endblock %}

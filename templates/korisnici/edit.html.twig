@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Uređivanje korisnika{% endblock %}
+
+{% block body %}
+    <h1>Uredi korisnika</h1>
+
+    {{ include('korisnici/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('korisnici_index') }}">natrag na popis korisnika</a>
+
+    {{ include('korisnici/_delete_form.html.twig') }}
+{% endblock %}

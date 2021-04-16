@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dodavanje korisnika{% endblock %}
+
+{% block body %}
+    <h1>Dodaj novog korisnika</h1>
+
+    {{ include('korisnici/_form.html.twig') }}
+
+    <a href="{{ path('korisnici_index') }}">natrag na popis korisnika</a>
+{% endblock %}

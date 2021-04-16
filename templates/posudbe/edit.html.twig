@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Uređivanje posudbi{% endblock %}
+
+{% block body %}
+    <h1>Uredi posidbu</h1>
+
+    {{ include('posudbe/_form.html.twig', {'button_label': 'Spremi'}) }}
+
+    <a href="{{ path('posudbe_index') }}">natrag na popis posudbu</a>
+
+    {{ include('posudbe/_delete_form.html.twig') }}
+{% endblock %}

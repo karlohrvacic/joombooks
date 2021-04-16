@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Popis posudbi% endblock %}
+
+{% block body %}
+    <h1>Popis posudbi</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Broj Građje</th>
+                <th>Broj Iskaznice Korisnika</th>
+                <th>Datum Posudbe</th>
+                <th>Datum Roka Vracanja</th>
+                <th>Datum Vracanja</th>
+                <th>Opcije</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for posudbe in posudbes %}
+            <tr>
+                <td>{{ posudbe.id }}</td>
+                <td>{{ posudbe.idGradje }}</td>
+                <td>{{ posudbe.brojIskazniceKorisnika }}</td>
+                <td>{{ posudbe.datumPosudbe ? posudbe.datumPosudbe|date('Y-m-d') : '' }}</td>
+                <td>{{ posudbe.datumRokaVracanja ? posudbe.datumRokaVracanja|date('Y-m-d') : '' }}</td>
+                <td>{{ posudbe.datumVracanja ? posudbe.datumVracanja|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('posudbe_show', {'id': posudbe.id}) }}">Pokaži</a>
+                    <a href="{{ path('posudbe_edit', {'id': posudbe.id}) }}">Uredi</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('posudbe_new') }}">Create new</a>
+{% endblock %}

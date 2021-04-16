@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nova posudba{% endblock %}
+
+{% block body %}
+    <h1>Dodaj posubu</h1>
+
+    {{ include('posudbe/_form.html.twig') }}
+
+    <a href="{{ path('posudbe_index') }}">natrag na popis posudbi</a>
+{% endblock %}
