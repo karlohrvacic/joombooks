@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dodavanje države{% endblock %}
+
+{% block body %}
+    <h1>Upišite novu državu</h1>
+
+    {{ include('drzave/_form.html.twig') }}
+
+    <a href="{{ path('drzave_index') }}">natrag na popis država</a>
+{% endblock %}

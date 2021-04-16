@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Uređivanje država{% endblock %}
+
+{% block body %}
+    <h1>Uređivanje država</h1>
+
+    {{ include('drzave/_form.html.twig', {'button_label': 'Spremi'}) }}
+
+    <a href="{{ path('drzave_index') }}">natrag na popis država</a>
+
+    {{ include('drzave/_delete_form.html.twig') }}
+{% endblock %}

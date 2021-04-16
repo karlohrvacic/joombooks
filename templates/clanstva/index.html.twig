@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Članstva{% endblock %}
+
+{% block body %}
+    <h1>Popis članstva</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Broj Iskaznice Korisnika</th>
+                <th>Opcije</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for clanstva in clanstvas %}
+            <tr>
+                <td>{{ clanstva.id }}</td>
+                <td>{{ clanstva.brojIskazniceKorisnika }}</td>
+                <td>
+                    <a href="{{ path('clanstva_show', {'id': clanstva.id}) }}">Ukloni</a>
+                    <a href="{{ path('clanstva_edit', {'id': clanstva.id}) }}">Uredi</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">nema članstva</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('clanstva_new') }}">Dodaj</a>
+{% endblock %}

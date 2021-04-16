@@ -80,4 +80,8 @@ class Drzave
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->naziv;
+    }
 }

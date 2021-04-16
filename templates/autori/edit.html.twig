@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Uređivanje autora{% endblock %}
+
+{% block body %}
+    <h1>Uređivanje autora</h1>
+
+    {{ include('autori/_form.html.twig', {'button_label': 'Spremi'}) }}
+
+    <a href="{{ path('autori_index') }}">natrag na popis autora</a>
+
+    {{ include('autori/_delete_form.html.twig') }}
+{% endblock %}

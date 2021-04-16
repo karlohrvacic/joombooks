@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Uređivanje članstva{% endblock %}
+
+{% block body %}
+    <h1>Uređivanje članstva</h1>
+
+    {{ include('clanstva/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('clanstva_index') }}">natrag na listu članstva</a>
+
+    {{ include('clanstva/_delete_form.html.twig') }}
+{% endblock %}

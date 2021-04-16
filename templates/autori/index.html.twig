@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Popis autora{% endblock %}
+
+{% block body %}
+    <h1>Popis autora</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Opcije</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for autori in autoris %}
+            <tr>
+                <td>{{ autori.id }}</td>
+                <td>{{ autori.ime }}</td>
+                <td>{{ autori.prezime }}</td>
+                <td>
+                    <a href="{{ path('autori_show', {'id': autori.id}) }}">Prikaži</a>
+                    <a href="{{ path('autori_edit', {'id': autori.id}) }}">Uredi</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Nema pronađenih autora</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('autori_new') }}">Dodaj</a>
+{% endblock %}

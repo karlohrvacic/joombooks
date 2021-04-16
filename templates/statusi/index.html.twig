@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Popis statusa{% endblock %}
+
+{% block body %}
+    <h1>Popis statusa</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Naziv</th>
+                <!--<th>Opcije</th>-->
+            </tr>
+        </thead>
+        <tbody>
+        {% for statusi in statusis %}
+            <tr>
+                <td>{{ statusi.id }}</td>
+                <td>{{ statusi.naziv }}</td>
+               <!-- <td>
+                    <a href="{{ path('statusi_show', {'id': statusi.id}) }}">show</a>
+                    <a href="{{ path('statusi_edit', {'id': statusi.id}) }}">edit</a>
+                </td>-->
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Nema pronađenih statusa</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <!-- <a href="{{ path('statusi_new') }}">Dodaj</a>-->
+{% endblock %}

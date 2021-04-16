@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('autori_delete', {'id': autori.id}) }}" onsubmit="return confirm('Jeste li sigurni da želite ukolniti autora?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ autori.id) }}">
+    <button class="btn">Ukloni</button>
+</form>

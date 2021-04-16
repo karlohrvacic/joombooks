@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('clanstva_delete', {'id': clanstva.id}) }}" onsubmit="return confirm('Jeste li sigurni da želite ukloniti članstvo?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ clanstva.id) }}">
+    <button class="btn">Ukloni</button>
+</form>

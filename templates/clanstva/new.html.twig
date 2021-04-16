@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dodavanje članstva{% endblock %}
+
+{% block body %}
+    <h1>Dodavanje članstva</h1>
+
+    {{ include('clanstva/_form.html.twig') }}
+
+    <a href="{{ path('clanstva_index') }}">natrag na popis članstva</a>
+{% endblock %}

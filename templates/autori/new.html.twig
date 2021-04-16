@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dodavanje autora{% endblock %}
+
+{% block body %}
+    <h1>Upišite novog autora</h1>
+
+    {{ include('autori/_form.html.twig') }}
+
+    <a href="{{ path('autori_index') }}">natrag na popis autora</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pregled članstva{% endblock %}
+
+{% block body %}
+    <h1>Pregled članstva</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ clanstva.id }}</td>
+            </tr>
+            <tr>
+                <th>Broj Iskaznice Korisnika</th>
+                <td>{{ clanstva.brojIskazniceKorisnika }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('clanstva_index') }}">nazad na popis članstva</a>
+
+    <a href="{{ path('clanstva_edit', {'id': clanstva.id}) }}">Uredi</a>
+
+    {{ include('clanstva/_delete_form.html.twig') }}
+{% endblock %}
