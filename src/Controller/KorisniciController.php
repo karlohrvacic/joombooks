@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/korisnici')]
+#[Route('/knjiznica/korisnici')]
 class KorisniciController extends AbstractController
 {
     #[Route('/', name: 'korisnici_index', methods: ['GET'])]

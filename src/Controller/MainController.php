@@ -18,9 +18,6 @@ class MainController extends AbstractController
      */
     public function index()
     {
-        $product = $this->getDoctrine()
-            ->getRepository(Drzave::class)
-            ->find(1);
 
         return $this->render('base.html.twig',[
 

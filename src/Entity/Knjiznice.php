@@ -6,11 +6,12 @@ use App\Repository\KnjizniceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=KnjizniceRepository::class)
  */
-class Knjiznice
+class Knjiznice implements UserInterface
 {
     /**
      * @ORM\Id
@@ -68,6 +69,11 @@ class Knjiznice
      * @ORM\OneToMany(targetEntity=Clanstva::class, mappedBy="knjiznica")
      */
     private $clanstva;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     public function __construct()
     {
@@ -235,4 +241,49 @@ class Knjiznice
 
         return $this;
     }
+
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_LIBRARY';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getPassword()
+    {
+        return (string) $this->lozinka;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getUsername()
+    {
+        return (string) $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
 }
+
