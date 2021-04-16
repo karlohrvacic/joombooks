@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AutoriRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,10 +29,21 @@ class Autori
      */
     private $prezime;
 
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToMany(targetEntity=Gradja::class, mappedBy="autori")
+     */
+    private $popisGradje;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Drzave::class, inversedBy="autori")
      */
     private $drzava;
+
+    public function __construct()
+    {
+        $this->popisGradje = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,12 +74,39 @@ class Autori
         return $this;
     }
 
-    public function getDrzava(): ?string
+    /**
+     * @return Collection|Gradja[]
+     */
+    public function getPopisGradje(): Collection
+    {
+        return $this->popisGradje;
+    }
+
+    public function addPopisGradje(Gradja $popisGradje): self
+    {
+        if (!$this->popisGradje->contains($popisGradje)) {
+            $this->popisGradje[] = $popisGradje;
+            $popisGradje->addAutori($this);
+        }
+
+        return $this;
+    }
+
+    public function removePopisGradje(Gradja $popisGradje): self
+    {
+        if ($this->popisGradje->removeElement($popisGradje)) {
+            $popisGradje->removeAutori($this);
+        }
+
+        return $this;
+    }
+
+    public function getDrzava(): ?Drzave
     {
         return $this->drzava;
     }
 
-    public function setDrzava(?string $drzava): self
+    public function setDrzava(?Drzave $drzava): self
     {
         $this->drzava = $drzava;
 

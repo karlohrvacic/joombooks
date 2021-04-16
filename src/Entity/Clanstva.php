@@ -23,14 +23,17 @@ class Clanstva
     private $brojIskazniceKorisnika;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Korisnici::class, inversedBy="clanstva")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $oibKnjiznice;
+    private $korisnik;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Knjiznice::class, inversedBy="clanstva")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idKorisnika;
+    private $knjiznica;
+
 
     public function getId(): ?int
     {
@@ -49,26 +52,26 @@ class Clanstva
         return $this;
     }
 
-    public function getOibKnjiznice(): ?string
+    public function getKorisnik(): ?Korisnici
     {
-        return $this->oibKnjiznice;
+        return $this->korisnik;
     }
 
-    public function setOibKnjiznice(string $oibKnjiznice): self
+    public function setKorisnik(?Korisnici $korisnik): self
     {
-        $this->oibKnjiznice = $oibKnjiznice;
+        $this->korisnik = $korisnik;
 
         return $this;
     }
 
-    public function getIdKorisnika(): ?int
+    public function getKnjiznica(): ?Knjiznice
     {
-        return $this->idKorisnika;
+        return $this->knjiznica;
     }
 
-    public function setIdKorisnika(int $idKorisnika): self
+    public function setKnjiznica(?Knjiznice $knjiznica): self
     {
-        $this->idKorisnika = $idKorisnika;
+        $this->knjiznica = $knjiznica;
 
         return $this;
     }

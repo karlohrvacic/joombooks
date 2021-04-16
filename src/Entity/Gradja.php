@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GradjaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,10 +49,6 @@ class Gradja
      */
     private $datumDodavanja;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $status;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -61,6 +59,45 @@ class Gradja
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $jezik;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $brojInventara;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Autori::class, inversedBy="popisGradje")
+     */
+    private $autori;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Statusi::class, inversedBy="gradje")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Zanrovi::class, inversedBy="gradje")
+     */
+    private $zanrovi;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Knjiznice::class, inversedBy="gradje")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $knjiznicaVlasnik;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Posudbe::class, mappedBy="gradja")
+     */
+    private $posudbe;
+
+    public function __construct()
+    {
+        $this->autori = new ArrayCollection();
+        $this->zanrovi = new ArrayCollection();
+        $this->posudbe = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -139,17 +176,6 @@ class Gradja
         return $this;
     }
 
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
 
     public function getGodinaIzdanja(): ?\DateTimeInterface
     {
@@ -171,6 +197,120 @@ class Gradja
     public function setJezik(?string $jezik): self
     {
         $this->jezik = $jezik;
+
+        return $this;
+    }
+
+    public function getBrojInventara(): ?string
+    {
+        return $this->brojInventara;
+    }
+
+    public function setBrojInventara(string $brojInventara): self
+    {
+        $this->brojInventara = $brojInventara;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Autori[]
+     */
+    public function getAutori(): Collection
+    {
+        return $this->autori;
+    }
+
+    public function addAutori(Autori $autori): self
+    {
+        if (!$this->autori->contains($autori)) {
+            $this->autori[] = $autori;
+        }
+
+        return $this;
+    }
+
+    public function removeAutori(Autori $autori): self
+    {
+        $this->autori->removeElement($autori);
+
+        return $this;
+    }
+
+    public function getStatus(): ?Statusi
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Statusi $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Zanrovi[]
+     */
+    public function getZanrovi(): Collection
+    {
+        return $this->zanrovi;
+    }
+
+    public function addZanrovi(Zanrovi $zanrovi): self
+    {
+        if (!$this->zanrovi->contains($zanrovi)) {
+            $this->zanrovi[] = $zanrovi;
+        }
+
+        return $this;
+    }
+
+    public function removeZanrovi(Zanrovi $zanrovi): self
+    {
+        $this->zanrovi->removeElement($zanrovi);
+
+        return $this;
+    }
+
+    public function getKnjiznicaVlasnik(): ?Knjiznice
+    {
+        return $this->knjiznicaVlasnik;
+    }
+
+    public function setKnjiznicaVlasnik(?Knjiznice $knjiznicaVlasnik): self
+    {
+        $this->knjiznicaVlasnik = $knjiznicaVlasnik;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Posudbe[]
+     */
+    public function getPosudbe(): Collection
+    {
+        return $this->posudbe;
+    }
+
+    public function addPosudbe(Posudbe $posudbe): self
+    {
+        if (!$this->posudbe->contains($posudbe)) {
+            $this->posudbe[] = $posudbe;
+            $posudbe->setGradja($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosudbe(Posudbe $posudbe): self
+    {
+        if ($this->posudbe->removeElement($posudbe)) {
+            // set the owning side to null (unless already changed)
+            if ($posudbe->getGradja() === $this) {
+                $posudbe->setGradja(null);
+            }
+        }
 
         return $this;
     }

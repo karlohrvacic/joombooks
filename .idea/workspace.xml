@@ -5,6 +5,12 @@
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.env.test" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jumkabooks.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/bin/console" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/bin/phpunit" afterDir="false" />
@@ -47,8 +53,26 @@
       <change afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Controller/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Entity/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Autori.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Clanstva.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Drzave.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Gradja.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Knjiznice.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Korisnici.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Posudbe.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Statusi.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Zanrovi.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Kernel.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Repository/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/AutoriRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/ClanstvaRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/DrzaveRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/GradjaRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/KnjizniceRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/KorisniciRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/PosudbeRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/StatusiRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/ZanroviRepository.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/tests/bootstrap.php" afterDir="false" />
@@ -194,7 +218,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1618563051194</updated>
-      <workItem from="1618563053199" duration="1888000" />
+      <workItem from="1618563053199" duration="4201000" />
     </task>
     <servers />
   </component>

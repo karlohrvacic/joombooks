@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ZanroviRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,16 @@ class Zanrovi
      */
     private $naziv;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Gradja::class, mappedBy="zanrovi")
+     */
+    private $gradje;
+
+    public function __construct()
+    {
+        $this->gradje = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +47,33 @@ class Zanrovi
     public function setNaziv(string $naziv): self
     {
         $this->naziv = $naziv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Gradja[]
+     */
+    public function getGradje(): Collection
+    {
+        return $this->gradje;
+    }
+
+    public function addGradje(Gradja $gradje): self
+    {
+        if (!$this->gradje->contains($gradje)) {
+            $this->gradje[] = $gradje;
+            $gradje->addZanrovi($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGradje(Gradja $gradje): self
+    {
+        if ($this->gradje->removeElement($gradje)) {
+            $gradje->removeZanrovi($this);
+        }
 
         return $this;
     }

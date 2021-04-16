@@ -43,7 +43,14 @@ class Posudbe
     private $datumVracanja;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Gradja::class, inversedBy="posudbe")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $gradja;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Statusi::class, inversedBy="posudbe")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $status;
 
@@ -112,12 +119,24 @@ class Posudbe
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getGradja(): ?Gradja
+    {
+        return $this->gradja;
+    }
+
+    public function setGradja(?Gradja $gradja): self
+    {
+        $this->gradja = $gradja;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Statusi
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus(?Statusi $status): self
     {
         $this->status = $status;
 

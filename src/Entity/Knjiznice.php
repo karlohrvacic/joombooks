@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\KnjizniceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,6 +58,22 @@ class Knjiznice
      * @ORM\Column(type="integer")
      */
     private $maxRezerviranih;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Gradja::class, mappedBy="knjiznicaVlasnik")
+     */
+    private $gradje;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Clanstva::class, mappedBy="knjiznica")
+     */
+    private $clanstva;
+
+    public function __construct()
+    {
+        $this->gradje = new ArrayCollection();
+        $this->clanstva = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,6 +172,66 @@ class Knjiznice
     public function setMaxRezerviranih(int $maxRezerviranih): self
     {
         $this->maxRezerviranih = $maxRezerviranih;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Gradja[]
+     */
+    public function getGradje(): Collection
+    {
+        return $this->gradje;
+    }
+
+    public function addGradje(Gradja $gradje): self
+    {
+        if (!$this->gradje->contains($gradje)) {
+            $this->gradje[] = $gradje;
+            $gradje->setKnjiznicaVlasnik($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGradje(Gradja $gradje): self
+    {
+        if ($this->gradje->removeElement($gradje)) {
+            // set the owning side to null (unless already changed)
+            if ($gradje->getKnjiznicaVlasnik() === $this) {
+                $gradje->setKnjiznicaVlasnik(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Clanstva[]
+     */
+    public function getClanstva(): Collection
+    {
+        return $this->clanstva;
+    }
+
+    public function addClanstva(Clanstva $clanstva): self
+    {
+        if (!$this->clanstva->contains($clanstva)) {
+            $this->clanstva[] = $clanstva;
+            $clanstva->setKnjiznica($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClanstva(Clanstva $clanstva): self
+    {
+        if ($this->clanstva->removeElement($clanstva)) {
+            // set the owning side to null (unless already changed)
+            if ($clanstva->getKnjiznica() === $this) {
+                $clanstva->setKnjiznica(null);
+            }
+        }
 
         return $this;
     }
