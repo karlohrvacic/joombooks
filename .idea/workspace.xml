@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f7ad96ef-ef3d-49e5-b168-059c47d86df0" name="Default Changelist" comment="User Login Works">
-      <change afterPath="$PROJECT_DIR$/src/Controller/BarcodeController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/GetUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/korisnickiProfil/korisnickiProfil.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jumkabooks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jumkabooks.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="f7ad96ef-ef3d-49e5-b168-059c47d86df0" name="Default Changelist" comment="Getting user object">
+      <change afterPath="$PROJECT_DIR$/public/files/pitcures/profile/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/ActivateController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/GradjaController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/GradjaType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/ZanroviType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/activate/activate.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/gradja/_delete_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/gradja/_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/gradja/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/gradja/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/gradja/new.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/gradja/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ClanstvaController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/KnjizniceAuthenticatorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/KnjizniceAuthenticatorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/KorisniciController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/KorisniciController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PosudbeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PosudbeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProfilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProfilController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Autori.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Autori.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Clanstva.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Knjiznice.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Knjiznice.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Korisnici.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Korisnici.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Posudbe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Posudbe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Statusi.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Statusi.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zanrovi.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Zanrovi.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ClanstvaType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ClanstvaRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/KnjizniceAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/KnjizniceAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/KorisniciAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/KorisniciAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/korisnickiProfil/login.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/korisnickiProfil/mainProfile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/korisnickiProfil/knjiznicaProfil.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/AutoriType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AutoriType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/KorisniciType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/KorisniciType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/PosudbeType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/PosudbeType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/korisnici/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/korisnici/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,6 +175,7 @@
       <recent name="D:\Programming\xampp\htdocs\jumkabooks\templates\korisnickiProfil" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programming\xampp\htdocs\jumkabooks\templates\activate" />
       <recent name="D:\Programming\xampp\htdocs\jumkabooks\templates\korisnickiProfil" />
       <recent name="D:\Programming\xampp\htdocs\jumkabooks\templates\security" />
       <recent name="D:\Programming\xampp\htdocs\jumkabooks\public\css" />
@@ -197,7 +193,7 @@
       <workItem from="1618563053199" duration="9633000" />
       <workItem from="1618575257180" duration="5161000" />
       <workItem from="1618590738014" duration="34506000" />
-      <workItem from="1618740449750" duration="1495000" />
+      <workItem from="1618740449750" duration="20142000" />
     </task>
     <task id="LOCAL-00001" summary="Crud">
       <created>1618593254167</created>
@@ -220,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618606325597</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Getting user object">
+      <created>1618751537169</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618751537169</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +244,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Crud" />
     <MESSAGE value="User Login Works" />
-    <option name="LAST_COMMIT_MESSAGE" value="User Login Works" />
+    <MESSAGE value="Getting user object" />
+    <option name="LAST_COMMIT_MESSAGE" value="Getting user object" />
   </component>
 </project>

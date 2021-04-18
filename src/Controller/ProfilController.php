@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProfilController extends AbstractController
 {
     /**
-     * @Route("/izbornik", name="korisnicki_profil")
+     * @Route("/korisnik", name="korisnicki_profil")
      */
     public function korisnickiProfil()
     {

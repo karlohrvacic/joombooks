@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Posudbe;
+use Doctrine\DBAL\Types\DateTimeType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +18,9 @@ class PosudbeType extends AbstractType
             ->add('brojIskazniceKorisnika')
             ->add('datumPosudbe')
             ->add('datumRokaVracanja')
-            ->add('datumVracanja')
+            ->add('datumVracanja',DateType::class, [
+                'required'   => false,
+            ])
             ->add('gradja')
             ->add('status')
         ;

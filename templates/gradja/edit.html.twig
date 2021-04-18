@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Gradja{% endblock %}
+
+{% block body %}
+    <h1>Edit Gradja</h1>
+
+    {{ include('gradja/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('gradja_index') }}">back to list</a>
+
+    {{ include('gradja/_delete_form.html.twig') }}
+{% endblock %}

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Form\KorisniciType;
 use App\Repository\KorisniciRepository;
@@ -14,15 +13,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-#[Route('/knjiznica/korisnici')]
-class KorisniciController extends AbstractController
+#[Route('/activation')]
+class ActivateController extends AbstractController
 {
     #[Route('/', name: 'korisnici_index', methods: ['GET'])]
-    public function index(KorisniciRepository $korisniciRepository): Response
+    public function index(Request $request, Korisnici $korisnici): Response
     {
-        return $this->render('korisnici/index.html.twig', [
-            'korisnicis' => $korisniciRepository->findAll(),
-        ]);
+
     }
 
     #[Route('/new', name: 'korisnici_new', methods: ['GET', 'POST'])]
@@ -36,11 +33,11 @@ class KorisniciController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $korisnici->setRoles(["ROLE_USER"]);
 
-            if(is_a($this->getUser(), Knjiznice::class)){
+            if (is_a($this->getUser(), Knjiznice::class)) {
                 $korisnici->setKnjiznice($this->getUser());
             }
 
-            if($request->files->get('fotografija') !== null){
+            if ($request->files->get('fotografija') !== null) {
                 $korisnici->setFotografija($this->tempUploadAction($request));
             }
 
@@ -60,14 +57,6 @@ class KorisniciController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'korisnici_show', methods: ['GET'])]
-    public function show(Korisnici $korisnici): Response
-    {
-        return $this->render('korisnici/show.html.twig', [
-            'korisnici' => $korisnici,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'korisnici_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Korisnici $korisnici): Response
     {
@@ -79,7 +68,7 @@ class KorisniciController extends AbstractController
 
             $korisnici->setPassword($hash);
 
-            if($request->files->get('korisnici')['fotografija'] != null){
+            if ($request->files->get('korisnici')['fotografija'] != null) {
                 $filesystem = new Filesystem();
                 $filesystem->remove($korisnici->getFotografija());
                 $korisnici->setFotografija($this->tempUploadAction($request));
@@ -99,31 +88,5 @@ class KorisniciController extends AbstractController
             'korisnici' => $korisnici,
             'form' => $form->createView(),
         ]);
-    }
-
-    #[Route('/{id}', name: 'korisnici_delete', methods: ['POST'])]
-    public function delete(Request $request, Korisnici $korisnici): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$korisnici->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($korisnici);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('korisnici_index');
-    }
-
-    private function tempUploadAction(Request $req){
-
-        /** @var UploadedFile $uploadedFile */
-        $uploadedFile = $req->files->get('korisnici')['fotografija'];
-        $destination = $this->getParameter('kernel.project_dir').'/public/files/pitcures/profile';
-
-        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-        $newFileName = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
-
-        $uploadedFile->move($destination, $newFileName);
-
-        return '/files/pitcures/profile/'.$newFileName;
     }
 }

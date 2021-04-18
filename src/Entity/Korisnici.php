@@ -6,6 +6,7 @@ use App\Repository\KorisniciRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -13,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Korisnici implements UserInterface
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -74,6 +76,7 @@ class Korisnici implements UserInterface
      * @ORM\ManyToOne(targetEntity=Knjiznice::class, inversedBy="korisnici")
      */
     private $knjiznice;
+
 
     public function __construct()
     {
@@ -193,7 +196,7 @@ class Korisnici implements UserInterface
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
+        $this->lozinka = $password;
 
         return $this;
     }

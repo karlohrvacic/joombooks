@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Gradja{% endblock %}
+
+{% block body %}
+    <h1>Create new Gradja</h1>
+
+    {{ include('gradja/_form.html.twig') }}
+
+    <a href="{{ path('gradja_index') }}">back to list</a>
+{% endblock %}
