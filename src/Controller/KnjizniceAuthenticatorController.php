@@ -27,7 +27,7 @@ class KnjizniceAuthenticatorController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/knjiznica/logout", name="app_logout")
      */
     public function logout()
     {

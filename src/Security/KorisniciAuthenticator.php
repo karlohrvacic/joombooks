@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -65,9 +66,12 @@ class KorisniciAuthenticator extends AbstractFormLoginAuthenticator
 
         $user = $this->entityManager->getRepository(Korisnici::class)->findOneBy(['email' => $credentials['email']]);
 
+        if(!$user){
+            $user = $this->entityManager->getRepository(Knjiznice::class)->findOneBy(['email' => $credentials['email']]);
+        }
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Korisnik nije pronađen.');
         }
 
         return $user;
@@ -86,8 +90,14 @@ class KorisniciAuthenticator extends AbstractFormLoginAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
+        if(in_array("ROLE_USER",$token->getRoleNames())){
+            return new RedirectResponse($this->urlGenerator->generate('korisnicki_profil'));
 
-        return new RedirectResponse($this->urlGenerator->generate('korisnicki_profil'));
+        } else if(in_array("ROLE_LIBRARY",$token->getRoleNames())){
+            return new RedirectResponse($this->urlGenerator->generate('knjiznica_profil'));
+        }
+
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
         #throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

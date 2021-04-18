@@ -65,20 +65,21 @@ class Knjiznice implements UserInterface
      */
     private $gradje;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Clanstva::class, mappedBy="knjiznica")
-     */
-    private $clanstva;
 
     /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity=Korisnici::class, mappedBy="knjiznice")
+     */
+    private $korisnici;
+
     public function __construct()
     {
         $this->gradje = new ArrayCollection();
-        $this->clanstva = new ArrayCollection();
+        $this->korisnici = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -212,36 +213,6 @@ class Knjiznice implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Clanstva[]
-     */
-    public function getClanstva(): Collection
-    {
-        return $this->clanstva;
-    }
-
-    public function addClanstva(Clanstva $clanstva): self
-    {
-        if (!$this->clanstva->contains($clanstva)) {
-            $this->clanstva[] = $clanstva;
-            $clanstva->setKnjiznica($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClanstva(Clanstva $clanstva): self
-    {
-        if ($this->clanstva->removeElement($clanstva)) {
-            // set the owning side to null (unless already changed)
-            if ($clanstva->getKnjiznica() === $this) {
-                $clanstva->setKnjiznica(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getRoles()
     {
         $roles = $this->roles;
@@ -284,6 +255,36 @@ class Knjiznice implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Korisnici[]
+     */
+    public function getKorisnici(): Collection
+    {
+        return $this->korisnici;
+    }
+
+    public function addKorisnici(Korisnici $korisnici): self
+    {
+        if (!$this->korisnici->contains($korisnici)) {
+            $this->korisnici[] = $korisnici;
+            $korisnici->setKnjiznice($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKorisnici(Korisnici $korisnici): self
+    {
+        if ($this->korisnici->removeElement($korisnici)) {
+            // set the owning side to null (unless already changed)
+            if ($korisnici->getKnjiznice() === $this) {
+                $korisnici->setKnjiznice(null);
+            }
+        }
+
+        return $this;
     }
 }
 

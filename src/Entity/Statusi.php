@@ -116,4 +116,8 @@ class Statusi
 
         return $this;
     }
+
+    public function __toString(){
+        return $this->getNaziv();
+    }
 }

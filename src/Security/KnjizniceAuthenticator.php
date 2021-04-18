@@ -87,7 +87,7 @@ class KnjizniceAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate(''));
+        return new RedirectResponse($this->urlGenerator->generate('knjiznica_profil'));
         #throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

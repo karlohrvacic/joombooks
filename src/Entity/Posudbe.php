@@ -54,6 +54,11 @@ class Posudbe
      */
     private $status;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Korisnici::class, inversedBy="posudbe")
+     */
+    private $korisnici;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -139,6 +144,18 @@ class Posudbe
     public function setStatus(?Statusi $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getKorisnici(): ?Korisnici
+    {
+        return $this->korisnici;
+    }
+
+    public function setKorisnici(?Korisnici $korisnici): self
+    {
+        $this->korisnici = $korisnici;
 
         return $this;
     }

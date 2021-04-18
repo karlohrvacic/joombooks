@@ -2,8 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7ad96ef-ef3d-49e5-b168-059c47d86df0" name="Default Changelist" comment="User Login Works">
+      <change afterPath="$PROJECT_DIR$/src/Controller/BarcodeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/GetUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/korisnickiProfil/korisnickiProfil.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jumkabooks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jumkabooks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ClanstvaController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/KnjizniceAuthenticatorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/KnjizniceAuthenticatorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProfilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProfilController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Autori.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Autori.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Clanstva.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Knjiznice.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Knjiznice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Korisnici.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Korisnici.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Posudbe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Posudbe.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Statusi.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Statusi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Zanrovi.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Zanrovi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ClanstvaType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ClanstvaRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/KnjizniceAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/KnjizniceAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/KorisniciAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/KorisniciAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/korisnickiProfil/login.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/korisnickiProfil/mainProfile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/korisnickiProfil/knjiznicaProfil.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +155,7 @@
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/codeitnowin/barcode" />
     </include_path>
   </component>
   <component name="ProjectId" id="1rFDfSGTAvH5CP0REzyeXaxibKI" />
@@ -141,6 +168,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/korisnickiProfil" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
@@ -148,8 +176,12 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Programming\xampp\htdocs\jumkabooks\templates\korisnickiProfil" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Programming\xampp\htdocs\jumkabooks\templates\korisnickiProfil" />
+      <recent name="D:\Programming\xampp\htdocs\jumkabooks\templates\security" />
       <recent name="D:\Programming\xampp\htdocs\jumkabooks\public\css" />
       <recent name="D:\Programming\xampp\htdocs\jumkabooks\public\js" />
     </key>
@@ -164,7 +196,8 @@
       <updated>1618563051194</updated>
       <workItem from="1618563053199" duration="9633000" />
       <workItem from="1618575257180" duration="5161000" />
-      <workItem from="1618590738014" duration="14759000" />
+      <workItem from="1618590738014" duration="34506000" />
+      <workItem from="1618740449750" duration="1495000" />
     </task>
     <task id="LOCAL-00001" summary="Crud">
       <created>1618593254167</created>

@@ -5,18 +5,19 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
+        library_provider:
+            entity:
+                class: App\Entity\Knjiznice
+                property: email
         user_provider:
             entity:
                 class: App\Entity\Korisnici
                 property: email
-        library_provider:
-            entity:
-                class: App\Entity\Knjiznica
-                property: email
-        chain_provider:
-            chain:
-                providers: [ user_provider, library_provider ]
-        users_in_memory: { memory: null }
+
+        #chain_provider:
+        #    chain:
+        #        providers: [ user_provider, library_provider ]
+        #users_in_memory: { memory: null }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -24,16 +25,15 @@ security:
         main:
             anonymous: true
             lazy: true
-            provider: users_in_memory
+            provider: user_provider
             guard:
                 authenticators:
                     - App\Security\KorisniciAuthenticator
-                    - App\Security\KnjizniceAuthenticator
                 entry_point: App\Security\KorisniciAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+                target: app_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -45,5 +45,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/logout, roles: IS_AUTHENTICATED_FULLY }
          - { path: ^/knjiznica, roles: ROLE_LIBRARY}
          - { path: ^/, roles: ROLE_USER }

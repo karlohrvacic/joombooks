@@ -1,4 +1,7 @@
 {
+    "codeitnowin/barcode": {
+        "version": "3.0.2"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },

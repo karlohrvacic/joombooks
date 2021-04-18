@@ -51,24 +51,35 @@ class Korisnici implements UserInterface
     private $fotografija;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $brojIskazniceKorisnika;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $razred;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Clanstva::class, mappedBy="korisnik")
-     */
-    private $clanstva;
 
     /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity=Posudbe::class, mappedBy="korisnici")
+     */
+    private $posudbe;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Knjiznice::class, inversedBy="korisnici")
+     */
+    private $knjiznice;
+
     public function __construct()
     {
-        $this->clanstva = new ArrayCollection();
+        $this->posudbe = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -159,36 +170,6 @@ class Korisnici implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Clanstva[]
-     */
-    public function getClanstva(): Collection
-    {
-        return $this->clanstva;
-    }
-
-    public function addClanstva(Clanstva $clanstva): self
-    {
-        if (!$this->clanstva->contains($clanstva)) {
-            $this->clanstva[] = $clanstva;
-            $clanstva->setKorisnik($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClanstva(Clanstva $clanstva): self
-    {
-        if ($this->clanstva->removeElement($clanstva)) {
-            // set the owning side to null (unless already changed)
-            if ($clanstva->getKorisnik() === $this) {
-                $clanstva->setKorisnik(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getRoles()
     {
         $roles = $this->roles;
@@ -231,5 +212,67 @@ class Korisnici implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function __toString(){
+       return $this->getIme()." ".$this->getPrezime()." [".$this->getEmail()."]";
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBrojIskazniceKorisnika()
+    {
+        return $this->brojIskazniceKorisnika;
+    }
+
+    /**
+     * @param mixed $brojIskazniceKorisnika
+     */
+    public function setBrojIskazniceKorisnika($brojIskazniceKorisnika): void
+    {
+        $this->brojIskazniceKorisnika = $brojIskazniceKorisnika;
+    }
+
+    /**
+     * @return Collection|Posudbe[]
+     */
+    public function getPosudbe(): Collection
+    {
+        return $this->posudbe;
+    }
+
+    public function addPosudbe(Posudbe $posudbe): self
+    {
+        if (!$this->posudbe->contains($posudbe)) {
+            $this->posudbe[] = $posudbe;
+            $posudbe->setKorisnici($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosudbe(Posudbe $posudbe): self
+    {
+        if ($this->posudbe->removeElement($posudbe)) {
+            // set the owning side to null (unless already changed)
+            if ($posudbe->getKorisnici() === $this) {
+                $posudbe->setKorisnici(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getKnjiznice(): ?Knjiznice
+    {
+        return $this->knjiznice;
+    }
+
+    public function setKnjiznice(?Knjiznice $knjiznice): self
+    {
+        $this->knjiznice = $knjiznice;
+
+        return $this;
     }
 }
