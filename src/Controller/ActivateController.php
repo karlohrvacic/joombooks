@@ -46,7 +46,7 @@ class ActivateController extends AbstractController
             $entityManager->persist($korisnik);
             $entityManager->flush();
 
-            return $this->redirectToRoute('korisnici_index');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('activate/activate.html.twig', [

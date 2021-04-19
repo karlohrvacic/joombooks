@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gradja index{% endblock %}
+
+{% block body %}
+    <h1>Posudjene index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>ISBN</th>
+            <th>Naslov</th>
+            <th>OibKnjiznice</th>
+            <th>Fotografija</th>
+            <th>Opis</th>
+            <th>DatumDodavanja</th>
+            <th>GodinaIzdanja</th>
+            <th>Jezik</th>
+            <th>BrojInventara</th>
+            <th>Opcije</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for gradja in gradjas %}
+            <tr>
+                <td>{{ posudbe.id }}</td>
+                <td>{{ gradja.ISBN }}</td>
+                <td>{{ gradja.naslov }}</td>
+                <td>{{ gradja.oibKnjiznice }}</td>
+                <td>{{ gradja.fotografija }}</td>
+                <td>{{ gradja.opis }}</td>
+                <td>{{ gradja.datumDodavanja ? gradja.datumDodavanja|date('Y-m-d') : '' }}</td>
+                <td>{{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('Y-m-d') : '' }}</td>
+                <td>{{ gradja.jezik }}</td>
+                <td>{{ gradja.brojInventara }}</td>
+
+
+                <td>
+                        <a href="#">Produži</a>
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_LIBRARY') %}
+        <a href="{{ path('gradja_new') }}">Create new</a>
+    {% else %}
+        <a href="{{ path('korisnicki_profil') }}">HOME</a>
+
+    {% endif %}
+{% endblock %}

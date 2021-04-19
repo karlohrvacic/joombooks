@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Gradja;
+use App\Entity\Knjiznice;
 use App\Form\GradjaType;
 use App\Repository\GradjaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,8 +17,16 @@ class GradjaController extends AbstractController
     #[Route('/', name: 'gradja_index', methods: ['GET'])]
     public function index(GradjaRepository $gradjaRepository): Response
     {
+        /**
+         * @var $user Knjiznice
+         */
+        $user = $this->getUser();
+        $user->getOibKnjiznice();
+        //todo only for knjiznica where user is member
         return $this->render('gradja/index.html.twig', [
-            'gradjas' => $gradjaRepository->findAll(),
+            'gradjas' => $gradjaRepository->findBy([
+                'knjiznicaVlasnik' => $user
+            ]),
         ]);
     }
 
@@ -30,6 +39,13 @@ class GradjaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            /**
+             * @var $user Knjiznice
+             */
+            $user = $this->getUser();
+            $gradja->setKnjiznicaVlasnik($user);
+
             $entityManager->persist($gradja);
             $entityManager->flush();
 

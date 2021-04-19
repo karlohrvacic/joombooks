@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Autori;
-use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +16,7 @@ class AutoriType extends AbstractType
             ->add('ime')
             ->add('prezime')
             //->add('popisGradje')
-            ->add('drzava', StringType::class, [
+            ->add('drzava', TextType::class, [
                 'required'   => false,
             ])
         ;

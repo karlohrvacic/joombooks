@@ -30,11 +30,6 @@ class Gradja
     private $naslov;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $oibKnjiznice;
-
-    /**
      * @ORM\Column(type="string", length=2048)
      */
     private $fotografija;
@@ -124,18 +119,6 @@ class Gradja
     public function setNaslov(string $naslov): self
     {
         $this->naslov = $naslov;
-
-        return $this;
-    }
-
-    public function getOibKnjiznice(): ?string
-    {
-        return $this->oibKnjiznice;
-    }
-
-    public function setOibKnjiznice(string $oibKnjiznice): self
-    {
-        $this->oibKnjiznice = $oibKnjiznice;
 
         return $this;
     }
@@ -313,5 +296,8 @@ class Gradja
         }
 
         return $this;
+    }
+    public function __toString(){
+        return $this->getNaslov();
     }
 }

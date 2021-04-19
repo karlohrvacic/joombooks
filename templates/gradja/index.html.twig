@@ -10,15 +10,18 @@
             <tr>
                 <th>Id</th>
                 <th>ISBN</th>
+                <th>Status</th>
                 <th>Naslov</th>
-                <th>OibKnjiznice</th>
+                {% if is_granted('ROLE_USER') %}
+                <th>Ime knjižnice</th>
+                {% endif %}
                 <th>Fotografija</th>
                 <th>Opis</th>
                 <th>DatumDodavanja</th>
                 <th>GodinaIzdanja</th>
                 <th>Jezik</th>
                 <th>BrojInventara</th>
-                <th>actions</th>
+                <th>Opcije</th>
             </tr>
         </thead>
         <tbody>
@@ -26,18 +29,28 @@
             <tr>
                 <td>{{ gradja.id }}</td>
                 <td>{{ gradja.ISBN }}</td>
+                <td>{{ gradja.status }}</td>
                 <td>{{ gradja.naslov }}</td>
-                <td>{{ gradja.oibKnjiznice }}</td>
+                {% if is_granted('ROLE_USER') %}
+                    <td>{{ gradja.knjiznicaVlasnik }}</td>
+                {% endif %}
                 <td>{{ gradja.fotografija }}</td>
                 <td>{{ gradja.opis }}</td>
                 <td>{{ gradja.datumDodavanja ? gradja.datumDodavanja|date('Y-m-d') : '' }}</td>
                 <td>{{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('Y-m-d') : '' }}</td>
                 <td>{{ gradja.jezik }}</td>
                 <td>{{ gradja.brojInventara }}</td>
+
+
                 <td>
-                    <a href="{{ path('gradja_show', {'id': gradja.id}) }}">show</a>
-                    <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">edit</a>
+                    {% if is_granted('ROLE_LIBRARY') %}
+                            <a href="{{ path('gradja_show', {'id': gradja.id}) }}">show</a>
+                            <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">edit</a>
+                    {% elseif gradja.status == 'Dostupno' %}
+                            <a href="{{ path('posudbe_new', {'id': gradja.id}) }}">Rezerviraj</a>
+                    {% endif %}
                 </td>
+
             </tr>
         {% else %}
             <tr>
@@ -46,6 +59,10 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% if is_granted('ROLE_LIBRARY') %}
     <a href="{{ path('gradja_new') }}">Create new</a>
+    {% else %}
+        <a href="{{ path('korisnicki_profil') }}">HOME</a>
+
+    {% endif %}
 {% endblock %}

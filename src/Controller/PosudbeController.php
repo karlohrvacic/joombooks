@@ -2,9 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Gradja;
+use App\Entity\Korisnici;
 use App\Entity\Posudbe;
+use App\Entity\Statusi;
 use App\Form\PosudbeType;
+use App\Repository\GradjaRepository;
 use App\Repository\PosudbeRepository;
+use App\Repository\StatusiRepository;
+use DateInterval;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,22 +31,58 @@ class PosudbeController extends AbstractController
     #[Route('/new', name: 'posudbe_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
-        $posudbe = new Posudbe();
-        $form = $this->createForm(PosudbeType::class, $posudbe);
-        $form->handleRequest($request);
+        if ($request->isMethod('post')) {
+            $posudbe = new Posudbe();
+            $form = $this->createForm(PosudbeType::class, $posudbe);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($posudbe);
-            $entityManager->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($posudbe);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('posudbe_index');
+                return $this->redirectToRoute('posudbe_index');
+            }
+
+            return $this->render('posudbe/new.html.twig', [
+                'posudbe' => $posudbe,
+                'form' => $form->createView(),
+            ]);
         }
 
-        return $this->render('posudbe/new.html.twig', [
-            'posudbe' => $posudbe,
-            'form' => $form->createView(),
-        ]);
+        if($request->isMethod('get')){
+            $posudbe = new Posudbe();
+            $entityManager = $this->getDoctrine()->getManager();
+            $gradja = $entityManager->getRepository(Gradja::class)
+                ->find($request->query->get('id'));
+
+
+            /**
+             * @var $user Korisnici
+             */
+            $user = $this->getUser();
+
+            $posudbe->setIdGradje($gradja->getId());
+            $posudbe->setGradja($gradja);
+            $posudbe->setKorisnici($user);
+            $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(3));
+
+            $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P2D')));
+            $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval('P32D')));
+            $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
+            $user->addPosudbe($posudbe);
+            $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($posudbe);
+            $entityManager->persist($user);
+            $entityManager->persist($gradja);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('posudjene_knjige_korisnika');
+
+        }
     }
 
     #[Route('/{id}', name: 'posudbe_show', methods: ['GET'])]

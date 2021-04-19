@@ -2,9 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Autori;
 use App\Entity\Gradja;
-use Doctrine\DBAL\Types\DateType;
-use Doctrine\DBAL\Types\StringType;
+use App\Entity\Zanrovi;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -16,31 +20,36 @@ class GradjaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('ISBN', StringType::class,[
-                'required'   => false,
+            ->add('ISBN', TextType::class,[
+                'required' => false,
+                'label' => 'ISBN'
             ])
             ->add('naslov')
             //->add('oibKnjiznice') //TODO
             ->add('fotografija', FileType::class, [ //TODO
                 'required' => false,
             ])
-            ->add('opis',StringType::class, [
+            ->add('opis',TextType::class, [
                 'required' => false,
             ])
-            ->add('datumDodavanja', DateType::class)
+            ->add('datumDodavanja', DateType::class, [
+                'data' => new \DateTime("now")
+            ])
             ->add('godinaIzdanja', DateType::class, [
                     'required' => false,
                 ])
-            ->add('jezik',StringType::class, [
+            ->add('jezik',TextType::class, [
                 'required' => false,
             ])
             ->add('brojInventara', NumberType::class)
-            ->add('autori', AutoriType::class, [
-                'required' => false,
+            ->add('autori', EntityType::class, [
+                'multiple' => true,
+                'class' => Autori::class,
             ])
             ->add('status')
-            ->add('zanrovi', ZanroviType::class, [
-                'required' => false,
+            ->add('zanrovi', EntityType::class, [
+                'multiple' => true,
+                'class' => Zanrovi::class,
             ])
            // ->add('knjiznicaVlasnik')
         ;
