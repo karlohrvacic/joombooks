@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Controller\BarcodeController;
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
+use App\Entity\Posudbe;
 use App\Repository\GradjaRepository;
+use App\Repository\KorisniciRepository;
 use ContainerExHJEvb\getBarcodeControllerService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,10 +45,14 @@ class ProfilController extends AbstractController
          * @var $korisnik Korisnici
          */
         $korisnik = $this->getUser();
-        dd($korisnik->getPosudbe());
+
+        $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
+            'brojIskazniceKorisnika' => $korisnik->getBrojIskazniceKorisnika(),
+            'status' => 3
+        ]);
 
         return $this->render('korisnickiProfil/pregledPosudjenih.html.twig',[
-            'posudbe' => $korisnik->getPosudbe()
+            'posudbe' => $posudbe
         ]);
     }
 
@@ -65,6 +71,26 @@ class ProfilController extends AbstractController
             'gradjas' => $gradjaRepository->findBy([
                 'knjiznicaVlasnik' => $korisnik->getKnjiznice()
             ]),
+        ]);
+    }
+
+    /**
+     * @Route("/korisnik/rezervirano", name="rezervirane_knjige_korisnika")
+     */
+    public function pregledRezerviranih()
+    {
+        /**
+         * @var $korisnik Korisnici
+         */
+        $korisnik = $this->getUser();
+
+        $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
+            'brojIskazniceKorisnika' => $korisnik->getBrojIskazniceKorisnika(),
+            'status' => 5
+        ]);
+
+        return $this->render('korisnickiProfil/pregledRezerviranih.html.twig',[
+            'posudbe' => $posudbe
         ]);
     }
 }

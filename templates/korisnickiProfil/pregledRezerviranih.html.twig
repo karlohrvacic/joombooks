@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Posuđeneee index{% endblock %}
+{% block title %}Rezerviranee knkioge{% endblock %}
 
 {% block body %}
-    <h1>Posudjene index</h1>
+    <h1>Rezerviranee index</h1>
 
     <table class="table">
         <thead>
@@ -14,8 +14,7 @@
             <th>Ime knjižnice</th>
             <th>Fotografija</th>
             <th>Opis</th>
-            <th>Datum posudbe</th>
-            <th>Rok povratka</th>
+            <th>Rok rezervacije</th>
             <th>Jezik</th>
             <th>BrojInventara</th>
             <th>Opcije</th>
@@ -31,7 +30,6 @@
                 <td>{{ posudba.getGradja.fotografija }}</td>
                 <td>{{ posudba.getGradja.opis }}</td>
                 <td>{{ posudba.datumPosudbe ? posudba.datumPosudbe |date('Y-m-d') : '' }}</td>
-                <td>{{ posudba.datumVracanja ? posudba.datumVracanja|date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.getGradja.jezik }}</td>
                 <td>{{ posudba.getGradja.brojInventara }}</td>
 

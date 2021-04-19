@@ -18,11 +18,6 @@ class Posudbe
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $idGradje;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $brojIskazniceKorisnika;
@@ -62,18 +57,6 @@ class Posudbe
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdGradje(): ?int
-    {
-        return $this->idGradje;
-    }
-
-    public function setIdGradje(int $idGradje): self
-    {
-        $this->idGradje = $idGradje;
-
-        return $this;
     }
 
     public function getBrojIskazniceKorisnika(): ?string

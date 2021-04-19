@@ -65,20 +65,25 @@ class PosudbeController extends AbstractController
             $posudbe->setIdGradje($gradja->getId());
             $posudbe->setGradja($gradja);
             $posudbe->setKorisnici($user);
-            $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(3));
+            $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(5));
 
             $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P2D')));
             $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval('P32D')));
             $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
-            $user->addPosudbe($posudbe);
             $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($posudbe);
-            $entityManager->persist($user);
             $entityManager->persist($gradja);
 
             $entityManager->flush();
+
+            $user->addPosudbe($posudbe);
+            $entityManager->persist($user);
+
+            $entityManager->flush();
+
 
             return $this->redirectToRoute('posudjene_knjige_korisnika');
 
