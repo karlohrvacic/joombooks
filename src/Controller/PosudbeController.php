@@ -62,6 +62,8 @@ class PosudbeController extends AbstractController
              */
             $user = $this->getUser();
 
+            //todo logika smije li produljiti
+
             $posudbe->setIdGradje($gradja->getId());
             $posudbe->setGradja($gradja);
             $posudbe->setKorisnici($user);
