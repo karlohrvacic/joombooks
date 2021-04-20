@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header, footer{
+    background-color: #DC3545;
+    color: #DC3545;
+    height: 10vh;
+}
+.wrapper{
+    display: flex;
+    height: 80vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.login{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.login h1{
+    text-align: center;
+}
