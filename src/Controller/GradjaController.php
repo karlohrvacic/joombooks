@@ -23,7 +23,6 @@ class GradjaController extends AbstractController
          */
         $user = $this->getUser();
         $user->getOibKnjiznice();
-        //todo only for knjiznica where user is member
         return $this->render('gradja/index.html.twig', [
             'gradjas' => $gradjaRepository->findBy([
                 'knjiznicaVlasnik' => $user

@@ -29,13 +29,13 @@
                 <td>{{ posudba.getGradja.getKnjiznicaVlasnik.getNaziv }}</td>
                 <td><img width="100px" src="{{ posudba.getGradja.fotografija }}"></td>
                 <td>{{ posudba.getGradja.opis }}</td>
-                <td>{{ posudba.datumPosudbe ? posudba.datumPosudbe |date('Y-m-d') : '' }}</td>
+                <td>{{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja |date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.getGradja.jezik }}</td>
                 <td>{{ posudba.getGradja.brojInventara }}</td>
 
 
                 <td>
-                    <a href="#">Otkaži rezervaciju</a>
+                    <a href="{{ path('rezervacija_cancel', {'id': posudba.id}) }}">Otkaži rezervaciju</a>
                     <a href="#">Produži</a>
                 </td>
 

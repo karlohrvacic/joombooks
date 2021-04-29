@@ -50,6 +50,7 @@ class PosudbeController extends AbstractController
             ]);
         }
 
+        //Rezervacije
         if($request->isMethod('get')){
             $posudbe = new Posudbe();
             $entityManager = $this->getDoctrine()->getManager();
@@ -61,31 +62,27 @@ class PosudbeController extends AbstractController
              */
             $user = $this->getUser();
 
-            //todo logika smije li produljiti
 
-            $posudbe->setIdGradje($gradja->getId());
-            $posudbe->setGradja($gradja);
-            $posudbe->setKorisnici($user);
-            $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+            // smije li napraviti rezervaciju
+            if($user->getBrojTrenutnoRezerviranih() < $user->getKnjiznice()->getMaxRezerviranih()){
 
-            $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P2D')));
-            $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval('P32D')));
-            $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
-            $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+                $posudbe->setGradja($gradja);
+                $posudbe->setKorisnici($user);
+                $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(5));
 
+                $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
+                $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval('P2D')));
+                $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
+                $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+                $user->addPosudbe($posudbe);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($posudbe);
-            $entityManager->persist($gradja);
+                $entityManager->persist($posudbe);
+                $entityManager->persist($gradja);
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
 
-
-            $user->addPosudbe($posudbe);
-            $entityManager->persist($user);
-
-            $entityManager->flush();
-
-
-            return $this->redirectToRoute('posudjene_knjige_korisnika');
+            return $this->redirectToRoute('rezervirane_knjige_korisnika');
 
         }
     }
@@ -126,5 +123,25 @@ class PosudbeController extends AbstractController
         }
 
         return $this->redirectToRoute('posudbe_index');
+    }
+
+    #[Route('/cancel/{id}', name: 'rezervacija_cancel', methods: ['GET'])]
+    public function cancelation(Request $request, $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $rezervacija = $entityManager->getRepository(Posudbe::class)
+            ->find($id);
+
+        $rezervacija
+            ->setStatus($entityManager->getRepository(Statusi::class)
+                ->find(6));
+        $rezervacija->getGradja()
+            ->setStatus($entityManager->getRepository(Statusi::class)
+                ->find(1));
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('rezervirane_knjige_korisnika');
+
     }
 }

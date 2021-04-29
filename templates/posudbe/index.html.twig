@@ -22,7 +22,7 @@
         {% for posudbe in posudbes %}
             <tr>
                 <td>{{ posudbe.id }}</td>
-                <td>{{ posudbe.idGradje }}</td>
+                <td>{{ posudbe.gradja.id }}</td>
                 <td>{{ posudbe.status }}</td>
                 <td>{{ posudbe.brojIskazniceKorisnika }}</td>
                 <td>{{ posudbe.datumPosudbe ? posudbe.datumPosudbe|date('Y-m-d') : '' }}</td>

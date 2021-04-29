@@ -278,4 +278,17 @@ class Korisnici implements UserInterface
 
         return $this;
     }
+
+    public function getBrojTrenutnoRezerviranih(): ?int
+    {
+        $trenutnePosudbe = 0;
+
+        foreach ($this->getPosudbe()->toArray() as $posudba) {
+            if($posudba->getStatus()->getId() == 5){
+                $trenutnePosudbe++;
+            }
+        }
+        return $trenutnePosudbe;
+
+    }
 }
