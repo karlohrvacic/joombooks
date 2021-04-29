@@ -56,7 +56,6 @@ class PosudbeController extends AbstractController
             $gradja = $entityManager->getRepository(Gradja::class)
                 ->find($request->query->get('id'));
 
-
             /**
              * @var $user Korisnici
              */
@@ -79,7 +78,6 @@ class PosudbeController extends AbstractController
             $entityManager->persist($posudbe);
             $entityManager->persist($gradja);
 
-            $entityManager->flush();
 
             $user->addPosudbe($posudbe);
             $entityManager->persist($user);

@@ -7,6 +7,7 @@ use App\Entity\Knjiznice;
 use App\Form\GradjaType;
 use App\Repository\GradjaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,6 +46,10 @@ class GradjaController extends AbstractController
              */
             $user = $this->getUser();
             $gradja->setKnjiznicaVlasnik($user);
+
+            if($request->files->get('gradja')['fotografija'] !== null){
+                $gradja->setFotografija($this->tempUploadAction($request));
+            }
 
             $entityManager->persist($gradja);
             $entityManager->flush();
@@ -94,5 +99,19 @@ class GradjaController extends AbstractController
         }
 
         return $this->redirectToRoute('gradja_index');
+    }
+
+    private function tempUploadAction(Request $req){
+
+        /** @var UploadedFile $uploadedFile */
+        $uploadedFile = $req->files->get('gradja')['fotografija'];
+        $destination = $this->getParameter('kernel.project_dir').'/public/files/pitcures/gradja';
+
+        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $newFileName = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+
+        $uploadedFile->move($destination, $newFileName);
+
+        return '/files/pitcures/gradja/'.$newFileName;
     }
 }

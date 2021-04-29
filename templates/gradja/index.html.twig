@@ -34,7 +34,7 @@
                 {% if is_granted('ROLE_USER') %}
                     <td>{{ gradja.knjiznicaVlasnik }}</td>
                 {% endif %}
-                <td>{{ gradja.fotografija }}</td>
+                <td><img width="100px" src="{{ gradja.fotografija }}"></td>
                 <td>{{ gradja.opis }}</td>
                 <td>{{ gradja.datumDodavanja ? gradja.datumDodavanja|date('Y-m-d') : '' }}</td>
                 <td>{{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('Y-m-d') : '' }}</td>

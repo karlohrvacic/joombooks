@@ -25,8 +25,8 @@ class GradjaType extends AbstractType
                 'label' => 'ISBN'
             ])
             ->add('naslov')
-            //->add('oibKnjiznice') //TODO
-            ->add('fotografija', FileType::class, [ //TODO
+            ->add('fotografija', FileType::class, [
+                'mapped' => false,
                 'required' => false,
             ])
             ->add('opis',TextType::class, [

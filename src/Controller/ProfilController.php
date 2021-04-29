@@ -8,7 +8,11 @@ use App\Entity\Korisnici;
 use App\Entity\Posudbe;
 use App\Repository\GradjaRepository;
 use App\Repository\KorisniciRepository;
+use App\Service\RezervacijaVerify;
 use ContainerExHJEvb\getBarcodeControllerService;
+use ContainerKqqSjSH\getRezervacijaVerifyService;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -79,6 +83,7 @@ class ProfilController extends AbstractController
      */
     public function pregledRezerviranih()
     {
+
         /**
          * @var $korisnik Korisnici
          */
