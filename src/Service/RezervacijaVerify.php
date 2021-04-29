@@ -3,24 +3,33 @@
 namespace App\Service;
 
 use App\Entity\Posudbe;
-use App\Repository\PosudbeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class RezervacijaVerify
+class RezervacijaVerify extends AbstractController
 {
-    private $entityManager;
+    private $em;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->entityManager = $entityManager;
+        $this->em = $em;
     }
 
     public function rezervacijaExpiration()
     {
-        $istekleRezervacije = $this->entityManager->getRepository(PosudbeRepository::class)->findBy(
-            ['status_id' => 5]
-        );
-        dd($istekleRezervacije);
+        $now = new \DateTime();
+        /**
+         * @var $istekleRezervacije Posudbe
+         */
+        $istekleRezervacije = $this->em->createQueryBuilder()
+            ->select('i')
+            ->from('App:Posudbe', 'i')
+            ->where('i.datumRokaVracanja > :date and i.status = 5')
+            ->setParameter('date', $now)
+            ->getQuery()
+            ->getResult();
+        dd($istekleRezervacije[0]->getDatumRokaVracanja(), $now);
     }
 
 }

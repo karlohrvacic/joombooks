@@ -27,7 +27,7 @@
                 <td>{{ posudba.gradja.isbn }}</td>
                 <td>{{ posudba.getGradja.getNaslov }}</td>
                 <td>{{ posudba.getGradja.getKnjiznicaVlasnik.getNaziv }}</td>
-                <td>{{ posudba.getGradja.fotografija }}</td>
+                <td><img width="100px" src="{{ posudba.getGradja.fotografija }}"></td>
                 <td>{{ posudba.getGradja.opis }}</td>
                 <td>{{ posudba.datumPosudbe ? posudba.datumPosudbe |date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.getGradja.jezik }}</td>

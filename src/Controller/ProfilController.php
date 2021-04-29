@@ -81,9 +81,9 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik/rezervirano", name="rezervirane_knjige_korisnika")
      */
-    public function pregledRezerviranih()
+    public function pregledRezerviranih(RezervacijaVerify $verify)
     {
-
+        $verify->rezervacijaExpiration();
         /**
          * @var $korisnik Korisnici
          */
