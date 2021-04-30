@@ -8,6 +8,7 @@ use App\Entity\Korisnici;
 use App\Entity\Posudbe;
 use App\Repository\GradjaRepository;
 use App\Repository\KorisniciRepository;
+use App\Service\MailerSender;
 use App\Service\RezervacijaVerify;
 use ContainerExHJEvb\getBarcodeControllerService;
 use ContainerKqqSjSH\getRezervacijaVerifyService;
@@ -69,7 +70,6 @@ class ProfilController extends AbstractController
          * @var $korisnik Korisnici
          */
         $korisnik = $this->getUser();
-
 
         return $this->render('gradja/index.html.twig', [
             'gradjas' => $gradjaRepository->findBy([

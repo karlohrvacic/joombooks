@@ -15,9 +15,9 @@
                 <th>Broj Telefona</th>
                 <th>Fotografija</th>
                 <th>Razred</th>
-                {{ if(app.user.granted("USER_ADMIN")) }}
+                {% if is_granted('ROLE_LIBRARY') %}
                     <th>Opcije</th>
-                {{ endif }}
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -30,10 +30,13 @@
                 <td>{{ korisnici.brojTelefona }}</td>
                 <td> <img src="{{ korisnici.fotografija }}" alt="Profilna fotografija" width="50px"> </td>
                 <td>{{ korisnici.razred }}</td>
-                <td>
-                    <a href="{{ path('korisnici_show', {'id': korisnici.id}) }}">show</a>
-                    <a href="{{ path('korisnici_edit', {'id': korisnici.id}) }}">edit</a>
-                </td>
+
+                {% if is_granted('ROLE_LIBRARY') %}
+                    <td>
+                        <a href="{{ path('korisnici_show', {'id': korisnici.id}) }}">show</a>
+                        <a href="{{ path('korisnici_edit', {'id': korisnici.id}) }}">edit</a>
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>

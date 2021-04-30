@@ -4,12 +4,9 @@ namespace App\Service;
 
 use App\Entity\Posudbe;
 use App\Entity\Statusi;
-use DateInterval;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class RezervacijaVerify extends AbstractController
+class RezervacijaVerify
 {
     private $em;
 

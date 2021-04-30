@@ -71,7 +71,7 @@ class PosudbeController extends AbstractController
                 $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(5));
 
                 $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
-                $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval('P2D')));
+                $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval('P2D')));// todo ne hardkodirati trajanje rezervacije!!!!!
                 $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
                 $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
                 $user->addPosudbe($posudbe);
@@ -128,18 +128,52 @@ class PosudbeController extends AbstractController
     #[Route('/cancel/{id}', name: 'rezervacija_cancel', methods: ['GET'])]
     public function cancelation(Request $request, $id): Response
     {
+
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)
             ->find($id);
 
-        $rezervacija
-            ->setStatus($entityManager->getRepository(Statusi::class)
-                ->find(6));
-        $rezervacija->getGradja()
-            ->setStatus($entityManager->getRepository(Statusi::class)
-                ->find(1));
+        /**
+         * @var $user Korisnici
+         */
+        $user = $this->getUser();
+        if($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()){
+            $rezervacija
+                ->setStatus($entityManager->getRepository(Statusi::class)
+                    ->find(6));
+            $rezervacija->getGradja()
+                ->setStatus($entityManager->getRepository(Statusi::class)
+                    ->find(1));
 
-        $entityManager->flush();
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('rezervirane_knjige_korisnika');
+
+    }
+
+    #[Route('/extend/{id}', name: 'rezervacija_extend', methods: ['GET'])]
+    public function extension(Request $request, $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $rezervacija = $entityManager->getRepository(Posudbe::class)
+            ->find($id);
+
+        /**
+         * @var $user Korisnici
+         */
+        $user = $this->getUser();
+
+        // todo ne hardkodirati trajanje rezervacije!!!!!
+        if($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika() &&
+            $rezervacija->getDatumPosudbe()->diff($rezervacija->getDatumRokaVracanja())->format('%r%a') < 4){
+
+            $newDate = clone $rezervacija->getDatumRokaVracanja();
+            $newDate->add(new DateInterval('P2D'));
+            $rezervacija->setDatumRokaVracanja($newDate);
+            $entityManager->persist($rezervacija);
+            $entityManager->flush();
+        }
 
         return $this->redirectToRoute('rezervirane_knjige_korisnika');
 

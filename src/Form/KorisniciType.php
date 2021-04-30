@@ -23,6 +23,7 @@ class KorisniciType extends AbstractType
                 'required' => false,
                 'empty_data' => ''
             ])*/
+                ->add('brojIskazniceKorisnika', NumberType::class)
             ->add('brojTelefona', NumberType::class, [
                 'required'   => false,
                 ])

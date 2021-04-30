@@ -6,6 +6,7 @@ use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Form\KorisniciType;
 use App\Repository\KorisniciRepository;
+use App\Service\MailerSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,7 +27,7 @@ class KorisniciController extends AbstractController
     }
 
     #[Route('/new', name: 'korisnici_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, MailerSender $mailerSender): Response
     {
         $korisnici = new Korisnici();
         $form = $this->createForm(KorisniciType::class, $korisnici);
@@ -46,10 +47,11 @@ class KorisniciController extends AbstractController
 
             $korisnici->setLozinka(uniqid());
 
-            //todo send email with code stored in password field
 
             $entityManager->persist($korisnici);
             $entityManager->flush();
+
+            $mailerSender->sendActivationEmail($korisnici);
 
             return $this->redirectToRoute('korisnici_index');
         }

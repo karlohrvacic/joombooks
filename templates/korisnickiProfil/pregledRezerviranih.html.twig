@@ -33,12 +33,10 @@
                 <td>{{ posudba.getGradja.jezik }}</td>
                 <td>{{ posudba.getGradja.brojInventara }}</td>
 
-
                 <td>
                     <a href="{{ path('rezervacija_cancel', {'id': posudba.id}) }}">Otkaži rezervaciju</a>
-                    <a href="#">Produži</a>
+                    <a href="{{ path('rezervacija_extend', {'id': posudba.id}) }}">Produži</a>
                 </td>
-
 
             </tr>
         {% else %}

@@ -5,6 +5,15 @@
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
+    "composer/semver": {
+        "version": "3.2.4"
+    },
+    "composer/xdebug-handler": {
+        "version": "2.0.0"
+    },
+    "danielstjules/stringy": {
+        "version": "3.1.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -91,6 +100,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
+    "jean85/pretty-package-versions": {
+        "version": "1.6.0"
+    },
     "laminas/laminas-code": {
         "version": "4.2.0"
     },
@@ -103,6 +115,21 @@
     "monolog/monolog": {
         "version": "2.2.0"
     },
+    "nette/caching": {
+        "version": "v3.1.1"
+    },
+    "nette/finder": {
+        "version": "v2.5.2"
+    },
+    "nette/neon": {
+        "version": "v3.2.2"
+    },
+    "nette/robot-loader": {
+        "version": "v3.4.0"
+    },
+    "nette/utils": {
+        "version": "v3.2.2"
+    },
     "nikic/php-parser": {
         "version": "v4.10.4"
     },
@@ -114,6 +141,15 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.4.0"
+    },
+    "phpstan/phpdoc-parser": {
+        "version": "0.5.4"
+    },
+    "phpstan/phpstan": {
+        "version": "0.12.85"
+    },
+    "phpstan/phpstan-phpunit": {
+        "version": "0.12.18"
     },
     "psr/cache": {
         "version": "2.0.0"
@@ -129,6 +165,33 @@
     },
     "psr/log": {
         "version": "1.1.3"
+    },
+    "rector/rector": {
+        "version": "0.10.16"
+    },
+    "rector/rector-cakephp": {
+        "version": "0.10.4"
+    },
+    "rector/rector-doctrine": {
+        "version": "0.10.6"
+    },
+    "rector/rector-installer": {
+        "version": "0.10.1"
+    },
+    "rector/rector-laravel": {
+        "version": "0.10.2"
+    },
+    "rector/rector-nette": {
+        "version": "0.10.9"
+    },
+    "rector/rector-phpunit": {
+        "version": "0.10.8"
+    },
+    "rector/rector-symfony": {
+        "version": "0.10.6"
+    },
+    "sebastian/diff": {
+        "version": "4.0.4"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -419,6 +482,15 @@
     "symfony/security-http": {
         "version": "v5.2.6"
     },
+    "symfony/sendgrid-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "b46e4f8f1adb2864f0aa9c0ff57aea3324a07199"
+        }
+    },
     "symfony/serializer": {
         "version": "v5.2.4"
     },
@@ -511,6 +583,51 @@
     },
     "symfony/yaml": {
         "version": "v5.2.5"
+    },
+    "symplify/astral": {
+        "version": "v9.3.0"
+    },
+    "symplify/autowire-array-parameter": {
+        "version": "v9.3.0"
+    },
+    "symplify/composer-json-manipulator": {
+        "version": "v9.3.0"
+    },
+    "symplify/console-color-diff": {
+        "version": "v9.3.0"
+    },
+    "symplify/console-package-builder": {
+        "version": "v9.3.0"
+    },
+    "symplify/easy-testing": {
+        "version": "v9.3.0"
+    },
+    "symplify/package-builder": {
+        "version": "v9.3.0"
+    },
+    "symplify/rule-doc-generator-contracts": {
+        "version": "v9.3.0"
+    },
+    "symplify/set-config-resolver": {
+        "version": "v9.3.0"
+    },
+    "symplify/simple-php-doc-parser": {
+        "version": "v9.3.0"
+    },
+    "symplify/skipper": {
+        "version": "v9.3.0"
+    },
+    "symplify/smart-file-system": {
+        "version": "v9.3.0"
+    },
+    "symplify/symfony-php-config": {
+        "version": "v9.3.0"
+    },
+    "symplify/symplify-kernel": {
+        "version": "v9.3.0"
+    },
+    "tracy/tracy": {
+        "version": "v2.8.4"
     },
     "twig/extra-bundle": {
         "version": "v3.3.0"

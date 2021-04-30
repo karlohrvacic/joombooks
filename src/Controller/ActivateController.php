@@ -16,10 +16,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ActivateController extends AbstractController
 {
-    #[Route('/activation', name: 'activation_index', methods: ['GET', 'POST'])]
-    public function index(Request $request): Response
+    #[Route('/aktivacija/{code}', name: 'activation_index', defaults: ['code' => ''], methods: ['GET', 'POST'])]
+    public function index(Request $request, $code): Response
     {
-        $form = $this->createForm(ActivationType::class);
+        $form = $this->createForm(ActivationType::class, array(
+            'code' => $code,
+        ));
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
