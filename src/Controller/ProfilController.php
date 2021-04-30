@@ -2,18 +2,10 @@
 
 namespace App\Controller;
 
-use App\Controller\BarcodeController;
-use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Entity\Posudbe;
 use App\Repository\GradjaRepository;
-use App\Repository\KorisniciRepository;
-use App\Service\MailerSender;
-use App\Service\RezervacijaVerify;
-use ContainerExHJEvb\getBarcodeControllerService;
-use ContainerKqqSjSH\getRezervacijaVerifyService;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -24,10 +16,14 @@ class ProfilController extends AbstractController
      */
     public function korisnickiProfil()
     {
-        #$isbnCode = makeISBN("0123456789");
-       # dd($this->getUser());
+        /**
+         * @var $korisnik Korisnici
+         */
+        $korisnik = $this->getUser();
+
         return $this->render('korisnickiProfil/korisnickiProfil.html.twig',[
-            #'code' => $isbnCode
+            'korisnik' => $korisnik
+            //'code' => $isbnCode
         ]);
     }
     /**

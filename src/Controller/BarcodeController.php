@@ -7,7 +7,7 @@ use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 
 class BarcodeController{
 
-    public function makeISBN($ISBNcode): string
+    public function makeISBN($ISBNcode)
     {
 
         $barcode = new BarcodeGenerator();
@@ -18,6 +18,6 @@ class BarcodeController{
         $barcode->setFontSize(10);
 
         #echo '<img src="data:image/png;base64,'.$code.'" />';
-        return $barcode->generate();;
+        return $barcode;
     }
 }

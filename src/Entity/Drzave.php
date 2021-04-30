@@ -29,9 +29,15 @@ class Drzave
      */
     private $autori;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Izdavaci::class, mappedBy="relation")
+     */
+    private $izdavaci;
+
     public function __construct()
     {
         $this->autori = new ArrayCollection();
+        $this->izdavaci = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,5 +89,35 @@ class Drzave
     public function __toString()
     {
         return $this->naziv;
+    }
+
+    /**
+     * @return Collection|Izdavaci[]
+     */
+    public function getIzdavaci(): Collection
+    {
+        return $this->izdavaci;
+    }
+
+    public function addIzdavaci(Izdavaci $izdavaci): self
+    {
+        if (!$this->izdavaci->contains($izdavaci)) {
+            $this->izdavaci[] = $izdavaci;
+            $izdavaci->setDrzava($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIzdavaci(Izdavaci $izdavaci): self
+    {
+        if ($this->izdavaci->removeElement($izdavaci)) {
+            // set the owning side to null (unless already changed)
+            if ($izdavaci->getDrzava() === $this) {
+                $izdavaci->setDrzava(null);
+            }
+        }
+
+        return $this;
     }
 }

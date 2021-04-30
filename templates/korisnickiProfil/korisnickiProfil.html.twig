@@ -4,9 +4,15 @@
 
 {% block body %}
     <h1>Dobrodošli korisniče</h1>
-    <a href="{{ path('pregled_knjiga') }}">pregled knjiga</a>
-    <a href="{{ path('posudjene_knjige_korisnika') }}">posuđeno</a>
-    <a href="{{ path('rezervirane_knjige_korisnika') }}">rezervirano</a>
+    <p>{{ korisnik.ime }}</p>
+    <p>{{ korisnik.prezime }}</p>
+    <p>{{ korisnik.knjiznice.naziv }}</p>
+    <p>{{ korisnik.knjiznice.adresa }}</p>
+    <td><img width="100px" src="{{ korisnik.fotografija }}"></td>
+    <a href="{{ path('pregled_knjiga') }}">Pretraži</a>
+    <a href="{{ path('posudjene_knjige_korisnika') }}">Posuđeno</a>
+    <a href="{{ path('rezervirane_knjige_korisnika') }}">Rezervirano</a>
+    <br>
     <a href="{{ path('app_logout') }}">profil</a>
     <a href="{{ path('app_logout') }}">obavijesti</a>
     <a href="{{ path('app_logout') }}">radno vrijeme</a>

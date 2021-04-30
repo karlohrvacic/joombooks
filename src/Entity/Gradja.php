@@ -87,6 +87,16 @@ class Gradja
      */
     private $posudbe;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Izdavaci::class, inversedBy="gradje")
+     */
+    private $izdavac;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Jezici::class, inversedBy="gradje")
+     */
+    private $jezici;
+
     public function __construct()
     {
         $this->autori = new ArrayCollection();
@@ -299,5 +309,29 @@ class Gradja
     }
     public function __toString(){
         return $this->getNaslov();
+    }
+
+    public function getIzdavac(): ?Izdavaci
+    {
+        return $this->izdavac;
+    }
+
+    public function setIzdavac(?Izdavaci $izdavac): self
+    {
+        $this->izdavac = $izdavac;
+
+        return $this;
+    }
+
+    public function getJezici(): ?Jezici
+    {
+        return $this->jezici;
+    }
+
+    public function setJezici(?Jezici $jezici): self
+    {
+        $this->jezici = $jezici;
+
+        return $this;
     }
 }
