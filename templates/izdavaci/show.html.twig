@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Izdavaci{% endblock %}
+
+{% block body %}
+    <h1>Izdavaci</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ izdavaci.id }}</td>
+            </tr>
+            <tr>
+                <th>Naziv</th>
+                <td>{{ izdavaci.naziv }}</td>
+            </tr>
+            <tr>
+                <th>Adresa</th>
+                <td>{{ izdavaci.adresa }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('izdavaci_index') }}">back to list</a>
+
+    <a href="{{ path('izdavaci_edit', {'id': izdavaci.id}) }}">edit</a>
+
+    {{ include('izdavaci/_delete_form.html.twig') }}
+{% endblock %}

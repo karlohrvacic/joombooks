@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Izdavaci{% endblock %}
+
+{% block body %}
+    <h1>Edit Izdavaci</h1>
+
+    {{ include('izdavaci/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('izdavaci_index') }}">back to list</a>
+
+    {{ include('izdavaci/_delete_form.html.twig') }}
+{% endblock %}

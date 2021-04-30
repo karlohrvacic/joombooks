@@ -51,11 +51,6 @@ class Gradja
     private $godinaIzdanja;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $jezik;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $brojInventara;
@@ -178,18 +173,6 @@ class Gradja
     public function setGodinaIzdanja(?\DateTimeInterface $godinaIzdanja): self
     {
         $this->godinaIzdanja = $godinaIzdanja;
-
-        return $this;
-    }
-
-    public function getJezik(): ?string
-    {
-        return $this->jezik;
-    }
-
-    public function setJezik(?string $jezik): self
-    {
-        $this->jezik = $jezik;
 
         return $this;
     }

@@ -2,20 +2,33 @@
 
 {% block title %}Posuđeneee index{% endblock %}
 
+    {% if is_granted('ROLE_USER') %}
+        <p>{{ korisnik.ime }}</p>
+        <p>{{ korisnik.prezime }}</p>
+        <td><img width="100px" src="{{ korisnik.fotografija }}" alt="profilna fotografija"></td>
+    {% endif %}
+
 {% block body %}
     <h1>Posudjene index</h1>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>ISBN</th>
+            {% if is_granted('ROLE_LIBRARY') %}
+                <th>Id</th>
+                <th>ISBN</th>
+            {% endif %}
+
+            <th>Status</th>
             <th>Naslov</th>
-            <th>Ime knjižnice</th>
+            <th>Autori</th>
+            {% if is_granted('ROLE_USER') %}
+                <th>Ime knjižnice</th>
+            {% endif %}
             <th>Fotografija</th>
             <th>Opis</th>
-            <th>Datum posudbe</th>
-            <th>Rok povratka</th>
+            <th>DatumDodavanja</th>
+            <th>GodinaIzdanja</th>
             <th>Jezik</th>
             <th>BrojInventara</th>
             <th>Opcije</th>

@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Autori;
 use App\Entity\Gradja;
+use App\Entity\Izdavaci;
+use App\Entity\Jezici;
 use App\Entity\Zanrovi;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -38,8 +40,9 @@ class GradjaType extends AbstractType
             ->add('godinaIzdanja', DateType::class, [
                     'required' => false,
                 ])
-            ->add('jezik',TextType::class, [
+            ->add('jezik',EntityType::class, [
                 'required' => false,
+                'class' => Jezici::class,
             ])
             ->add('brojInventara', NumberType::class)
             ->add('autori', EntityType::class, [
@@ -50,6 +53,10 @@ class GradjaType extends AbstractType
             ->add('zanrovi', EntityType::class, [
                 'multiple' => true,
                 'class' => Zanrovi::class,
+            ])
+            ->add('izdavac',EntityType::class, [
+                'required' => false,
+                'class' => Izdavaci::class,
             ])
            // ->add('knjiznicaVlasnik')
         ;

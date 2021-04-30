@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Jezici{% endblock %}
+
+{% block body %}
+    <h1>Edit Jezici</h1>
+
+    {{ include('jezici/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('jezici_index') }}">back to list</a>
+
+    {{ include('jezici/_delete_form.html.twig') }}
+{% endblock %}

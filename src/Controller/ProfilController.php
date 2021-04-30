@@ -53,7 +53,9 @@ class ProfilController extends AbstractController
         ]);
 
         return $this->render('korisnickiProfil/pregledPosudjenih.html.twig',[
-            'posudbe' => $posudbe
+            'posudbe' => $posudbe,
+            'korisnik' => $korisnik
+
         ]);
     }
 
@@ -69,8 +71,9 @@ class ProfilController extends AbstractController
 
         return $this->render('gradja/index.html.twig', [
             'gradjas' => $gradjaRepository->findBy([
-                'knjiznicaVlasnik' => $korisnik->getKnjiznice()
+                'knjiznicaVlasnik' => $korisnik->getKnjiznice(),
             ]),
+            'korisnik' => $korisnik
         ]);
     }
 
