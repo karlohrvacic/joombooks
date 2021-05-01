@@ -142,4 +142,11 @@ class Posudbe
 
         return $this;
     }
+
+    public function zakasnina(){
+        $daniKasnjenja = $this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a');
+        $cijenaZakasnine = $this->getKorisnici()->getKnjiznice()->getCijenaZakasnine();
+        return $daniKasnjenja * $cijenaZakasnine;
+
+    }
 }

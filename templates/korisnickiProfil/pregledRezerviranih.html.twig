@@ -17,6 +17,7 @@
             <th>Rok rezervacije</th>
             <th>Jezik</th>
             <th>BrojInventara</th>
+            <th>Izdavač</th>
             <th>Opcije</th>
         </tr>
         </thead>
@@ -30,8 +31,9 @@
                 <td><img width="100px" src="{{ posudba.getGradja.fotografija }}"></td>
                 <td>{{ posudba.getGradja.opis }}</td>
                 <td>{{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja |date('Y-m-d') : '' }}</td>
-                <td>{{ posudba.getGradja.jezik }}</td>
+                <td>{{ posudba.getGradja.jezici }}</td>
                 <td>{{ posudba.getGradja.brojInventara }}</td>
+                <td>{{ posudba.getGradja.izdavac }}</td>
 
                 <td>
                     <a href="{{ path('rezervacija_cancel', {'id': posudba.id}) }}">Otkaži rezervaciju</a>
@@ -49,7 +51,6 @@
     {% if is_granted('ROLE_LIBRARY') %}
         <a href="{{ path('gradja_new') }}">Create new</a>
     {% else %}
-        <a href="{{ path('korisnicki_profil') }}">HOME</a>
-
+        <a href="{{ path('korisnicki_izbornik') }}">HOME</a>
     {% endif %}
 {% endblock %}

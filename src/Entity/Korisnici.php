@@ -58,7 +58,7 @@ class Korisnici implements UserInterface
     private $brojIskazniceKorisnika;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $razred;
 
@@ -161,7 +161,7 @@ class Korisnici implements UserInterface
         return $this;
     }
 
-    public function getRazred(): ?int
+    public function getRazred(): ?string
     {
         return $this->razred;
     }
@@ -281,10 +281,23 @@ class Korisnici implements UserInterface
 
     public function getBrojTrenutnoRezerviranih(): ?int
     {
+        $trenutneRezervacije = 0;
+
+        foreach ($this->getPosudbe()->toArray() as $rezervacija) {
+            if($rezervacija->getStatus()->getId() == 5){
+                $trenutneRezervacije++;
+            }
+        }
+        return $trenutneRezervacije;
+
+    }
+
+    public function getBrojTrenutnoPosudenih(): ?int
+    {
         $trenutnePosudbe = 0;
 
         foreach ($this->getPosudbe()->toArray() as $posudba) {
-            if($posudba->getStatus()->getId() == 5){
+            if($posudba->getStatus()->getId() == 3){
                 $trenutnePosudbe++;
             }
         }

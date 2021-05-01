@@ -2,14 +2,16 @@
 
 {% block title %}Posuđeneee index{% endblock %}
 
+
+
+{% block body %}
+    <h1>Posudjene index</h1>
+
     {% if is_granted('ROLE_USER') %}
         <p>{{ korisnik.ime }}</p>
         <p>{{ korisnik.prezime }}</p>
         <td><img width="100px" src="{{ korisnik.fotografija }}" alt="profilna fotografija"></td>
     {% endif %}
-
-{% block body %}
-    <h1>Posudjene index</h1>
 
     <table class="table">
         <thead>
@@ -26,11 +28,13 @@
                 <th>Ime knjižnice</th>
             {% endif %}
             <th>Fotografija</th>
+            <th>Izdavač</th>
             <th>Opis</th>
             <th>DatumDodavanja</th>
             <th>GodinaIzdanja</th>
             <th>Jezik</th>
-            <th>BrojInventara</th>
+            <th>Rok povratka</th>
+            <th>Zakasnina</th>
             <th>Opcije</th>
         </tr>
         </thead>
@@ -42,12 +46,13 @@
                 <td>{{ posudba.getGradja.getNaslov }}</td>
                 <td>{{ posudba.getGradja.getKnjiznicaVlasnik.getNaziv }}</td>
                 <td><img width="100px" src="{{ posudba.getGradja.fotografija }}"></td>
+                <td>{{ posudba.getGradja.izdavac.naziv}}</td>
                 <td>{{ posudba.getGradja.opis }}</td>
                 <td>{{ posudba.datumPosudbe ? posudba.datumPosudbe |date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.datumVracanja ? posudba.datumVracanja|date('Y-m-d') : '' }}</td>
-                <td>{{ posudba.getGradja.jezik }}</td>
-                <td>{{ posudba.getGradja.brojInventara }}</td>
-
+                <td>{{ posudba.getGradja.jezici.ime }}</td>
+                <td>{{ posudba.datumVracanja ? posudba.datumVracanja|date('Y-m-d') : '' }}</td>
+                <td>{{ posudba.zakasnina }}</td>
 
                 <td>
                     <a href="#">Produži</a>
@@ -65,7 +70,7 @@
     {% if is_granted('ROLE_LIBRARY') %}
         <a href="{{ path('gradja_new') }}">Create new</a>
     {% else %}
-        <a href="{{ path('korisnicki_profil') }}">HOME</a>
+        <a href="{{ path('korisnicki_izbornik') }}">HOME</a>
 
     {% endif %}
 {% endblock %}

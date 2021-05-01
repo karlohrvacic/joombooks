@@ -10,13 +10,15 @@
     <p>{{ korisnik.knjiznice.adresa }}</p>
     <td><img width="100px" src="{{ korisnik.fotografija }}"></td>
     <a href="{{ path('pregled_knjiga') }}">Pretraži</a>
+    <p>{{ korisnik.brojTrenutnoPosudenih }}</p>
     <a href="{{ path('posudjene_knjige_korisnika') }}">Posuđeno</a>
+    <p>{{ korisnik.brojTrenutnoRezerviranih }}</p>
     <a href="{{ path('rezervirane_knjige_korisnika') }}">Rezervirano</a>
     <br>
-    <a href="{{ path('app_logout') }}">profil</a>
-    <a href="{{ path('app_logout') }}">obavijesti</a>
-    <a href="{{ path('app_logout') }}">radno vrijeme</a>
-    <a href="{{ path('app_logout') }}">postavke</a>
-    <a href="{{ path('app_logout') }}">info/pomoć</a>
+    <a href="{{ path('korisnicki_profil') }}">profil</a>
+    <a href="{{ path('korisnicke_obavijesti') }}">obavijesti</a>
+    <a href="{{ path('radno_vrijeme') }}">radno vrijeme</a>
+    <a href="{{ path('korisnicke_postavke') }}">postavke</a>
+    <a href="https://stackoverflow.com/questions/tagged/php">info/pomoć</a>
     <a href="{{ path('app_logout') }}">odjava</a>
 {% endblock %}

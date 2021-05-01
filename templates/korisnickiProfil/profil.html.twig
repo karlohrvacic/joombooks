@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Moj Profil{% endblock %}
+
+{% block body %}
+    <h1>Profil moj index</h1>
+    <a href="{{ path('korisnicki_izbornik') }}">HOME</a>
+    <img width="100px" src="{{ korisnik.fotografija }}">
+    <p>{{ korisnik.ime }}</p>
+    <p>{{ korisnik.prezime }}</p>
+    <p>{{ korisnik.knjiznice.naziv}}</p>
+    <p>{{ korisnik.knjiznice.adresa }}</p>
+    <p>{{ korisnik.razred }}</p>
+    <p>{{ korisnik.email }}</p>
+    <img src="" alt="BarCode{{ korisnik.brojIskazniceKorisnika }}">
+{% endblock %}

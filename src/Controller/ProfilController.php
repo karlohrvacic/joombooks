@@ -12,16 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProfilController extends AbstractController
 {
     /**
-     * @Route("/korisnik", name="korisnicki_profil")
+     * @Route("/korisnik", name="korisnicki_izbornik")
      */
-    public function korisnickiProfil()
+    public function korisnickiIzbornik()
     {
         /**
          * @var $korisnik Korisnici
          */
         $korisnik = $this->getUser();
 
-        return $this->render('korisnickiProfil/korisnickiProfil.html.twig',[
+        return $this->render('korisnickiProfil/korisnickaPocetna.html.twig',[
             'korisnik' => $korisnik
             //'code' => $isbnCode
         ]);
@@ -32,7 +32,7 @@ class ProfilController extends AbstractController
     public function knjiznicaProfil()
     {
         #dd($this->getUser());
-        return $this->render('korisnickiProfil/knjiznicaProfil.html.twig',[
+        return $this->render('korisnickiProfil/knjiznicaPocetna.html.twig',[
 
         ]);
     }
@@ -55,7 +55,6 @@ class ProfilController extends AbstractController
         return $this->render('korisnickiProfil/pregledPosudjenih.html.twig',[
             'posudbe' => $posudbe,
             'korisnik' => $korisnik
-
         ]);
     }
 
@@ -94,6 +93,67 @@ class ProfilController extends AbstractController
 
         return $this->render('korisnickiProfil/pregledRezerviranih.html.twig',[
             'posudbe' => $posudbe
+        ]);
+    }
+
+    /**
+     * @Route("/korisnik/profil", name="korisnicki_profil")
+     */
+    public function korisnickiProfil()
+    {
+        /**
+         * @var $korisnik Korisnici
+         */
+        $korisnik = $this->getUser();
+
+        return $this->render('korisnickiProfil/profil.html.twig',[
+            'korisnik' => $korisnik
+            //'code' => $isbnCode
+        ]);
+    }
+
+    /**
+     * @Route("/korisnik/obavijesti", name="korisnicke_obavijesti")
+     */
+    public function korisnickeObavijesti()
+    {
+        /**
+         * @var $korisnik Korisnici
+         */
+        $korisnik = $this->getUser();
+
+        return $this->render('korisnickiProfil/obavijesti.html.twig',[
+            'korisnik' => $korisnik
+        ]);
+    }
+
+    /**
+     * @Route("/korisnik/postavke", name="korisnicke_postavke")
+     */
+    public function korisnickePostavke()
+    {
+        /**
+         * @var $korisnik Korisnici
+         */
+        $korisnik = $this->getUser();
+
+        return $this->render('korisnickiProfil/postavke.html.twig',[
+            'korisnik' => $korisnik
+        ]);
+    }
+
+    /**
+     * @Route("/radno_vrijeme", name="radno_vrijeme")
+     */
+    public function radnovrijeme()
+    {
+        /**
+         * @var $korisnik Korisnici
+         */
+        $korisnik = $this->getUser();
+
+        return $this->render('korisnickiProfil/postavke.html.twig',[
+            'korisnik' => $korisnik
         ]);
     }
 }
