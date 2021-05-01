@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
+use App\Service\RezervacijaVerify;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,10 +92,10 @@ class KorisniciAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
         if(in_array("ROLE_USER",$token->getRoleNames())){
-            return new RedirectResponse($this->urlGenerator->generate('korisnicki_profil'));
+            return new RedirectResponse($this->urlGenerator->generate('korisnicki_izbornik'));
 
         } else if(in_array("ROLE_LIBRARY",$token->getRoleNames())){
-            return new RedirectResponse($this->urlGenerator->generate('knjiznica_profil'));
+            return new RedirectResponse($this->urlGenerator->generate('knjiznica_izbornik'));
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_login'));

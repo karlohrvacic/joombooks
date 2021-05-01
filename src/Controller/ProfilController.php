@@ -27,12 +27,12 @@ class ProfilController extends AbstractController
         ]);
     }
     /**
-     * @Route("/knjiznica", name="knjiznica_profil")
+     * @Route("/knjiznica", name="knjiznica_izbornik")
      */
     public function knjiznicaProfil()
     {
         #dd($this->getUser());
-        return $this->render('korisnickiProfil/knjiznicaPocetna.html.twig',[
+        return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig',[
 
         ]);
     }
