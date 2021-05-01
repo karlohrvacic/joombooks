@@ -16,14 +16,14 @@ class ProfilController extends AbstractController
      */
     public function korisnickiIzbornik()
     {
+
         /**
          * @var $korisnik Korisnici
          */
         $korisnik = $this->getUser();
 
         return $this->render('korisnickiProfil/korisnickaPocetna.html.twig',[
-            'korisnik' => $korisnik
-            //'code' => $isbnCode
+            'korisnik' => $korisnik,
         ]);
     }
     /**
@@ -52,9 +52,12 @@ class ProfilController extends AbstractController
             'status' => 3
         ]);
 
+        $code = new BarcodeController();
+
         return $this->render('korisnickiProfil/pregledPosudjenih.html.twig',[
             'posudbe' => $posudbe,
-            'korisnik' => $korisnik
+            'korisnik' => $korisnik,
+            'code' => $code
         ]);
     }
 
@@ -106,9 +109,11 @@ class ProfilController extends AbstractController
          */
         $korisnik = $this->getUser();
 
+        $code = new BarcodeController();
+
         return $this->render('korisnickiProfil/profil.html.twig',[
-            'korisnik' => $korisnik
-            //'code' => $isbnCode
+            'korisnik' => $korisnik,
+            'code' => $code
         ]);
     }
 

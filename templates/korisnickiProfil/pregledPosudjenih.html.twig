@@ -53,12 +53,11 @@
                 <td>{{ posudba.getGradja.jezici.ime }}</td>
                 <td>{{ posudba.datumVracanja ? posudba.datumVracanja|date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.zakasnina }}</td>
-
+                <img src="data:image/png;base64,{{ code.makeBarcode(  posudba.gradja.brojInventara  , "Code128").generate }}"
+                     alt="Broj inventara: {{ posudba.gradja.brojInventara  }}"/>
                 <td>
                     <a href="#">Produži</a>
                 </td>
-
-
             </tr>
         {% else %}
             <tr>
@@ -71,6 +70,5 @@
         <a href="{{ path('gradja_new') }}">Create new</a>
     {% else %}
         <a href="{{ path('korisnicki_izbornik') }}">HOME</a>
-
     {% endif %}
 {% endblock %}
