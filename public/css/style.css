@@ -8,7 +8,69 @@ html, body {
     margin: 0;
     height: 100%;
 }
-
+body{
+    font-family: 'Actor', sans-serif;
+}
 h1 {
     text-align: center;
+}
+
+header{
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    background-color: #303C6C;
+    color: white;
+    height: 10vh;
+}
+footer{
+    background-color: #B4DFE5;
+    color: #B4DFE5;
+    height: 10vh;
+}
+
+input.form-control{
+    border-radius: 20px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+    background-color: #D1FDFE;
+}
+
+.submit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name{
+    display: inline;
+}
+
+.btn{
+    background-color: #FBE8A6;
+    border-color: #FBE8A6;
+    color: black;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.btn:hover{
+    background-color: #F4976C;
+    border-color: #F4976C;
+}
+
+.btn-group{
+    border-radius: 0px;
+    margin-bottom: 10px;
+}
+
+.btn-group-lg{
+    border-radius: 0px;
 }
