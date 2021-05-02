@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Korisnici;
 use App\Entity\Posudbe;
 use App\Repository\GradjaRepository;
-use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
+use App\Service\RezervacijaVerify;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -14,8 +14,9 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik", name="korisnicki_izbornik")
      */
-    public function korisnickiIzbornik()
+    public function korisnickiIzbornik(RezervacijaVerify $verify)
     {
+        $verify->rezervacijaExpirationCheck();
 
         /**
          * @var $korisnik Korisnici
@@ -64,8 +65,9 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik/gradja", name="pregled_knjiga")
      */
-    public function pregledKnjiga(GradjaRepository $gradjaRepository)
+    public function pregledKnjiga(GradjaRepository $gradjaRepository, RezervacijaVerify $verify)
     {
+        $verify->rezervacijaExpirationCheck();
         /**
          * @var $korisnik Korisnici
          */
@@ -82,8 +84,9 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik/rezervirano", name="rezervirane_knjige_korisnika")
      */
-    public function pregledRezerviranih()
+    public function pregledRezerviranih(RezervacijaVerify $verify)
     {
+        $verify->rezervacijaExpirationCheck();
         /**
          * @var $korisnik Korisnici
          */

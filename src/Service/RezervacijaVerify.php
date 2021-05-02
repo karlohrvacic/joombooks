@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Posudbe;
 use App\Entity\Statusi;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 class RezervacijaVerify
@@ -17,7 +18,7 @@ class RezervacijaVerify
 
     public function rezervacijaExpirationCheck()
     {
-        $now = new \DateTime();
+        $now = new DateTime();
         /**
          * @var $istekleRezervacije Posudbe
          */
@@ -28,10 +29,11 @@ class RezervacijaVerify
             ->setParameter('date', $now)
             ->getQuery()
             ->getResult();
+
         foreach ($istekleRezervacije as $rezervacija){
             $rezervacija
                 ->setStatus($this->em->getRepository(Statusi::class)
-                    ->find(6));
+                    ->find(7));
             $rezervacija->getGradja()
                 ->setStatus($this->em->getRepository(Statusi::class)
                     ->find(1));

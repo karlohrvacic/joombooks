@@ -7,11 +7,11 @@ use App\Entity\Korisnici;
 use App\Entity\Posudbe;
 use App\Entity\Statusi;
 use App\Form\PosudbeType;
-use App\Repository\GradjaRepository;
 use App\Repository\PosudbeRepository;
-use App\Repository\StatusiRepository;
+use App\Service\RezervacijaVerify;
 use DateInterval;
 use DateTime;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,16 +21,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class PosudbeController extends AbstractController
 {
     #[Route('/', name: 'posudbe_index', methods: ['GET'])]
-    public function index(PosudbeRepository $posudbeRepository): Response
+    public function index(PosudbeRepository $posudbeRepository, RezervacijaVerify $verify): Response
     {
+        $verify->rezervacijaExpirationCheck();
         return $this->render('posudbe/index.html.twig', [
             'posudbes' => $posudbeRepository->findAll(),
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/new', name: 'posudbe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, RezervacijaVerify $verify): Response
     {
+        $verify->rezervacijaExpirationCheck();
         if ($request->isMethod('post')) {
             $posudbe = new Posudbe();
             $form = $this->createForm(PosudbeType::class, $posudbe);
@@ -71,7 +76,11 @@ class PosudbeController extends AbstractController
                 $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(5));
 
                 $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
-                $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval('P2D')));// todo ne hardkodirati trajanje rezervacije!!!!!
+
+                $daniRezervacije = $user->getKnjiznice()->getDaniRezervacije();
+                $duration = "P".$daniRezervacije."D";
+
+                $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
                 $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
                 $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
                 $user->addPosudbe($posudbe);
@@ -81,23 +90,23 @@ class PosudbeController extends AbstractController
                 $entityManager->persist($user);
                 $entityManager->flush();
             }
-
-            return $this->redirectToRoute('rezervirane_knjige_korisnika');
-
         }
+        return $this->redirectToRoute('rezervirane_knjige_korisnika');
     }
 
     #[Route('/{id}', name: 'posudbe_show', methods: ['GET'])]
-    public function show(Posudbe $posudbe): Response
+    public function show(Posudbe $posudbe, RezervacijaVerify $verify): Response
     {
+        $verify->rezervacijaExpirationCheck();
         return $this->render('posudbe/show.html.twig', [
             'posudbe' => $posudbe,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'posudbe_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Posudbe $posudbe): Response
+    public function edit(Request $request, Posudbe $posudbe, RezervacijaVerify $verify): Response
     {
+        $verify->rezervacijaExpirationCheck();
         $form = $this->createForm(PosudbeType::class, $posudbe);
         $form->handleRequest($request);
 
@@ -114,8 +123,9 @@ class PosudbeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'posudbe_delete', methods: ['POST'])]
-    public function delete(Request $request, Posudbe $posudbe): Response
+    public function delete(Request $request, Posudbe $posudbe, RezervacijaVerify $verify): Response
     {
+        $verify->rezervacijaExpirationCheck();
         if ($this->isCsrfTokenValid('delete'.$posudbe->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($posudbe);
@@ -126,12 +136,11 @@ class PosudbeController extends AbstractController
     }
 
     #[Route('/cancel/{id}', name: 'rezervacija_cancel', methods: ['GET'])]
-    public function cancelation(Request $request, $id): Response
+    public function cancelation($id, RezervacijaVerify $verify): Response
     {
-
+        $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
-        $rezervacija = $entityManager->getRepository(Posudbe::class)
-            ->find($id);
+        $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
 
         /**
          * @var $user Korisnici
@@ -140,7 +149,7 @@ class PosudbeController extends AbstractController
         if($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()){
             $rezervacija
                 ->setStatus($entityManager->getRepository(Statusi::class)
-                    ->find(6));
+                    ->find(8));
             $rezervacija->getGradja()
                 ->setStatus($entityManager->getRepository(Statusi::class)
                     ->find(1));
@@ -152,9 +161,14 @@ class PosudbeController extends AbstractController
 
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/extend/{id}', name: 'rezervacija_extend', methods: ['GET'])]
-    public function extension(Request $request, $id): Response
+    public function extension($id, RezervacijaVerify $verify): Response
     {
+        $verify->rezervacijaExpirationCheck();
+
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)
             ->find($id);
@@ -164,12 +178,15 @@ class PosudbeController extends AbstractController
          */
         $user = $this->getUser();
 
-        // todo ne hardkodirati trajanje rezervacije!!!!!
+        $daniRezervacije = $user->getKnjiznice()->getDaniRezervacije();
         if($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika() &&
-            $rezervacija->getDatumPosudbe()->diff($rezervacija->getDatumRokaVracanja())->format('%r%a') < 4){
+            $rezervacija->getDatumPosudbe()->diff($rezervacija->getDatumRokaVracanja())->format('%r%a') <
+            ($daniRezervacije * 2)){
+
+            $duration = "P".$daniRezervacije."D";
 
             $newDate = clone $rezervacija->getDatumRokaVracanja();
-            $newDate->add(new DateInterval('P2D'));
+            $newDate->add(new DateInterval($duration));
             $rezervacija->setDatumRokaVracanja($newDate);
             $entityManager->persist($rezervacija);
             $entityManager->flush();
@@ -178,4 +195,5 @@ class PosudbeController extends AbstractController
         return $this->redirectToRoute('rezervirane_knjige_korisnika');
 
     }
+
 }

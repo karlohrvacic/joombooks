@@ -18,7 +18,7 @@ class Knjiznice implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -75,6 +75,11 @@ class Knjiznice implements UserInterface
      * @ORM\OneToMany(targetEntity=Korisnici::class, mappedBy="knjiznice")
      */
     private $korisnici;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $daniRezervacije;
 
     public function __construct()
     {
@@ -289,6 +294,18 @@ class Knjiznice implements UserInterface
 
     public function __toString(){
         return $this->getNaziv();
+    }
+
+    public function getDaniRezervacije(): ?int
+    {
+        return $this->daniRezervacije;
+    }
+
+    public function setDaniRezervacije(int $daniRezervacije): self
+    {
+        $this->daniRezervacije = $daniRezervacije;
+
+        return $this;
     }
 }
 
