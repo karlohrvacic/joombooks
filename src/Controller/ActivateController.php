@@ -16,6 +16,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ActivateController extends AbstractController
 {
+    private $passwordEncoder;
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     #[Route('/aktivacija/{code}', name: 'activation_index', defaults: ['code' => ''], methods: ['GET', 'POST'])]
     public function index(Request $request, $code): Response
     {
@@ -41,7 +47,7 @@ class ActivateController extends AbstractController
                 );
             }
 
-            $hash = password_hash($form->get('password')->getData(), PASSWORD_DEFAULT);
+            $hash = $this->passwordEncoder->encodePassword($korisnik, $form->get('password')->getData());
 
             $korisnik->setLozinka($hash);
 

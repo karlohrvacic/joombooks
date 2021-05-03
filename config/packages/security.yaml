@@ -2,6 +2,8 @@ security:
     encoders:
         Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUser:
             algorithm: bcrypt
+        App\Entity\Korisnici: bcrypt
+        App\Entity\Knjiznice: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
