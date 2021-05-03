@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="467ab3ec-7b04-4d6d-a77d-87e89b82e473" name="Default Changelist" comment="Favicon">
+    <list default="true" id="467ab3ec-7b04-4d6d-a77d-87e89b82e473" name="Default Changelist" comment="User edit works">
+      <change afterPath="$PROJECT_DIR$/migrations/Version20210503213636.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/knjiznicniProfil/rezervirane.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/KorisniciController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/KorisniciController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Korisnici.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Korisnici.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/KorisniciType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/KorisniciType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/GradjaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GradjaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PosudbeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PosudbeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProfilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProfilController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Knjiznice.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Knjiznice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Posudbe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Posudbe.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/gradja/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/gradja/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/knjiznicniProfil/knjiznicaPocetna.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/knjiznicniProfil/knjiznicaPocetna.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +239,7 @@
       <workItem from="1619882993875" duration="11527000" />
       <workItem from="1619960860712" duration="29000" />
       <workItem from="1619972893187" duration="8439000" />
-      <workItem from="1620050014103" duration="15417000" />
+      <workItem from="1620050014103" duration="21147000" />
     </task>
     <task id="LOCAL-00001" summary="Ctrl">
       <created>1618948338747</created>
@@ -389,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620073482036</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="User edit works">
+      <created>1620075100129</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1620075100129</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,6 +433,7 @@
     <MESSAGE value="Fixes on verify reservation and days for resevation" />
     <MESSAGE value="Security activated" />
     <MESSAGE value="Favicon" />
-    <option name="LAST_COMMIT_MESSAGE" value="Favicon" />
+    <MESSAGE value="User edit works" />
+    <option name="LAST_COMMIT_MESSAGE" value="User edit works" />
   </component>
 </project>

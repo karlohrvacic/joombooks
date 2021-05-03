@@ -4,8 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Gradja;
 use App\Entity\Knjiznice;
+use App\Entity\Korisnici;
+use App\Entity\Posudbe;
+use App\Entity\Statusi;
 use App\Form\GradjaType;
 use App\Repository\GradjaRepository;
+use App\Service\RezervacijaVerify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,10 +27,13 @@ class GradjaController extends AbstractController
          */
         $user = $this->getUser();
         $user->getOibKnjiznice();
+        $code = new BarcodeController();
+
         return $this->render('gradja/index.html.twig', [
             'gradjas' => $gradjaRepository->findBy([
                 'knjiznicaVlasnik' => $user
             ]),
+            'code' => $code
         ]);
     }
 
@@ -112,5 +119,32 @@ class GradjaController extends AbstractController
         $uploadedFile->move($destination, $newFileName);
 
         return '/files/pitcures/gradja/'.$newFileName;
+    }
+
+    #[Route('gradja/posudi/{id}', name: 'posudi_gradju', methods: ['GET'])]
+    public function posudiKnjigu($id, RezervacijaVerify $verify): Response
+    {
+        $verify->rezervacijaExpirationCheck();
+        $entityManager = $this->getDoctrine()->getManager();
+        $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
+
+        /**
+         * @var $knjiznicar Knjiznice
+         */
+        $knjiznicar = $this->getUser();
+        if ($knjiznicar){
+            if($knjiznicar === $rezervacija->getKnjiznica()){
+                $rezervacija
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(3));
+                $rezervacija->getGradja()
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(3));
+
+                $entityManager->flush();
+            }
+            return $this->render('knjiznicniProfil/rezervirane.html.twig');
+        }
+
     }
 }

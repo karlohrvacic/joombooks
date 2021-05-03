@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Popis rezervacija{% endblock %}
+
+{% block body %}
+    <h1>Popis rezervacija</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>ISBN</th>
+            <th>Broj inventara</th>
+            <th>Broj Iskaznice Korisnika</th>
+            <th>Datum Rezerviranja</th>
+            <th>Datum Roka Rezervacije</th>
+            <th>Opcije</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for posudbe in posudbes %}
+            <tr>
+                <td>{{ posudbe.id }}</td>
+                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.iSBN  , "Isbn").generate }}"
+                         alt="Isbn: {{ posudbe.gradja.iSBN  }}"/></td>
+                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.brojInventara  , "Code128").generate }}"
+                         alt="Broj inventara: {{ posudbe.gradja.brojInventara  }}"/></td>
+                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.brojIskazniceKorisnika  , "Code39").generate }}"
+                         alt="Broj iskaznice korisnika: {{ posudbe.brojIskazniceKorisnika  }}"/></td>
+                <td>{{ posudbe.datumPosudbe ? posudbe.datumPosudbe|date('Y-m-d') : '' }}</td>
+                <td>{{ posudbe.datumRokaVracanja ? posudbe.datumRokaVracanja|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('rezervacija_cancel', {'id': posudbe.id}) }}">Otkaži</a>
+                    <a href="{{ path('posudi_gradju', {'id': posudbe.id}) }}">Posudi</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('posudbe_new') }}">Create new</a>
+{% endblock %}

@@ -54,6 +54,12 @@ class Posudbe
      */
     private $korisnici;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Knjiznice::class, inversedBy="posudbe")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $knjiznica;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -148,5 +154,17 @@ class Posudbe
         $cijenaZakasnine = $this->getKorisnici()->getKnjiznice()->getCijenaZakasnine();
         return $daniKasnjenja * $cijenaZakasnine;
 
+    }
+
+    public function getKnjiznica(): ?Knjiznice
+    {
+        return $this->knjiznica;
+    }
+
+    public function setKnjiznica(?Knjiznice $knjiznica): self
+    {
+        $this->knjiznica = $knjiznica;
+
+        return $this;
     }
 }

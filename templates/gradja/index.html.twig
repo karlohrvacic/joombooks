@@ -50,7 +50,8 @@
             <tr>
                 {% if is_granted('ROLE_LIBRARY') %}
                     <td>{{ gradja.id }}</td>
-                    <td>{{ gradja.ISBN }}</td>
+                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.ISBN  , "Isbn").generate }}"
+                             alt="ISBN: {{ gradja.ISBN }} "/></td>
                 {% endif %}
                 <td>{{ gradja.status }}</td>
                 <td>{{ gradja.naslov }}</td>
@@ -70,7 +71,8 @@
                     <td>{{ zanr }}</td>
                 {% endfor %}
                 {% if is_granted('ROLE_LIBRARY') %}
-                    <td>{{ gradja.brojInventara }}</td>
+                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.brojInventara  , "Code39").generate }}"
+                             alt="ISBN: {{ gradja.brojInventara }} "/></td>
                 {% endif %}
 
                 <td>

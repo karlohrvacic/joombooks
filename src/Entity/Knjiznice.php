@@ -81,10 +81,16 @@ class Knjiznice implements UserInterface
      */
     private $daniRezervacije;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Posudbe::class, mappedBy="knjiznica")
+     */
+    private $posudbe;
+
     public function __construct()
     {
         $this->gradje = new ArrayCollection();
         $this->korisnici = new ArrayCollection();
+        $this->posudbe = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -304,6 +310,36 @@ class Knjiznice implements UserInterface
     public function setDaniRezervacije(int $daniRezervacije): self
     {
         $this->daniRezervacije = $daniRezervacije;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Posudbe[]
+     */
+    public function getPosudbe(): Collection
+    {
+        return $this->posudbe;
+    }
+
+    public function addPosudbe(Posudbe $posudbe): self
+    {
+        if (!$this->posudbe->contains($posudbe)) {
+            $this->posudbe[] = $posudbe;
+            $posudbe->setKnjiznica($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosudbe(Posudbe $posudbe): self
+    {
+        if ($this->posudbe->removeElement($posudbe)) {
+            // set the owning side to null (unless already changed)
+            if ($posudbe->getKnjiznica() === $this) {
+                $posudbe->setKnjiznica(null);
+            }
+        }
 
         return $this;
     }

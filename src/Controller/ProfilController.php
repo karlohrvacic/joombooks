@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Entity\Posudbe;
+use App\Entity\Statusi;
 use App\Repository\GradjaRepository;
 use App\Service\RezervacijaVerify;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -163,5 +167,97 @@ class ProfilController extends AbstractController
         return $this->render('korisnickiProfil/postavke.html.twig',[
             'korisnik' => $korisnik
         ]);
+    }
+
+    /**
+     * @Route("/knjiznica/rezervirano", name="rezervacije_korisnika")
+     */
+    public function pregledRezervacija(RezervacijaVerify $verify)
+    {
+        $verify->rezervacijaExpirationCheck();
+        /**
+         * @var $knjiznica Knjiznice
+         */
+        $knjiznica = $this->getUser();
+
+        $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
+            'knjiznica' => $knjiznica,
+            'status' => 5
+        ]);
+
+        $code = new BarcodeController();
+
+
+        return $this->render('knjiznicniProfil/rezervirane.html.twig',[
+            'posudbes' => $posudbe,
+            'code' => $code
+        ]);
+    }
+
+    /**
+     * @Route("/knjiznica/posudjeno", name="posudbe_korisnika")
+     */
+    public function pregledPosudbi(RezervacijaVerify $verify)
+    {
+        $verify->rezervacijaExpirationCheck();
+        /**
+         * @var $knjiznica Knjiznice
+         */
+        $knjiznica = $this->getUser();
+
+        $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
+            'knjiznica' => $knjiznica,
+            'status' => 3
+        ]);
+
+        $code = new BarcodeController();
+
+        return $this->render('korisnickiProfil/pregledRezerviranih.html.twig',[
+            'gradjas' => $posudbe,
+            'code' => $code
+        ]);
+    }
+    #[Route('gradja/cancel/{id}', name: 'rezervacija_cancel', methods: ['GET'])]
+    public function cancelation(Request $request, $id, RezervacijaVerify $verify): Response
+    {
+        $verify->rezervacijaExpirationCheck();
+        $entityManager = $this->getDoctrine()->getManager();
+        $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
+
+        /**
+         * @var $user Korisnici
+         */
+        $user = $this->getUser();
+        if ($user === Korisnici::class){
+            if($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()){
+                $rezervacija
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(8));
+                $rezervacija->getGradja()
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(1));
+
+                $entityManager->flush();
+            }
+            return $this->render('korisnickiProfil/pregledRezerviranih.html.twig');
+        }
+        /**
+         * @var $knjiznicar Knjiznice
+         */
+        $knjiznicar = $this->getUser();
+        if ($knjiznicar){
+            if($knjiznicar === $rezervacija->getKnjiznica()){
+                $rezervacija
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(8));
+                $rezervacija->getGradja()
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(1));
+
+                $entityManager->flush();
+            }
+            return $this->render('knjiznicniProfil/rezervirane.html.twig');
+        }
+
     }
 }
