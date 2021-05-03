@@ -166,7 +166,7 @@ class Korisnici implements UserInterface
         return $this->razred;
     }
 
-    public function setRazred(?int $razred): self
+    public function setRazred(?string $razred): self
     {
         $this->razred = $razred;
 

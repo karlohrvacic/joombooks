@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="467ab3ec-7b04-4d6d-a77d-87e89b82e473" name="Default Changelist" comment="Security activated">
+    <list default="true" id="467ab3ec-7b04-4d6d-a77d-87e89b82e473" name="Default Changelist" comment="Favicon">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/KorisniciController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/KorisniciController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Korisnici.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Korisnici.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/KorisniciType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/KorisniciType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +233,7 @@
       <workItem from="1619882993875" duration="11527000" />
       <workItem from="1619960860712" duration="29000" />
       <workItem from="1619972893187" duration="8439000" />
-      <workItem from="1620050014103" duration="13642000" />
+      <workItem from="1620050014103" duration="15417000" />
     </task>
     <task id="LOCAL-00001" summary="Ctrl">
       <created>1618948338747</created>
@@ -380,7 +382,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620072695173</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Favicon">
+      <created>1620073482036</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1620073482036</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -410,6 +419,7 @@
     <MESSAGE value="Barcodes are here" />
     <MESSAGE value="Fixes on verify reservation and days for resevation" />
     <MESSAGE value="Security activated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Security activated" />
+    <MESSAGE value="Favicon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Favicon" />
   </component>
 </project>

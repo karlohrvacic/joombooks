@@ -77,21 +77,21 @@ class KorisniciController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hash = password_hash($form->get('lozinka')->getData(), PASSWORD_DEFAULT);
-
-            $korisnici->setPassword($hash);
+            //$hash = password_hash($form->get('lozinka')->getData(), PASSWORD_DEFAULT);
+            //$korisnici->setPassword($hash);
 
             if($request->files->get('korisnici')['fotografija'] != null){
-                $filesystem = new Filesystem();
-                $filesystem->remove($korisnici->getFotografija());
+                if($korisnici->getFotografija() != null){
+                    unlink("../public".$korisnici->getFotografija());
+                }
                 $korisnici->setFotografija($this->tempUploadAction($request));
             }
 
             $this->getDoctrine()->getManager()->flush();
 
-            $hash = password_hash($form->get('lozinka')->getData(), PASSWORD_DEFAULT);
+            //$hash = password_hash($form->get('lozinka')->getData(), PASSWORD_DEFAULT);
 
-            $korisnici->setPassword($hash);
+            //$korisnici->setPassword($hash);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('korisnici_index');
