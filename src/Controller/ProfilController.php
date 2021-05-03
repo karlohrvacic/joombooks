@@ -16,7 +16,7 @@ class ProfilController extends AbstractController
      */
     public function korisnickiIzbornik(RezervacijaVerify $verify)
     {
-        $verify->rezervacijaExpirationCheck();
+        //$verify->rezervacijaExpirationCheck();
 
         /**
          * @var $korisnik Korisnici
