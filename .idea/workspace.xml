@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="467ab3ec-7b04-4d6d-a77d-87e89b82e473" name="Default Changelist" comment="Security activated">
-      <change beforePath="$PROJECT_DIR$/.idea/jumkabooks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jumkabooks.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,10 +198,10 @@
       <recent name="D:\Programming\Projects\Personal\jumkabooks\templates\korisnickiProfil" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programming\Projects\Personal\jumkabooks\public" />
       <recent name="D:\Programming\Projects\Personal\jumkabooks\templates\knjiznicniProfil" />
       <recent name="D:\Programming\Projects\Personal\jumkabooks\src\Service" />
       <recent name="D:\Programming\Projects\Personal\jumkabooks\src\Controller" />
-      <recent name="D:\Programming\Projects\Personal\jumkabooks\public" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -233,7 +231,7 @@
       <workItem from="1619882993875" duration="11527000" />
       <workItem from="1619960860712" duration="29000" />
       <workItem from="1619972893187" duration="8439000" />
-      <workItem from="1620050014103" duration="12979000" />
+      <workItem from="1620050014103" duration="13642000" />
     </task>
     <task id="LOCAL-00001" summary="Ctrl">
       <created>1618948338747</created>
@@ -368,7 +366,21 @@
       <option name="project" value="LOCAL" />
       <updated>1620072029295</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Security activated">
+      <created>1620072626372</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1620072626372</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Security activated">
+      <created>1620072695173</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1620072695173</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
