@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="467ab3ec-7b04-4d6d-a77d-87e89b82e473" name="Default Changelist" comment="Fixes on verify reservation and days for resevation">
+      <change beforePath="$PROJECT_DIR$/.idea/jumkabooks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jumkabooks.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProfilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProfilController.php" afterDir="false" />
@@ -191,7 +192,7 @@
       <workItem from="1619882993875" duration="11527000" />
       <workItem from="1619960860712" duration="29000" />
       <workItem from="1619972893187" duration="8439000" />
-      <workItem from="1620050014103" duration="7731000" />
+      <workItem from="1620050014103" duration="9318000" />
     </task>
     <task id="LOCAL-00001" summary="Ctrl">
       <created>1618948338747</created>
@@ -291,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620065332763</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fixes on verify reservation and days for resevation">
+      <created>1620066583177</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1620066583177</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

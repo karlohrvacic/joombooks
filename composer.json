@@ -101,7 +101,4 @@
             "require": "5.2.*"
         }
     },
-    "require-dev": {
-        "heroku/heroku-buildpack-php" : "dev-master"
-    }
 }
