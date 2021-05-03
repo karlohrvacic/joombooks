@@ -4,13 +4,10 @@
     box-sizing: border-box;
 }
 
-html, body {
-    margin: 0;
-    height: 100%;
-}
 body{
     font-family: 'Actor', sans-serif;
 }
+
 h1 {
     text-align: center;
 }
@@ -44,16 +41,6 @@ input.form-control{
     background-color: #D1FDFE;
 }
 
-.submit{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.name{
-    display: inline;
-}
-
 .btn{
     background-color: #FBE8A6;
     border-color: #FBE8A6;
@@ -61,16 +48,9 @@ input.form-control{
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.btn:hover{
+.btn.selected, .btn:hover, .btn:focus{
     background-color: #F4976C;
     border-color: #F4976C;
-}
-
-.btn-group{
-    border-radius: 0px;
-    margin-bottom: 10px;
-}
-
-.btn-group-lg{
-    border-radius: 0px;
+    color: white;
+    box-shadow: 0 0 0 0.25rem rgba(244, 151, 108, 0.25);
 }

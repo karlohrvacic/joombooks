@@ -3,15 +3,15 @@
 {% block title %}Prijava{% endblock %}
 
 {% block body %}
-    <header class="pl-7">
+    <header>
         Jumka books
     </header>
     <div class="container-fluid main">
-        <div class="btn-group btn-group-lg" role="group" aria-label="...">
-            <button type="button" class="btn btn-secondary">Korisnik</button>
-            <button type="button" class="btn btn-secondary">Knjižnica</button>
+        <div class="btn-group mb-3" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-lg biranje selected">Korisnik</button>
+            <button type="button" class="btn btn-lg biranje">Knjižnica</button>
         </div>
-    <div class="row col-12 col-lg-6">
+    <div class="row col-10 col-sm-8 col-md-6 col-lg-4">
         <form method="post" class="login">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -35,20 +35,20 @@
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
             See https://symfony.com/doc/current/security/remember_me.html
             #}
+            <div class="form-check mb-2 mt-3">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="_remember_me">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Zapamti me
+                </label>
+            </div>
             <div class="submit text-center">
-                <div class="form-check mb-2 mt-3">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="_remember_me">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Zapamti me
-                    </label>
-                </div>
-                <button class="btn btn-lg btn-primary mt-3" type="submit">
+                <button class="btn btn-lg mt-3" type="submit">
                     Prijava
                 </button>
             </div>
         </form>
         <div class="text-center">
-            <a href="{{ path('activation_index', {'code': ''} ) }}"><button class="btn btn-lg btn-primary mt-3">
+            <a href="{{ path('activation_index', {'code': ''} ) }}"><button class="btn btn-lg mt-3">
                     Aktivacija
                 </button></a>
         </div>
