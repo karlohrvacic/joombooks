@@ -1,0 +1,93 @@
+Index: templates/base.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>{% block title %}Welcome!{% endblock %}</title>\r\n    {# Run `composer require symfony/webpack-encore-bundle`\r\n           and uncomment the following Encore helpers to start using Symfony UX #}\r\n    {% block stylesheets %}\r\n        <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\">\r\n        <link href=\"https://fonts.googleapis.com/css2?family=Actor&display=swap\" rel=\"stylesheet\">\r\n        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6\" crossorigin=\"anonymous\">\r\n        <link rel=\"stylesheet\" href=\"{{ asset('css/style.css') }}\">\r\n    {% endblock %}\r\n</head>\r\n<body>\r\n{% block body %}\r\n{% endblock %}\r\n{% block javascripts %}\r\n    <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf\" crossorigin=\"anonymous\"></script>\r\n    <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\" integrity=\"sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=\" crossorigin=\"anonymous\"></script>\r\n    <script src=\"{{ asset('js/app.js') }}\"></script>\r\n{% endblock %}\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/base.html.twig b/templates/base.html.twig
+--- a/templates/base.html.twig	(revision 9ac322fae329f241682981699c48329189ecb8a0)
++++ b/templates/base.html.twig	(date 1619991851260)
+@@ -3,6 +3,7 @@
+ <head>
+     <meta charset="UTF-8">
+     <title>{% block title %}Welcome!{% endblock %}</title>
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {# Run `composer require symfony/webpack-encore-bundle`
+            and uncomment the following Encore helpers to start using Symfony UX #}
+     {% block stylesheets %}
+Index: src/Security/KnjizniceAuthenticator.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Security;\r\n\r\nuse App\\Entity\\Knjiznice;\r\nuse Doctrine\\ORM\\EntityManagerInterface;\r\nuse Symfony\\Component\\HttpFoundation\\RedirectResponse;\r\nuse Symfony\\Component\\HttpFoundation\\Request;\r\nuse Symfony\\Component\\Routing\\Generator\\UrlGeneratorInterface;\r\nuse Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface;\r\nuse Symfony\\Component\\Security\\Core\\Exception\\CustomUserMessageAuthenticationException;\r\nuse Symfony\\Component\\Security\\Core\\Exception\\InvalidCsrfTokenException;\r\nuse Symfony\\Component\\Security\\Core\\Security;\r\nuse Symfony\\Component\\Security\\Core\\User\\UserInterface;\r\nuse Symfony\\Component\\Security\\Core\\User\\UserProviderInterface;\r\nuse Symfony\\Component\\Security\\Csrf\\CsrfToken;\r\nuse Symfony\\Component\\Security\\Csrf\\CsrfTokenManagerInterface;\r\nuse Symfony\\Component\\Security\\Guard\\Authenticator\\AbstractFormLoginAuthenticator;\r\nuse Symfony\\Component\\Security\\Http\\Util\\TargetPathTrait;\r\n\r\nclass KnjizniceAuthenticator extends AbstractFormLoginAuthenticator\r\n{\r\n    use TargetPathTrait;\r\n\r\n    public const LOGIN_ROUTE = 'app_login';\r\n\r\n    private $entityManager;\r\n    private $urlGenerator;\r\n    private $csrfTokenManager;\r\n\r\n    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager)\r\n    {\r\n        $this->entityManager = $entityManager;\r\n        $this->urlGenerator = $urlGenerator;\r\n        $this->csrfTokenManager = $csrfTokenManager;\r\n    }\r\n\r\n    public function supports(Request $request)\r\n    {\r\n        return self::LOGIN_ROUTE === $request->attributes->get('_route')\r\n            && $request->isMethod('POST');\r\n    }\r\n\r\n    public function getCredentials(Request $request)\r\n    {\r\n        $credentials = [\r\n            'email' => $request->request->get('email'),\r\n            'password' => $request->request->get('password'),\r\n            'csrf_token' => $request->request->get('_csrf_token'),\r\n        ];\r\n        $request->getSession()->set(\r\n            Security::LAST_USERNAME,\r\n            $credentials['email']\r\n        );\r\n\r\n        return $credentials;\r\n    }\r\n\r\n    public function getUser($credentials, UserProviderInterface $userProvider)\r\n    {\r\n        $token = new CsrfToken('authenticate', $credentials['csrf_token']);\r\n        if (!$this->csrfTokenManager->isTokenValid($token)) {\r\n            throw new InvalidCsrfTokenException();\r\n        }\r\n\r\n        $user = $this->entityManager->getRepository(Knjiznice::class)->findOneBy(['email' => $credentials['email']]);\r\n\r\n        if (!$user) {\r\n            // fail authentication with a custom error\r\n            throw new CustomUserMessageAuthenticationException('Email could not be found.');\r\n        }\r\n\r\n        return $user;\r\n    }\r\n\r\n    public function checkCredentials($credentials, UserInterface $user)\r\n    {\r\n        // Check the user's password or other credentials and return true or false\r\n        // If there are no credentials to check, you can just return true\r\n        return true;\r\n        #throw new \\Exception('TODO: check the credentials inside '.__FILE__);\r\n    }\r\n\r\n    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)\r\n    {\r\n        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {\r\n            return new RedirectResponse($targetPath);\r\n        }\r\n\r\n        return new RedirectResponse($this->urlGenerator->generate('knjiznica_izbornik'));\r\n        #throw new \\Exception('TODO: provide a valid redirect inside '.__FILE__);\r\n    }\r\n\r\n    protected function getLoginUrl()\r\n    {\r\n        return $this->urlGenerator->generate(self::LOGIN_ROUTE);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Security/KnjizniceAuthenticator.php b/src/Security/KnjizniceAuthenticator.php
+--- a/src/Security/KnjizniceAuthenticator.php	(revision 9ac322fae329f241682981699c48329189ecb8a0)
++++ b/src/Security/KnjizniceAuthenticator.php	(date 1619980309257)
+@@ -78,7 +78,7 @@
+         // Check the user's password or other credentials and return true or false
+         // If there are no credentials to check, you can just return true
+         return true;
+-        #throw new \Exception('TODO: check the credentials inside '.__FILE__);
++        #throw new \Exception(': check the credentials inside '.__FILE__);
+     }
+ 
+     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
+@@ -88,7 +88,7 @@
+         }
+ 
+         return new RedirectResponse($this->urlGenerator->generate('knjiznica_izbornik'));
+-        #throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
++        #throw new \Exception(': provide a valid redirect inside '.__FILE__);
+     }
+ 
+     protected function getLoginUrl()
+Index: src/Security/KorisniciAuthenticator.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nnamespace App\\Security;\r\n\r\nuse App\\Entity\\Knjiznice;\r\nuse App\\Entity\\Korisnici;\r\nuse App\\Service\\RezervacijaVerify;\r\nuse Doctrine\\ORM\\EntityManagerInterface;\r\nuse Symfony\\Component\\HttpFoundation\\RedirectResponse;\r\nuse Symfony\\Component\\HttpFoundation\\Request;\r\nuse Symfony\\Component\\Routing\\Generator\\UrlGeneratorInterface;\r\nuse Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface;\r\nuse Symfony\\Component\\Security\\Core\\Exception\\CustomUserMessageAuthenticationException;\r\nuse Symfony\\Component\\Security\\Core\\Exception\\InvalidCsrfTokenException;\r\nuse Symfony\\Component\\Security\\Core\\Security;\r\nuse Symfony\\Component\\Security\\Core\\User\\UserInterface;\r\nuse Symfony\\Component\\Security\\Core\\User\\UserProviderInterface;\r\nuse Symfony\\Component\\Security\\Csrf\\CsrfToken;\r\nuse Symfony\\Component\\Security\\Csrf\\CsrfTokenManagerInterface;\r\nuse Symfony\\Component\\Security\\Guard\\Authenticator\\AbstractFormLoginAuthenticator;\r\nuse Symfony\\Component\\Security\\Http\\Util\\TargetPathTrait;\r\n\r\nclass KorisniciAuthenticator extends AbstractFormLoginAuthenticator\r\n{\r\n    use TargetPathTrait;\r\n\r\n    public const LOGIN_ROUTE = 'app_login';\r\n\r\n    private $entityManager;\r\n    private $urlGenerator;\r\n    private $csrfTokenManager;\r\n\r\n    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager)\r\n    {\r\n        $this->entityManager = $entityManager;\r\n        $this->urlGenerator = $urlGenerator;\r\n        $this->csrfTokenManager = $csrfTokenManager;\r\n    }\r\n\r\n    public function supports(Request $request)\r\n    {\r\n        return self::LOGIN_ROUTE === $request->attributes->get('_route')\r\n            && $request->isMethod('POST');\r\n    }\r\n\r\n    public function getCredentials(Request $request)\r\n    {\r\n        $credentials = [\r\n            'email' => $request->request->get('email'),\r\n            'password' => $request->request->get('password'),\r\n            'csrf_token' => $request->request->get('_csrf_token'),\r\n        ];\r\n        $request->getSession()->set(\r\n            Security::LAST_USERNAME,\r\n            $credentials['email']\r\n        );\r\n\r\n        return $credentials;\r\n    }\r\n\r\n    public function getUser($credentials, UserProviderInterface $userProvider)\r\n    {\r\n        $token = new CsrfToken('authenticate', $credentials['csrf_token']);\r\n        if (!$this->csrfTokenManager->isTokenValid($token)) {\r\n            throw new InvalidCsrfTokenException();\r\n        }\r\n\r\n        $user = $this->entityManager->getRepository(Korisnici::class)->findOneBy(['email' => $credentials['email']]);\r\n\r\n        if(!$user){\r\n            $user = $this->entityManager->getRepository(Knjiznice::class)->findOneBy(['email' => $credentials['email']]);\r\n        }\r\n        if (!$user) {\r\n            // fail authentication with a custom error\r\n            throw new CustomUserMessageAuthenticationException('Korisnik nije pronađen.');\r\n        }\r\n\r\n        return $user;\r\n    }\r\n\r\n    public function checkCredentials($credentials, UserInterface $user)\r\n    {\r\n        // Check the user's password or other credentials and return true or false\r\n        // If there are no credentials to check, you can just return true\r\n        return true;\r\n        #throw new \\Exception('TODO: check the credentials inside '.__FILE__);\r\n    }\r\n\r\n    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)\r\n    {\r\n        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {\r\n            return new RedirectResponse($targetPath);\r\n        }\r\n        if(in_array(\"ROLE_USER\",$token->getRoleNames())){\r\n            return new RedirectResponse($this->urlGenerator->generate('korisnicki_izbornik'));\r\n\r\n        } else if(in_array(\"ROLE_LIBRARY\",$token->getRoleNames())){\r\n            return new RedirectResponse($this->urlGenerator->generate('knjiznica_izbornik'));\r\n        }\r\n\r\n        return new RedirectResponse($this->urlGenerator->generate('app_login'));\r\n        #throw new \\Exception('TODO: provide a valid redirect inside '.__FILE__);\r\n    }\r\n\r\n    protected function getLoginUrl()\r\n    {\r\n        return $this->urlGenerator->generate(self::LOGIN_ROUTE);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Security/KorisniciAuthenticator.php b/src/Security/KorisniciAuthenticator.php
+--- a/src/Security/KorisniciAuthenticator.php	(revision 9ac322fae329f241682981699c48329189ecb8a0)
++++ b/src/Security/KorisniciAuthenticator.php	(date 1619980309268)
+@@ -83,7 +83,7 @@
+         // Check the user's password or other credentials and return true or false
+         // If there are no credentials to check, you can just return true
+         return true;
+-        #throw new \Exception('TODO: check the credentials inside '.__FILE__);
++        #throw new \Exception(': check the credentials inside '.__FILE__);
+     }
+ 
+     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
+@@ -99,7 +99,7 @@
+         }
+ 
+         return new RedirectResponse($this->urlGenerator->generate('app_login'));
+-        #throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
++        #throw new \Exception(': provide a valid redirect inside '.__FILE__);
+     }
+ 
+     protected function getLoginUrl()
+Index: .idea/jumkabooks.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"WEB_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\">\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/spec\" isTestSource=\"true\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" packagePrefix=\"App\\\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/tests\" isTestSource=\"true\" packagePrefix=\"App\\Tests\\\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symfony/sendgrid-mailer\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/jean85/pretty-package-versions\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/astral\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/autowire-array-parameter\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/composer-json-manipulator\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/console-color-diff\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/console-package-builder\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/easy-testing\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/package-builder\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/rule-doc-generator-contracts\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/set-config-resolver\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/simple-php-doc-parser\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/skipper\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/smart-file-system\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/symfony-php-config\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symplify/symplify-kernel\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/nette/caching\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/nette/finder\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/nette/neon\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/nette/robot-loader\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/nette/utils\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/rector/rector\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/rector/rector-cakephp\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/rector/rector-doctrine\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/rector/rector-installer\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/rector/rector-laravel\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/rector/rector-nette\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/rector/rector-phpunit\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/rector/rector-symfony\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/danielstjules/stringy\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/phpstan/phpdoc-parser\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/phpstan/phpstan\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/phpstan/phpstan-phpunit\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/sebastian/diff\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/tracy/tracy\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/vendor/symfony/requirements-checker\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jumkabooks.iml b/.idea/jumkabooks.iml
+--- a/.idea/jumkabooks.iml	(revision 9ac322fae329f241682981699c48329189ecb8a0)
++++ b/.idea/jumkabooks.iml	(date 1619990587400)
+@@ -44,5 +44,7 @@
+     </content>
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="bootstrap" level="application" />
++    <orderEntry type="library" name="jquery-3.6.0" level="application" />
+   </component>
+ </module>
+\ No newline at end of file
