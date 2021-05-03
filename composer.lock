@@ -8,20 +8,19 @@
     "packages": [
         {
             "name": "codeitnowin/barcode",
-            "version": "3.0.5",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeitnowin/barcode-generator.git",
-                "reference": "bd140d279fc813e00f72eaa4f033186bf78b8786"
+                "reference": "a84e923469a631e48723cd1cca21858605966904"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeitnowin/barcode-generator/zipball/bd140d279fc813e00f72eaa4f033186bf78b8786",
-                "reference": "bd140d279fc813e00f72eaa4f033186bf78b8786",
+                "url": "https://api.github.com/repos/codeitnowin/barcode-generator/zipball/a84e923469a631e48723cd1cca21858605966904",
+                "reference": "a84e923469a631e48723cd1cca21858605966904",
                 "shasum": ""
             },
             "require": {
-                "ext-gd": "*",
                 "php": ">=5.3.2"
             },
             "type": "library",
@@ -55,9 +54,9 @@
             ],
             "support": {
                 "issues": "https://github.com/codeitnowin/barcode-generator/issues",
-                "source": "https://github.com/codeitnowin/barcode-generator/tree/v3.0.5"
+                "source": "https://github.com/codeitnowin/barcode-generator/tree/master"
             },
-            "time": "2021-02-19T15:33:44+00:00"
+            "time": "2018-06-01T13:33:52+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
