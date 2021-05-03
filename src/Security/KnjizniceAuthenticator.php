@@ -78,7 +78,7 @@ class KnjizniceAuthenticator extends AbstractFormLoginAuthenticator
         // Check the user's password or other credentials and return true or false
         // If there are no credentials to check, you can just return true
         return true;
-        #throw new \Exception('TODO: check the credentials inside '.__FILE__);
+        #throw new \Exception(': check the credentials inside '.__FILE__);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
@@ -88,7 +88,7 @@ class KnjizniceAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         return new RedirectResponse($this->urlGenerator->generate('knjiznica_izbornik'));
-        #throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        #throw new \Exception(': provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl()
