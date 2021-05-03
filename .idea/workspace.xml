@@ -2,7 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="467ab3ec-7b04-4d6d-a77d-87e89b82e473" name="Default Changelist" comment="Fixes on verify reservation and days for resevation">
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jumkabooks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jumkabooks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/phpunit" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/dev/debug.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/dev/web_profiler.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/test/web_profiler.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes/dev/web_profiler.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/bootstrap.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,20 +61,15 @@
       <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
       <path value="$PROJECT_DIR$/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
-      <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
       <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
-      <path value="$PROJECT_DIR$/vendor/symfony/debug-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
       <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
       <path value="$PROJECT_DIR$/vendor/symfony/config" />
-      <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/dependency-injection" />
       <path value="$PROJECT_DIR$/vendor/symfony/doctrine-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
@@ -74,7 +84,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/web-link" />
       <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
       <path value="$PROJECT_DIR$/vendor/symfony/validator" />
       <path value="$PROJECT_DIR$/vendor/symfony/framework-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
@@ -91,7 +100,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
       <path value="$PROJECT_DIR$/vendor/symfony/cache" />
-      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
@@ -132,43 +140,9 @@
       <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/codeitnowin/barcode" />
-      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
       <path value="$PROJECT_DIR$/vendor/symfony/sendgrid-mailer" />
-      <path value="$PROJECT_DIR$/vendor/jean85/pretty-package-versions" />
-      <path value="$PROJECT_DIR$/vendor/symplify/astral" />
-      <path value="$PROJECT_DIR$/vendor/symplify/autowire-array-parameter" />
-      <path value="$PROJECT_DIR$/vendor/symplify/composer-json-manipulator" />
-      <path value="$PROJECT_DIR$/vendor/symplify/console-color-diff" />
-      <path value="$PROJECT_DIR$/vendor/symplify/console-package-builder" />
-      <path value="$PROJECT_DIR$/vendor/symplify/easy-testing" />
-      <path value="$PROJECT_DIR$/vendor/symplify/package-builder" />
-      <path value="$PROJECT_DIR$/vendor/symplify/rule-doc-generator-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symplify/set-config-resolver" />
-      <path value="$PROJECT_DIR$/vendor/symplify/simple-php-doc-parser" />
-      <path value="$PROJECT_DIR$/vendor/symplify/skipper" />
-      <path value="$PROJECT_DIR$/vendor/symplify/smart-file-system" />
-      <path value="$PROJECT_DIR$/vendor/symplify/symfony-php-config" />
-      <path value="$PROJECT_DIR$/vendor/symplify/symplify-kernel" />
-      <path value="$PROJECT_DIR$/vendor/nette/caching" />
-      <path value="$PROJECT_DIR$/vendor/nette/finder" />
-      <path value="$PROJECT_DIR$/vendor/nette/neon" />
-      <path value="$PROJECT_DIR$/vendor/nette/robot-loader" />
-      <path value="$PROJECT_DIR$/vendor/nette/utils" />
-      <path value="$PROJECT_DIR$/vendor/rector/rector" />
-      <path value="$PROJECT_DIR$/vendor/rector/rector-cakephp" />
-      <path value="$PROJECT_DIR$/vendor/rector/rector-doctrine" />
-      <path value="$PROJECT_DIR$/vendor/rector/rector-installer" />
-      <path value="$PROJECT_DIR$/vendor/rector/rector-laravel" />
-      <path value="$PROJECT_DIR$/vendor/rector/rector-nette" />
-      <path value="$PROJECT_DIR$/vendor/rector/rector-phpunit" />
-      <path value="$PROJECT_DIR$/vendor/rector/rector-symfony" />
-      <path value="$PROJECT_DIR$/vendor/danielstjules/stringy" />
-      <path value="$PROJECT_DIR$/vendor/phpstan/phpdoc-parser" />
-      <path value="$PROJECT_DIR$/vendor/phpstan/phpstan" />
-      <path value="$PROJECT_DIR$/vendor/phpstan/phpstan-phpunit" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
-      <path value="$PROJECT_DIR$/vendor/tracy/tracy" />
       <path value="$PROJECT_DIR$/vendor/symfony/requirements-checker" />
+      <path value="$PROJECT_DIR$/vendor/heroku/heroku-buildpack-php" />
     </include_path>
   </component>
   <component name="ProjectId" id="1rR70vDUOjd934izxMOPzpaYQRy" />
@@ -229,7 +203,7 @@
       <workItem from="1619882993875" duration="11527000" />
       <workItem from="1619960860712" duration="29000" />
       <workItem from="1619972893187" duration="8439000" />
-      <workItem from="1620050014103" duration="3464000" />
+      <workItem from="1620050014103" duration="6342000" />
     </task>
     <task id="LOCAL-00001" summary="Ctrl">
       <created>1618948338747</created>
