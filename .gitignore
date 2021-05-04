@@ -7,7 +7,9 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-/public/files
+/public/files/pitcures/gradja
+/public/files/pitcures/profile
+
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
