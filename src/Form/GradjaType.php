@@ -37,8 +37,8 @@ class GradjaType extends AbstractType
                 'data' => new \DateTime("now")
             ])
             ->add('godinaIzdanja', DateType::class, [
-                    'required' => false,
-                ])
+                'widget' => 'choice',
+            ])
             ->add('jezici',EntityType::class, [
                 'required' => false,
                 'class' => Jezici::class,
