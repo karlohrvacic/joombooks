@@ -3,9 +3,18 @@
 {% block title %}Moj Profil{% endblock %}
 
 {% block body %}
-    <h1>Profil moj index</h1>
+    <header>
+        <img src="/public/files/pitcures/icons/houseorange.png"/>
+        <div class="ime-slika">
+            <div class="ime-prezime">
+                <p>{{ korisnik.ime }}</p>
+                <p>{{ korisnik.prezime }}</p>
+            </div>
+            <img src="{{ korisnik.fotografija }}">
+        </div>
+    </header>
     <a href="{{ path('korisnicki_izbornik') }}">HOME</a>
-    <img width="100px" src="{{ korisnik.fotografija }}">
+    <img src="{{ korisnik.fotografija }}">
     <p>{{ korisnik.ime }}</p>
     <p>{{ korisnik.prezime }}</p>
     <p>{{ korisnik.knjiznice.naziv}}</p>

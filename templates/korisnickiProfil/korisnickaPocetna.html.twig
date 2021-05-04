@@ -3,12 +3,14 @@
 {% block title %}Izbornik{% endblock %}
 
 {% block body %}
-    <header>
-        <div class="ime-prezime">
-            <p>{{ korisnik.ime }}</p>
-            <p>{{ korisnik.prezime }}</p>
+    <header class="pocetna">
+        <div class="ime-slika">
+            <div class="ime-prezime">
+                <p>{{ korisnik.ime }}</p>
+                <p>{{ korisnik.prezime }}</p>
+            </div>
+            <img src="{{ korisnik.fotografija }}">
         </div>
-        <img src="{{ korisnik.fotografija }}">
     </header>
     <section class="skola">
         <div>
@@ -27,29 +29,39 @@
             <i class="fas fa-bars"></i>
         </a>
     </section>
-    <div class="container-fluid korisnik-main">
-        <div class="row col-10 col-sm-8 col-md-6 col-lg-5">
-            <div class="menu-pictures">
-                <a href="{{ path('pregled_knjiga') }}">
-                    <div class="box1">
-                        <p>PRETRAŽI</p>
-                        <img src="/files/pitcures/icons/pretraziMain.png" alt=""/>
+    <div class="korisnik-main">
+            <div class="buttons">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <a class="izbornik-link" href="{{ path('pregled_knjiga') }}">
+                                <div class="box1">
+                                    <p>PRETRAŽI</p>
+                                    <img src="/files/pitcures/icons/pretraziMain.png" alt=""/>
+                                    <div class="clear"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12">
+                            <a class="izbornik-link" href="{{ path('posudjene_knjige_korisnika') }}">
+                                <div class="box2">
+                                    <p>POSUĐENO: {{ korisnik.brojTrenutnoPosudenih }}</p>
+                                    <img src="/files/pitcures/icons/posudenoMain.png" alt=""/>
+                                    <div class="clear"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12">
+                            <a class="izbornik-link" href="{{ path('rezervirane_knjige_korisnika') }}">
+                                <div class="box3">
+                                    <p>REZERVIRANO: {{ korisnik.brojTrenutnoRezerviranih }}</p>
+                                    <img src="/files/pitcures/icons/rezerviranoMain.png" alt=""/>
+                                    <div class="clear"></div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </a>
-                <a href="{{ path('posudjene_knjige_korisnika') }}">
-                    <div class="clear"></div>
-                    <div class="box2">
-                        <img src="/files/pitcures/icons/posudenoMain.png" alt=""/>
-                        <p>POSUĐENO: {{ korisnik.brojTrenutnoPosudenih }}</p>
-                    </div>
-                </a>
-                <a href="{{ path('rezervirane_knjige_korisnika') }}">
-                <div class="clear"></div>
-                    <div class="box3">
-                        <p>REZERVIRANO: {{ korisnik.brojTrenutnoRezerviranih }}</p>
-                        <img src="/files/pitcures/icons/rezerviranoMain.png" alt=""/>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
     </div>
