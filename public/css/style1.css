@@ -291,3 +291,21 @@ input.form-control{
     }
 }
 
+/*POSTAVKE*/
+.postavke h2{
+    font-size: 1.25rem;
+    margin-bottom: 0.1rem;
+}
+.postavke{
+    background-color: #D1FDFE;
+    height: 70vh;
+    padding: 1.5rem;
+}
+.obavijest{
+    display: flex;
+    justify-content: space-between;
+}
+.dodatne{
+    margin-top: 20px;
+}
+
