@@ -118,11 +118,11 @@ class ProfilController extends AbstractController
          */
         $korisnik = $this->getUser();
 
-        //$code = new BarcodeController();
+        $code = new BarcodeController();
 
         return $this->render('korisnickiProfil/profil.html.twig',[
             'korisnik' => $korisnik,
-            //'code' => $code
+            'code' => $code
         ]);
     }
 

@@ -49,7 +49,8 @@
                     </div>
                     <div class="qr col-12 col-md-6 col-lg-6">
                         <div class="qr-baby">
-                            QR kod / Barkod učenika
+                            <img  src="data:image/png;base64,{{ code.makeBarcode(  korisnik.brojIskazniceKorisnika  , "Code128").generate }}"
+                                 alt="Bar code korisnika: {{ korisnik.brojIskazniceKorisnika  }}"/>
                         </div>
                     </div>
                 </div>
@@ -59,8 +60,5 @@
     <footer style="color: black;">
         Jumka books
     </footer>
-    {#
-    <img src="data:image/png;base64,{{ code.makeBarcode(  korisnik.brojIskazniceKorisnika  , "Code128").generate }}"
-         alt="Bar code korisnika: {{ korisnik.brojIskazniceKorisnika  }}"/>
-    #}
+
 {% endblock %}

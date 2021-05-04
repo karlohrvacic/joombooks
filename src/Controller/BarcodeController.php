@@ -15,7 +15,7 @@ class BarcodeController extends AbstractController
         $barcode->setType(constant('CodeItNow\BarcodeBundle\Utils\BarcodeGenerator::'.$typeExt));
         $barcode->setScale(2);
         $barcode->setThickness(25);
-        $barcode->setFontSize(10);
+        $barcode->setFontSize(12);
         return $barcode;
     }
 }
