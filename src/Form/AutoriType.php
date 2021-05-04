@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Autori;
+use App\Entity\Drzave;
+use App\Entity\Zanrovi;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,8 +19,9 @@ class AutoriType extends AbstractType
             ->add('ime')
             ->add('prezime')
             //->add('popisGradje')
-            ->add('drzava', TextType::class, [
-                'required'   => false,
+            ->add('drzava', EntityType::class, [
+                'required' => false,
+                'class' => Drzave::class,
             ])
         ;
     }
