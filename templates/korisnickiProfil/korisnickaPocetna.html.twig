@@ -3,22 +3,62 @@
 {% block title %}Izbornik{% endblock %}
 
 {% block body %}
-    <h1>Dobrodošli korisniče</h1>
-    <p>{{ korisnik.ime }}</p>
-    <p>{{ korisnik.prezime }}</p>
-    <p>{{ korisnik.knjiznice.naziv }}</p>
-    <p>{{ korisnik.knjiznice.adresa }}</p>
-    <td><img width="100px" src="{{ korisnik.fotografija }}"></td>
-    <a href="{{ path('pregled_knjiga') }}">Pretraži</a>
-    <p>{{ korisnik.brojTrenutnoPosudenih }}</p>
-    <a href="{{ path('posudjene_knjige_korisnika') }}">Posuđeno</a>
-    <p>{{ korisnik.brojTrenutnoRezerviranih }}</p>
-    <a href="{{ path('rezervirane_knjige_korisnika') }}">Rezervirano</a>
-    <br>
-    <a href="{{ path('korisnicki_profil') }}">profil</a>
-    <a href="{{ path('korisnicke_obavijesti') }}">obavijesti</a>
-    <a href="{{ path('radno_vrijeme') }}">radno vrijeme</a>
-    <a href="{{ path('korisnicke_postavke') }}">postavke</a>
-    <a href="https://stackoverflow.com/questions/tagged/php">info/pomoć</a>
-    <a href="{{ path('app_logout') }}">odjava</a>
+    <header>
+        <div class="ime-prezime">
+            <p>{{ korisnik.ime }}</p>
+            <p>{{ korisnik.prezime }}</p>
+        </div>
+        <img src="{{ korisnik.fotografija }}">
+    </header>
+    <section class="skola">
+        <div>
+            <h1>OŠ Đure Deželića</h1>
+            <h2>Ivanić-Grad</h2>
+        </div>
+        <div id="myLinks">
+            <a href="{{ path('korisnicki_profil') }}">profil <img src="/files/pitcures/icons/person.png"/></a>
+            <a href="{{ path('korisnicke_obavijesti') }}">obavijesti <img src="/files/pitcures/icons/notification.png"/></a>
+            <a href="{{ path('radno_vrijeme') }}">radno vrijeme <img src="/files/pitcures/icons/clock.png"/></a>
+            <a href="{{ path('korisnicke_postavke') }}">postavke <img src="/files/pitcures/icons/settings.png"/></a>
+            <a href="https://stackoverflow.com/questions/tagged/php">info/pomoć <img src="/files/pitcures/icons/help.png"/></a>
+            <a href="{{ path('app_logout') }}">Odjavi se <img src="/files/pitcures/icons/onoff.png"/></a>
+        </div>
+        <a class="icon" onclick="myFunction()">
+            <i class="fas fa-bars"></i>
+        </a>
+    </section>
+    <div class="container-fluid korisnik-main">
+        <div class="row col-10 col-sm-8 col-md-6 col-lg-5">
+            <div class="menu-pictures">
+                <a href="{{ path('pregled_knjiga') }}">
+                    <div class="box1">
+                        <p>PRETRAŽI</p>
+                        <img src="/files/pitcures/icons/pretraziMain.png" alt=""/>
+                    </div>
+                </a>
+                <a href="{{ path('posudjene_knjige_korisnika') }}">
+                    <div class="clear"></div>
+                    <div class="box2">
+                        <img src="/files/pitcures/icons/posudenoMain.png" alt=""/>
+                        <p>POSUĐENO: {{ korisnik.brojTrenutnoPosudenih }}</p>
+                    </div>
+                </a>
+                <a href="{{ path('rezervirane_knjige_korisnika') }}">
+                <div class="clear"></div>
+                    <div class="box3">
+                        <p>REZERVIRANO: {{ korisnik.brojTrenutnoRezerviranih }}</p>
+                        <img src="/files/pitcures/icons/rezerviranoMain.png" alt=""/>
+                    </div>
+                </a>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    <footer style="color: black;">
+        Jumka books
+    </footer>
 {% endblock %}

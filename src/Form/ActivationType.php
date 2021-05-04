@@ -17,7 +17,10 @@ class ActivationType extends AbstractType
         $builder
             ->add('email', EmailType::class)
             ->add('code', null , [
-                'label' => 'Upišite kod iz e-maila:'
+                'label' => 'Upišite kod iz e-maila:',
+                'row_attr' => [
+                    'class' => 'form-row-split'
+                ]
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,

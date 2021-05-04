@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Actor', sans-serif;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+header{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 10vh;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #303C6C;
+    color: white;
+}
+footer{
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    background-color: #B4DFE5;
+    color: #B4DFE5;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+input.form-control{
+    border-radius: 20px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.selection{
+    margin: 10% 0;
+}
+
+.main{
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    background-color: #D1FDFE;
+    text-align: center;
+}
+
+.btn{
+    background-color: #FBE8A6;
+    border-color: #FBE8A6;
+    color: black;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.btn.selected, .btn:hover, .btn:focus{
+    background-color: #F4976C;
+    border-color: #F4976C;
+    color: white;
+}
+
+.btn.selected, .btn:focus{
+    box-shadow: 0 0 0 0.25rem rgba(244, 151, 108, 0.25);
+}
+
+.form-check{
+    text-align: left;
+}
+
+#inputEmail{
+    margin: 5% 0 3%;
+}
+
+#inputPassword{
+    margin: 0 0 3%;
+}
+
+.remember{
+    margin-bottom: 10%;
+}
+
+.btn-logins{
+    margin-bottom: 3%;
+    width: 8rem;
+}
+
+/*Korisnicki profil*/
+.ime-prezime{
+    margin-right: 0.5rem;
+}
+.ime-prezime p{
+    display: inline;
+}
+.skola{
+    position: relative;
+    z-index: 1;
+    height: 10vh;
+    background-color: #B4DFE5;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.skola h1{
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+}
+.skola h2{
+    font-size: 1rem;
+}
+.skola a{
+    cursor: pointer;
+    color: black;
+    text-transform: none;
+}
+.skola i{
+    font-size: 2rem;
+}
+.korisnik-main{
+    background-color: #D1FDFE;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+#myLinks{
+    display: none;
+    position: absolute;
+    top: 8.5vh;
+    right: 2rem;
+    width: 150px;
+    background-color: white;
+    text-align: right;
+    padding: 10px;
+}
+#myLinks img{
+    width: 15%;
+}
+#myLinks a{
+    display: block;
+    text-decoration: none;
+}
+
+
+/*MARTA*/
+
+.menu-pictures{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.btn:focus, .btn:active{
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0px;
+}
+
+.clear{
+    position: static;
+    margin: 30px;
+}
+
+.box1, .box2, .box3{
+    position: relative;
+}
+
+.box1 p{
+    display: inline;
+    padding: 20px 90px 20px 90px;
+    background-color: #FBE8A6;
+    border-radius: 40px;
+    position: absolute;
+    top: 15%;
+    box-shadow: 0px 3px 2px #aaaaaa;
+    color: #303C6C;
+    font-size: 24px;
+}
+
+.box2 img{
+    max-height: 110px;
+    position: absolute;
+    -webkit-filter: drop-shadow(0px 3px 1px #aaaaaa);
+    filter: drop-shadow(0px 3px 1px #aaaaaa);
+    z-index: 1;
+    margin-top: -37px;
+}
+
+.box2 p{
+    display: inline;
+    margin: 50px;
+    padding: 20px 34px 20px 120px;
+    background-color: #FBE8A6;
+    border-radius: 40px;
+    position: relative;
+    box-shadow: 0px 3px 2px #aaaaaa;
+    color: #303C6C;
+    font-size: 24px;
+}
+
+.box3 p{
+    display: inline;
+    padding: 20px 100px 20px 40px;
+    background-color: #FBE8A6;
+    border-radius: 40px;
+    position: absolute;
+    top: 15%;
+    box-shadow: 0px 3px 2px #aaaaaa;
+    color: #303C6C;
+    font-size: 24px;
+}
+
+.box3 img, .box1 img{
+    max-height: 110px;
+    position: relative;
+    margin-left: 220px;
+    -webkit-filter: drop-shadow(0px 3px 1px #aaaaaa);
+    filter: drop-shadow(0px 3px 1px #aaaaaa);
+}
