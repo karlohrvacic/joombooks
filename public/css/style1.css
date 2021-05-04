@@ -96,6 +96,9 @@ input.form-control{
 }
 
 /*Korisnicka pocetna*/
+.korisnicka-foto{
+    border-radius: 50px;
+}
 .pocetna{
     justify-content: flex-end;
 }
