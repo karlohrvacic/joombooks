@@ -241,7 +241,8 @@ class ProfilController extends AbstractController
 
                 $entityManager->flush();
             }
-            return $this->render('korisnickiProfil/pregledRezerviranih.html.twig');
+
+            return $this->redirectToRoute('rezervirane_knjige_korisnika');
         }
         /**
          * @var $knjiznicar Knjiznice
@@ -258,7 +259,7 @@ class ProfilController extends AbstractController
 
                 $entityManager->flush();
             }
-            return $this->render('knjiznicniProfil/rezervirane.html.twig');
+            return $this->redirectToRoute('rezervacije_korisnika');
         }
 
     }
@@ -291,7 +292,38 @@ class ProfilController extends AbstractController
 
                 $entityManager->flush();
             }
-            return $this->render('knjiznicniProfil/rezervirane.html.twig');
+            return $this->redirectToRoute('posudbe_korisnika');
+        }
+        return $this->redirectToRoute('app_login');
+    }
+
+    #[Route('knjiznica/gradja/vrati/{id}', name: 'vrati_gradju', methods: ['GET'])]
+    public function vracanje(Request $request, $id, RezervacijaVerify $verify)
+    {
+        $verify->rezervacijaExpirationCheck();
+        $entityManager = $this->getDoctrine()->getManager();
+        $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
+
+        /**
+         * @var $knjiznicar Knjiznice
+         */
+        $knjiznicar = $this->getUser();
+
+        if ($knjiznicar) {
+            if ($rezervacija->getKnjiznica() instanceof $knjiznicar ) {
+                $rezervacija
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(6));
+                $rezervacija->getGradja()
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(1));
+
+                $rezervacija->setDatumVracanja((new DateTime())->add(new DateInterval('P0D')));
+
+                $entityManager->flush();
+            }
+            return $this->redirectToRoute('posudbe_korisnika');
+
         }
         return $this->render('app_login');
     }

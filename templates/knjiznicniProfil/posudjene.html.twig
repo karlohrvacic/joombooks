@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Popis rezervacija{% endblock %}
+{% block title %}Popis posudbi{% endblock %}
 
 {% block body %}
-    <h1>Popis rezervacija</h1>
+    <h1>Popis posudbi</h1>
 
     <table class="table">
         <thead>
@@ -32,7 +32,7 @@
                 <td>{{ posudbe.datumRokaVracanja ? posudbe.datumRokaVracanja|date('Y-m-d') : '' }}</td>
                 <td>{{ posudbe.zakasnina }}</td>
                 <td>
-                    <a href="{{ path('rezervacija_cancel', {'id': posudbe.id}) }}">Vraćanje</a>
+                    <a href="{{ path('vrati_gradju', {'id': posudbe.id}) }}">Vraćanje</a>
                 </td>
             </tr>
         {% else %}

@@ -21,7 +21,6 @@
                 <th>ISBN</th>
             {% endif %}
 
-            <th>Status</th>
             <th>Naslov</th>
             <th>Autori</th>
             {% if is_granted('ROLE_USER') %}
@@ -33,7 +32,6 @@
             <th>Datum posudbe</th>
             <th>Datum roka povratka</th>
             <th>Jezik</th>
-            <th>Rok povratka</th>
             <th>Zakasnina</th>
             <th>Opcije</th>
         </tr>
@@ -41,7 +39,6 @@
         <tbody>
         {% for posudba in posudbe %}
             <tr>
-                <td>{{ posudba.id }}</td>
                 <td>{{ posudba.getGradja.getNaslov }}</td>
                 {% for autor in posudba.gradja.autori %}
                     <td>{{ autor }}</td>
@@ -53,7 +50,6 @@
                 <td>{{ posudba.datumPosudbe ? posudba.datumPosudbe |date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja|date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.getGradja.jezici.ime }}</td>
-                <td>{{ posudba.datumVracanja ? posudba.datumVracanja|date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.zakasnina }} kn</td>
                 <img src="data:image/png;base64,{{ code.makeBarcode(  posudba.gradja.brojInventara  , "Code128").generate }}"
                      alt="Broj inventara: {{ posudba.gradja.brojInventara  }}"/>
