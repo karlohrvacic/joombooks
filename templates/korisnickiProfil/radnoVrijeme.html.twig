@@ -4,16 +4,21 @@
 
 {% block body %}
     <header>
-        <div class="ime-prezime">
-            <p>{{ korisnik.ime }}</p>
-            <p>{{ korisnik.prezime }}</p>
+        <div class="home">
+            <a href="{{ path('korisnicki_izbornik') }}"><img src="/files/pitcures/icons/homewhite.png"/></a>
         </div>
-        <a href={{ path('korisnicki_izbornik') }}><img src="{{ korisnik.fotografija }}"></a>
+        <div class="ime-slika">
+            <div class="ime-prezime">
+                <p>{{ korisnik.ime }}</p>
+                <p>{{ korisnik.prezime }}</p>
+            </div>
+            <img class="korisnicka-foto" src="{{ korisnik.fotografija }}">
+        </div>
     </header>
     <section class="skola">
-        <div>
-            <h1>{{korisnik.knjiznice.naziv}}</h1>
-            <h2>Grad Zagreb</h2>
+        <div class="look">
+            <img src="/files/pitcures/icons/clock.png">
+            <h1>RADNO VRIJEME</h1>
         </div>
         <div id="myLinks">
             <a href="{{ path('korisnicki_profil') }}">profil <img src="/files/pitcures/icons/person.png"/></a>
@@ -27,26 +32,24 @@
             <i class="fas fa-bars"></i>
         </a>
     </section>
-
-    <div class="container-fluid korisnik-main table-responsive">
-        <table class="table table-sm" style="max-width: 50%">
-            <h1>Radno vrijeme</h1>
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Ponedjeljak - Petak</th>
-                <th scope="col">Subota</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>8 - 21</td>
-                <td>9 - 14</td>
-            </tr>
-            </tbody>
-        </table>
-
-
+    <div class="korisnik-main table-responsive">
+            <table class="table table-sm" style="max-width: 50%">
+                <h1>Radno vrijeme</h1>
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Ponedjeljak - Petak</th>
+                    <th scope="col">Subota</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>8 - 21</td>
+                    <td>9 - 14</td>
+                </tr>
+                </tbody>
+            </table>
     </div>
+
     <footer style="color: black;">
         Jumka books
     </footer>
