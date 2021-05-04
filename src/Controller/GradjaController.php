@@ -84,6 +84,14 @@ class GradjaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if($request->files->get('gradja')['fotografija'] != null){
+                if($gradja->getFotografija() != null && file_exists("../public".$gradja->getFotografija())){
+                    unlink("../public".$gradja->getFotografija());
+                }
+                $gradja->setFotografija($this->tempUploadAction($request));
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('gradja_index');

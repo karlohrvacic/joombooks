@@ -8,7 +8,6 @@ use App\Entity\Izdavaci;
 use App\Entity\Jezici;
 use App\Entity\Zanrovi;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -40,7 +39,7 @@ class GradjaType extends AbstractType
             ->add('godinaIzdanja', DateType::class, [
                     'required' => false,
                 ])
-            ->add('jezik',EntityType::class, [
+            ->add('jezici',EntityType::class, [
                 'required' => false,
                 'class' => Jezici::class,
             ])

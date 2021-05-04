@@ -23,7 +23,14 @@
 
                     {% if app.user %}
                         <div class="mb-3 mt-3">
-                            Ulogirani ste kao {{ app.user.username }} <a href="{{ path('app_logout') }}"><button class="btn">Odjava</button></a>
+                            {% if is_granted('ROLE_LIBRARY') %}
+                                <a href="{{ path('knjiznica_izbornik') }}">Povratak u izbornik</a>
+                            {% endif %}
+                            {% if is_granted('ROLE_USER') %}
+                                <a href="{{ path('korisnicki_izbornik') }}">Povratak u izbornik</a>
+                            {% endif %}
+
+                            Prijavljeni ste kao {{ app.user.username }} <a href="{{ path('app_logout') }}"><button class="btn">Odjava</button></a>
                         </div>
                     {% endif %}
 

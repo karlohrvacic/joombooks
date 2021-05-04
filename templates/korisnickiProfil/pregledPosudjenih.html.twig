@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Posuđeneee index{% endblock %}
+{% block title %}Posuđene index{% endblock %}
 
 
 
@@ -30,8 +30,8 @@
             <th>Fotografija</th>
             <th>Izdavač</th>
             <th>Opis</th>
-            <th>DatumDodavanja</th>
-            <th>GodinaIzdanja</th>
+            <th>Datum posudbe</th>
+            <th>Datum roka povratka</th>
             <th>Jezik</th>
             <th>Rok povratka</th>
             <th>Zakasnina</th>
@@ -42,17 +42,19 @@
         {% for posudba in posudbe %}
             <tr>
                 <td>{{ posudba.id }}</td>
-                <td>{{ posudba.gradja.isbn }}</td>
                 <td>{{ posudba.getGradja.getNaslov }}</td>
+                {% for autor in posudba.gradja.autori %}
+                    <td>{{ autor }}</td>
+                {% endfor %}
                 <td>{{ posudba.getGradja.getKnjiznicaVlasnik.getNaziv }}</td>
                 <td><img width="100px" src="{{ posudba.getGradja.fotografija }}"></td>
                 <td>{{ posudba.getGradja.izdavac.naziv}}</td>
                 <td>{{ posudba.getGradja.opis }}</td>
                 <td>{{ posudba.datumPosudbe ? posudba.datumPosudbe |date('Y-m-d') : '' }}</td>
-                <td>{{ posudba.datumVracanja ? posudba.datumVracanja|date('Y-m-d') : '' }}</td>
+                <td>{{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja|date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.getGradja.jezici.ime }}</td>
                 <td>{{ posudba.datumVracanja ? posudba.datumVracanja|date('Y-m-d') : '' }}</td>
-                <td>{{ posudba.zakasnina }}</td>
+                <td>{{ posudba.zakasnina }} kn</td>
                 <img src="data:image/png;base64,{{ code.makeBarcode(  posudba.gradja.brojInventara  , "Code128").generate }}"
                      alt="Broj inventara: {{ posudba.gradja.brojInventara  }}"/>
                 <td>

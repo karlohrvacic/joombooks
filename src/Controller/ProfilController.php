@@ -8,6 +8,8 @@ use App\Entity\Posudbe;
 use App\Entity\Statusi;
 use App\Repository\GradjaRepository;
 use App\Service\RezervacijaVerify;
+use DateInterval;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -212,8 +214,8 @@ class ProfilController extends AbstractController
 
         $code = new BarcodeController();
 
-        return $this->render('korisnickiProfil/pregledRezerviranih.html.twig',[
-            'gradjas' => $posudbe,
+        return $this->render('knjiznicniProfil/posudjene.html.twig',[
+            'posudbes' => $posudbe,
             'code' => $code
         ]);
     }
@@ -259,5 +261,38 @@ class ProfilController extends AbstractController
             return $this->render('knjiznicniProfil/rezervirane.html.twig');
         }
 
+    }
+    #[Route('knjiznica/gradja/posudi/{id}', name: 'posudi_rezerviranu_gradju', methods: ['GET'])]
+    public function posudba(Request $request, $id, RezervacijaVerify $verify)
+    {
+        $verify->rezervacijaExpirationCheck();
+        $entityManager = $this->getDoctrine()->getManager();
+        $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
+
+        /**
+         * @var $knjiznicar Knjiznice
+         */
+        $knjiznicar = $this->getUser();
+
+        if ($knjiznicar) {
+            if ($knjiznicar === $rezervacija->getKnjiznica()) {
+                $rezervacija
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(3));
+                $rezervacija->getGradja()
+                    ->setStatus($entityManager->getRepository(Statusi::class)
+                        ->find(3));
+
+                $rezervacija->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
+                $daniPosudbe = 30;
+                $duration = "P".$daniPosudbe."D";
+
+                $rezervacija->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
+
+                $entityManager->flush();
+            }
+            return $this->render('knjiznicniProfil/rezervirane.html.twig');
+        }
+        return $this->render('app_login');
     }
 }

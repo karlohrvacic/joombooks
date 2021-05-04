@@ -12,8 +12,9 @@
             <th>ISBN</th>
             <th>Broj inventara</th>
             <th>Broj Iskaznice Korisnika</th>
-            <th>Datum Rezerviranja</th>
-            <th>Datum Roka Rezervacije</th>
+            <th>Datum Posudbe</th>
+            <th>Rok vraćanja</th>
+            <th>Zakasnina</th>
             <th>Opcije</th>
         </tr>
         </thead>
@@ -29,9 +30,9 @@
                          alt="Broj iskaznice korisnika: {{ posudbe.brojIskazniceKorisnika  }}"/></td>
                 <td>{{ posudbe.datumPosudbe ? posudbe.datumPosudbe|date('Y-m-d') : '' }}</td>
                 <td>{{ posudbe.datumRokaVracanja ? posudbe.datumRokaVracanja|date('Y-m-d') : '' }}</td>
+                <td>{{ posudbe.zakasnina }}</td>
                 <td>
-                    <a href="{{ path('rezervacija_cancel', {'id': posudbe.id}) }}">Otkaži</a>
-                    <a href="{{ path('posudi_rezerviranu_gradju', {'id': posudbe.id}) }}">Posudi</a>
+                    <a href="{{ path('rezervacija_cancel', {'id': posudbe.id}) }}">Vraćanje</a>
                 </td>
             </tr>
         {% else %}

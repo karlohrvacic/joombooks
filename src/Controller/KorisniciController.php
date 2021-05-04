@@ -81,7 +81,7 @@ class KorisniciController extends AbstractController
             //$korisnici->setPassword($hash);
 
             if($request->files->get('korisnici')['fotografija'] != null){
-                if($korisnici->getFotografija() != null){
+                if($korisnici->getFotografija() != null && file_exists("../public".$korisnici->getFotografija())){
                     unlink("../public".$korisnici->getFotografija());
                 }
                 $korisnici->setFotografija($this->tempUploadAction($request));

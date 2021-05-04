@@ -150,8 +150,11 @@ class Posudbe
     }
 
     public function zakasnina(){
-        $daniKasnjenja = $this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a');
+        $daniKasnjenja = $this->getDatumRokaVracanja()->diff($this->getDatumPosudbe())->format('%r%a');
         $cijenaZakasnine = $this->getKorisnici()->getKnjiznice()->getCijenaZakasnine();
+        if($daniKasnjenja <= 0){
+            return 0;
+        }
         return $daniKasnjenja * $cijenaZakasnine;
 
     }

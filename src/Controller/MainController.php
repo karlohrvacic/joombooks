@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Knjiznice;
+use App\Entity\Korisnici;
 use App\Service\RezervacijaVerify;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
+
     /**
      * @Route("/")
      */
@@ -16,6 +19,16 @@ class MainController extends AbstractController
     {
         $verify->rezervacijaExpirationCheck();
 
+        /** @var $user Korisnici */
+        $user = $this->getUser();
+        if($user instanceof Korisnici){
+            return $this->redirectToRoute('korisnicki_izbornik');
+        }
+        /** @var $user Knjiznice */
+        $user = $this->getUser();
+        if($user == Knjiznice::class){
+            return $this->redirectToRoute('knjiznica_izbornik');
+        }
         return $this->redirectToRoute('app_login');
 
     }
