@@ -26,9 +26,10 @@ class MainController extends AbstractController
         }
         /** @var $user Knjiznice */
         $user = $this->getUser();
-        if($user == Knjiznice::class){
+        if($user instanceof Knjiznice){
             return $this->redirectToRoute('knjiznica_izbornik');
         }
+
         return $this->redirectToRoute('app_login');
 
     }
