@@ -1,20 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Moj Postavke{% endblock %}
+{% block title %}Moje Postavke{% endblock %}
 
 {% block body %}
     <header>
-        <div class="ime-prezime">
-            <p>{{ korisnik.ime }}</p>
-            <p>{{ korisnik.prezime }}</p>
+        <div class="home">
+            <a href="{{ path('korisnicki_izbornik') }}"><img src="/files/pitcures/icons/homewhite.png"/></a>
         </div>
-        <a href={{ path('korisnicki_izbornik') }}><img src="{{ korisnik.fotografija }}"></a>
+        <div class="ime-slika">
+            <div class="ime-prezime">
+                <p>{{ korisnik.ime }}</p>
+                <p>{{ korisnik.prezime }}</p>
+            </div>
+            <img class="korisnicka-foto" src="{{ korisnik.fotografija }}">
+        </div>
     </header>
     <section class="skola">
-        <div>
-            <img class="float-left" src="/files/pitcures/icons/settings.png">
-            <h1>{{korisnik.knjiznice.naziv}}</h1>
-            <h2>Grad Zagreb</h2>
+        <div class="look">
+            <img src="/files/pitcures/icons/settings.png">
+            <h1>POSTAVKE</h1>
         </div>
         <div id="myLinks">
             <a href="{{ path('korisnicki_profil') }}">profil <img src="/files/pitcures/icons/person.png"/></a>
@@ -29,12 +33,7 @@
         </a>
     </section>
 
-    <div class="container-fluid korisnik-main table-responsive">
-        <form>
-
-
-        </form>
-
+    <div class="container-fluid korisnik-main">
 
     </div>
     <footer style="color: black;">

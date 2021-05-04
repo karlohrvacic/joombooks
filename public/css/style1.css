@@ -98,6 +98,7 @@ input.form-control{
 /*Korisnicka pocetna*/
 .korisnicka-foto{
     border-radius: 50%;
+    height: 80%;
 }
 .pocetna{
     justify-content: flex-end;
@@ -231,6 +232,7 @@ input.form-control{
 .ime-slika{
     display: flex;
     align-items: center;
+    height: 100%;
 }
 .home, .look{
     height: 80%;
