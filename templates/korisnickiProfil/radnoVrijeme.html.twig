@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Moj Postavke{% endblock %}
+{% block title %}Radno vrijeme{% endblock %}
 
 {% block body %}
     <header>
@@ -12,7 +12,6 @@
     </header>
     <section class="skola">
         <div>
-            <img class="float-left" src="/files/pitcures/icons/settings.png">
             <h1>{{korisnik.knjiznice.naziv}}</h1>
             <h2>Grad Zagreb</h2>
         </div>
@@ -30,10 +29,21 @@
     </section>
 
     <div class="container-fluid korisnik-main table-responsive">
-        <form>
-
-
-        </form>
+        <table class="table table-sm" style="max-width: 50%">
+            <h1>Radno vrijeme</h1>
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Ponedjeljak - Petak</th>
+                <th scope="col">Subota</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>8 - 21</td>
+                <td>9 - 14</td>
+            </tr>
+            </tbody>
+        </table>
 
 
     </div>

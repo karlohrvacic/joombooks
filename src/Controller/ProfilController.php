@@ -166,7 +166,7 @@ class ProfilController extends AbstractController
          */
         $korisnik = $this->getUser();
 
-        return $this->render('korisnickiProfil/postavke.html.twig',[
+        return $this->render('korisnickiProfil/radnoVrijeme.html.twig',[
             'korisnik' => $korisnik
         ]);
     }
