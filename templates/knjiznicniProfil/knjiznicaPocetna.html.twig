@@ -4,10 +4,13 @@
 
 {% block body %}
     <h1>Dobrodošla knjižnica</h1>
-    <a href="{{ path('rezervacije_korisnika') }}">pregled rezervacija</a>
-    <a href="{{ path('posudbe_korisnika') }}">popis posudbi</a>
+    <a href="{{ path('rezervacije_korisnika') }}">Pregled rezervacija</a>
+    <a href="{{ path('posudbe_korisnika') }}">Pregled posudbi</a>
     <a href="{{ path('korisnici_index') }}">pregled korisnika</a>
-    <a href="{{ path('gradja_new') }}">dodaj građu</a>
-    <a href="{{ path('autori_new') }}">Dodaj autora</a>
+    <a href="{{ path('gradja_index') }}">Pregled građe</a>
+    <a href="{{ path('autori_index') }}">Pregled autora</a>
+    <a href="{{ path('jezici_index') }}">Pregled Jezika</a>
+    <a href="{{ path('izdavaci_index') }}">Pregled izdavača</a>
+
     <a href="{{ path('app_logout') }}">Odjava</a>
 {% endblock %}

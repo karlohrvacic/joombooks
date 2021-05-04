@@ -230,7 +230,7 @@ class ProfilController extends AbstractController
          * @var $user Korisnici
          */
         $user = $this->getUser();
-        if ($user === Korisnici::class){
+        if ($user instanceof Korisnici){
             if($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()){
                 $rezervacija
                     ->setStatus($entityManager->getRepository(Statusi::class)
@@ -249,7 +249,7 @@ class ProfilController extends AbstractController
          */
         $knjiznicar = $this->getUser();
         if ($knjiznicar){
-            if($knjiznicar === $rezervacija->getKnjiznica()){
+            if($knjiznicar instanceof Knjiznice){
                 $rezervacija
                     ->setStatus($entityManager->getRepository(Statusi::class)
                         ->find(8));
