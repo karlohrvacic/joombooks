@@ -13,8 +13,8 @@ a{
 }
 header{
     position: relative;
-    z-index: 1;
     width: 100%;
+    z-index: 1;
     height: 10vh;
     padding: 0 1.5rem;
     display: flex;
@@ -24,15 +24,16 @@ header{
     color: white;
 }
 footer{
-    position: relative;
+    position: fixed;
+    bottom: 0;
     width: 100%;
     z-index: 1;
     background-color: #B4DFE5;
     color: #B4DFE5;
-    height: 10vh;
+    height: 10%;
     display: flex;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
 }
 
 input.form-control{
@@ -45,6 +46,7 @@ input.form-control{
 }
 
 .main{
+    position: relative;
     height: 80vh;
     display: flex;
     flex-direction: column;
@@ -105,10 +107,11 @@ input.form-control{
 }
 .skola{
     position: relative;
+    width: 100%;
     z-index: 1;
     height: 10vh;
     background-color: #B4DFE5;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -129,6 +132,7 @@ input.form-control{
     font-size: 2rem;
 }
 .korisnik-main{
+    position: relative;
     background-color: #D1FDFE;
     height: 70vh;
     display: flex;
@@ -142,7 +146,7 @@ input.form-control{
     position: absolute;
     top: 8.5vh;
     right: 2rem;
-    width: 150px;
+    width: 180px;
     background-color: white;
     text-align: right;
     padding: 10px;
@@ -224,5 +228,61 @@ input.form-control{
 .ime-slika{
     display: flex;
     align-items: center;
+}
+.home, .look{
+    height: 80%;
+}
+.home img, .look img{
+    height: 100%;
+    margin-right: 10px;
+}
+.look{
+    display: flex;
+    align-items: center;
+}
+.profile-main{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1.5rem;
+}
+.profile-container{
+    margin: 0 auto;
+}
+.profile-pic{
+    height: 100px;
+}
+.podaci{
+    margin: 1.5rem auto 0;
+    width: 70%;
+}
+.podaci p{
+    margin-bottom: 5px;
+}
+.qr {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.qr-baby{
+    background: #FBE8A6;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 500px){
+    .profile-main{
+        height: 100%;
+    }
+    .qr{
+        margin: 20px 0 30%;
+    }
+    .qr-baby{
+        width: 100%;
+        height: 200px;
+    }
 }
 

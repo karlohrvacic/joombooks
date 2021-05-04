@@ -4,7 +4,9 @@
 
 {% block body %}
     <header>
-        <img src="/public/files/pitcures/icons/houseorange.png"/>
+        <div class="home">
+            <a href="{{ path('korisnicki_izbornik') }}"><img src="/files/pitcures/icons/homewhite.png"/></a>
+        </div>
         <div class="ime-slika">
             <div class="ime-prezime">
                 <p>{{ korisnik.ime }}</p>
@@ -13,14 +15,50 @@
             <img src="{{ korisnik.fotografija }}">
         </div>
     </header>
-    <a href="{{ path('korisnicki_izbornik') }}">HOME</a>
-    <img src="{{ korisnik.fotografija }}">
-    <p>{{ korisnik.ime }}</p>
-    <p>{{ korisnik.prezime }}</p>
-    <p>{{ korisnik.knjiznice.naziv}}</p>
-    <p>{{ korisnik.knjiznice.adresa }}</p>
-    <p>{{ korisnik.razred }}</p>
-    <p>{{ korisnik.email }}</p>
+    <section class="skola">
+        <div class="look">
+            <img src="/files/pitcures/icons/person.png">
+            <h1>PROFIL</h1>
+        </div>
+        <div id="myLinks">
+            <a href="{{ path('korisnicki_profil') }}">profil <img src="/files/pitcures/icons/person.png"/></a>
+            <a href="{{ path('korisnicke_obavijesti') }}">obavijesti <img src="/files/pitcures/icons/notification.png"/></a>
+            <a href="{{ path('radno_vrijeme') }}">radno vrijeme <img src="/files/pitcures/icons/clock.png"/></a>
+            <a href="{{ path('korisnicke_postavke') }}">postavke <img src="/files/pitcures/icons/settings.png"/></a>
+            <a href="https://stackoverflow.com/questions/tagged/php">info/pomoć <img src="/files/pitcures/icons/help.png"/></a>
+            <a href="{{ path('app_logout') }}">Odjavi se <img src="/files/pitcures/icons/onoff.png"/></a>
+        </div>
+        <a class="icon" onclick="myFunction()">
+            <i class="fas fa-bars"></i>
+        </a>
+    </section>
+    <div class="korisnik-main profile-main">
+        <div class="profile-container">
+            <img class="profile-pic" src="{{ korisnik.fotografija }}">
+        </div>
+        <div class="podaci">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="podaci-info col-12 col-md-6 col-lg-6">
+                        <p>Ime: {{ korisnik.ime }}</p>
+                        <p>Prezime: {{ korisnik.prezime }}</p>
+                        <p>Knjižnica: {{ korisnik.knjiznice.naziv}}</p>
+                        <p>Mjesto: {{ korisnik.knjiznice.adresa }}</p>
+                        <p>Razred: {{ korisnik.razred }}</p>
+                        <p>Email: {{ korisnik.email }}</p>
+                    </div>
+                    <div class="qr col-12 col-md-6 col-lg-6">
+                        <div class="qr-baby">
+                            QR kod / Barkod učenika
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="color: black;">
+        Jumka books
+    </footer>
     {#
     <img src="data:image/png;base64,{{ code.makeBarcode(  korisnik.brojIskazniceKorisnika  , "Code128").generate }}"
          alt="Bar code korisnika: {{ korisnik.brojIskazniceKorisnika  }}"/>
