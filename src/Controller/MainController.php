@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Service\RezervacijaVerify;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -15,10 +16,9 @@ class MainController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index(RezervacijaVerify $verify)
+    public function index(RezervacijaVerify $verify): RedirectResponse
     {
         $verify->rezervacijaExpirationCheck();
-
 
         /** @var $user Korisnici */
         $user = $this->getUser();

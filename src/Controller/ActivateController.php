@@ -4,11 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Korisnici;
 use App\Form\ActivationType;
-use App\Form\KorisniciType;
-use App\Repository\KorisniciRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ActivateController extends AbstractController
 {
-    private $passwordEncoder;
+    private UserPasswordEncoderInterface $passwordEncoder;
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;

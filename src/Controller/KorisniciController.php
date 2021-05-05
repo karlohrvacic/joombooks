@@ -36,7 +36,8 @@ class KorisniciController extends AbstractController
             $korisnici->setRoles(["ROLE_USER"]);
 
             if(is_a($this->getUser(), Knjiznice::class)){
-                $korisnici->setKnjiznice($this->getUser());
+                $knjiznica = $this->getUser();
+                $korisnici->setKnjiznice($knjiznica);
             }
 
             if($request->files->get('fotografija') !== null){
@@ -113,8 +114,8 @@ class KorisniciController extends AbstractController
         return $this->redirectToRoute('korisnici_index');
     }
 
-    private function tempUploadAction(Request $req){
-
+    private function tempUploadAction(Request $req): string
+    {
         /** @var UploadedFile $uploadedFile */
         $uploadedFile = $req->files->get('korisnici')['fotografija'];
         $destination = $this->getParameter('kernel.project_dir').'/public/files/pitcures/profile';

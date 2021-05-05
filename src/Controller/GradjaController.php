@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Gradja;
 use App\Entity\Knjiznice;
-use App\Entity\Korisnici;
 use App\Entity\Posudbe;
 use App\Entity\Statusi;
 use App\Form\GradjaType;
@@ -120,8 +119,8 @@ class GradjaController extends AbstractController
         return $this->redirectToRoute('gradja_index');
     }
 
-    private function tempUploadAction(Request $req){
-
+    private function tempUploadAction(Request $req): string
+    {
         /** @var UploadedFile $uploadedFile */
         $uploadedFile = $req->files->get('gradja')['fotografija'];
         $destination = $this->getParameter('kernel.project_dir').'/public/files/pitcures/gradja';
@@ -146,7 +145,7 @@ class GradjaController extends AbstractController
          */
         $knjiznicar = $this->getUser();
         if ($knjiznicar){
-            if($knjiznicar === $rezervacija->getKnjiznica()){
+            if($knjiznicar === $rezervacija->getKnjiznica()) {
                 $rezervacija
                     ->setStatus($entityManager->getRepository(Statusi::class)
                         ->find(3));
@@ -159,9 +158,10 @@ class GradjaController extends AbstractController
 
             }
 
-
             return $this->render('knjiznicniProfil/rezervirane.html.twig');
         }
+
+        return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig');
 
     }
 }

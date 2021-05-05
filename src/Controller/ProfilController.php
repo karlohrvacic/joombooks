@@ -10,7 +10,8 @@ use App\Repository\GradjaRepository;
 use App\Service\RezervacijaVerify;
 use DateInterval;
 use DateTime;
-use Symfony\Component\HttpFoundation\Request;
+use Exception;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik", name="korisnicki_izbornik")
      */
-    public function korisnickiIzbornik(RezervacijaVerify $verify)
+    public function korisnickiIzbornik(RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
 
@@ -36,7 +37,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/knjiznica", name="knjiznica_izbornik")
      */
-    public function knjiznicaProfil()
+    public function knjiznicaProfil(): Response
     {
         #dd($this->getUser());
         return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig',[
@@ -47,7 +48,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik/posudjeno", name="posudjene_knjige_korisnika")
      */
-    public function pregledPosudjenih()
+    public function pregledPosudjenih(): Response
     {
         /**
          * @var $korisnik Korisnici
@@ -71,7 +72,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik/gradja", name="pregled_knjiga")
      */
-    public function pregledKnjiga(GradjaRepository $gradjaRepository, RezervacijaVerify $verify)
+    public function pregledKnjiga(GradjaRepository $gradjaRepository, RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
         /**
@@ -90,7 +91,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik/rezervirano", name="rezervirane_knjige_korisnika")
      */
-    public function pregledRezerviranih(RezervacijaVerify $verify)
+    public function pregledRezerviranih(RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
         /**
@@ -111,7 +112,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik/profil", name="korisnicki_profil")
      */
-    public function korisnickiProfil()
+    public function korisnickiProfil(): Response
     {
         /**
          * @var $korisnik Korisnici
@@ -129,7 +130,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik/obavijesti", name="korisnicke_obavijesti")
      */
-    public function korisnickeObavijesti()
+    public function korisnickeObavijesti(): Response
     {
         /**
          * @var $korisnik Korisnici
@@ -144,7 +145,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik/postavke", name="korisnicke_postavke")
      */
-    public function korisnickePostavke()
+    public function korisnickePostavke(): Response
     {
         /**
          * @var $korisnik Korisnici
@@ -159,7 +160,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/radno_vrijeme", name="radno_vrijeme")
      */
-    public function radnovrijeme()
+    public function radnovrijeme(): Response
     {
         /**
          * @var $korisnik Korisnici
@@ -174,7 +175,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/knjiznica/rezervirano", name="rezervacije_korisnika")
      */
-    public function pregledRezervacija(RezervacijaVerify $verify)
+    public function pregledRezervacija(RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
         /**
@@ -199,7 +200,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/knjiznica/posudjeno", name="posudbe_korisnika")
      */
-    public function pregledPosudbi(RezervacijaVerify $verify)
+    public function pregledPosudbi(RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
         /**
@@ -220,7 +221,7 @@ class ProfilController extends AbstractController
         ]);
     }
     #[Route('gradja/cancel/{id}', name: 'rezervacija_cancel', methods: ['GET'])]
-    public function cancelation(Request $request, $id, RezervacijaVerify $verify): Response
+    public function cancelation($id, RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
@@ -267,10 +268,14 @@ class ProfilController extends AbstractController
             }
             return $this->redirectToRoute('rezervacije_korisnika');
         }
-
+        return $this->redirectToRoute('app_login');
     }
+
+    /**
+     * @throws Exception
+     */
     #[Route('knjiznica/gradja/posudi/{id}', name: 'posudi_rezerviranu_gradju', methods: ['GET'])]
-    public function posudba(Request $request, $id, RezervacijaVerify $verify)
+    public function posudba($id, RezervacijaVerify $verify): RedirectResponse
     {
         $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
@@ -307,7 +312,7 @@ class ProfilController extends AbstractController
     }
 
     #[Route('knjiznica/gradja/vrati/{id}', name: 'vrati_gradju', methods: ['GET'])]
-    public function vracanje(Request $request, $id, RezervacijaVerify $verify)
+    public function vracanje($id, RezervacijaVerify $verify)
     {
         $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
