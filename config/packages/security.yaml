@@ -32,6 +32,10 @@ security:
                 authenticators:
                     - App\Security\KorisniciAuthenticator
                 entry_point: App\Security\KorisniciAuthenticator
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path: /
             logout:
                 path: app_logout
                 # where to redirect after logout
