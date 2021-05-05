@@ -52,9 +52,13 @@
                 <td>{{ posudba.zakasnina }} kn</td>
                 <img src="data:image/png;base64,{{ code.makeBarcode(  posudba.gradja.brojInventara  , "Code128").generate }}"
                      alt="Broj inventara: {{ posudba.gradja.brojInventara  }}"/>
-                <td>
-                    <a href="#">Produži</a>
-                </td>
+
+                {% if is_granted('ROLE_LIBRARY') %}
+                    <td>
+                        <a href="#">Produži</a>
+                    </td>
+                {% endif %}
+
             </tr>
         {% else %}
             <tr>
