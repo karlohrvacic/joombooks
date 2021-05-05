@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BarcodeController extends AbstractController
 {

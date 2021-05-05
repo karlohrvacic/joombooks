@@ -4,7 +4,6 @@ namespace App\Security;
 
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
-use App\Service\RezervacijaVerify;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

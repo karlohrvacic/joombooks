@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ActivateController extends AbstractController
 {
     private UserPasswordEncoderInterface $passwordEncoder;
+
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
@@ -30,7 +31,7 @@ class ActivateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
 
-            $korisnik= $this->getDoctrine()
+            $korisnik = $this->getDoctrine()
                 ->getRepository(Korisnici::class)
                 ->findOneBy([
                     'email' => $form->get('email')->getData(),
