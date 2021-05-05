@@ -11,6 +11,6 @@ Technologies:
 Dependencies:
 - <a href="https://github.com/karlohrvacic/jumkabooks/network/dependencies">Github List</a><br>
 
-Design by: <a href="https://github.com/MartaJagacic">Marta Jagačić</a>
-Frontend by: <a href="https://github.com/juliusdinter">Julius Dinter</a>
-Backend by: <a href="https://github.com/karlohrvacic">Karlo Hrvačić</a>
+Design by: <a href="https://github.com/MartaJagacic">Marta Jagačić</a><br>
+Frontend by: <a href="https://github.com/juliusdinter">Julius Dinter</a><br>
+Backend by: <a href="https://github.com/karlohrvacic">Karlo Hrvačić</a><br>
