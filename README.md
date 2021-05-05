@@ -2,7 +2,7 @@
 
 MC2 competition entry by BookExchangers
 
-Helps Independent libraries and their users. 
+Helps connecting Independent libraries with their users. 
 
 
 <a href="https://jumkabooks.herokuapp.com">Live version</a><br>
