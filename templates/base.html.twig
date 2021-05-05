@@ -26,10 +26,15 @@
 
             <div class="ime-slika">
                 <div class="ime-prezime">
-                    <p>{{ korisnik.ime }}</p>
-                    <p>{{ korisnik.prezime }}</p>
+                    {% if korisnik is defined %}
+                        <p>{{ korisnik.ime }}</p>
+                        <p>{{ korisnik.prezime }}</p>
+                    {% endif %}
                 </div>
-                <img class="korisnicka-foto" src="{{ korisnik.fotografija }}">
+                {% if korisnik is defined %}
+                    <img class="korisnicka-foto" src="{{ korisnik.fotografija }}">
+                {% endif %}
+
             </div>
         </header>
 
