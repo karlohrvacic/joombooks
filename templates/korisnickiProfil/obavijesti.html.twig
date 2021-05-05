@@ -2,36 +2,14 @@
 
 {% block title %}Obavijesti{% endblock %}
 
+{% block nazivTrenutneStranice %}
+    <div class="look">
+        <img src="/files/pitcures/icons/notification.png">
+        <h1>OBAVIJESTI</h1>
+    </div>
+{% endblock %}
+
 {% block body %}
-    <header>
-        <div class="home">
-            <a href="{{ path('korisnicki_izbornik') }}"><img src="/files/pitcures/icons/homewhite.png"/></a>
-        </div>
-        <div class="ime-slika">
-            <div class="ime-prezime">
-                <p>{{ korisnik.ime }}</p>
-                <p>{{ korisnik.prezime }}</p>
-            </div>
-            <img class="korisnicka-foto" src="{{ korisnik.fotografija }}">
-        </div>
-    </header>
-    <section class="skola">
-        <div class="look">
-            <img src="/files/pitcures/icons/notification.png">
-            <h1>OBAVIJESTI</h1>
-        </div>
-        <div id="myLinks">
-            <a href="{{ path('korisnicki_profil') }}">profil <img src="/files/pitcures/icons/person.png"/></a>
-            <a href="{{ path('korisnicke_obavijesti') }}">obavijesti <img src="/files/pitcures/icons/notification.png"/></a>
-            <a href="{{ path('radno_vrijeme') }}">radno vrijeme <img src="/files/pitcures/icons/clock.png"/></a>
-            <a href="{{ path('korisnicke_postavke') }}">postavke <img src="/files/pitcures/icons/settings.png"/></a>
-            <a href="https://stackoverflow.com/questions/tagged/php">info/pomoć <img src="/files/pitcures/icons/help.png"/></a>
-            <a href="{{ path('app_logout') }}">Odjavi se <img src="/files/pitcures/icons/onoff.png"/></a>
-        </div>
-        <a class="icon" onclick="myFunction()">
-            <i class="fas fa-bars"></i>
-        </a>
-    </section>
 
     <div class="container-fluid postavke">
         <div class="row">
