@@ -33,6 +33,8 @@ class StatusiController extends AbstractController
             $entityManager->persist($statusi);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Novi status uspješno pohranjen!');
+
             return $this->redirectToRoute('statusi_index');
         }
 
@@ -59,6 +61,8 @@ class StatusiController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+
             return $this->redirectToRoute('statusi_index');
         }
 
@@ -75,6 +79,7 @@ class StatusiController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($statusi);
             $entityManager->flush();
+            $this->addFlash('success', 'Status uspješno uklonjen!');
         }
 
         return $this->redirectToRoute('statusi_index');

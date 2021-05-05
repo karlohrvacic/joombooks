@@ -26,7 +26,6 @@ class GradjaController extends AbstractController
          * @var $user Knjiznice
          */
         $user = $this->getUser();
-        $user->getOibKnjiznice();
         $code = new BarcodeController();
 
         return $this->render('gradja/index.html.twig', [
@@ -59,6 +58,8 @@ class GradjaController extends AbstractController
 
             $entityManager->persist($gradja);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Nova građa uspješno pohranjena!');
 
             return $this->redirectToRoute('gradja_index');
         }
@@ -94,6 +95,8 @@ class GradjaController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+
             return $this->redirectToRoute('gradja_index');
         }
 
@@ -111,6 +114,8 @@ class GradjaController extends AbstractController
             $entityManager->remove($gradja);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Građa uspješno uklonjena!');
 
         return $this->redirectToRoute('gradja_index');
     }
@@ -150,7 +155,11 @@ class GradjaController extends AbstractController
                         ->find(3));
 
                 $entityManager->flush();
+                $this->addFlash('success', 'Građa uspješno posuđena!');
+
             }
+
+
             return $this->render('knjiznicniProfil/rezervirane.html.twig');
         }
 

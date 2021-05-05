@@ -240,6 +240,9 @@ class ProfilController extends AbstractController
                         ->find(1));
 
                 $entityManager->flush();
+
+                $this->addFlash('success', 'Rezervacija uspješno otkazana!');
+
             }
 
             return $this->redirectToRoute('rezervirane_knjige_korisnika');
@@ -258,6 +261,9 @@ class ProfilController extends AbstractController
                         ->find(1));
 
                 $entityManager->flush();
+
+                $this->addFlash('success', 'Rezervacija uspješno otkazana!');
+
             }
             return $this->redirectToRoute('rezervacije_korisnika');
         }
@@ -291,6 +297,9 @@ class ProfilController extends AbstractController
                 $rezervacija->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
 
                 $entityManager->flush();
+
+                $this->addFlash('success', 'Građa uspješno posuđena!');
+
             }
             return $this->redirectToRoute('posudbe_korisnika');
         }
@@ -321,6 +330,9 @@ class ProfilController extends AbstractController
                 $rezervacija->setDatumVracanja((new DateTime())->add(new DateInterval('P0D')));
 
                 $entityManager->flush();
+
+                $this->addFlash('success', 'Građa uspješno vraćena!');
+
             }
             return $this->redirectToRoute('posudbe_korisnika');
 

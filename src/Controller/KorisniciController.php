@@ -8,12 +8,10 @@ use App\Form\KorisniciType;
 use App\Repository\KorisniciRepository;
 use App\Service\MailerSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 #[Route('/knjiznica/korisnici')]
 class KorisniciController extends AbstractController
@@ -45,13 +43,17 @@ class KorisniciController extends AbstractController
                 $korisnici->setFotografija($this->tempUploadAction($request));
             }
 
+            // Save random string as activation code
             $korisnici->setLozinka(uniqid());
-
 
             $entityManager->persist($korisnici);
             $entityManager->flush();
 
+            // Send user activation code via email
             $mailerSender->sendActivationEmail($korisnici);
+
+            $this->addFlash('success', 'Novi korisnik uspješno pohranjen!');
+            $this->addFlash('success', 'Aktivacijski kod mu je poslan putem e-maila!');
 
             return $this->redirectToRoute('korisnici_index');
         }
@@ -77,8 +79,6 @@ class KorisniciController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$hash = password_hash($form->get('lozinka')->getData(), PASSWORD_DEFAULT);
-            //$korisnici->setPassword($hash);
 
             if($request->files->get('korisnici')['fotografija'] != null){
                 if($korisnici->getFotografija() != null && file_exists("../public".$korisnici->getFotografija())){
@@ -89,10 +89,7 @@ class KorisniciController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            //$hash = password_hash($form->get('lozinka')->getData(), PASSWORD_DEFAULT);
-
-            //$korisnici->setPassword($hash);
-            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Promjene uspješno pohranjene!');
 
             return $this->redirectToRoute('korisnici_index');
         }
@@ -110,6 +107,7 @@ class KorisniciController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($korisnici);
             $entityManager->flush();
+            $this->addFlash('success', 'Korisnik uspješno uklonjen!');
         }
 
         return $this->redirectToRoute('korisnici_index');

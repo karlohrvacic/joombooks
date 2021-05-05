@@ -55,6 +55,9 @@ class ActivateController extends AbstractController
             $entityManager->persist($korisnik);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Uspješno ste aktivirali svoj račun!');
+            $this->addFlash('success', 'Molimo izvršite prvu prijavu');
+
             return $this->redirectToRoute('app_login');
         }
 

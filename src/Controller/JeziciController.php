@@ -32,7 +32,7 @@ class JeziciController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($jezici);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Novi jezik uspješno pohranjen!');
             return $this->redirectToRoute('jezici_index');
         }
 
@@ -59,6 +59,8 @@ class JeziciController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+
             return $this->redirectToRoute('jezici_index');
         }
 
@@ -75,6 +77,9 @@ class JeziciController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($jezici);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Autor uspješno uklonjen!');
+
         }
 
         return $this->redirectToRoute('jezici_index');

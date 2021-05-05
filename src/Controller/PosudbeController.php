@@ -32,68 +32,51 @@ class PosudbeController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/new', name: 'posudbe_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'posudbe_new', methods: ['GET'])]
     public function new(Request $request, RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
-        if ($request->isMethod('post')) {
-            $posudbe = new Posudbe();
-            $form = $this->createForm(PosudbeType::class, $posudbe);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $entityManager = $this->getDoctrine()->getManager();
-
-
-
-                $entityManager->persist($posudbe);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('posudbe_index');
-            }
-
-            return $this->render('posudbe/new.html.twig', [
-                'posudbe' => $posudbe,
-                'form' => $form->createView(),
-            ]);
-        }
 
         //Rezervacije
-        if($request->isMethod('get')){
-            $posudbe = new Posudbe();
-            $entityManager = $this->getDoctrine()->getManager();
-            $gradja = $entityManager->getRepository(Gradja::class)
+        $posudbe = new Posudbe();
+        $entityManager = $this->getDoctrine()->getManager();
+        $gradja = $entityManager->getRepository(Gradja::class)
                 ->find($request->query->get('id'));
+        /**
+         * @var $user Korisnici
+         */
+        $user = $this->getUser();
 
-            /**
-             * @var $user Korisnici
-             */
-            $user = $this->getUser();
+        // smije li napraviti rezervaciju
 
+        $maxRezerviranih = $user->getKnjiznice()->getMaxRezerviranih();
 
-            // smije li napraviti rezervaciju
-            if($user->getBrojTrenutnoRezerviranih() < $user->getKnjiznice()->getMaxRezerviranih()){
+        if($user->getBrojTrenutnoRezerviranih() < $maxRezerviranih){
 
-                $posudbe->setGradja($gradja);
-                $posudbe->setKorisnici($user);
-                $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+            $posudbe->setGradja($gradja);
+            $posudbe->setKorisnici($user);
+            $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(5));
 
-                $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
-                $posudbe->setKnjiznica($user->getKnjiznice());
-                $daniRezervacije = $user->getKnjiznice()->getDaniRezervacije();
-                $duration = "P".$daniRezervacije."D";
+            $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
+            $posudbe->setKnjiznica($user->getKnjiznice());
+            $daniRezervacije = $user->getKnjiznice()->getDaniRezervacije();
+            $duration = "P".$daniRezervacije."D";
 
-                $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
-                $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
-                $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
-                $user->addPosudbe($posudbe);
+            $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
+            $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
+            $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+            $user->addPosudbe($posudbe);
 
-                $entityManager->persist($posudbe);
-                $entityManager->persist($gradja);
-                $entityManager->persist($user);
-                $entityManager->flush();
+            $entityManager->persist($posudbe);
+            $entityManager->persist($gradja);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Uspješno ste rezervirali građu!');
+            } else{
+                $this->addFlash('alert', "Imate maksimalan broj rezervirane građe ($maxRezerviranih)!");
             }
-        }
+
         return $this->redirectToRoute('rezervirane_knjige_korisnika');
     }
 
@@ -116,6 +99,8 @@ class PosudbeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+
             return $this->redirectToRoute('posudbe_index');
         }
 
@@ -133,6 +118,7 @@ class PosudbeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($posudbe);
             $entityManager->flush();
+            $this->addFlash('success', 'Uspješno uklonjeo!');
         }
 
         return $this->redirectToRoute('posudbe_index');
@@ -167,6 +153,9 @@ class PosudbeController extends AbstractController
             $rezervacija->setDatumRokaVracanja($newDate);
             $entityManager->persist($rezervacija);
             $entityManager->flush();
+            $this->addFlash('success', 'Uspješno ste produžili rezervaciju!');
+        } else{
+            $this->addFlash('alert', "Rezervaciju možete produžiti samo jednom"); // vuci iz baze
         }
 
         return $this->redirectToRoute('rezervirane_knjige_korisnika');

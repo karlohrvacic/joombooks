@@ -39,6 +39,8 @@ class DrzaveController extends AbstractController
             $entityManager->persist($drzave);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Nova država uspješno pohranjena!');
+
             return $this->redirectToRoute('drzave_index');
         }
 
@@ -69,6 +71,8 @@ class DrzaveController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+
             return $this->redirectToRoute('drzave_index');
         }
 
@@ -87,8 +91,9 @@ class DrzaveController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($drzave);
             $entityManager->flush();
-        }
+            $this->addFlash('success', 'Država uspješno uklonjena!');
 
+        }
         return $this->redirectToRoute('drzave_index');
     }
 

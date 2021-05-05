@@ -33,6 +33,8 @@ class IzdavaciController extends AbstractController
             $entityManager->persist($izdavaci);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Novi izdavač uspješno pohranjen!');
+
             return $this->redirectToRoute('izdavaci_index');
         }
 
@@ -59,6 +61,8 @@ class IzdavaciController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+
             return $this->redirectToRoute('izdavaci_index');
         }
 
@@ -75,7 +79,9 @@ class IzdavaciController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($izdavaci);
             $entityManager->flush();
+            $this->addFlash('success', 'Izdavač uspješno uklonjen!');
         }
+
 
         return $this->redirectToRoute('izdavaci_index');
     }

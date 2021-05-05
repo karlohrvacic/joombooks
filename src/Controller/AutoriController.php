@@ -39,6 +39,8 @@ class AutoriController extends AbstractController
             $entityManager->persist($autori);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Novi autor uspješno pohranjen!');
+
             return $this->redirectToRoute('autori_index');
         }
 
@@ -69,6 +71,9 @@ class AutoriController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+
+
             return $this->redirectToRoute('autori_index');
         }
 
@@ -87,6 +92,8 @@ class AutoriController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($autori);
             $entityManager->flush();
+            $this->addFlash('success', 'Autor uspješno uklonjen!');
+
         }
 
         return $this->redirectToRoute('autori_index');

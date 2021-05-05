@@ -19,6 +19,7 @@ class MainController extends AbstractController
     {
         $verify->rezervacijaExpirationCheck();
 
+
         /** @var $user Korisnici */
         $user = $this->getUser();
         if($user instanceof Korisnici){
