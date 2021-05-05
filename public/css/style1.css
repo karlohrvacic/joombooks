@@ -163,6 +163,12 @@ input.form-control{
     text-decoration: none;
 }
 
+.korisnik-footer{
+    position: relative;
+    height: 10vh;
+    z-index: 1;
+}
+
 
 /*MARTA*/
 .clear{
