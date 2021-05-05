@@ -19,7 +19,7 @@
     {% if is_granted('ROLE_USER') %}
         <header>
             <div class="home">
-                {% if app.request.get('korisnicki_izbornik') != 'korisnicki_izbornik' %}
+                {% if app.request.get('_route') != 'korisnicki_izbornik' %}
                     <a href="{{ path('korisnicki_izbornik') }}"><img src="/files/pitcures/icons/homewhite.png"/></a>
                 {% endif %}
             </div>
