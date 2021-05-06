@@ -151,6 +151,9 @@
     "phpstan/phpstan-phpunit": {
         "version": "0.12.18"
     },
+    "picqer/php-barcode-generator": {
+        "version": "v2.2.0"
+    },
     "psr/cache": {
         "version": "2.0.0"
     },
