@@ -4,19 +4,19 @@ $('.biranje').on('click', function(){
 });
 
 /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
-function myFunction() {
-    var x = document.getElementById("myLinks");
+function myFunction(x) {
+    var y = document.getElementById(x);
     if (x.style.display === "block") {
         x.style.display = "none";
     } else {
         x.style.display = "block";
     }
 }
-function popular() {
-    var x = document.getElementById("popular");
-    if (x.style.display === "block") {
-        x.style.display = "none";
+function sakriveno(x){
+    var y = document.getElementsByClassName("sakriveno").item(x-1);
+    if (y.style.display === "flex") {
+        y.style.display = "none";
     } else {
-        x.style.display = "block";
+        y.style.display = "flex";
     }
 }
