@@ -127,7 +127,7 @@ input.form-control{
 .skola h2{
     font-size: 1rem;
 }
-.skola a{
+.skola a, .icon{
     cursor: pointer;
     color: black;
     text-transform: none;
@@ -154,11 +154,12 @@ input.form-control{
     background-color: white;
     text-align: right;
     padding: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 #myLinks img{
     width: 15%;
 }
-#myLinks a{
+#myLinks a, #popular a{
     display: block;
     text-decoration: none;
 }
@@ -240,8 +241,11 @@ input.form-control{
     align-items: center;
     height: 100%;
 }
-.home, .look{
+.home{
     height: 80%;
+}
+.look{
+    height: 90%;
 }
 .home img, .look img{
     height: 100%;
@@ -324,5 +328,37 @@ input.form-control{
     padding: 10px 10px 0;
     display: flex;
     align-items: center;
+}
+
+/*PRETRAŽIVANJE*/
+.form-inline{
+    display: flex;
+    align-items: center;
+}
+.search-btn{
+    margin:0 10px;
+    height: 100%;
+}
+.search-btn img{
+
+    width: 40px;
+}
+.triangle{
+    width: 40px;
+    height: 25px;
+}
+#popular{
+    display: none;
+    position: absolute;
+    top: 32vh;
+    right: 2rem;
+    width: 140px;
+    background-color: white;
+    text-align: right;
+    padding: 20px 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+svg{
+    margin-left: 5px;
 }
 

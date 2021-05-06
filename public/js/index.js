@@ -12,3 +12,11 @@ function myFunction() {
         x.style.display = "block";
     }
 }
+function popular() {
+    var x = document.getElementById("popular");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
