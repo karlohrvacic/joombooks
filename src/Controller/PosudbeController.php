@@ -74,7 +74,7 @@ class PosudbeController extends AbstractController
 
             $this->addFlash('success', 'Uspješno ste rezervirali građu!');
             } else{
-                $this->addFlash('alert', "Imate maksimalan broj rezervirane građe ($maxRezerviranih)!");
+                $this->addFlash('alert', "Već ste rezervirali $maxRezerviranih knjige!");
             }
 
         return $this->redirectToRoute('rezervirane_knjige_korisnika');
