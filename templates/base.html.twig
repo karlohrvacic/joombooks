@@ -58,13 +58,15 @@
     {% endif %}
 
     {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
+        <div class="alert alert-success align-items-center">
             {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
     {% for message in app.flashes('alert') %}
-        <div class="alert alert-danger">
+        <div class="alert alert-danger align-items-center">
             {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
 
