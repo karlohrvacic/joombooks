@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Gradja;
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Entity\Posudbe;
@@ -11,6 +12,7 @@ use App\Service\RezervacijaVerify;
 use DateInterval;
 use DateTime;
 use Exception;
+use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,17 +32,18 @@ class ProfilController extends AbstractController
          */
         $korisnik = $this->getUser();
 
-        return $this->render('korisnickiProfil/korisnickaPocetna.html.twig',[
+        return $this->render('korisnickiProfil/korisnickaPocetna.html.twig', [
             'korisnik' => $korisnik,
         ]);
     }
+
     /**
      * @Route("/knjiznica", name="knjiznica_izbornik")
      */
     public function knjiznicaProfil(): Response
     {
         #dd($this->getUser());
-        return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig',[
+        return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig', [
 
         ]);
     }
@@ -62,7 +65,7 @@ class ProfilController extends AbstractController
 
         $code = new BarcodeController();
 
-        return $this->render('korisnickiProfil/pregledPosudjenih.html.twig',[
+        return $this->render('korisnickiProfil/pregledPosudjenih.html.twig', [
             'posudbe' => $posudbe,
             'korisnik' => $korisnik,
             'code' => $code
@@ -104,7 +107,7 @@ class ProfilController extends AbstractController
             'status' => 5
         ]);
 
-        return $this->render('korisnickiProfil/pregledRezerviranih.html.twig',[
+        return $this->render('korisnickiProfil/pregledRezerviranih.html.twig', [
             'posudbe' => $posudbe
         ]);
     }
@@ -121,7 +124,7 @@ class ProfilController extends AbstractController
 
         $code = new BarcodeController();
 
-        return $this->render('korisnickiProfil/profil.html.twig',[
+        return $this->render('korisnickiProfil/profil.html.twig', [
             'korisnik' => $korisnik,
             'code' => $code
         ]);
@@ -137,7 +140,7 @@ class ProfilController extends AbstractController
          */
         $korisnik = $this->getUser();
 
-        return $this->render('korisnickiProfil/obavijesti.html.twig',[
+        return $this->render('korisnickiProfil/obavijesti.html.twig', [
             'korisnik' => $korisnik
         ]);
     }
@@ -152,7 +155,7 @@ class ProfilController extends AbstractController
          */
         $korisnik = $this->getUser();
 
-        return $this->render('korisnickiProfil/postavke.html.twig',[
+        return $this->render('korisnickiProfil/postavke.html.twig', [
             'korisnik' => $korisnik
         ]);
     }
@@ -167,7 +170,7 @@ class ProfilController extends AbstractController
          */
         $korisnik = $this->getUser();
 
-        return $this->render('korisnickiProfil/radnoVrijeme.html.twig',[
+        return $this->render('korisnickiProfil/radnoVrijeme.html.twig', [
             'korisnik' => $korisnik
         ]);
     }
@@ -191,7 +194,7 @@ class ProfilController extends AbstractController
         $code = new BarcodeController();
 
 
-        return $this->render('knjiznicniProfil/rezervirane.html.twig',[
+        return $this->render('knjiznicniProfil/rezervirane.html.twig', [
             'posudbes' => $posudbe,
             'code' => $code
         ]);
@@ -215,11 +218,12 @@ class ProfilController extends AbstractController
 
         $code = new BarcodeController();
 
-        return $this->render('knjiznicniProfil/posudjene.html.twig',[
+        return $this->render('knjiznicniProfil/posudjene.html.twig', [
             'posudbes' => $posudbe,
             'code' => $code
         ]);
     }
+
     #[Route('gradja/cancel/{id}', name: 'rezervacija_cancel', methods: ['GET'])]
     public function cancelation($id, RezervacijaVerify $verify): Response
     {
@@ -231,8 +235,8 @@ class ProfilController extends AbstractController
          * @var $user Korisnici
          */
         $user = $this->getUser();
-        if ($user instanceof Korisnici){
-            if($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()){
+        if ($user instanceof Korisnici) {
+            if ($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()) {
                 $rezervacija
                     ->setStatus($entityManager->getRepository(Statusi::class)
                         ->find(8));
@@ -252,8 +256,8 @@ class ProfilController extends AbstractController
          * @var $knjiznicar Knjiznice
          */
         $knjiznicar = $this->getUser();
-        if ($knjiznicar){
-            if($knjiznicar instanceof Knjiznice){
+        if ($knjiznicar) {
+            if ($knjiznicar instanceof Knjiznice) {
                 $rezervacija
                     ->setStatus($entityManager->getRepository(Statusi::class)
                         ->find(8));
@@ -297,7 +301,7 @@ class ProfilController extends AbstractController
 
                 $rezervacija->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
                 $daniPosudbe = 30;
-                $duration = "P".$daniPosudbe."D";
+                $duration = "P" . $daniPosudbe . "D";
 
                 $rezervacija->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
 
@@ -309,6 +313,59 @@ class ProfilController extends AbstractController
             return $this->redirectToRoute('posudbe_korisnika');
         }
         return $this->redirectToRoute('app_login');
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[Route('knjiznica/gradja/posudi/{idGradja}/{idKorisnika}', name: 'posudi_gradju', methods: ['GET'])]
+    public function posudbaBezRezervacije(Request $request, $idGradja, $idKorisnika, RezervacijaVerify $verify): RedirectResponse
+    {
+        $verify->rezervacijaExpirationCheck();
+        $entityManager = $this->getDoctrine()->getManager();
+        $korisnik = $entityManager->getRepository(Korisnici::class)->find($idKorisnika);
+
+        /**
+         * @var $knjiznicar Knjiznice
+         */
+        $knjiznicar = $this->getUser();
+
+        if ($korisnik->getBrojTrenutnoPosudenih() < $knjiznicar->getMaxPosudjenih()) {
+            $posudbe = new Posudbe();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $gradja = $entityManager->getRepository(Gradja::class)->find($idGradja);
+
+            $posudbe->setGradja($gradja);
+            $posudbe->setKorisnici($korisnik);
+            $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+
+            $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
+            $posudbe->setKnjiznica($knjiznicar);
+            $daniPosudbe = 30;
+            $duration = "P".$daniPosudbe."D";
+
+            $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
+            $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
+            $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+            $user->addPosudbe($posudbe);
+
+            $entityManager->persist($posudbe);
+            $entityManager->persist($gradja);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Građa uspješno posuđena!');
+
+        } else {
+            $borrowed = $korisnik->getBrojTrenutnoPosudenih();
+            $this->addFlash('alert', "Korisnik ima već $borrowed posudbe!");
+        }
+
+        return $this->redirectToRoute('posudbe_korisnika');
+
     }
 
     #[Route('knjiznica/gradja/vrati/{id}', name: 'vrati_gradju', methods: ['GET'])]

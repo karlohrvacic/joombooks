@@ -86,6 +86,11 @@ class Knjiznice implements UserInterface
      */
     private $posudbe;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $daniPosudbe;
+
     public function __construct()
     {
         $this->gradje = new ArrayCollection();
@@ -340,6 +345,18 @@ class Knjiznice implements UserInterface
                 $posudbe->setKnjiznica(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDaniPosudbe(): ?int
+    {
+        return $this->daniPosudbe;
+    }
+
+    public function setDaniPosudbe(int $daniPosudbe): self
+    {
+        $this->daniPosudbe = $daniPosudbe;
 
         return $this;
     }
