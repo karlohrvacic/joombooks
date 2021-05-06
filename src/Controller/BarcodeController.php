@@ -8,14 +8,16 @@ use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 class BarcodeController extends AbstractController
 {
 
+    private $barcode;
+
     public function makeBarcode($text, $typeExt): BarcodeGenerator
     {
-        $barcode = new BarcodeGenerator();
-        $barcode->setText($text);
-        $barcode->setType(constant('CodeItNow\BarcodeBundle\Utils\BarcodeGenerator::'.$typeExt));
-        $barcode->setScale(2);
-        $barcode->setThickness(25);
-        $barcode->setFontSize(10);
-        return $barcode;
+        $this->barcode = new BarcodeGenerator();
+        $this->barcode->setText($text);
+        $this->barcode->setType(constant('CodeItNow\BarcodeBundle\Utils\BarcodeGenerator::'.$typeExt));
+        $this->barcode->setScale(2);
+        $this->barcode->setThickness(25);
+        $this->barcode->setFontSize(10);
+        return $this->barcode;
     }
 }
