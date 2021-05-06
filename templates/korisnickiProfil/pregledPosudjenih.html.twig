@@ -50,10 +50,12 @@
                 <td>{{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja|date('Y-m-d') : '' }}</td>
                 <td>{{ posudba.getGradja.jezici.ime }}</td>
                 <td>{{ posudba.zakasnina }} kn</td>
-                <img src="data:image/png;base64,{{ code.makeBarcode(  posudba.gradja.brojInventara  , "Code128").generate }}"
-                     alt="Broj inventara: {{ posudba.gradja.brojInventara  }}"/>
+
+
 
                 {% if is_granted('ROLE_LIBRARY') %}
+                    <img src="data:image/png;base64,{{ code.makeBarcode(  posudba.gradja.brojInventara  , "Code128").generate }}"
+                         alt="Broj inventara: {{ posudba.gradja.brojInventara  }}"/>
                     <td>
                         <a href="#">Produži</a>
                     </td>
