@@ -4,23 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "86376f30a133497fb88653a31588317c",
+    "content-hash": "ea0973874a814c55e8d0c7ceb7276f5b",
     "packages": [
         {
             "name": "codeitnowin/barcode",
-            "version": "3.0.2",
+            "version": "3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeitnowin/barcode-generator.git",
-                "reference": "a84e923469a631e48723cd1cca21858605966904"
+                "reference": "bd140d279fc813e00f72eaa4f033186bf78b8786"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeitnowin/barcode-generator/zipball/a84e923469a631e48723cd1cca21858605966904",
-                "reference": "a84e923469a631e48723cd1cca21858605966904",
+                "url": "https://api.github.com/repos/codeitnowin/barcode-generator/zipball/bd140d279fc813e00f72eaa4f033186bf78b8786",
+                "reference": "bd140d279fc813e00f72eaa4f033186bf78b8786",
                 "shasum": ""
             },
             "require": {
+                "ext-gd": "*",
                 "php": ">=5.3.2"
             },
             "type": "library",
@@ -54,9 +55,9 @@
             ],
             "support": {
                 "issues": "https://github.com/codeitnowin/barcode-generator/issues",
-                "source": "https://github.com/codeitnowin/barcode-generator/tree/master"
+                "source": "https://github.com/codeitnowin/barcode-generator/tree/v3.0.5"
             },
-            "time": "2018-06-01T13:33:52+00:00"
+            "time": "2021-02-19T15:33:44+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -10610,7 +10611,8 @@
     "platform": {
         "php": ">=8.0",
         "ext-ctype": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-gd": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
