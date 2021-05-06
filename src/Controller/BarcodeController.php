@@ -16,7 +16,6 @@ class BarcodeController extends AbstractController
         $barcode->setScale(2);
         $barcode->setThickness(25);
         $barcode->setFontSize(10);
-        //return $barcode;
-        return "";
+        return $barcode;
     }
 }
