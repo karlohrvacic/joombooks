@@ -8,15 +8,17 @@ use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 class BarcodeController
 {
 
-    public static function makeBarcode($text, $typeExt): string
+    public static function makeBarcode($text, $typeExt)
     {
-        /*$barcode = new BarcodeGenerator();
+        $barcode = new BarcodeGenerator();
         $barcode->setText($text);
         $barcode->setType(constant('CodeItNow\BarcodeBundle\Utils\BarcodeGenerator::'.$typeExt));
         $barcode->setScale(2);
         $barcode->setThickness(25);
         $barcode->setFontSize(10);
-        return $barcode;*/
+
+        return $barcode;
+
         $redColor = [255, 0, 0];
 
         $generator = new BarcodeGeneratorPNG();
