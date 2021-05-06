@@ -300,7 +300,7 @@ class ProfilController extends AbstractController
                         ->find(3));
 
                 $rezervacija->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
-                $daniPosudbe = 30;
+                $daniPosudbe = $knjiznicar->getDaniPosudbe();
                 $duration = "P" . $daniPosudbe . "D";
 
                 $rezervacija->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
@@ -338,24 +338,23 @@ class ProfilController extends AbstractController
 
             $posudbe->setGradja($gradja);
             $posudbe->setKorisnici($korisnik);
-            $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(5));
+            $posudbe->setStatus($entityManager->getRepository(Statusi::class)->find(3));
 
             $posudbe->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
             $posudbe->setKnjiznica($knjiznicar);
-            $daniPosudbe = 30;
+            $daniPosudbe = $knjiznicar->getDaniPosudbe();
             $duration = "P".$daniPosudbe."D";
 
             $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
-            $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
-            $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
-            $user->addPosudbe($posudbe);
+            $posudbe->setBrojIskazniceKorisnika($korisnik->getBrojIskazniceKorisnika());
+            $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(3));
+            $korisnik->addPosudbe($posudbe);
 
             $entityManager->persist($posudbe);
             $entityManager->persist($gradja);
-            $entityManager->persist($user);
+            $entityManager->persist($korisnik);
             $entityManager->flush();
 
-            $entityManager->flush();
 
             $this->addFlash('success', 'Građa uspješno posuđena!');
 
