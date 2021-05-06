@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class BarcodeController extends AbstractController
+class BarcodeController
 {
 
     public function makeBarcode($text, $typeExt)

@@ -10,7 +10,6 @@ use App\Repository\GradjaRepository;
 use App\Service\RezervacijaVerify;
 use DateInterval;
 use DateTime;
-use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
