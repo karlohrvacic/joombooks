@@ -22,7 +22,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/korisnik", name="korisnicki_izbornik")
      */
-    public function korisnickiIzbornik(RezervacijaVerify $verify): Response
+    public function korisnickiIzbornik(Request $request, RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
 
