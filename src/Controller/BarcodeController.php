@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 
-class BarcodeController
+class BarcodeController extends AbstractController
 {
 
     public function makeBarcode($text, $typeExt)
@@ -14,7 +15,7 @@ class BarcodeController
         $barcode->setType(constant('CodeItNow\BarcodeBundle\Utils\BarcodeGenerator::'.$typeExt));
         $barcode->setScale(2);
         $barcode->setThickness(25);
-        $barcode->setFontSize(12);
+        $barcode->setFontSize(10);
         return $barcode;
     }
 }
