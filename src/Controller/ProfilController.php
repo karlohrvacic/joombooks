@@ -30,7 +30,7 @@ class ProfilController extends AbstractController
          */
         $korisnik = $this->getUser();
 
-        return $this->render('korisnickiProfil/korisnickaPocetna.html.twig', [
+        return $this->render('korisnickiProfil/korisnickaPocetna.html.twig',[
             'korisnik' => $korisnik,
         ]);
     }
