@@ -8,7 +8,7 @@ use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 class BarcodeController extends AbstractController
 {
 
-    public function makeBarcode($text, $typeExt)
+    public function makeBarcode($text, $typeExt): BarcodeGenerator
     {
         $barcode = new BarcodeGenerator();
         $barcode->setText($text);
