@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Gradja;
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Entity\Posudbe;
@@ -12,11 +11,10 @@ use App\Service\RezervacijaVerify;
 use DateInterval;
 use DateTime;
 use Exception;
-use http\Env\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfilController extends AbstractController
 {
