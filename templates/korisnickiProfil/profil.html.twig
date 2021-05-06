@@ -27,11 +27,8 @@
                     </div>
                     <div class="qr col-12 col-md-6 col-lg-6">
                         <div class="qr-baby">
-                            <img  src="data:image/png;base64,{{ code.makeBarcode(  korisnik.brojIskazniceKorisnika  , "Code128").generate }}"
+                            <img  src="data:image/png;base64,{{ code.makeBarcode(  korisnik.brojIskazniceKorisnika  , "Code128", "#FBE8A6").generate }}"
                                   alt="Bar code korisnika: {{ korisnik.brojIskazniceKorisnika  }}"/>
-
-                             {# <img  src="data:image/png;base64,{{ code.makeBarcode(  korisnik.brojIskazniceKorisnika  , "Code128") }}"
-                               alt="Bar code korisnika: {{ korisnik.brojIskazniceKorisnika  }}"/> #}
                         </div>
                     </div>
                 </div>
