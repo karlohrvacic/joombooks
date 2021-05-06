@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BarcodeController extends AbstractController
 {
 
-    public function makeBarcode($text, $typeExt): BarcodeGenerator
+    public function makeBarcode($text, $typeExt)
     {
         $barcode = new BarcodeGenerator();
         $barcode->setText($text);
