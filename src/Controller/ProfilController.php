@@ -274,9 +274,7 @@ class ProfilController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
-    /**
-     * @throws Exception
-     */
+
     #[Route('knjiznica/gradja/posudi/{id}', name: 'posudi_rezerviranu_gradju', methods: ['GET'])]
     public function posudba($id, RezervacijaVerify $verify): RedirectResponse
     {
@@ -314,9 +312,7 @@ class ProfilController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
-    /**
-     * @throws Exception
-     */
+
     #[Route('knjiznica/gradja/posudi/{idGradja}/{idKorisnika}', name: 'posudi_gradju', methods: ['GET'])]
     public function posudbaBezRezervacije(Request $request, $idGradja, $idKorisnika, RezervacijaVerify $verify): RedirectResponse
     {
