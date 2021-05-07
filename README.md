@@ -9,9 +9,9 @@ Helps connecting Independent libraries with their users.
 
 
 Technologies: 
-- <a href="https://symfony.com/">Symfony</a><br>
-- <a href="https://getbootstrap.com/">Bootstrap</a>
-- <a href="https://www.mysql.com/">MySQL</a>
+- <p>PHP with <a href="https://symfony.com/">Symfony 5</a> framework</p>
+- <p><a href="https://getbootstrap.com/">Bootstrap 5</a></p>
+- <p><a href="https://www.mysql.com/">MySQL</a></p>
 
 Dependencies:
 - <a href="https://github.com/karlohrvacic/jumkabooks/network/dependencies">Github List</a><br>
