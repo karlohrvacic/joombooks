@@ -356,6 +356,7 @@ input.form-control{
 #popular{
     display: none;
     position: absolute;
+    z-index: 1;
     top: 32vh;
     right: 2rem;
     width: 140px;
@@ -421,7 +422,7 @@ svg{
     padding: 10px 20px 10px 10px;
 }
 
-.popup{
+.popup, .produzi-rez{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -437,7 +438,7 @@ svg{
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border-radius: 20px;
 }
-.popup a{
+.popup a, .produzi-rez a{
     margin: 0 10px;
     background: #B4DFE5;
     display: flex;
@@ -458,8 +459,19 @@ svg{
     align-items: center;
     background-color: white;
     padding: 10px 20px 10px 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .cross{
     width: 50px;
+}
+.produzi{
+    background-color: #B4DFE5;
+    padding: 5px;
+    width: 120px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 

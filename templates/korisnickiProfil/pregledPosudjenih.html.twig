@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Posuđene index{% endblock %}
+{% block title %}Posuđeno{% endblock %}
 
+{% block nazivTrenutneStranice %}
+    <div class="look">
+        <img src="/files/pitcures/icons/posudenoIcon.png">
+        <h1>POSUĐENO</h1>
+    </div>
+{% endblock %}
 
 {% block body %}
-    <h1>Posudjene index</h1>
-
-    {% if is_granted('ROLE_USER') %}
-        <p>{{ korisnik.ime }}</p>
-        <p>{{ korisnik.prezime }}</p>
-        <td><img width="100px" src="{{ korisnik.fotografija }}" alt="profilna fotografija"></td>
-    {% endif %}
+{#    {% if is_granted('ROLE_USER') %}#}
+{#        <p>{{ korisnik.ime }}</p>#}
+{#        <p>{{ korisnik.prezime }}</p>#}
+{#        <td><img width="100px" src="{{ korisnik.fotografija }}" alt="profilna fotografija"></td>#}
+{#    {% endif %}#}
 
     <table class="table">
         <thead>
@@ -71,7 +75,5 @@
     </table>
     {% if is_granted('ROLE_LIBRARY') %}
         <a href="{{ path('gradja_new') }}">Create new</a>
-    {% else %}
-        <a href="{{ path('korisnicki_izbornik') }}">HOME</a>
     {% endif %}
 {% endblock %}
