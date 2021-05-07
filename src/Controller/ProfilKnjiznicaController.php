@@ -67,7 +67,7 @@ class ProfilKnjiznicaController extends AbstractController
 
         $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
             'knjiznica' => $knjiznica,
-            'status' => 3
+            'status'  => array(3, 9)
         ]);
 
         $code = new BarcodeController();
@@ -191,6 +191,71 @@ class ProfilKnjiznicaController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('success', 'Građa uspješno vraćena!');
+
+            }
+            return $this->redirectToRoute('posudbe_korisnika');
+
+        }
+        return $this->render('app_login');
+    }
+
+    #[Route('knjiznica/gradja/produlji-posudbu/{id}', name: 'odobri-produljenje', methods: ['GET'])]
+    public function extendAccept($id, RezervacijaVerify $verify)
+    {
+        $verify->rezervacijaExpirationCheck();
+        $entityManager = $this->getDoctrine()->getManager();
+        $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
+
+        /**
+         * @var $knjiznicar Knjiznice
+         */
+        $knjiznicar = $this->getUser();
+
+        if ($knjiznicar) {
+            if ($rezervacija->getKnjiznica() instanceof $knjiznicar ) {
+
+                $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(3));
+
+                $daniPosudbe = $knjiznicar->getDaniPosudbe();
+                $duration = "P".$daniPosudbe."D";
+
+                $newDate = clone $rezervacija->getDatumRokaVracanja();
+                $newDate->add(new DateInterval($duration));
+
+                $rezervacija->setDatumRokaVracanja($newDate);
+                $entityManager->persist($rezervacija);
+
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Posudba uspješno produžena!');
+
+            }
+            return $this->redirectToRoute('posudbe_korisnika');
+
+        }
+        return $this->render('app_login');
+    }
+
+    #[Route('knjiznica/gradja/odbij-produljenje-posudbe/{id}', name: 'odbij-produljenje', methods: ['GET'])]
+    public function extendDeny($id, RezervacijaVerify $verify)
+    {
+        $verify->rezervacijaExpirationCheck();
+        $entityManager = $this->getDoctrine()->getManager();
+        $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
+
+        /**
+         * @var $knjiznicar Knjiznice
+         */
+        $knjiznicar = $this->getUser();
+
+        if ($knjiznicar) {
+            if ($rezervacija->getKnjiznica() instanceof $knjiznicar ) {
+
+                $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(3));
+
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Zahtjev za produljivanje posudbe uspješno odbijen!');
 
             }
             return $this->redirectToRoute('posudbe_korisnika');

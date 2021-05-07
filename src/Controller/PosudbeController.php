@@ -144,18 +144,19 @@ class PosudbeController extends AbstractController
         $daniRezervacije = $user->getKnjiznice()->getDaniRezervacije();
         if($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika() &&
             $rezervacija->getDatumPosudbe()->diff($rezervacija->getDatumRokaVracanja())->format('%r%a') <
-            ($daniRezervacije * 2)){
+            ($daniRezervacije * 2) && $rezervacija->getStatus()->getId() == 5){
 
             $duration = "P".$daniRezervacije."D";
-
             $newDate = clone $rezervacija->getDatumRokaVracanja();
             $newDate->add(new DateInterval($duration));
+
             $rezervacija->setDatumRokaVracanja($newDate);
             $entityManager->persist($rezervacija);
             $entityManager->flush();
+
             $this->addFlash('success', 'Uspješno ste produžili rezervaciju!');
         } else{
-            $this->addFlash('alert', "Rezervaciju možete produžiti samo jednom"); // vuci iz baze
+            $this->addFlash('alert', "Rezervaciju ne možete produžiti!");
         }
 
         return $this->redirectToRoute('rezervirane_knjige_korisnika');
@@ -172,13 +173,13 @@ class PosudbeController extends AbstractController
          * @var $user Korisnici
          */
         $user = $this->getUser();
-        if ($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()) {
-            $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(9));
+        if ($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()
+            && $rezervacija->getStatus()->getId() == 3) {
 
+            $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(9));
                 $entityManager->flush();
 
                 $this->addFlash('success', 'Zahtjev za produljenje posudbe uspješno poslan!');
-
         }
         else{
             $this->addFlash('alert', 'Nije vam dopušteno poslati zahtjev za produljenje,!');

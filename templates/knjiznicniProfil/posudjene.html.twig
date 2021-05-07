@@ -33,6 +33,10 @@
                 <td>{{ posudbe.zakasnina }}</td>
                 <td>
                     <a href="{{ path('vrati_gradju', {'id': posudbe.id}) }}">Vraćanje</a>
+                    {% if posudbe.status.id == 9 %}
+                        <a href="{{ path('odobri-produljenje', {'id': posudbe.id}) }}">Odobri zahtjev za produljenje</a>
+                        <a href="{{ path('odbij-produljenje', {'id': posudbe.id}) }}">Odbij zahtjev za produljenje</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -43,5 +47,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('posudbe_new') }}">Create new</a>
 {% endblock %}
