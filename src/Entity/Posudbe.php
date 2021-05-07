@@ -172,16 +172,24 @@ class Posudbe
     }
 
     public function getBrojPutaProduljenjaRezervacije(){
+        if($this->getStatus()->getId() == 5){
+            return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a')
+                / $this->getKnjiznica()->getDaniRezervacije());
+        }else{
+            return 0;
+        }
 
-        return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a')
-            / $this->getKnjiznica()->getDaniRezervacije());
 
     }
 
     public function getBrojPutaProduljenjaPosudbe(){
+        if($this->getStatus()->getId() == 3){
+            return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a')
+                / $this->getKnjiznica()->getDaniPosudbe());
+        }else{
+            return 0;
+        }
 
-        return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a')
-            / $this->getKnjiznica()->getDaniPosudbe());
 
     }
 
