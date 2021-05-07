@@ -30,7 +30,6 @@ class ActivateController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $korisnik = $this->getDoctrine()
                 ->getRepository(Korisnici::class)
                 ->findOneBy([

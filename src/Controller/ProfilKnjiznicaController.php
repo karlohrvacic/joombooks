@@ -23,10 +23,7 @@ class ProfilKnjiznicaController extends AbstractController
      */
     public function knjiznicaProfil(): Response
     {
-        #dd($this->getUser());
-        return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig', [
-
-        ]);
+        return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig');
     }
 
     /**
@@ -90,28 +87,24 @@ class ProfilKnjiznicaController extends AbstractController
          */
         $knjiznicar = $this->getUser();
 
-        if ($knjiznicar) {
-            if ($knjiznicar === $rezervacija->getKnjiznica()) {
-                $rezervacija
-                    ->setStatus($entityManager->getRepository(Statusi::class)
-                        ->find(3));
-                $rezervacija->getGradja()
-                    ->setStatus($entityManager->getRepository(Statusi::class)
-                        ->find(3));
+        if ($knjiznicar === $rezervacija->getKnjiznica()) {
 
-                $rezervacija->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
-                $daniPosudbe = $knjiznicar->getDaniPosudbe();
-                $duration = "P" . $daniPosudbe . "D";
+            $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(3));
+            $rezervacija->getGradja()->setStatus($entityManager->getRepository(Statusi::class)->find(3));
 
-                $rezervacija->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
+            $rezervacija->setDatumPosudbe((new DateTime())->add(new DateInterval('P0D')));
+            $daniPosudbe = $knjiznicar->getDaniPosudbe();
+            $duration = "P" . $daniPosudbe . "D";
 
-                $entityManager->flush();
+            $rezervacija->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
 
-                $this->addFlash('success', 'Građa uspješno posuđena!');
+            $entityManager->flush();
+            $this->addFlash('success', 'Građa uspješno posuđena!');
 
-            }
             return $this->redirectToRoute('posudbe_korisnika');
         }
+        $this->addFlash('alert', 'Nije vam dozvoljeno posuđivati tuđe knjige!');
+
         return $this->redirectToRoute('app_login');
     }
 
@@ -123,16 +116,15 @@ class ProfilKnjiznicaController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $korisnik = $entityManager->getRepository(Korisnici::class)->find($idKorisnika);
 
+        $gradja = $entityManager->getRepository(Gradja::class)->find($idGradja);
+
         /**
          * @var $knjiznicar Knjiznice
          */
         $knjiznicar = $this->getUser();
 
-        if ($korisnik->getBrojTrenutnoPosudenih() < $knjiznicar->getMaxPosudjenih()) {
+        if ($korisnik->getBrojTrenutnoPosudenih() < $knjiznicar->getMaxPosudjenih() && $gradja->getStatus()->getId() == 1) {
             $posudbe = new Posudbe();
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $gradja = $entityManager->getRepository(Gradja::class)->find($idGradja);
 
             $posudbe->setGradja($gradja);
             $posudbe->setKorisnici($korisnik);
@@ -162,7 +154,6 @@ class ProfilKnjiznicaController extends AbstractController
         }
 
         return $this->redirectToRoute('posudbe_korisnika');
-
     }
 
     #[Route('knjiznica/gradja/vrati/{id}', name: 'vrati_gradju', methods: ['GET'])]
@@ -211,25 +202,23 @@ class ProfilKnjiznicaController extends AbstractController
          */
         $knjiznicar = $this->getUser();
 
-        if ($knjiznicar) {
-            if ($rezervacija->getKnjiznica() instanceof $knjiznicar ) {
+        if ($rezervacija->getKnjiznica() instanceof $knjiznicar ) {
 
-                $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(3));
+            $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(3));
 
-                $daniPosudbe = $knjiznicar->getDaniPosudbe();
-                $duration = "P".$daniPosudbe."D";
+            $daniPosudbe = $knjiznicar->getDaniPosudbe();
+            $duration = "P".$daniPosudbe."D";
 
-                $newDate = clone $rezervacija->getDatumRokaVracanja();
-                $newDate->add(new DateInterval($duration));
+            $newDate = clone $rezervacija->getDatumRokaVracanja();
+            $newDate->add(new DateInterval($duration));
 
-                $rezervacija->setDatumRokaVracanja($newDate);
-                $entityManager->persist($rezervacija);
+            $rezervacija->setDatumRokaVracanja($newDate);
+            $entityManager->persist($rezervacija);
 
-                $entityManager->flush();
+            $entityManager->flush();
 
-                $this->addFlash('success', 'Posudba uspješno produžena!');
+            $this->addFlash('success', 'Posudba uspješno produžena!');
 
-            }
             return $this->redirectToRoute('posudbe_korisnika');
 
         }

@@ -133,8 +133,7 @@ class PosudbeController extends AbstractController
         $verify->rezervacijaExpirationCheck();
 
         $entityManager = $this->getDoctrine()->getManager();
-        $rezervacija = $entityManager->getRepository(Posudbe::class)
-            ->find($id);
+        $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
 
         /**
          * @var $user Korisnici
@@ -169,6 +168,7 @@ class PosudbeController extends AbstractController
         $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
+
         /**
          * @var $user Korisnici
          */
