@@ -474,4 +474,7 @@ svg{
     align-items: center;
     text-align: center;
 }
+.produzeno, .produzeno:hover{
+    color: #6B6B6B;
+}
 

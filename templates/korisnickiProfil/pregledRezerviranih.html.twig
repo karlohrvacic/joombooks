@@ -37,7 +37,11 @@
                                 <p style="font-weight: bold;">Datum isteka rezervacije: {{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja|date('d.m.Y.') : '' }} </p>
                             </div>
                             <div class="produzi">
-                                <a style="cursor: pointer;" onclick="produziRez({{ loop.index }})">produži rezervaciju</a>
+                                {% if posudba.brojPutaProduljenjaRezervacije >= 2 %}
+                                    <a class="produzeno">produženo</a>
+                                {% else %}
+                                    <a style="cursor: pointer;" onclick="produziRez({{ loop.index }})">produži rezervaciju</a>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="popup">
