@@ -170,4 +170,19 @@ class Posudbe
 
         return $this;
     }
+
+    public function getBrojPutaProduljenjaRezervacije(){
+
+        return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a')
+            / $this->getKnjiznica()->getDaniRezervacije());
+
+    }
+
+    public function getBrojPutaProduljenjaPosudbe(){
+
+        return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a')
+            / $this->getKnjiznica()->getDaniPosudbe());
+
+    }
+
 }
