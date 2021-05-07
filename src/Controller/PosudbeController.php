@@ -32,16 +32,16 @@ class PosudbeController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/new', name: 'posudbe_new', methods: ['GET'])]
-    public function new(Request $request, RezervacijaVerify $verify): Response
+    #[Route('/new/{id}', name: 'posudbe_new', methods: ['GET'])]
+    public function new($id, RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
 
         //Rezervacije
         $posudbe = new Posudbe();
         $entityManager = $this->getDoctrine()->getManager();
-        $gradja = $entityManager->getRepository(Gradja::class)
-                ->find($request->query->get('id'));
+        $gradja = $entityManager->getRepository(Gradja::class)->find($id);
+
         /**
          * @var $user Korisnici
          */
@@ -127,7 +127,7 @@ class PosudbeController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/extend/{id}', name: 'rezervacija_extend', methods: ['GET'])]
+    #[Route('/produlji-rezervaciju/{id}', name: 'rezervacija_extend', methods: ['GET'])]
     public function extension($id, RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
@@ -160,6 +160,32 @@ class PosudbeController extends AbstractController
 
         return $this->redirectToRoute('rezervirane_knjige_korisnika');
 
+    }
+
+    #[Route('/zatrazi-produljenje/{id}', name: 'zatrazi_produljenje_posudbe', methods: ['GET'])]
+    public function zatraziProduljenjePosudbe($id, RezervacijaVerify $verify): Response
+    {
+        $verify->rezervacijaExpirationCheck();
+        $entityManager = $this->getDoctrine()->getManager();
+        $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
+        /**
+         * @var $user Korisnici
+         */
+        $user = $this->getUser();
+        if ($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()) {
+            $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(9));
+
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Zahtjev za produljenje posudbe uspješno poslan!');
+
+        }
+        else{
+            $this->addFlash('alert', 'Nije vam dopušteno poslati zahtjev za produljenje,!');
+        }
+            return $this->redirectToRoute('rezervirane_knjige_korisnika');
+
+        return $this->redirectToRoute('app_login');
     }
 
 }

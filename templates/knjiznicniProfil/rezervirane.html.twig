@@ -21,11 +21,11 @@
         {% for posudbe in posudbes %}
             <tr>
                 <td>{{ posudbe.id }}</td>
-                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.iSBN  , "Isbn").generate }}"
+                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.iSBN  , "Isbn", "#FFF").generate }}"
                          alt="Isbn: {{ posudbe.gradja.iSBN  }}"/></td>
-                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.brojInventara  , "Code128").generate }}"
+                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.brojInventara  , "Code128", "#FFF").generate }}"
                          alt="Broj inventara: {{ posudbe.gradja.brojInventara  }}"/></td>
-                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.brojIskazniceKorisnika  , "Code39").generate }}"
+                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.brojIskazniceKorisnika  , "Code39", "#FFF").generate }}"
                          alt="Broj iskaznice korisnika: {{ posudbe.brojIskazniceKorisnika  }}"/></td>
                 <td>{{ posudbe.datumPosudbe ? posudbe.datumPosudbe|date('Y-m-d') : '' }}</td>
                 <td>{{ posudbe.datumRokaVracanja ? posudbe.datumRokaVracanja|date('Y-m-d') : '' }}</td>
@@ -42,5 +42,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('posudbe_new') }}">Create new</a>
 {% endblock %}
