@@ -20,3 +20,12 @@ function sakriveno(x){
         y.style.display = "flex";
     }
 }
+
+function popup(x){
+    var y = document.getElementsByClassName("popup").item(x-1);
+    if (y.style.display === "flex") {
+        y.style.display = "none";
+    } else {
+        y.style.display = "flex";
+    }
+}

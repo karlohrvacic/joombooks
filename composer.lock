@@ -8788,16 +8788,16 @@
         },
         {
             "name": "rector/rector-installer",
-            "version": "0.10.1",
+            "version": "0.10.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rectorphp/rector-installer.git",
-                "reference": "2e8df01aac6a3dedd113ba57ea6f129b6a9872c9"
+                "url": "https://github.com/rectorphp/extension-installer.git",
+                "reference": "56c97630fca170b5586b2f08e76348f924ebb8dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector-installer/zipball/2e8df01aac6a3dedd113ba57ea6f129b6a9872c9",
-                "reference": "2e8df01aac6a3dedd113ba57ea6f129b6a9872c9",
+                "url": "https://api.github.com/repos/rectorphp/extension-installer/zipball/56c97630fca170b5586b2f08e76348f924ebb8dd",
+                "reference": "56c97630fca170b5586b2f08e76348f924ebb8dd",
                 "shasum": ""
             },
             "require": {
@@ -8806,14 +8806,16 @@
             },
             "require-dev": {
                 "composer/composer": "^2.0",
+                "composer/xdebug-handler": "2.0 as 1.4",
+                "friendsofphp/php-cs-fixer": "^3.0",
                 "jangregor/phpstan-prophecy": "^0.8.1",
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpstan/extension-installer": "^1.1",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector-phpstan-rules": "^0.1.0",
-                "symplify/easy-coding-standard": "^9.2.24",
-                "symplify/phpstan-extensions": "^9.2.24",
-                "symplify/phpstan-rules": "^9.2.24"
+                "rector/rector-phpstan-rules": "^0.1",
+                "symplify/easy-coding-standard": "^9.3.1",
+                "symplify/phpstan-extensions": "^9.3",
+                "symplify/phpstan-rules": "^9.3"
             },
             "type": "composer-plugin",
             "extra": {
@@ -8821,19 +8823,20 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Rector\\RectorInstaller\\": "src/"
+                    "Rector\\RectorInstaller\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Composer plugin for automatic installation of rector extensions",
+            "description": "Composer plugin for automatic installation of Rector extensions",
             "support": {
-                "issues": "https://github.com/rectorphp/rector-installer/issues",
-                "source": "https://github.com/rectorphp/rector-installer/tree/0.10.1"
+                "issues": "https://github.com/rectorphp/extension-installer/issues",
+                "source": "https://github.com/rectorphp/extension-installer/tree/0.10.2"
             },
-            "time": "2021-04-26T14:25:12+00:00"
+            "abandoned": "rector/extension-installer",
+            "time": "2021-05-06T21:14:19+00:00"
         },
         {
             "name": "rector/rector-laravel",
@@ -8893,22 +8896,22 @@
         },
         {
             "name": "rector/rector-nette",
-            "version": "0.10.9",
+            "version": "0.10.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector-nette.git",
-                "reference": "19c85c870f9a7a90d1f2e9be9b3e048b4db69697"
+                "reference": "e9f0de1ffb3ba1eecdaa281fcd64fda1d3515e6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector-nette/zipball/19c85c870f9a7a90d1f2e9be9b3e048b4db69697",
-                "reference": "19c85c870f9a7a90d1f2e9be9b3e048b4db69697",
+                "url": "https://api.github.com/repos/rectorphp/rector-nette/zipball/e9f0de1ffb3ba1eecdaa281fcd64fda1d3515e6f",
+                "reference": "e9f0de1ffb3ba1eecdaa281fcd64fda1d3515e6f",
                 "shasum": ""
             },
             "require": {
                 "ext-xml": "*",
                 "php": ">=7.3",
-                "rector/rector": "^0.10.12"
+                "rector/rector": "^0.10.19"
             },
             "conflict": {
                 "rector/rector": "<=0.10.3"
@@ -8918,13 +8921,14 @@
                 "nette/di": "^3.0",
                 "nette/forms": "3.0.*",
                 "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "^0.12.85",
                 "phpstan/phpstan-nette": "^0.12.16",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector-phpstan-rules": "^0.1",
-                "symplify/easy-coding-standard": "^9.2",
-                "symplify/phpstan-extensions": "^9.2",
-                "symplify/phpstan-rules": "^9.2",
-                "symplify/rule-doc-generator": "^9.2"
+                "rector/rector-phpstan-rules": "^0.2",
+                "symplify/easy-coding-standard": "^9.3",
+                "symplify/phpstan-extensions": "^9.3",
+                "symplify/phpstan-rules": "^9.3",
+                "symplify/rule-doc-generator": "^9.3"
             },
             "type": "rector-extension",
             "extra": {
@@ -8949,9 +8953,9 @@
             "description": "Rector upgrades rules for Nette Framework",
             "support": {
                 "issues": "https://github.com/rectorphp/rector-nette/issues",
-                "source": "https://github.com/rectorphp/rector-nette/tree/0.10.9"
+                "source": "https://github.com/rectorphp/rector-nette/tree/0.10.10"
             },
-            "time": "2021-04-26T10:35:59+00:00"
+            "time": "2021-05-06T23:55:02+00:00"
         },
         {
             "name": "rector/rector-phpunit",

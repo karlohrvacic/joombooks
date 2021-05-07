@@ -377,8 +377,9 @@ svg{
     justify-content: space-between;
     align-items: center;
     background-color: #FBE8A6;
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 10px 20px 10px 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .naslov p{
     margin: 2px 10px;
@@ -418,5 +419,35 @@ svg{
     align-items: center;
     background-color: white;
     padding: 10px 20px 10px 10px;
+}
+
+.popup{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin-left:-100px;   /* negative half of width above */
+    margin-top:-100px;
+    background-color: #303C6C;
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 20px;
+}
+.popup a{
+    margin: 0 10px;
+    background: #B4DFE5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 40px;
+}
+.popup p{
+    margin: 20px;
 }
 

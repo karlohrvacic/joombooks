@@ -63,7 +63,14 @@
                                 <p>Opis: {{ gradja.opis }}</p>
                             </div>
                             <div class="status">
-                                <a href="{{ path('posudbe_new', {'id': gradja.id}) }}">Rezerviraj</a>
+                                <a style="cursor: pointer;" onclick="popup({{ loop.index }})">Rezerviraj</a>
+                            </div>
+                        </div>
+                        <div class="popup">
+                            <p style="color: #B4DFE5;">Jeste li sigurni da želite rezervirati knjigu <span style="color: white;">{{ gradja.naslov }} ?</span></p>
+                            <div style="display: flex; justify-content: center;">
+                                <a href="{{ path('posudbe_new', {'id': gradja.id}) }}">DA</a>
+                                <a style="cursor: pointer;" href="">NE</a>
                             </div>
                         </div>
                     {% else %}
