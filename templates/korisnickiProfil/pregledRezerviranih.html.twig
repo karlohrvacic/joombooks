@@ -1,56 +1,104 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rezerviranee knkioge{% endblock %}
+{% block title %}Rezervirane knjige{% endblock %}
+
+{% block nazivTrenutneStranice %}
+    <div class="look">
+        <img src="/files/pitcures/icons/rezerviranoIcon.png">
+        <h1>REZERVIRANO</h1>
+    </div>
+{% endblock %}
 
 {% block body %}
-    <h1>Rezerviranee index</h1>
+    <div class="container-fluid postavke trazi">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="grade">
+                    {% for posudba in posudbe %}
+                        <div class="grada">
+                            <div class="naslov">
+                                <p class="ime-knjige">{{ posudba.gradja.naslov }}</p>
+                                {% for autor in posudba.gradja.autori %}
+                                    <p class="autor">{{ autor }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="cross">
+                                <a style="cursor: pointer" onclick="popup({{ loop.index }})"><img width="100%" height="100%" src="/files/pitcures/icons/crosswhite.png"/></a>
+                            </div>
+                        </div>
+                        <div class="rezervirano">
+                            <div class="zanr">
+                                <p style="display: inline">Žanr: </p>
+                                {% for zanr in posudba.gradja.zanrovi %}
+                                    <span>{{ zanr }}</span>
+                                {% endfor %}
+                                <p>Godina izdanja: {{ posudba.gradja.godinaIzdanja ? posudba.gradja.godinaIzdanja|date('d.m.Y.') : '' }}</p>
+                                <p>Izdavač: {{ posudba.gradja.opis }}</p>
+                                <p style="font-weight: bold;">Datum isteka rezervacije: {{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja|date('d.m.Y.') : '' }} </p>
+                            </div>
+                        </div>
+                        <div class="popup">
+                            <p style="color: #B4DFE5;">Jeste li sigurni da želite otkazati rezervaciju knjige <span style="color: white;">{{ posudba.gradja.naslov }} ?</span></p>
+                            <div style="display: flex; justify-content: center;">
+                                <a style="cursor: pointer;" href="{{ path('rezervacija_cancel', {'id': posudba.id}) }}">DA</a>
+                                <a style="cursor: pointer;" href="">NE</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p>Nema podataka.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>ISBN</th>
-            <th>Naslov</th>
-            <th>Ime knjižnice</th>
-            <th>Fotografija</th>
-            <th>Opis</th>
-            <th>Rok rezervacije</th>
-            <th>Jezik</th>
-            <th>BrojInventara</th>
-            <th>Izdavač</th>
-            <th>Opcije</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for posudba in posudbe %}
-            <tr>
-                <td>{{ posudba.id }}</td>
-                <td>{{ posudba.gradja.isbn }}</td>
-                <td>{{ posudba.getGradja.getNaslov }}</td>
-                <td>{{ posudba.getGradja.getKnjiznicaVlasnik.getNaziv }}</td>
-                <td><img width="100px" src="{{ posudba.getGradja.fotografija }}"></td>
-                <td>{{ posudba.getGradja.opis }}</td>
-                <td>{{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja |date('Y-m-d') : '' }}</td>
-                <td>{{ posudba.getGradja.jezici }}</td>
-                <td>{{ posudba.getGradja.brojInventara }}</td>
-                <td>{{ posudba.getGradja.izdavac }}</td>
+{#    <table class="table">#}
+{#        <thead>#}
+{#        <tr>#}
+{#            <th>Id</th>#}
+{#            <th>ISBN</th>#}
+{#            <th>Naslov</th>#}
+{#            <th>Ime knjižnice</th>#}
+{#            <th>Fotografija</th>#}
+{#            <th>Opis</th>#}
+{#            <th>Rok rezervacije</th>#}
+{#            <th>Jezik</th>#}
+{#            <th>BrojInventara</th>#}
+{#            <th>Izdavač</th>#}
+{#            <th>Opcije</th>#}
+{#        </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for posudba in posudbe %}#}
+{#            <tr>#}
+{#                <td>{{ posudba.id }}</td>#}
+{#                <td>{{ posudba.gradja.isbn }}</td>#}
+{#                <td>{{ posudba.getGradja.getNaslov }}</td>#}
+{#                <td>{{ posudba.getGradja.getKnjiznicaVlasnik.getNaziv }}</td>#}
+{#                <td><img width="100px" src="{{ posudba.getGradja.fotografija }}"></td>#}
+{#                <td>{{ posudba.getGradja.opis }}</td>#}
+{#                <td>{{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja |date('Y-m-d') : '' }}</td>#}
+{#                <td>{{ posudba.getGradja.jezici }}</td>#}
+{#                <td>{{ posudba.getGradja.brojInventara }}</td>#}
+{#                <td>{{ posudba.getGradja.izdavac }}</td>#}
 
-                <td>
-                    <a href="{{ path('rezervacija_cancel', {'id': posudba.id}) }}">Otkaži rezervaciju</a>
-                    <a href="{{ path('rezervacija_extend', {'id': posudba.id}) }}">Produži</a>
-                </td>
+{#                <td>#}
+{#                    <a href="{{ path('rezervacija_cancel', {'id': posudba.id}) }}">Otkaži rezervaciju</a>#}
+{#                    <a href="{{ path('rezervacija_extend', {'id': posudba.id}) }}">Produži</a>#}
+{#                </td>#}
 
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{#            </tr>#}
+{#        {% else %}#}
+{#            <tr>#}
+{#                <td colspan="11">Nema podataka</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
     {% if is_granted('ROLE_LIBRARY') %}
         <a href="{{ path('gradja_new') }}">Create new</a>
-    {% else %}
-        <a href="{{ path('korisnicki_izbornik') }}">HOME</a>
     {% endif %}
+    <footer style="color: black;">
+        Jumka books
+    </footer>
 {% endblock %}

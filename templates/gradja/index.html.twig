@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gradja index{% endblock %}
+{% block title %}Pretraživanje{% endblock %}
 
 {% block nazivTrenutneStranice %}
     <div class="look">
@@ -59,7 +59,7 @@
                                 {% for zanr in gradja.zanrovi %}
                                     <span>{{ zanr }}</span>
                                 {% endfor %}
-                                <p>Godina izdanja: {{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('Y-m-d') : '' }}</p>
+                                <p>Godina izdanja: {{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('d.m.Y.') : '' }}</p>
                                 <p>Opis: {{ gradja.opis }}</p>
                             </div>
                             <div class="status">

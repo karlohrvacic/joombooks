@@ -451,3 +451,15 @@ svg{
     margin: 20px;
 }
 
+/* REZERVIRANO */
+.rezervirano{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px 10px 10px;
+}
+.cross{
+    width: 50px;
+}
+
