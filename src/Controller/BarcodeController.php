@@ -14,10 +14,10 @@ class BarcodeController
         $barcode = new BarcodeGenerator();
         $barcode->setText($text);
         $barcode->setType(constant('CodeItNow\BarcodeBundle\Utils\BarcodeGenerator::'.$typeExt));
+        $barcode->setBackgroundColor($colour);
         $barcode->setScale(2);
         $barcode->setThickness(25);
         $barcode->setFontSize(10);
-        $barcode->setBackgroundColor($colour);
 
         return $barcode;
     }

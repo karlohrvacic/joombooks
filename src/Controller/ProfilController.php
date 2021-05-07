@@ -106,7 +106,8 @@ class ProfilController extends AbstractController
         ]);
 
         return $this->render('korisnickiProfil/pregledRezerviranih.html.twig', [
-            'posudbe' => $posudbe
+            'posudbe' => $posudbe,
+            'korisnik' => $korisnik
         ]);
     }
 
