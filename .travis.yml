@@ -44,11 +44,6 @@ notifications:
 
   on_failure: always
 
-# Project language
-
-# Allows use container-based infrastructure
-sudo: false
-
 # Start mysql service
 services:
   - mysql
@@ -71,7 +66,7 @@ before-install:
 # Create database, schema and fixtures
 install:
   - composer install
-  - php bin/console doctrine:database:create --env=test
-  - php bin/console doctrine:schema:create --env=test
-  - php bin/console doctrine:fixtures:load -n --env=test
+  - php bin/console doctrine:database:create --env=dev
+  - php bin/console doctrine:schema:create --env=dev
+  - php bin/console doctrine:fixtures:load -n --env=dev
 
