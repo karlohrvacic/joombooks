@@ -209,6 +209,10 @@ class ProfilKnjiznicaController extends AbstractController
 
             $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(3));
 
+            $korisnik = $rezervacija->getKorisnici();
+            $imeKnjige = $rezervacija->getGradja()->getNaslov();
+            $korisnik->addNotifications("Produljenje posudbe za $imeKnjige je odobreno!");
+
             $daniPosudbe = $knjiznicar->getDaniPosudbe();
             $duration = "P".$daniPosudbe."D";
 
@@ -244,6 +248,10 @@ class ProfilKnjiznicaController extends AbstractController
             if ($rezervacija->getKnjiznica() instanceof $knjiznicar ) {
 
                 $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(3));
+
+                $imeKnjige = $rezervacija->getGradja()->getNaslov();
+                $korisnik = $rezervacija->getKorisnici();
+                $korisnik->addNotifications("Produljenje posudbe za $imeKnjige je odbijeno!");
 
                 $entityManager->flush();
 

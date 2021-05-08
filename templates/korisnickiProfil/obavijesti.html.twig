@@ -12,14 +12,17 @@
 {% block body %}
 
     <div class="container-fluid postavke">
-        <div class="row">
-            <div class="notification">
-                <p>Rok za Zlatarovo zlato istječe sutra, dd.mm.</p>
+        {% for notifications in notification_layer %}
+            {% for notification in notifications %}
+            <div class="row">
+                <div class="notification">
+                    <p>{{ notification }}</p>
+                </div>
             </div>
-            <div class="notification">
-                <p>Knjiga Breza nije vraćena na vrijeme. Zakasnina trenutno iznosi # kn.</p>
-            </div>
-        </div>
+            {% else %}
+                <p>Nema obavijesti.</p>
+            {% endfor %}
+        {% endfor %}
     </div>
     <footer style="color: black;">
         Jumka books

@@ -76,6 +76,11 @@ class Korisnici implements UserInterface
      */
     private $knjiznice;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $notifications = [];
+
 
     public function __construct()
     {
@@ -302,5 +307,36 @@ class Korisnici implements UserInterface
         }
         return $trenutnePosudbe;
 
+    }
+
+    public function getNotifications(): ?array
+    {
+
+        return $this->notifications;
+    }
+
+    public function setNotifications(?array $notifications): self
+    {
+        $this->notifications = $notifications;
+
+        return $this;
+    }
+
+    public function addNotifications(?string $notification): self
+    {
+        if($this->getNotifications() == null){
+            $this->notifications = array($notification);
+        } else{
+            array_push($this->notifications, $notification);
+        }
+
+        return $this;
+    }
+
+    public function closeNotification(?int $number): self
+    {
+        unset($this->notifications[$number]);
+
+        return $this;
     }
 }

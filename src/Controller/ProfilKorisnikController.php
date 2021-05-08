@@ -124,21 +124,6 @@ class ProfilKorisnikController extends AbstractController
     }
 
     /**
-     * @Route("/obavijesti", name="korisnicke_obavijesti")
-     */
-    public function korisnickeObavijesti(): Response
-    {
-        /**
-         * @var $korisnik Korisnici
-         */
-        $korisnik = $this->getUser();
-
-        return $this->render('korisnickiProfil/obavijesti.html.twig', [
-            'korisnik' => $korisnik
-        ]);
-    }
-
-    /**
      * @Route("/postavke", name="korisnicke_postavke")
      */
     public function korisnickePostavke(): Response

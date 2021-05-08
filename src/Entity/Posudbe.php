@@ -159,6 +159,10 @@ class Posudbe
 
     }
 
+    public function brojDanaIsteka(){
+        return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a'));
+    }
+
     public function getKnjiznica(): ?Knjiznice
     {
         return $this->knjiznica;
