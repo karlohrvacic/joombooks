@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Korisnici;
 use App\Form\ActivationType;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

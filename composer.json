@@ -6,8 +6,8 @@
     "require": {
         "php": ">=8.0",
         "ext-ctype": "*",
-        "ext-iconv": "*",
         "ext-gd": "*",
+        "ext-iconv": "*",
         "codeitnowin/barcode": "^3.0",
         "composer/package-versions-deprecated": "1.11.99.1",
         "doctrine/annotations": "^1.0",
@@ -48,7 +48,6 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "rector/rector": "^0.10.16",
         "symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
         "symfony/debug-bundle": "^5.2",
