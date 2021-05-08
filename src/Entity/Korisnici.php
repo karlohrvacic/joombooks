@@ -296,7 +296,7 @@ class Korisnici implements UserInterface
         $trenutnePosudbe = 0;
 
         foreach ($this->getPosudbe()->toArray() as $posudba) {
-            if($posudba->getStatus()->getId() == 3){
+            if($posudba->getStatus()->getId() == 3 || $posudba->getStatus()->getId() == 9){
                 $trenutnePosudbe++;
             }
         }

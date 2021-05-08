@@ -65,6 +65,8 @@ class ProfilKnjiznicaController extends AbstractController
         $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
             'knjiznica' => $knjiznica,
             'status'  => array(3, 9)
+        ], [
+            'status' => 'DESC'
         ]);
 
         $code = new BarcodeController();

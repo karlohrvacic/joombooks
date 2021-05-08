@@ -44,7 +44,7 @@ class ProfilKorisnikController extends AbstractController
 
         $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
             'brojIskazniceKorisnika' => $korisnik->getBrojIskazniceKorisnika(),
-            'status' => 3
+            'status'  => array(3, 9)
         ]);
 
         $code = new BarcodeController();

@@ -182,9 +182,9 @@ class PosudbeController extends AbstractController
                 $this->addFlash('success', 'Zahtjev za produljenje posudbe uspješno poslan!');
         }
         else{
-            $this->addFlash('alert', 'Nije vam dopušteno poslati zahtjev za produljenje,!');
+            $this->addFlash('alert', 'Nije vam dopušteno poslati zahtjev za produljenje!');
         }
-            return $this->redirectToRoute('rezervirane_knjige_korisnika');
+            return $this->redirectToRoute('posudjene_knjige_korisnika');
 
         return $this->redirectToRoute('app_login');
     }
