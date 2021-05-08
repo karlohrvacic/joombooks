@@ -57,10 +57,9 @@ class ProfilKorisnikController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/gradja", name="pregled_knjiga")
-     */
-    public function pregledKnjiga(GradjaRepository $gradjaRepository, RezervacijaVerify $verify): Response
+
+    #[Route('/gradja/{query}', name: 'pregled_knjiga', defaults: ['query' => ''], methods: ['GET', 'POST'])]
+    public function pregledKnjiga(Request $request, GradjaRepository $gradjaRepository, RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
         /**
@@ -68,11 +67,20 @@ class ProfilKorisnikController extends AbstractController
          */
         $korisnik = $this->getUser();
 
-        return $this->render('korisnickiProfil/pregledGradje.html.twig', [
-            'gradjas' => $gradjaRepository->findBy([
+        $query = $request->query->get('query');
+
+        if($query){
+            $gradja = $gradjaRepository->findByAutorAndNazivPoOibuKnjiznice($query, $korisnik->getKnjiznice());
+        } else{
+            $gradja = $gradjaRepository->findBy([
                 'knjiznicaVlasnik' => $korisnik->getKnjiznice(),
-            ]),
-            'korisnik' => $korisnik
+            ]);
+        }
+
+        return $this->render('korisnickiProfil/pregledGradje.html.twig', [
+            'gradjas' => $gradja,
+            'korisnik' => $korisnik,
+            'last_query' => $query
         ]);
     }
 

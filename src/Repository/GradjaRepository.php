@@ -23,13 +23,13 @@ class GradjaRepository extends ServiceEntityRepository
       * @return Gradja[] Returns an array of Gradja objects
       */
 
-    public function findByAutorAndNaziv($value)
+    public function findByAutorAndNazivPoOibuKnjiznice($value, $knjiznica)
     {
         return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('g.knjiznicaVlasnik = :oib AND (g.naslov LIKE :val )')
+            ->setParameter('oib', $knjiznica->getId())
+            ->setParameter('val', "%".$value."%")
             ->orderBy('g.id', 'ASC')
-            //->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;

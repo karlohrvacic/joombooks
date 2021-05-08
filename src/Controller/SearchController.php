@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Repository\GradjaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,24 +43,5 @@ class SearchController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-    //gradjas
-    #[Route('/handleSearchBarForGradja', name: 'handle_Search_Bar_For_Gradja')]
-    public function handleSearchBarForGradja(Request $request, GradjaRepository $gradjaRepository){
-        $query = $request->request->get('form')['query'];
-        if ($query){
-            $gradjas = $gradjaRepository->findByAutorAndNaziv($query);
-        }
 
-        /**
-         * @var $korisnik Korisnici
-         */
-        $korisnik = $this->getUser();
-
-        return $this->render('', [
-            'korisnik' => $korisnik,
-
-        ]);
-    }
 }
-//'gradjas' => $gradjaRepository->findBy([
-//    'knjiznicaVlasnik' => $korisnik->getKnjiznice(),
