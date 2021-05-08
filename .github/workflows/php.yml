@@ -9,9 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+      - uses: php-actions/composer@v5
+      - uses: php-actions/phpunit@v2
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: PHPUnit
-        uses: chindit/actions-phpunit-symfony@master
