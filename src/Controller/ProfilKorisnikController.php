@@ -2,10 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Entity\Posudbe;
-use App\Entity\Statusi;
+use App\Repository\AutoriRepository;
 use App\Repository\GradjaRepository;
 use App\Service\RezervacijaVerify;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +18,7 @@ class ProfilKorisnikController extends AbstractController
     /**
      * @Route("/", name="korisnicki_izbornik")
      */
-    public function korisnickiIzbornik(Request $request, RezervacijaVerify $verify): Response
+    public function korisnickiIzbornik(RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();
 
@@ -58,7 +57,7 @@ class ProfilKorisnikController extends AbstractController
     }
 
 
-    #[Route('/gradja/{query}', name: 'pregled_knjiga', defaults: ['query' => ''], methods: ['GET', 'POST'])]
+    #[Route('/gradja', name: 'pregled_knjiga', methods: ['GET', 'POST'])]
     public function pregledKnjiga(Request $request, GradjaRepository $gradjaRepository, RezervacijaVerify $verify): Response
     {
         $verify->rezervacijaExpirationCheck();

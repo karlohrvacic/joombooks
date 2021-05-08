@@ -26,7 +26,7 @@ class GradjaRepository extends ServiceEntityRepository
     public function findByAutorAndNazivPoOibuKnjiznice($value, $knjiznica)
     {
         return $this->createQueryBuilder('g')
-            ->andWhere('g.knjiznicaVlasnik = :oib AND (g.naslov LIKE :val )')
+            ->andWhere('g.knjiznicaVlasnik = :oib AND (g.naslov LIKE :val)')
             ->setParameter('oib', $knjiznica->getId())
             ->setParameter('val', "%".$value."%")
             ->orderBy('g.id', 'ASC')

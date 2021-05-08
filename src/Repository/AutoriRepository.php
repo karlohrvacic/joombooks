@@ -19,22 +19,21 @@ class AutoriRepository extends ServiceEntityRepository
         parent::__construct($registry, Autori::class);
     }
 
-    // /**
-    //  * @return Autori[] Returns an array of Autori objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+//     /**
+//      * @return Autori[] Returns an array of Autori objects
+//      */
+//
+//    public function findAutorByImeAndPrezime($value)
+//    {
+//        return $this->createQueryBuilder('a')
+//            ->andWhere('a.ime LIKE :val OR a.prezime LIKE :val')
+//            ->setParameter('val', "%".$value."%")
+//            ->orderBy('a.id', 'ASC')
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
+
 
     /*
     public function findOneBySomeField($value): ?Autori
