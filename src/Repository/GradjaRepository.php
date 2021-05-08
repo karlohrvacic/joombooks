@@ -19,22 +19,22 @@ class GradjaRepository extends ServiceEntityRepository
         parent::__construct($registry, Gradja::class);
     }
 
-    // /**
-    //  * @return Gradja[] Returns an array of Gradja objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Gradja[] Returns an array of Gradja objects
+      */
+
+    public function findByAutorAndNaziv($value)
     {
         return $this->createQueryBuilder('g')
             ->andWhere('g.exampleField = :val')
             ->setParameter('val', $value)
             ->orderBy('g.id', 'ASC')
-            ->setMaxResults(10)
+            //->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Gradja

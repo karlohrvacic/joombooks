@@ -15,11 +15,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/knjiznica')]
 class ProfilKnjiznicaController extends AbstractController
 {
 
     /**
-     * @Route("/knjiznica", name="knjiznica_izbornik")
+     * @Route("/", name="knjiznica_izbornik")
      */
     public function knjiznicaProfil(): Response
     {
@@ -27,7 +28,7 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
     /**
-     * @Route("/knjiznica/rezervirano", name="rezervacije_korisnika")
+     * @Route("/rezervirano", name="rezervacije_korisnika")
      */
     public function pregledRezervacija(RezervacijaVerify $verify): Response
     {
@@ -52,7 +53,7 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
     /**
-     * @Route("/knjiznica/posudjeno", name="posudbe_korisnika")
+     * @Route("/posudjeno", name="posudbe_korisnika")
      */
     public function pregledPosudbi(RezervacijaVerify $verify): Response
     {
@@ -77,7 +78,7 @@ class ProfilKnjiznicaController extends AbstractController
         ]);
     }
 
-    #[Route('knjiznica/gradja/posudi/{id}', name: 'posudi_rezerviranu_gradju', methods: ['GET'])]
+    #[Route('/gradja/posudi/{id}', name: 'posudi_rezerviranu_gradju', methods: ['GET'])]
     public function posudba($id, RezervacijaVerify $verify): RedirectResponse
     {
         $verify->rezervacijaExpirationCheck();
@@ -111,7 +112,7 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
 
-    #[Route('knjiznica/gradja/posudi/{idGradja}/{idKorisnika}', name: 'posudi_gradju', methods: ['GET'])]
+    #[Route('/gradja/posudi/{idGradja}/{idKorisnika}', name: 'posudi_gradju', methods: ['GET'])]
     public function posudbaBezRezervacije($idGradja, $idKorisnika, RezervacijaVerify $verify): RedirectResponse
     {
         $verify->rezervacijaExpirationCheck();
@@ -158,7 +159,7 @@ class ProfilKnjiznicaController extends AbstractController
         return $this->redirectToRoute('posudbe_korisnika');
     }
 
-    #[Route('knjiznica/gradja/vrati/{id}', name: 'vrati_gradju', methods: ['GET'])]
+    #[Route('/gradja/vrati/{id}', name: 'vrati_gradju', methods: ['GET'])]
     public function vracanje($id, RezervacijaVerify $verify)
     {
         $verify->rezervacijaExpirationCheck();
@@ -192,7 +193,7 @@ class ProfilKnjiznicaController extends AbstractController
         return $this->render('app_login');
     }
 
-    #[Route('knjiznica/gradja/produlji-posudbu/{id}', name: 'odobri-produljenje', methods: ['GET'])]
+    #[Route('/gradja/produlji-posudbu/{id}', name: 'odobri-produljenje', methods: ['GET'])]
     public function extendAccept($id, RezervacijaVerify $verify)
     {
         $verify->rezervacijaExpirationCheck();
@@ -227,7 +228,7 @@ class ProfilKnjiznicaController extends AbstractController
         return $this->render('app_login');
     }
 
-    #[Route('knjiznica/gradja/odbij-produljenje-posudbe/{id}', name: 'odbij-produljenje', methods: ['GET'])]
+    #[Route('/gradja/odbij-produljenje-posudbe/{id}', name: 'odbij-produljenje', methods: ['GET'])]
     public function extendDeny($id, RezervacijaVerify $verify)
     {
         $verify->rezervacijaExpirationCheck();
