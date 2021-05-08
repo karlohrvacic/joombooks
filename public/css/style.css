@@ -244,14 +244,11 @@ input.form-control{
     align-items: center;
     height: 100%;
 }
-.home{
-    height: 80%;
-}
-.look{
-    height: 90%;
+.home, .look{
+    height: 100%;
 }
 .home img, .look img{
-    height: 100%;
+    height: 70%;
     margin-right: 10px;
 }
 .look{
@@ -268,7 +265,7 @@ input.form-control{
     margin: 0 auto;
 }
 .profile-pic{
-    height: 100px;
+    height: 150px;
 }
 .podaci{
     margin: 1.5rem auto 0;
@@ -283,17 +280,23 @@ input.form-control{
     justify-content: flex-end;
 }
 .qr-baby{
-    background: #FBE8A6;
+    background: white;
     width: 70%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.qr-baby img{
+    width: 90%;
+}
 
 @media screen and (max-width: 500px){
     .profile-main{
         height: 100%;
+    }
+    .podaci{
+        width: 100%;
     }
     .qr{
         margin: 20px 0 30%;

@@ -17,7 +17,7 @@
         <div class="podaci">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="podaci-info col-12 col-md-6 col-lg-6">
+                    <div class="podaci-info col-12 col-sm-12 col-md-6 col-lg-6">
                         <p>Ime: {{ korisnik.ime }}</p>
                         <p>Prezime: {{ korisnik.prezime }}</p>
                         <p>Knjižnica: {{ korisnik.knjiznice.naziv}}</p>
@@ -25,9 +25,9 @@
                         <p>Razred: {{ korisnik.razred }}</p>
                         <p>Email: {{ korisnik.email }}</p>
                     </div>
-                    <div class="qr col-12 col-md-6 col-lg-6">
+                    <div class="qr col-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="qr-baby">
-                            <img  src="data:image/png;base64,{{ code.makeBarcode(  korisnik.brojIskazniceKorisnika  , "Code128", "#FBE8A6").generate }}"
+                            <img  src="data:image/png;base64,{{ code.makeBarcode(  korisnik.brojIskazniceKorisnika  , "Code128", "white").generate }}"
                                   alt="Bar code korisnika: {{ korisnik.brojIskazniceKorisnika  }}"/>
                         </div>
                     </div>
