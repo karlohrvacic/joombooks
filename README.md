@@ -12,6 +12,7 @@ Technologies:
 - <p>PHP with <a href="https://symfony.com/">Symfony 5</a> framework</p>
 - <p><a href="https://getbootstrap.com/">Bootstrap 5</a></p>
 - <p><a href="https://www.mysql.com/">MySQL</a></p>
+- <p><a href="https://getcomposer.org/">Composer</a></p>
 
 Dependencies:
 - <a href="https://github.com/karlohrvacic/jumkabooks/network/dependencies">Github List</a><br>
