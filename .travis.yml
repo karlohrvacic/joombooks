@@ -6,7 +6,7 @@ language: php
 
 php:
 
-  - 8
+  - 8.0
 
   - hhvm
 
