@@ -17,10 +17,12 @@
     <body>
     {% if is_granted('ROLE_USER') %}
         <header>
-            <div class="home">
-                {% if app.request.get('_route') != 'korisnicki_izbornik' %}
-                    <a href="{{ path('korisnicki_izbornik') }}"><img alt="Izbornik" src="/files/pitcures/icons/homewhite.png"/></a>
-                {% endif %}
+            <div class="home-container">
+                <div class="home">
+                    {% if app.request.get('_route') != 'korisnicki_izbornik' %}
+                        <a href="{{ path('korisnicki_izbornik') }}"><img alt="Izbornik" src="/files/pitcures/icons/homewhite.png"/></a>
+                    {% endif %}
+                </div>
             </div>
 
             <div class="ime-slika">
@@ -50,9 +52,11 @@
                 <a href="mailto:support@jumkabooks.hr?subject=Pomoć">info/pomoć <img alt="pomoć" src="/files/pitcures/icons/help.png"/></a>
                 <a href="{{ path('app_logout') }}">Odjavi se <img alt="odjava" src="/files/pitcures/icons/onoff.png"/></a>
             </div>
-            <a class="icon" onclick="myFunction(myLinks)">
-                <i class="fas fa-bars"></i>
-            </a>
+            <div class="hamburger">
+                <a class="icon" onclick="myFunction(myLinks)">
+                    <img src="/files/pitcures/icons/hamburger.png"/>
+                </a>
+            </div>
         </section>
     {% endif %}
 
