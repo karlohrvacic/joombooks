@@ -26,15 +26,7 @@ class ObavijestiController extends AbstractController
         if (!empty($array)){
             array_push($notifications, $array);
         }
-        $array = $this->zakasnineCheck($korisnik);
-        if (!empty($array)){
-            array_push($notifications, $array);
-        }
-        $array = $this->povratakCheck($korisnik);
-        if (!empty($array)){
-            array_push($notifications, $array);
-        }
-        $array = $this->rezervacijaCheck($korisnik);
+        $array = $this->notifyCheck($korisnik);
         if (!empty($array)){
             array_push($notifications, $array);
         }
@@ -49,7 +41,7 @@ class ObavijestiController extends AbstractController
         ]);
     }
 
-    public function zakasnineCheck(Korisnici $korisnik)
+    public function notifyCheck(Korisnici $korisnik)
     {
         $array = [];
         foreach ($korisnik->getPosudbe() as $posudba){
@@ -60,41 +52,22 @@ class ObavijestiController extends AbstractController
                 Zakasnina trenutno iznosi $zakasnina kn";
 
             }
-        }
-
-        if (!empty($array)){
-            return $array;
-        }
-    }
-
-    public function povratakCheck(Korisnici $korisnik)
-    {
-        $array = [];
-        foreach ($korisnik->getPosudbe() as $posudba){
             if($posudba->brojDanaIsteka() == 1 && $posudba->getStatus()->getId() == 3){
                 $naslov = $posudba->getGradja()->getNaslov();
                 $array[] = "Rok za povratak $naslov istječe sutra!
                 Zatražite produživanje posudbe na vrijeme!";
             }
-        }
-        if (!empty($array)){
-            return $array;
-        }
-    }
-
-    public function rezervacijaCheck(Korisnici $korisnik)
-    {
-        $array = [];
-        foreach ($korisnik->getPosudbe() as $posudba){
             if($posudba->brojDanaIsteka() == 1 && $posudba->getStatus()->getId() == 5){
                 $naslov = $posudba->getGradja()->getNaslov();
                 $array[] =  "Rok za preuzimanje $naslov istječe sutra!";
             }
         }
+
         if (!empty($array)){
             return $array;
         }
     }
+
 
 
 }
