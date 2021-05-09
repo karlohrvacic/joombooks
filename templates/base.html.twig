@@ -25,18 +25,15 @@
                 </div>
             </div>
 
+            {% if korisnik is defined %}
             <div class="ime-slika">
                 <div class="ime-prezime">
-                    {% if korisnik is defined %}
-                        <p>{{ korisnik.ime }}</p>
-                        <p>{{ korisnik.prezime }}</p>
-                    {% endif %}
+                    <p>{{ korisnik.ime }}</p>
+                    <p>{{ korisnik.prezime }}</p>
                 </div>
-                {% if korisnik is defined %}
                     <img class="korisnicka-foto" src="{{ korisnik.fotografija }}" alt="profilna fotografija">
-                {% endif %}
-
-            </div>
+                </div>
+            {% endif %}
         </header>
 
         <section class="skola">
@@ -50,6 +47,49 @@
                 <a href="{{ path('radno_vrijeme') }}">radno vrijeme <img alt="radno vrijeme" src="/files/pitcures/icons/clock.png"/></a>
                 <a href="{{ path('korisnicke_postavke') }}">postavke <img alt="postavke" src="/files/pitcures/icons/settings.png"/></a>
                 <a href="mailto:support@jumkabooks.hr?subject=Pomoć">info/pomoć <img alt="pomoć" src="/files/pitcures/icons/help.png"/></a>
+                <a href="{{ path('app_logout') }}">Odjavi se <img alt="odjava" src="/files/pitcures/icons/onoff.png"/></a>
+            </div>
+            <div class="hamburger">
+                <a class="icon" onclick="myFunction(myLinks)">
+                    <img src="/files/pitcures/icons/hamburger.png"/>
+                </a>
+            </div>
+        </section>
+
+    {% elseif is_granted('ROLE_LIBRARY') %}
+        <header>
+            <div class="home-container">
+                <div class="home">
+                    {% if app.request.get('_route') != 'knjiznica_izbornik' %}
+                        <a href="{{ path('knjiznica_izbornik') }}"><img alt="Izbornik" src="/files/pitcures/icons/homewhite.png"/></a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if knjiznica is defined %}
+                <div class="ime-slika">
+                    <div class="ime-prezime">
+                        <p>{{ knjiznica.naziv }}</p>
+                        <p>{{ knjiznica.adresa }}</p>
+                    </div>
+{#                    <img class="korisnicka-foto" src="{{ korisnik.fotografija }}" alt="profilna fotografija">#}
+                </div>
+            {% endif %}
+
+            </div>
+        </header>
+
+        <section class="skola">
+
+            <div class="look">
+                {% block nazivTrenutneStraniceKnjiznice %}{% endblock %}
+            </div>
+            <div id="myLinks">
+{#                <a href="{{ path('korisnicki_profil') }}">profil <img alt="profil" src="/files/pitcures/icons/person.png"/></a>#}
+{#                <a href="{{ path('korisnicke_obavijesti') }}">obavijesti <img alt="obavijesti" src="/files/pitcures/icons/notification.png"/></a>#}
+{#                <a href="{{ path('radno_vrijeme') }}">radno vrijeme <img alt="radno vrijeme" src="/files/pitcures/icons/clock.png"/></a>#}
+{#                <a href="{{ path('korisnicke_postavke') }}">postavke <img alt="postavke" src="/files/pitcures/icons/settings.png"/></a>#}
+{#                <a href="mailto:support@jumkabooks.hr?subject=Pomoć">info/pomoć <img alt="pomoć" src="/files/pitcures/icons/help.png"/></a>#}
                 <a href="{{ path('app_logout') }}">Odjavi se <img alt="odjava" src="/files/pitcures/icons/onoff.png"/></a>
             </div>
             <div class="hamburger">

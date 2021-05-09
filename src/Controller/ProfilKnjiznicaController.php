@@ -24,7 +24,10 @@ class ProfilKnjiznicaController extends AbstractController
      */
     public function knjiznicaProfil(): Response
     {
-        return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig');
+        return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig', [
+            'knjiznica' => $this->getUser(),
+
+        ]);
     }
 
     /**
@@ -48,7 +51,8 @@ class ProfilKnjiznicaController extends AbstractController
 
         return $this->render('knjiznicniProfil/rezervirane.html.twig', [
             'posudbes' => $posudbe,
-            'code' => $code
+            'code' => $code,
+            'knjiznica' => $knjiznica
         ]);
     }
 
@@ -74,7 +78,9 @@ class ProfilKnjiznicaController extends AbstractController
 
         return $this->render('knjiznicniProfil/posudjene.html.twig', [
             'posudbes' => $posudbe,
-            'code' => $code
+            'code' => $code,
+            'knjiznica' => $knjiznica
+
         ]);
     }
 
@@ -189,7 +195,9 @@ class ProfilKnjiznicaController extends AbstractController
             return $this->redirectToRoute('posudbe_korisnika');
 
         }
-        return $this->render('app_login');
+        return $this->render('app_login', [
+            'knjiznica' => $knjiznicar,
+        ]);
     }
 
     #[Route('/gradja/produlji-posudbu/{id}', name: 'odobri-produljenje', methods: ['GET'])]

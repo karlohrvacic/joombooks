@@ -18,6 +18,8 @@ class JeziciController extends AbstractController
     {
         return $this->render('jezici/index.html.twig', [
             'jezicis' => $jeziciRepository->findAll(),
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 
@@ -39,6 +41,8 @@ class JeziciController extends AbstractController
         return $this->render('jezici/new.html.twig', [
             'jezici' => $jezici,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 
@@ -47,6 +51,8 @@ class JeziciController extends AbstractController
     {
         return $this->render('jezici/show.html.twig', [
             'jezici' => $jezici,
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 
@@ -67,6 +73,8 @@ class JeziciController extends AbstractController
         return $this->render('jezici/edit.html.twig', [
             'jezici' => $jezici,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 

@@ -18,6 +18,7 @@ class IzdavaciController extends AbstractController
     {
         return $this->render('izdavaci/index.html.twig', [
             'izdavacis' => $izdavaciRepository->findAll(),
+            'knjiznica' => $this->getUser(),
         ]);
     }
 
@@ -41,6 +42,8 @@ class IzdavaciController extends AbstractController
         return $this->render('izdavaci/new.html.twig', [
             'izdavaci' => $izdavaci,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 
@@ -49,6 +52,8 @@ class IzdavaciController extends AbstractController
     {
         return $this->render('izdavaci/show.html.twig', [
             'izdavaci' => $izdavaci,
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 
@@ -69,6 +74,8 @@ class IzdavaciController extends AbstractController
         return $this->render('izdavaci/edit.html.twig', [
             'izdavaci' => $izdavaci,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 

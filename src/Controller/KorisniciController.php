@@ -21,6 +21,8 @@ class KorisniciController extends AbstractController
     {
         return $this->render('korisnici/index.html.twig', [
             'korisnicis' => $korisniciRepository->findAll(),
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 
@@ -62,6 +64,8 @@ class KorisniciController extends AbstractController
         return $this->render('korisnici/new.html.twig', [
             'korisnici' => $korisnici,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 

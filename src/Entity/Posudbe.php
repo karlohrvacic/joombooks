@@ -139,7 +139,6 @@ class Posudbe
             return 0;
         }
         return $daniKasnjenja * $cijenaZakasnine;
-
     }
 
     public function brojDanaIsteka(){
@@ -165,8 +164,6 @@ class Posudbe
         }else{
             return 0;
         }
-
-
     }
 
     public function getBrojPutaProduljenjaPosudbe(){
@@ -176,8 +173,5 @@ class Posudbe
         }else{
             return 0;
         }
-
-
     }
-
 }

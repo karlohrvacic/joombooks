@@ -29,9 +29,9 @@ class GradjaController extends AbstractController
 
         return $this->render('gradja/index.html.twig', [
             'gradjas' => $gradjaRepository->findBy([
-                'knjiznicaVlasnik' => $user
-            ]),
-            'code' => $code
+                'knjiznicaVlasnik' => $user]),
+            'knjiznica' => $this->getUser(),
+            'code' => $code,
         ]);
     }
 
@@ -66,6 +66,7 @@ class GradjaController extends AbstractController
         return $this->render('gradja/new.html.twig', [
             'gradja' => $gradja,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser(),
         ]);
     }
 
@@ -74,6 +75,8 @@ class GradjaController extends AbstractController
     {
         return $this->render('gradja/show.html.twig', [
             'gradja' => $gradja,
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 
@@ -102,6 +105,8 @@ class GradjaController extends AbstractController
         return $this->render('gradja/edit.html.twig', [
             'gradja' => $gradja,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser(),
+
         ]);
     }
 
@@ -158,10 +163,10 @@ class GradjaController extends AbstractController
 
             }
 
-            return $this->render('knjiznicniProfil/rezervirane.html.twig');
-        }
+            return $this->redirectToRoute('rezervirane_knjige_korisnika');
 
-        return $this->render('knjiznicniProfil/knjiznicaPocetna.html.twig');
+        }
+        return $this->redirectToRoute('rezervirane_knjige_korisnika');
 
     }
 }

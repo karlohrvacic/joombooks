@@ -22,6 +22,7 @@ class AutoriController extends AbstractController
     {
         return $this->render('autori/index.html.twig', [
             'autoris' => $autoriRepository->findAll(),
+            'knjiznica' => $this->getUser()
         ]);
     }
 
@@ -47,6 +48,7 @@ class AutoriController extends AbstractController
         return $this->render('autori/new.html.twig', [
             'autori' => $autori,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser()
         ]);
     }
 
@@ -57,6 +59,7 @@ class AutoriController extends AbstractController
     {
         return $this->render('autori/show.html.twig', [
             'autori' => $autori,
+            'knjiznica' => $this->getUser()
         ]);
     }
 
@@ -80,6 +83,7 @@ class AutoriController extends AbstractController
         return $this->render('autori/edit.html.twig', [
             'autori' => $autori,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser()
         ]);
     }
 

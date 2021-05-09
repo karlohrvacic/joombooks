@@ -22,6 +22,7 @@ class DrzaveController extends AbstractController
     {
         return $this->render('drzave/index.html.twig', [
             'drzaves' => $drzaveRepository->findAll(),
+            'knjiznica' => $this->getUser()
         ]);
     }
 
@@ -47,6 +48,7 @@ class DrzaveController extends AbstractController
         return $this->render('drzave/new.html.twig', [
             'drzave' => $drzave,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser()
         ]);
     }
 
@@ -57,6 +59,7 @@ class DrzaveController extends AbstractController
     {
         return $this->render('drzave/show.html.twig', [
             'drzave' => $drzave,
+            'knjiznica' => $this->getUser(),
         ]);
     }
 
@@ -79,6 +82,7 @@ class DrzaveController extends AbstractController
         return $this->render('drzave/edit.html.twig', [
             'drzave' => $drzave,
             'form' => $form->createView(),
+            'knjiznica' => $this->getUser()
         ]);
     }
 
