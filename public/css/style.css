@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Actor', sans-serif;
-    font-size: calc(10px + (20 - 10) * ((100vw - 300px) / (1600 - 300)));
+    font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 a{
     text-decoration: none;
