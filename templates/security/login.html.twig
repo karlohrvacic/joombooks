@@ -4,16 +4,11 @@
 
 {% block body %}
     <header>
-        Jumka books
     </header>
     <div class="container-fluid main">
         <div class="row col-10 col-sm-8 col-md-6 col-lg-4">
             <div class="wrapper">
-                <div class="btn-group mb-3 selection" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-lg biranje selected">korisnik</button>
-                    <button type="button" class="btn btn-lg biranje">knjižničar</button>
-                </div>
-
+                    <h1 style="font-weight: bold; font-size: 3rem;">Dobro došli!</h1>
                     {% if error %}
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}

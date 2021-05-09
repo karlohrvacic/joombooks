@@ -28,8 +28,11 @@
                         <div class="col-12">
                             <a class="izbornik-link" href="{{ path('posudjene_knjige_korisnika') }}">
                                 <div class="box2">
-                                    <p>POSUĐENO: {{ korisnik.brojTrenutnoPosudenih }}</p>
+                                    <p>POSUĐENO</p>
                                     <img src="/files/pitcures/icons/posudenoMain.png" alt=""/>
+                                    {% if korisnik.brojTrenutnoPosudenih >=1 %}
+                                    <div class="gumbic1">{{ korisnik.brojTrenutnoPosudenih }}</div>
+                                    {% endif %}
                                     <div class="clear"></div>
                                 </div>
                             </a>
@@ -37,8 +40,11 @@
                         <div class="col-12">
                             <a class="izbornik-link" href="{{ path('rezervirane_knjige_korisnika') }}">
                                 <div class="box3">
-                                    <p>REZERVIRANO: {{ korisnik.brojTrenutnoRezerviranih }}</p>
+                                    <p>REZERVIRANO</p>
                                     <img src="/files/pitcures/icons/rezerviranoMain.png" alt=""/>
+                                    {% if korisnik.brojTrenutnoRezerviranih >=1 %}
+                                    <div class="gumbic2">{{ korisnik.brojTrenutnoRezerviranih }}</div>
+                                    {% endif %}
                                     <div class="clear"></div>
                                 </div>
                             </a>
@@ -47,8 +53,8 @@
                 </div>
             </div>
         </div>
-    <footer class="korisnik-footer" style="color: black;">
-        Jumka books
-    </footer>
     </div>
+    <footer style="color: black;">
+        © Jumka books
+    </footer>
 {% endblock %}
