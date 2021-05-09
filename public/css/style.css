@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Actor', sans-serif;
+    font-family: "Maiandra GD", sans-serif;
     font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
 }
 a{
@@ -35,7 +35,6 @@ header{
 }
 footer{
     position: relative;
-    /*bottom: 0;*/
     width: 100%;
     z-index: 1;
     background-color: #B4DFE5;
@@ -293,6 +292,9 @@ input.form-control{
     align-items: center;
     justify-content: center;
 }
+.look h1{
+    margin: 0;
+}
 .home img, .look img{
     height: 70%;
     margin-right: 10px;
@@ -368,18 +370,24 @@ input.form-control{
 /*PRETRAŽIVANJE*/
 .trazi{
     min-height: 70vh;
+    background-color: #D1FDFE;
+
 }
 .form-inline{
     display: flex;
     align-items: center;
+    width: 100%;
 }
 .search-btn{
     margin:0 10px;
     height: 100%;
+    border-radius: 50%;
+    border: none;
+    transform: translateX(20%);
 }
 .search-btn img{
-
-    width: 40px;
+    height: 100%;
+    height: 8vh;
 }
 .triangle{
     width: 40px;
@@ -402,7 +410,7 @@ svg{
 }
 
 .grade{
-    margin: 20px 10px;
+    margin: 1.5rem;
 }
 
 .grada{
@@ -495,7 +503,7 @@ svg{
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .cross{
-    width: 50px;
+    width: 10%;
 }
 .produzi{
     background-color: #B4DFE5;
@@ -513,4 +521,10 @@ svg{
 .produzeno, .produzeno:hover{
     color: #6B6B6B;
 }
+
+.qr-posudeno{
+    width: 80%;
+    height: 50%;
+}
+
 

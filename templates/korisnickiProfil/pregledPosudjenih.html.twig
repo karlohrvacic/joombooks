@@ -16,7 +16,7 @@
 {#        <td><img width="100px" src="{{ korisnik.fotografija }}" alt="profilna fotografija"></td>#}
 {#    {% endif %}#}
 
-    <div class="container-fluid postavke trazi">
+    <div class="container-fluid trazi">
         <div class="row">
             <div class="col-lg-12">
                 <div class="grade">
@@ -44,7 +44,7 @@
                                 <p style="font-weight: bold;">Rok za povratak: {{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja|date('d.m.Y.') : '' }} </p>
                             </div>
                             <div class="qr">
-                                <div class="qr-baby">
+                                <div class="qr-baby qr-posudeno">
                                     <img width="100%"  src="data:image/png;base64,{{ code.makeBarcode(  korisnik.brojIskazniceKorisnika  , "Code128", "white").generate }}"
                                           alt="Bar code korisnika: {{ korisnik.brojIskazniceKorisnika  }}"/>
                                 </div>

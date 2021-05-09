@@ -12,7 +12,7 @@
 {% block body %}
     <div class="container-fluid postavke trazi">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-12">
                 <div class="form-inline">
 
                     <form method="get" class="form-inline" action="{{ path('pregled_knjiga') }}">
@@ -21,24 +21,6 @@
                             <img src="/files/pitcures/icons/searchm.png" />
                         </button>
                     </form>
-
-                    <div id="popular">
-                        <a href="#">novo <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="10" cy="10" r="10" fill="#F4976C"/>
-                            </svg>
-                        </a>
-                        <a href="#">popularno <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="10" cy="10" r="10" fill="#F4976C"/>
-                            </svg>
-                        </a>
-                        <a href="#">moj razred <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="10" cy="10" r="10" fill="#F4976C"/>
-                            </svg>
-                        </a>
-                    </div>
-                    <a class="icon" onclick="myFunction(popular)">
-                        <img class="triangle" src="/files/pitcures/icons/triangle.png"/>
-                    </a>
                 </div>
                 <div class="grade">
                     {% for gradja in gradjas %}
