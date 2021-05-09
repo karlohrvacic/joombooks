@@ -63,7 +63,6 @@ class PosudbeController extends AbstractController
             $duration = "P".$daniRezervacije."D";
 
             $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
-            $posudbe->setBrojIskazniceKorisnika($user->getBrojIskazniceKorisnika());
             $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(5));
             $user->addPosudbe($posudbe);
 
@@ -141,7 +140,7 @@ class PosudbeController extends AbstractController
         $user = $this->getUser();
 
         $daniRezervacije = $user->getKnjiznice()->getDaniRezervacije();
-        if($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika() &&
+        if($user->getBrojIskazniceKorisnika() == $rezervacija->getKorisnici()->getBrojIskazniceKorisnika() &&
             $rezervacija->getDatumPosudbe()->diff($rezervacija->getDatumRokaVracanja())->format('%r%a') <
             ($daniRezervacije * 2) && $rezervacija->getStatus()->getId() == 5){
 
@@ -173,7 +172,7 @@ class PosudbeController extends AbstractController
          * @var $user Korisnici
          */
         $user = $this->getUser();
-        if ($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()
+        if ($user->getBrojIskazniceKorisnika() == $rezervacija->getKorisnici()->getBrojIskazniceKorisnika()
             && $rezervacija->getStatus()->getId() == 3) {
 
             $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(9));

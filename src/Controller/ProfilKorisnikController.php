@@ -43,7 +43,7 @@ class ProfilKorisnikController extends AbstractController
         $korisnik = $this->getUser();
 
         $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
-            'brojIskazniceKorisnika' => $korisnik->getBrojIskazniceKorisnika(),
+            'korisnici' => $korisnik,
             'status'  => array(3, 9)
         ]);
 
@@ -95,7 +95,7 @@ class ProfilKorisnikController extends AbstractController
         $korisnik = $this->getUser();
 
         $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
-            'brojIskazniceKorisnika' => $korisnik->getBrojIskazniceKorisnika(),
+            'korisnici' => $korisnik,
             'status' => 5
         ]);
 

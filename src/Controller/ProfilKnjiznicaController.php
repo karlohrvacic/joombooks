@@ -139,7 +139,6 @@ class ProfilKnjiznicaController extends AbstractController
             $duration = "P".$daniPosudbe."D";
 
             $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
-            $posudbe->setBrojIskazniceKorisnika($korisnik->getBrojIskazniceKorisnika());
             $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(3));
             $korisnik->addPosudbe($posudbe);
 

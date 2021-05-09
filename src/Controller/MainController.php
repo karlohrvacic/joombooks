@@ -65,7 +65,7 @@ class MainController extends AbstractController
          */
         $user = $this->getUser();
         if ($user instanceof Korisnici) {
-            if ($user->getBrojIskazniceKorisnika() == $rezervacija->getBrojIskazniceKorisnika()) {
+            if ($user->getBrojIskazniceKorisnika() == $rezervacija->getKorisnici()->getBrojIskazniceKorisnika()) {
                 $rezervacija
                     ->setStatus($entityManager->getRepository(Statusi::class)
                         ->find(8));

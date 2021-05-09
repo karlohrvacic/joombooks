@@ -26,8 +26,8 @@
                          alt="Isbn: {{ posudbe.gradja.iSBN  }}"/></td>
                 <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.brojInventara  , "Code128", "#FFF").generate }}"
                          alt="Broj inventara: {{ posudbe.gradja.brojInventara  }}"/></td>
-                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.brojIskazniceKorisnika  , "Code39", "#FFF").generate }}"
-                         alt="Broj iskaznice korisnika: {{ posudbe.brojIskazniceKorisnika  }}"/></td>
+                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.korisnici.brojIskazniceKorisnika  , "Code39", "#FFF").generate }}"
+                         alt="Broj iskaznice korisnika: {{ posudbe.korisnici.brojIskazniceKorisnika  }}"/></td>
                 <td>{{ posudbe.datumPosudbe ? posudbe.datumPosudbe|date('Y-m-d') : '' }}</td>
                 <td>{{ posudbe.datumRokaVracanja ? posudbe.datumRokaVracanja|date('Y-m-d') : '' }}</td>
                 <td>{{ posudbe.zakasnina }}</td>

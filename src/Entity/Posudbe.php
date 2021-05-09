@@ -18,11 +18,6 @@ class Posudbe
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $brojIskazniceKorisnika;
-
-    /**
      * @ORM\Column(type="date")
      */
     private $datumPosudbe;
@@ -63,18 +58,6 @@ class Posudbe
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBrojIskazniceKorisnika(): ?string
-    {
-        return $this->brojIskazniceKorisnika;
-    }
-
-    public function setBrojIskazniceKorisnika(string $brojIskazniceKorisnika): self
-    {
-        $this->brojIskazniceKorisnika = $brojIskazniceKorisnika;
-
-        return $this;
     }
 
     public function getDatumPosudbe(): ?\DateTimeInterface
