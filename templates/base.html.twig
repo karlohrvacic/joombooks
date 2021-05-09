@@ -61,13 +61,13 @@
     {% endif %}
 
     {% for message in app.flashes('success') %}
-        <div class="alert alert-sucess alert-dismissible fade show">
+        <div class="alert alert-success">
             {{ message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
     {% for message in app.flashes('alert') %}
-        <div class="alert alert-danger align-items-center">
+        <div class="alert alert-danger">
             {{ message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -77,7 +77,7 @@
     {% endblock %}
     {% if (app.request.get('_route') != 'korisnicki_izbornik') and (app.request.get('_route') != 'activation_index') %}
     <footer style="color: black;">
-        Jumka books
+        © Jumka books
     </footer>
     {% endif %}
     {% block javascripts %}

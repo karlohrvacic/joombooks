@@ -29,7 +29,6 @@
                                 {% endfor %}
                             </div>
                             <div class="status">
-
                                 <a style="cursor: pointer; color: black;" onclick="produziRez({{ loop.index }})">produži</a>
                             </div>
                         </div>
@@ -42,6 +41,7 @@
                                 <p>Godina izdanja: {{ posudba.gradja.godinaIzdanja ? posudba.gradja.godinaIzdanja|date('d.m.Y.') : '' }}</p>
                                 <p>Izdavač: {{ posudba.gradja.izdavac }}</p>
                                 <p style="font-weight: bold;">Rok za povratak: {{ posudba.datumRokaVracanja ? posudba.datumRokaVracanja|date('d.m.Y.') : '' }} </p>
+                                <p style="font-weight: bold;">Zakasnina: {{ posudba.zakasnina }} kn </p>
                             </div>
                             <div class="qr">
                                 <div class="qr-baby qr-posudeno">
