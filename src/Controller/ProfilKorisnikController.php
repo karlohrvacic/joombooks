@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Korisnici;
 use App\Entity\Posudbe;
-use App\Repository\AutoriRepository;
 use App\Repository\GradjaRepository;
 use App\Service\RezervacijaVerify;
 use Symfony\Component\HttpFoundation\Request;
