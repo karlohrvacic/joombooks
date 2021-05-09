@@ -81,6 +81,11 @@ class Korisnici implements UserInterface
      */
     private $notifications = [];
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $postavke = [];
+
 
     public function __construct()
     {
@@ -336,6 +341,18 @@ class Korisnici implements UserInterface
     public function closeNotification(?int $number): self
     {
         unset($this->notifications[$number]);
+
+        return $this;
+    }
+
+    public function getPostavke(): ?array
+    {
+        return $this->postavke;
+    }
+
+    public function setPostavke(?array $postavke): self
+    {
+        $this->postavke = $postavke;
 
         return $this;
     }

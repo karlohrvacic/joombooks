@@ -17,35 +17,37 @@
                 <h2>Obavijesti</h2>
             </div>
             <hr>
-            <div class="obavijesti col-12 col-md-6 col-lg-4">
-                <div class="obavijest">
-                    <p>Dan prije isteka rezervacije</p>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1">
-                        <label class="form-check-label" for="flexSwitchCheckDefault1">DA</label>
+            <form method="post" action="{{ path('spremi_postavke') }}">
+                <div class="obavijesti col-12 col-md-6 col-lg-4">
+                    <div class="obavijest">
+                        <p>Dan prije isteka rezervacije</p>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="istekRezervacije" type="checkbox" id="flexSwitchCheckDefault1">
+                            <label class="form-check-label" for="flexSwitchCheckDefault1">DA</label>
+                        </div>
                     </div>
-                </div>
-                <div class="obavijest">
-                    <p>Dan prije isteka roka za povratak</p>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2">
-                        <label class="form-check-label" for="flexSwitchCheckDefault2">DA</label>
+                    <div class="obavijest">
+                        <p>Dan prije isteka roka za povratak</p>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="rokPovratka" type="checkbox" id="flexSwitchCheckDefault2">
+                            <label class="form-check-label" for="flexSwitchCheckDefault2">DA</label>
+                        </div>
                     </div>
-                </div>
-                <div class="obavijest">
-                    <p>Odobreno produženje</p>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3">
-                        <label class="form-check-label" for="flexSwitchCheckDefault3">DA</label>
+                    <div class="obavijest">
+                        <p>Odobreno produženje</p>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="odobrenoProduljenje" type="checkbox" id="flexSwitchCheckDefault3">
+                            <label class="form-check-label" for="flexSwitchCheckDefault3">DA</label>
+                        </div>
                     </div>
-                </div>
-                <div class="obavijest">
-                    <p>Iznos zakasnine svakih # dana</p>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault4">
-                        <label class="form-check-label" for="flexSwitchCheckDefault4">DA</label>
+                    <div class="obavijest">
+                        <p>Iznos zakasnine svakih 7 dana</p>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="iznosZakasnine" type="checkbox" id="flexSwitchCheckDefault4">
+                            <label class="form-check-label" for="flexSwitchCheckDefault4">DA</label>
+                        </div>
                     </div>
-                </div>
+
             </div>
             <div class="dodatne">
                 <h2>Dodatne postavke</h2>
@@ -55,11 +57,17 @@
                 <div class="obavijest">
                     <p>Obavijesti mi šalji na e-mail</p>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault5">
+                        <input class="form-check-input" name="saljiEmail" type="checkbox" id="flexSwitchCheckDefault5">
                         <label class="form-check-label" for="flexSwitchCheckDefault5">DA</label>
                     </div>
                 </div>
             </div>
+                <div class="submit text-center">
+                    <button class="btn btn-lg btn-logins" type="submit">
+                        spremi
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 

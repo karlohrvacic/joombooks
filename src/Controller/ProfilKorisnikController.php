@@ -138,6 +138,22 @@ class ProfilKorisnikController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/postavke/spremi", name="spremi_postavke")
+     */
+    public function spremiPostavke(Request $request): Response
+    {
 
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entity = $entityManager->getRepository(Korisnici::class)
+            ->find($this->getUser()->getId());
+
+        $entity->setPostavke($_POST);
+        $entityManager->flush();
+        $this->addFlash('success', 'Postavke uspješno spremljene!');
+
+        return $this->redirectToRoute('korisnicke_postavke');
+    }
 
 }
