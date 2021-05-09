@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Knjiznice;
+use App\Entity\Korisnici;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +17,8 @@ class KnjizniceAuthenticatorController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+
+
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

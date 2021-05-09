@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Knjiznice;
+use App\Entity\Korisnici;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +17,12 @@ class KorisniciSecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        if($this->getUser() instanceof Korisnici){
+            return $this->redirectToRoute('korisnicki_izbornik');
+        }
+        else if($this->getUser() instanceof Knjiznice){
+            return $this->redirectToRoute('knjiznica_izbornik');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
