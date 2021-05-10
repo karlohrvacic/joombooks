@@ -189,7 +189,7 @@ class ProfilKnjiznicaController extends AbstractController
 
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Građa uspješno vraćena!');
+                $this->addFlash('success', 'Knjiga uspješno vraćena!');
 
             }
             return $this->redirectToRoute('posudbe_korisnika');

@@ -58,7 +58,7 @@ class GradjaController extends AbstractController
             $entityManager->persist($gradja);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Nova građa uspješno pohranjena!');
+            $this->addFlash('success', 'Nova knjiga uspješno pohranjena!');
 
             return $this->redirectToRoute('gradja_index');
         }
@@ -119,7 +119,7 @@ class GradjaController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->addFlash('success', 'Građa uspješno uklonjena!');
+        $this->addFlash('success', 'Knjiga uspješno uklonjena!');
 
         return $this->redirectToRoute('gradja_index');
     }
@@ -159,7 +159,7 @@ class GradjaController extends AbstractController
                         ->find(3));
 
                 $entityManager->flush();
-                $this->addFlash('success', 'Građa uspješno posuđena!');
+                $this->addFlash('success', 'Knjiga uspješno posuđena!');
 
             }
 
