@@ -60,5 +60,6 @@ class ActivateController extends AbstractController
         return $this->render('activate/activate.html.twig', [
             'form' => $form->createView(),
         ]);
+
     }
 }
