@@ -48,11 +48,16 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn knjiznice-btn">
-            <a href="{{ path('korisnici_index') }}">natrag na popis korisnika</a>
-        </button>
-        <button class="btn knjiznice-btn">
-            <a href="{{ path('korisnici_edit', {'id': korisnici.id}) }}">Uredi</a>
+        <a href="{{ path('korisnici_index') }}">
+            <button class="knjiznice-btn btn">
+                Natrag na popis korisnika
+            </button>
+        </a>
+        <a href="{{ path('korisnici_edit', {'id': korisnici.id}) }}">
+            <button class="knjiznice-btn btn">
+                Uredi
+            </button>
+        </a>
         </button>
         {{ include('korisnici/_delete_form.html.twig') }}
     </div>

@@ -38,12 +38,16 @@
 
                         {% if is_granted('ROLE_LIBRARY') %}
                             <td>
-                                <button class="knjiznice-btn btn">
-                                    <a href="{{ path('korisnici_show', {'id': korisnici.id}) }}">Prikaži</a>
-                                </button>
-                                <button class="knjiznice-btn btn">
-                                    <a href="{{ path('korisnici_edit', {'id': korisnici.id}) }}">Uredi</a>
-                                </button>
+                                <a href="{{ path('korisnici_show', {'id': korisnici.id}) }}">
+                                    <button class="knjiznice-btn btn">
+                                        Prikaži
+                                    </button>
+                                </a>
+                                <a href="{{ path('korisnici_edit', {'id': korisnici.id}) }}">
+                                    <button class="knjiznice-btn btn">
+                                        Uredi
+                                    </button>
+                                </a>
                             </td>
                         {% endif %}
                     </tr>
@@ -55,9 +59,11 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn">
-            <a href="{{ path('korisnici_new') }}">Dodaj</a>
-        </button>
+        <a href="{{ path('korisnici_new') }}">
+            <button class="btn knjiznice-btn">
+                Dodaj
+            </button>
+        </a>
     </div>
 {% endblock %}
 {% block javascript %}

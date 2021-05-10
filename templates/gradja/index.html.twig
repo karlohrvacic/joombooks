@@ -28,13 +28,13 @@
                     {% endif %}
                     <th>Fotografija</th>
                     <th>Opis</th>
-                    <th>DatumDodavanja</th>
-                    <th>GodinaIzdanja</th>
+                    <th>Datum dodavanja</th>
+                    <th>Godina izdanja</th>
                     <th>Jezik</th>
-                    <th>Zanr</th>
+                    <th>Žanr</th>
 
                     {% if is_granted('ROLE_LIBRARY') %}
-                        <th>BrojInventara</th>
+                        <th>Broj inventara</th>
                     {% endif %}
                     <th>Opcije</th>
                 </tr>
@@ -72,12 +72,16 @@
 
                         <td>
                             {% if is_granted('ROLE_LIBRARY') %}
-                                <button class="btn knjiznice-btn">
-                                    <a href="{{ path('gradja_show', {'id': gradja.id}) }}">Prikaži</a>
-                                </button>
-                                <button class="btn knjiznice-btn">
-                                    <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">Uredi</a>
-                                </button>
+                                <a href="{{ path('gradja_show', {'id': gradja.id}) }}">
+                                    <button class="btn knjiznice-btn">
+                                        Prikaži
+                                    </button>
+                                </a>
+                                <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">
+                                    <button class="btn knjiznice-btn">
+                                        Uredi
+                                    </button>
+                                </a>
                             {% elseif gradja.status == 'Dostupno' %}
                                 <button class="btn knjiznice-btn">
                                     <a href="{{ path('posudbe_new', {'id': gradja.id}) }}">Rezerviraj</a>
@@ -95,9 +99,12 @@
             </table>
         </div>
         {% if is_granted('ROLE_LIBRARY') %}
-            <button class="btn knjiznice-btn" style="margin-top: 10px;">
-                <a href="{{ path('gradja_new') }}">Dodaj</a>
-            </button>
+
+            <a href="{{ path('gradja_new') }}">
+                <button class="btn knjiznice-btn" style="margin-top: 10px;">
+                    Dodaj
+                </button>
+            </a>
 
         {% endif %}
     </div>

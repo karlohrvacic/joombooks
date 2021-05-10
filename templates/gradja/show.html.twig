@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pregled knjiga{% endblock %}
+{% block title %}Pregled knjige{% endblock %}
 
 {% block nazivTrenutneStraniceKnjiznice %}
     <div class="look">
         <img src="/files/pitcures/icons/pretraziIcon.png">
-        <h1>PREGLED KNJIGA</h1>
+        <h1>PREGLED KNJIGE</h1>
     </div>
 {% endblock %}
 
@@ -54,13 +54,17 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn knjiznice-btn">
-            <a href="{{ path('gradja_index') }}">Povratak na popis knjiga</a>
-        </button>
+        <a href="{{ path('gradja_index') }}">
+            <button class="btn knjiznice-btn">
+                Povratak na popis knjiga
+            </button>
+        </a>
 
-        <button class="btn knjiznice-btn">
-            <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">Uredi</a>
-        </button>
+        <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">
+            <button class="btn knjiznice-btn">
+                Uredi
+            </button>
+        </a>
 
         {{ include('gradja/_delete_form.html.twig') }}
     </div>

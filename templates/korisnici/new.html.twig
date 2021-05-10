@@ -9,9 +9,17 @@
 
 {% block body %}
 
-         include('korisnici/_form.html.twig') }}
+    <div class="postavke">
+        <div class="container">
+            <div class="row">
+                {{ include('korisnici/_form.html.twig') }}
+            </div>
+            <a href="{{ path('korisnici_index') }}">
+                <button class="btn knjiznice-btn" style="margin-top: 10px;">
+                    Natrag na popis korisnika
+                </button>
+            </a>
+        </div>
+    </div>
 
-        <button class="btn">
-            <a href="{{ path('korisnici_index') }}">natrag na popis korisnika</a>
-        </button>
 {% endblock %}
