@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Entity\Korisnici;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -23,13 +23,15 @@ class MailerSender
         $code = $user->getLozinka();
         $signUpPage = $this->router->generate("activation_index", ['code' => $code] , UrlGenerator::ABSOLUTE_URL);
         $ime = $user->getIme();
-        $email = (new Email())
+        $email = (new TemplatedEmail())
             ->from('aktivacija@joombooks.karlo.codes')
             ->to($user->getEmail())
             ->subject('Aktivacija računa!')
-            ->html("<p>Pozdrav $ime!<br>Vaš kod za aktivaciju računa je $code <br> <a href='$signUpPage'>Aktivirajte ovdje</a></p>");
-
+            ->htmlTemplate('emails/aktivacija.html.twig')
+            ->context([
+                'ime' => $ime,
+                'link' => $signUpPage
+                ]);
         $this->mailer->send($email);
-
     }
 }
