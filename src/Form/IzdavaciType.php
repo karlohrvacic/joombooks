@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Drzave;
 use App\Entity\Izdavaci;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +31,9 @@ class IzdavaciType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('drzava', TextType::class, [
+            ->add('drzava', EntityType::class, [
+                'multiple' => true,
+                'class' => Drzave::class,
                 'row_attr' => [
                     'class' => 'knjiznica-label'
                 ],
