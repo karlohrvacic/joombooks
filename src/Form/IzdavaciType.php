@@ -32,7 +32,6 @@ class IzdavaciType extends AbstractType
                 ]
             ])
             ->add('drzava', EntityType::class, [
-                'multiple' => true,
                 'class' => Drzave::class,
                 'row_attr' => [
                     'class' => 'knjiznica-label'
