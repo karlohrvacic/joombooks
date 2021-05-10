@@ -13,7 +13,7 @@ class MailerSender
     private $mailer;
     private $router;
 
-    public function __construct( MailG $mailer, UrlGeneratorInterface $router){
+    public function __construct( MailerInterface $mailer, UrlGeneratorInterface $router){
         $this->mailer = $mailer;
         $this->router = $router;
     }
