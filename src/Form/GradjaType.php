@@ -116,6 +116,7 @@ class GradjaType extends AbstractType
                 ]
             ])
             ->add('zanrovi', EntityType::class, [
+                'label' => 'Žanrovi',
                 'multiple' => true,
                 'class' => Zanrovi::class,
                 'row_attr' => [
@@ -126,6 +127,7 @@ class GradjaType extends AbstractType
                 ]
             ])
             ->add('izdavac',EntityType::class, [
+                'label' => 'Izdavač',
                 'required' => false,
                 'class' => Izdavaci::class,
                 'row_attr' => [
