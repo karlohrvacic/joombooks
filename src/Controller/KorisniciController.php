@@ -56,7 +56,7 @@ class KorisniciController extends AbstractController
             $mailerSender->sendActivationEmail($korisnici);
 
             $this->addFlash('success', 'Novi korisnik uspješno pohranjen!');
-            $this->addFlash('success', 'Aktivacijski kod mu je poslan putem e-maila!');
+            $this->addFlash('success', 'Aktivacijski kod je korisniku poslan putem e-maila!');
 
             return $this->redirectToRoute('korisnici_index');
         }
