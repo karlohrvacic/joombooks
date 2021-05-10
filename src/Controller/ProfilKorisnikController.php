@@ -132,6 +132,8 @@ class ProfilKorisnikController extends AbstractController
          */
         $korisnik = $this->getUser();
 
+        $postavke = $korisnik->getPostavke();
+
         return $this->render('korisnickiProfil/postavke.html.twig', [
             'korisnik' => $korisnik
         ]);
