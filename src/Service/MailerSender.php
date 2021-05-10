@@ -24,7 +24,7 @@ class MailerSender
         $signUpPage = $this->router->generate("activation_index", ['code' => $code] , UrlGenerator::ABSOLUTE_URL);
         $ime = $user->getIme();
         $email = (new Email())
-            ->from('hello@joombooks.karlo.codes')
+            ->from('aktivacija@joombooks.karlo.codes')
             ->to($user->getEmail())
             ->subject('Aktivacija računa!')
             ->html("<p>Pozdrav $ime!<br>Vaš kod za aktivaciju računa je $code <br> <a href='$signUpPage'>Aktivirajte ovdje</a></p>");
