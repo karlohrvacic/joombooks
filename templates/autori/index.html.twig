@@ -2,37 +2,50 @@
 
 {% block title %}Popis autora{% endblock %}
 
+{% block nazivTrenutneStraniceKnjiznice %}
+    <img src="/files/pitcures/icons/pisci.png">
+    <h1>POPIS AUTORA</h1>
+{% endblock %}
+
 {% block body %}
-    <h1>Popis autora</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>Država</th>
-                <th>Opcije</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for autori in autoris %}
-            <tr>
-                <td>{{ autori.ime }}</td>
-                <td>{{ autori.prezime }}</td>
-                <td>{{ autori.drzava }}</td>
+    <div class="postavke">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Država</th>
+                    <th>Opcije</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for autori in autoris %}
+                    <tr>
+                        <td>{{ autori.ime }}</td>
+                        <td>{{ autori.prezime }}</td>
+                        <td>{{ autori.drzava }}</td>
 
-                <td>
-                    <a href="{{ path('autori_show', {'id': autori.id}) }}">Prikaži</a>
-                    <a href="{{ path('autori_edit', {'id': autori.id}) }}">Uredi</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Nema pronađenih autora</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('autori_new') }}">Dodaj</a>
+                        <td>
+                            <button class="btn knjiznice-btn">
+                                <a href="{{ path('autori_show', {'id': autori.id}) }}">Prikaži</a>
+                            </button>
+                            <button class="btn knjiznice-btn">
+                                <a href="{{ path('autori_edit', {'id': autori.id}) }}">Uredi</a>
+                            </button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">Nema pronađenih autora</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button class="btn">
+            <a href="{{ path('autori_new') }}">Dodaj</a>
+        </button>
+    </div>
 {% endblock %}

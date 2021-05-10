@@ -3,14 +3,66 @@
 {% block title %}Izbornik{% endblock %}
 
 {% block body %}
-    <h1>Dobrodošla knjižnica</h1>
-    <a href="{{ path('rezervacije_korisnika') }}">Pregled rezervacija</a>
-    <a href="{{ path('posudbe_korisnika') }}">Pregled posudbi</a>
-    <a href="{{ path('korisnici_index') }}">pregled korisnika</a>
-    <a href="{{ path('gradja_index') }}">Pregled građe</a>
-    <a href="{{ path('autori_index') }}">Pregled autora</a>
-    <a href="{{ path('jezici_index') }}">Pregled Jezika</a>
-    <a href="{{ path('izdavaci_index') }}">Pregled izdavača</a>
+    <div class="korisnik-main knjiznica-main">
+        <div class="container">
+            <div class="row">
+                <div class="grade grade-knjiznica" style="margin-top: 20px;">
+                    <div class="grada grada-knjiznica">
+                        <img class="pregled-slike" src="/files/pitcures/icons/rezervacije.png">
+                        <a class="pregled-knjiznica" href="{{ path('rezervacije_korisnika') }}">PREGLED REZERVACIJA</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="grade grade-knjiznica">
+                    <div class="grada grada-knjiznica">
+                        <img class="pregled-slike" src="/files/pitcures/icons/posudbe.png">
+                        <a class="pregled-knjiznica"  href="{{ path('posudbe_korisnika') }}">PREGLED POSUDBI</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="grade grade-knjiznica">
+                    <div class="grada grada-knjiznica">
+                        <img class="pregled-slike" src="/files/pitcures/icons/korisnici1.png">
+                        <a class="pregled-knjiznica"  href="{{ path('korisnici_index') }}">PREGLED KORISNIKA</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="grade grade-knjiznica">
+                    <div class="grada grada-knjiznica">
+                        <img class="pregled-slike" src="/files/pitcures/icons/popis.png">
+                        <a class="pregled-knjiznica"  href="{{ path('gradja_index') }}">PREGLED GRAĐE</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="grade grade-knjiznica">
+                    <div class="grada grada-knjiznica">
+                        <img class="pregled-slike" src="/files/pitcures/icons/pisci.png">
+                        <a class="pregled-knjiznica"  href="{{ path('autori_index') }}">PREGLED AUTORA</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="grade grade-knjiznica">
+                    <div class="grada grada-knjiznica">
+                        <img class="pregled-slike" src="/files/pitcures/icons/jezik.png">
+                        <a class="pregled-knjiznica"  href="{{ path('jezici_index') }}">PREGLED JEZIKA</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="grade grade-knjiznica" style="margin-bottom: 30px;">
+                    <div class="grada grada-knjiznica">
+                        <img class="pregled-slike" src="/files/pitcures/icons/izdavac.png">
+                        <a class="pregled-knjiznica"  href="{{ path('izdavaci_index') }}">PREGLED IZDAVAČA</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('app_logout') }}">Odjava</a>
+
 {% endblock %}

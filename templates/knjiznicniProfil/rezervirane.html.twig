@@ -2,44 +2,53 @@
 
 {% block title %}Popis rezervacija{% endblock %}
 
-{% block body %}
-    <h1>Popis rezervacija</h1>
+{% block nazivTrenutneStraniceKnjiznice %}
+    <img src="/files/pitcures/icons/rezerviranoIcon.png">
+    <h1>POPIS REZERVACIJA</h1>
+{% endblock %}
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>ISBN</th>
-            <th>Broj inventara</th>
-            <th>Broj Iskaznice Korisnika</th>
-            <th>Datum Rezerviranja</th>
-            <th>Datum Roka Rezervacije</th>
-            <th>Opcije</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for posudbe in posudbes %}
-            <tr>
-                <td>{{ posudbe.id }}</td>
-                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.iSBN  , "Isbn", "#FFF").generate }}"
-                         alt="Isbn: {{ posudbe.gradja.iSBN  }}"/></td>
-                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.brojInventara  , "Code128", "#FFF").generate }}"
-                         alt="Broj inventara: {{ posudbe.gradja.brojInventara  }}"/></td>
-                <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.korisnici.brojIskazniceKorisnika  , "Code39", "#FFF").generate }}"
-                         alt="Broj iskaznice korisnika: {{ posudbe.korisnici.brojIskazniceKorisnika  }}"/></td>
-                <td>{{ posudbe.datumPosudbe ? posudbe.datumPosudbe|date('Y-m-d') : '' }}</td>
-                <td>{{ posudbe.datumRokaVracanja ? posudbe.datumRokaVracanja|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('rezervacija_cancel', {'id': posudbe.id}) }}">Otkaži</a>
-                    <a href="{{ path('posudi_rezerviranu_gradju', {'id': posudbe.id}) }}">Posudi</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block body %}
+    <div class="postavke">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>ISBN</th>
+                    <th>Broj inventara</th>
+                    <th>Broj iskaznice korisnika</th>
+                    <th>Datum rezerviranja</th>
+                    <th>Datum roka rezervacije</th>
+                    <th>Opcije</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for posudbe in posudbes %}
+                    <tr>
+                        <td>{{ posudbe.id }}</td>
+                        <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.iSBN  , "Isbn", "#FFF").generate }}"
+                                 alt="Isbn: {{ posudbe.gradja.iSBN  }}"/></td>
+                        <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.gradja.brojInventara  , "Code128", "#FFF").generate }}"
+                                 alt="Broj inventara: {{ posudbe.gradja.brojInventara  }}"/></td>
+                        <td><img src="data:image/png;base64,{{ code.makeBarcode(  posudbe.korisnici.brojIskazniceKorisnika  , "Code39", "#FFF").generate }}"
+                                 alt="Broj iskaznice korisnika: {{ posudbe.korisnici.brojIskazniceKorisnika  }}"/></td>
+                        <td>{{ posudbe.datumPosudbe ? posudbe.datumPosudbe|date('d.m.Y.') : '' }}</td>
+                        <td>{{ posudbe.datumRokaVracanja ? posudbe.datumRokaVracanja|date('d.m.Y.') : '' }}</td>
+                        <td>
+                            <button class="btn knjiznice-btn"><a href="{{ path('rezervacija_cancel', {'id': posudbe.id}) }}">Otkaži</a></button>
+                            <button class="btn"><a href="{{ path('posudi_rezerviranu_gradju', {'id': posudbe.id}) }}">Posudi</a></button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">nema podataka.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 
 {% endblock %}

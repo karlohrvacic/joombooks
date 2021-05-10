@@ -7,7 +7,6 @@
         {# Run `composer require symfony/webpack-encore-bundle`
                and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            <script src="https://kit.fontawesome.com/c57dfe08d3.js"></script>
             <link href="{{ asset('css/arialNova/stylesheet.css') }}" rel="stylesheet">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -57,7 +56,7 @@
         </section>
 
     {% elseif is_granted('ROLE_LIBRARY') %}
-        <header>
+        <header class="knjiznica-header">
             <div class="home-container">
                 <div class="home">
                     {% if app.request.get('_route') != 'knjiznica_izbornik' %}
@@ -68,9 +67,9 @@
 
             {% if knjiznica is defined %}
                 <div class="ime-slika">
-                    <div class="ime-prezime">
-                        <p>{{ knjiznica.naziv }}</p>
-                        <p>{{ knjiznica.adresa }}</p>
+                    <div class="knjiznica-naziv">
+                        <h1>{{ knjiznica.naziv }}</h1>
+                        <h2>{{ knjiznica.adresa }}</h2>
                     </div>
 {#                    <img class="korisnicka-foto" src="{{ korisnik.fotografija }}" alt="profilna fotografija">#}
                 </div>
@@ -84,18 +83,14 @@
             <div class="look">
                 {% block nazivTrenutneStraniceKnjiznice %}{% endblock %}
             </div>
-            <div id="myLinks">
 {#                <a href="{{ path('korisnicki_profil') }}">profil <img alt="profil" src="/files/pitcures/icons/person.png"/></a>#}
 {#                <a href="{{ path('korisnicke_obavijesti') }}">obavijesti <img alt="obavijesti" src="/files/pitcures/icons/notification.png"/></a>#}
 {#                <a href="{{ path('radno_vrijeme') }}">radno vrijeme <img alt="radno vrijeme" src="/files/pitcures/icons/clock.png"/></a>#}
 {#                <a href="{{ path('korisnicke_postavke') }}">postavke <img alt="postavke" src="/files/pitcures/icons/settings.png"/></a>#}
 {#                <a href="mailto:support@jumkabooks.hr?subject=Pomoć">info/pomoć <img alt="pomoć" src="/files/pitcures/icons/help.png"/></a>#}
-                <a href="{{ path('app_logout') }}">Odjavi se <img alt="odjava" src="/files/pitcures/icons/onoff.png"/></a>
-            </div>
-            <div class="hamburger">
-                <a class="icon" onclick="myFunction(myLinks)">
-                    <img src="/files/pitcures/icons/hamburger.png"/>
-                </a>
+
+            <div class="odjava-knjiznica">
+                <a class="btn" href="{{ path('app_logout') }}">Odjavi se</a>
             </div>
         </section>
     {% endif %}

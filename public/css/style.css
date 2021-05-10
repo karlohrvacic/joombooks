@@ -563,4 +563,35 @@ svg{
     margin-bottom: 0;
 }
 
+/* KNJIZNICA */
+.knjiznica-header{
+    min-height: 10vh;
+}
+.knjiznica-naziv h1, .knjiznica-naziv h2{
+    margin: 0;
+}
+.knjiznica-main{
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: 70vh;
+}
+.grade-knjiznica{
+    margin: 0;
+}
+.grada-knjiznica{
+    justify-content: flex-start;
+    padding: 0;
+}
+.pregled-slike{
+    width: 10%;
+    margin-right: 20px;
+}
+
+td, th{
+    border: 1px solid black;
+}
+
+.knjiznice-btn{
+    margin-bottom: 10px;
+}
 

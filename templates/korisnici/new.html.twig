@@ -2,10 +2,18 @@
 
 {% block title %}Dodavanje korisnika{% endblock %}
 
+{% block nazivTrenutneStraniceKnjiznice %}
+    <img src="/files/pitcures/icons/person.png">
+    <h1>NOVI KORISNIK</h1>
+{% endblock %}
+
 {% block body %}
-    <h1>Dodaj novog korisnika</h1>
 
     {{ include('korisnici/_form.html.twig') }}
 
-    <a href="{{ path('korisnici_index') }}">natrag na popis korisnika</a>
+
+
+    <button class="btn">
+        <a href="{{ path('korisnici_index') }}">natrag na popis korisnika</a>
+    </button>
 {% endblock %}

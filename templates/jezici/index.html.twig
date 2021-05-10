@@ -2,34 +2,47 @@
 
 {% block title %}Jezici index{% endblock %}
 
+{% block nazivTrenutneStraniceKnjiznice %}
+    <img src="/files/pitcures/icons/jezik.png">
+    <h1>POPIS JEZIKA</h1>
+{% endblock %}
+
 {% block body %}
-    <h1>Jezici index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Ime</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for jezici in jezicis %}
-            <tr>
-                <td>{{ jezici.id }}</td>
-                <td>{{ jezici.ime }}</td>
-                <td>
-                    <a href="{{ path('jezici_show', {'id': jezici.id}) }}">show</a>
-                    <a href="{{ path('jezici_edit', {'id': jezici.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('jezici_new') }}">Create new</a>
+    <div class="postavke">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ime</th>
+                    <th>Opcije</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for jezici in jezicis %}
+                    <tr>
+                        <td>{{ jezici.id }}</td>
+                        <td>{{ jezici.ime }}</td>
+                        <td>
+                            <button class="knjiznice-btn btn">
+                                <a href="{{ path('jezici_show', {'id': jezici.id}) }}">Prikaži</a>
+                            </button>
+                            <button class="knjiznice-btn btn">
+                                <a href="{{ path('jezici_edit', {'id': jezici.id}) }}">Uredi</a>
+                            </button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Nema podataka.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button class="btn">
+            <a href="{{ path('jezici_new') }}">Dodaj</a>
+        </button>
+    </div>
 {% endblock %}
