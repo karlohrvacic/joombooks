@@ -185,7 +185,7 @@ class PosudbeController extends AbstractController
             $this->addFlash('success', 'Zahtjev za produljenje posudbe uspješno poslan!');
         }
         else{
-            $this->addFlash('alert', 'Vaš zahtjev zahtjev za produljenje posudbe još uvijek čeka odluku knjižničara!');
+            $this->addFlash('alert', 'Vaš zahtjev za produljenje posudbe još uvijek čeka odluku knjižničara!');
         }
         return $this->redirectToRoute('posudjene_knjige_korisnika');
     }
