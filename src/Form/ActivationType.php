@@ -15,11 +15,21 @@ class ActivationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'row_attr' => [
+                    'class' => 'knjiznica-label'
+                ],
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
             ->add('code', null , [
                 'label' => 'Upišite kod iz e-maila:',
                 'row_attr' => [
-                    'class' => 'form-row-split'
+                    'class' => 'knjiznica-label'
+                ],
+                'attr' => [
+                    'class' => 'form-control'
                 ]
             ])
             ->add('password', RepeatedType::class, [
