@@ -38,10 +38,22 @@
                         <td>{{ posudbe.datumRokaVracanja ? posudbe.datumRokaVracanja|date('d.m.Y.') : '' }}</td>
                         <td>{{ posudbe.zakasnina }} kn</td>
                         <td>
-                            <button class="btn knjiznice-btn"><a href="{{ path('vrati_gradju', {'id': posudbe.id}) }}">Vraćanje</a></button>
+                            <a href="{{ path('vrati_gradju', {'id': posudbe.id}) }}">
+                                <button class="knjiznice-btn btn">
+                                    Vraćanje
+                                </button>
+                            </a>
                             {% if posudbe.status.id == 9 %}
-                                <button class="btn knjiznice-btn"><a href="{{ path('odobri-produljenje', {'id': posudbe.id}) }}">Odobri zahtjev za produljenje</a></button>
-                                <button class="btn knjiznice-btn"><a href="{{ path('odbij-produljenje', {'id': posudbe.id}) }}">Odbij zahtjev za produljenje</a></button>
+                                <a href="{{ path('odobri-produljenje', {'id': posudbe.id}) }}">
+                                    <button class="btn knjiznice-btn">
+                                        Odobri zahtjev za produljenje
+                                    </button>
+                                </a>
+                                <a href="{{ path('odbij-produljenje', {'id': posudbe.id}) }}">
+                                    <button class="btn knjiznice-btn">
+                                        Odbij zahtjev za produljenje
+                                    </button>
+                                </a>
                             {% endif %}
                         </td>
                     </tr>

@@ -1,11 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Gradja{% endblock %}
+{% block title %}Dodaj novu knjigu{% endblock %}
+
+{% block nazivTrenutneStraniceKnjiznice %}
+    <div class="look">
+        <img src="/files/pitcures/icons/pretraziIcon.png">
+        <h1>DODAJ NOVU KNJIGU</h1>
+    </div>
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Gradja</h1>
 
-    {{ include('gradja/_form.html.twig') }}
-
-    <a href="{{ path('gradja_index') }}">back to list</a>
+    <div class="postavke">
+        <div class="container">
+            <div class="row">
+                {{ include('gradja/_form.html.twig') }}
+            </div>
+            <a href="{{ path('gradja_index') }}">
+                <button class="btn knjiznice-btn" style="margin-top: 10px;">
+                    Povratak na popis knjiga
+                </button>
+            </a>
+        </div>
+    </div>
 {% endblock %}
