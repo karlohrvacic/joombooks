@@ -3,7 +3,7 @@
 {% block title %}Izdavaci index{% endblock %}
 
 {% block nazivTrenutneStraniceKnjiznice %}
-    <img src="/files/pitcures/icons/izdavac.png">
+    <img src="/files/pitcures/icons/izdavacround.png">
     <h1>POPIS IZDAVAČA</h1>
 {% endblock %}
 
@@ -27,12 +27,16 @@
                         <td>{{ izdavaci.naziv }}</td>
                         <td>{{ izdavaci.adresa }}</td>
                         <td>
-                            <button class="btn knjiznice-btn">
-                                <a href="{{ path('izdavaci_show', {'id': izdavaci.id}) }}">Prikaži</a>
-                            </button>
-                            <button class="btn knjiznice-btn">
-                                <a href="{{ path('izdavaci_edit', {'id': izdavaci.id}) }}">Uredi</a>
-                            </button>
+                            <a href="{{ path('izdavaci_show', {'id': izdavaci.id}) }}">
+                                <button class="btn knjiznice-btn">
+                                    Prikaži
+                                </button>
+                            </a>
+                            <a href="{{ path('izdavaci_edit', {'id': izdavaci.id}) }}">
+                                <button class="btn knjiznice-btn">
+                                    Uredi
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 {% else %}
@@ -43,8 +47,10 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn">
-            <a href="{{ path('izdavaci_new') }}">Dodaj</a>
-        </button>
+        <a href="{{ path('izdavaci_new') }}">
+            <button class="btn">
+                Dodaj
+            </button>
+        </a>
     </div>
 {% endblock %}

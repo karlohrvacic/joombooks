@@ -3,7 +3,7 @@
 {% block title %}Uređivanje jezika{% endblock %}
 
 {% block nazivTrenutneStraniceKnjiznice %}
-    <img src="/files/pitcures/icons/jezik.png">
+    <img src="/files/pitcures/icons/jezikround.png">
     <h1>UREĐIVANJE JEZIKA</h1>
 {% endblock %}
 
@@ -12,7 +12,7 @@
     <div class="postavke">
         <div class="container">
             <div class="row">
-                {{ include('jezici/_form.html.twig', {'button_label': 'Update'}) }}
+                {{ include('jezici/_form.html.twig', {'button_label': 'Pohrani promjene'}) }}
             </div>
             <a href="{{ path('jezici_index') }}">
                 <button class="btn knjiznice-btn"  style="margin-top: 10px;">

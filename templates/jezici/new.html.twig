@@ -1,11 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Jezici{% endblock %}
+{% block title %}Novi jezik{% endblock %}
+
+{% block nazivTrenutneStraniceKnjiznice %}
+    <img src="/files/pitcures/icons/jezikround.png">
+    <h1>DODAVANJE NOVOG JEZIKA</h1>
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Jezici</h1>
 
-    {{ include('jezici/_form.html.twig') }}
-
-    <a href="{{ path('jezici_index') }}">back to list</a>
+    <div class="postavke">
+        <div class="container">
+            <div class="row">
+                {{ include('jezici/_form.html.twig') }}
+            </div>
+            <a href="{{ path('jezici_index') }}">
+                <button class="btn knjiznice-btn" style="margin-top: 10px;">
+                    Povratak na listu jezika
+                </button>
+            </a>
+        </div>
+    </div>
 {% endblock %}

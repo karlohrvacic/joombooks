@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Jezici index{% endblock %}
+{% block title %}Popis jezika{% endblock %}
 
 {% block nazivTrenutneStraniceKnjiznice %}
-    <img src="/files/pitcures/icons/jezik.png">
+    <img src="/files/pitcures/icons/jezikround.png">
     <h1>POPIS JEZIKA</h1>
 {% endblock %}
 
@@ -25,12 +25,16 @@
                         <td>{{ jezici.id }}</td>
                         <td>{{ jezici.ime }}</td>
                         <td>
-                            <button class="knjiznice-btn btn">
-                                <a href="{{ path('jezici_show', {'id': jezici.id}) }}">Prikaži</a>
-                            </button>
-                            <button class="knjiznice-btn btn">
-                                <a href="{{ path('jezici_edit', {'id': jezici.id}) }}">Uredi</a>
-                            </button>
+                            <a href="{{ path('jezici_show', {'id': jezici.id}) }}">
+                                <button class="btn knjiznice-btn">
+                                    Prikaži
+                                </button>
+                            </a>
+                            <a href="{{ path('jezici_edit', {'id': jezici.id}) }}">
+                                <button class="btn knjiznice-btn">
+                                    Uredi
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 {% else %}
@@ -41,8 +45,10 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn">
-            <a href="{{ path('jezici_new') }}">Dodaj</a>
-        </button>
+        <a href="{{ path('jezici_new') }}">
+            <button class="btn knjiznice-btn">
+                Dodaj
+            </button>
+        </a>
     </div>
 {% endblock %}
