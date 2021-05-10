@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Form\ActivationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +23,19 @@ class ActivateController extends AbstractController
     #[Route('/aktivacija/{code}', name: 'activation_index', defaults: ['code' => ''], methods: ['GET', 'POST'])]
     public function index(Request $request, $code): Response
     {
+        /** @var $user Korisnici */
+        $user = $this->getUser();
+        if($user instanceof Korisnici){
+            $this->addFlash('alert', 'Ne možete aktivirati račun dok ste prijavljeni, prvo se odjavite!');
+            return $this->redirectToRoute('korisnicki_izbornik');
+        }
+        /** @var $user Knjiznice */
+        $user = $this->getUser();
+        if($user instanceof Knjiznice){
+            $this->addFlash('alert', 'Ne možete aktivirati račun dok ste prijavljeni, prvo se odjavite!');
+            return $this->redirectToRoute('knjiznica_izbornik');
+        }
+
         $form = $this->createForm(ActivationType::class, array(
             'code' => $code,
         ));
