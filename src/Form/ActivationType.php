@@ -35,8 +35,21 @@ class ActivationType extends AbstractType
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Lozinke se moraju podudarati.',
-                'first_options' => ['label' => 'Nova lozinka'],
-                'second_options' => ['label' => 'Ponovite novu lozinku'],
+                'first_options' => ['label' => 'Nova lozinka',
+                    'row_attr' => [
+                        'class' => 'knjiznica-label'
+                    ],
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]],
+                'second_options' => ['label' => 'Ponovite novu lozinku',
+                    'row_attr' => [
+                        'class' => 'knjiznica-label'
+                    ],
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]],
+
             ])
         ;
     }
