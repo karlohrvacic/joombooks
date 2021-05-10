@@ -23,23 +23,19 @@
                         <p>Dan prije isteka rezervacije</p>
                         <div class="form-check form-switch">
                             <input class="form-check-input" name="istekRezervacije" type="checkbox" id="flexSwitchCheckDefault2"
-                                    {% for key in korisnik.postavke|keys %}
-                                        {% if key == 'istekRezervacije' %}
-                                           checked
-                                        {% endif %}
-                                    {% endfor %}
-                                           >DA
+                                    {% if korisnik.postavke.istekRezervacije is defined  %}
+                                        checked
+                                    {% endif %}
+                            >DA
                         </div>
                     </div>
                     <div class="obavijest">
                         <p>Dan prije isteka roka za povratak</p>
                         <div class="form-check form-switch">
                             <input class="form-check-input" name="rokPovratka" type="checkbox" id="flexSwitchCheckDefault2"
-                                    {% for key in korisnik.postavke|keys %}
-                                        {% if key == 'rokPovratka' %}
-                                            checked
-                                        {% endif %}
-                                    {% endfor %}
+                                    {% if korisnik.postavke.rokPovratka is defined  %}
+                                        checked
+                                    {% endif %}
                             >DA
                         </div>
                     </div>
@@ -47,11 +43,9 @@
                         <p>Odobreno produženje</p>
                         <div class="form-check form-switch">
                             <input class="form-check-input" name="odobrenoProduljenje" type="checkbox" id="flexSwitchCheckDefault3"
-                                    {% for key in korisnik.postavke|keys %}
-                                        {% if key == 'odobrenoProduljenje' %}
-                                            checked
-                                        {% endif %}
-                                    {% endfor %}
+                                    {% if korisnik.postavke.odobrenoProduljenje is defined  %}
+                                        checked
+                                    {% endif %}
                                     >DA
                         </div>
                     </div>
@@ -59,11 +53,9 @@
                         <p>Iznos zakasnine svakih 7 dana</p>
                         <div class="form-check form-switch">
                             <input class="form-check-input" name="iznosZakasnine" type="checkbox" id="flexSwitchCheckDefault4"
-                                    {% for key in korisnik.postavke|keys %}
-                                        {% if key == 'iznosZakasnine' %}
-                                            checked
-                                        {% endif %}
-                                    {% endfor %}
+                                    {% if korisnik.postavke.iznosZakasnine is defined  %}
+                                        checked
+                                    {% endif %}
                             >DA
                         </div>
                     </div>
@@ -78,11 +70,9 @@
                     <p>Obavijesti mi šalji na e-mail</p>
                     <div class="form-check form-switch">
                         <input class="form-check-input" name="saljiEmail" type="checkbox" id="flexSwitchCheckDefault5"
-                                {% for key in korisnik.postavke|keys %}
-                                    {% if key == 'saljiEmail' %}
-                                        checked
-                                    {% endif %}
-                                {% endfor %}
+                                {% if korisnik.postavke.saljiEmail is defined  %}
+                                    checked
+                                {% endif %}
                         >DA
                     </div>
                 </div>
