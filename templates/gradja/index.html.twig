@@ -43,7 +43,7 @@
             <tr>
                 {% if is_granted('ROLE_LIBRARY') %}
                     <td>{{ gradja.id }}</td>
-                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.ISBN  , "Isbn").generate }}"
+                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.ISBN  , "Isbn", "#FFF").generate }}"
                              alt="ISBN: {{ gradja.ISBN }} "/></td>
                 {% endif %}
                 <td>{{ gradja.status }}</td>
@@ -60,11 +60,13 @@
                 <td>{{ gradja.datumDodavanja ? gradja.datumDodavanja|date('Y-m-d') : '' }}</td>
                 <td>{{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('Y-m-d') : '' }}</td>
                 <td>{{ gradja.jezici ? gradja.jezici.ime : '' }}</td>
-                {% for zanr in gradja.zanrovi %}
-                    <td>{{ zanr }}</td>
-                {% endfor %}
+                <td>
+                    {% for zanr in gradja.zanrovi %}
+                        {{ zanr }}
+                    {% endfor %}
+                </td>
                 {% if is_granted('ROLE_LIBRARY') %}
-                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.brojInventara  , "Code39").generate }}"
+                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.brojInventara  , "Code39", "#FFF").generate }}"
                              alt="ISBN: {{ gradja.brojInventara }} "/></td>
                 {% endif %}
 
