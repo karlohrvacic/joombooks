@@ -9,10 +9,24 @@
 
 {% block body %}
 
-    {{ include('korisnici/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="postavke">
 
-    <a href="{{ path('korisnici_index') }}">natrag na popis korisnika</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
 
-    {{ include('korisnici/_delete_form.html.twig') }}
+                    {{ include('korisnici/_form.html.twig',
+                        {'button_label': 'Pohrani promjene'}) }}
+
+                    {{ include('korisnici/_delete_form.html.twig') }}
+
+                    <button class="knjiznice-btn btn">
+                        <a href="{{ path('korisnici_index') }}">Natrag na popis korisnika</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 {% endblock %}

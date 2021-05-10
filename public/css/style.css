@@ -45,7 +45,7 @@ footer{
     padding: 0 1.5rem;
 }
 
-input{
+input.form-control{
     border-radius: 20px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -594,4 +594,10 @@ td, th{
 .knjiznice-btn{
     margin-bottom: 10px;
 }
+
+.knjiznica-label{
+    margin-bottom: 10px;
+}
+
+
 

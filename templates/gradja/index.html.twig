@@ -11,80 +11,80 @@
 
 {% block body %}
 
-{#    <table class="table">#}
-{#        <thead>#}
-{#        <tr>#}
-{#            {% if is_granted('ROLE_LIBRARY') %}#}
-{#                <th>Id</th>#}
-{#                <th>ISBN</th>#}
-{#            {% endif %}#}
+    <table class="table">
+        <thead>
+        <tr>
+            {% if is_granted('ROLE_LIBRARY') %}
+                <th>Id</th>
+                <th>ISBN</th>
+            {% endif %}
 
-{#            <th>Status</th>#}
-{#            <th>Naslov</th>#}
-{#            <th>Autori</th>#}
-{#            {% if is_granted('ROLE_USER') %}#}
-{#                <th>Ime knjižnice</th>#}
-{#            {% endif %}#}
-{#            <th>Fotografija</th>#}
-{#            <th>Opis</th>#}
-{#            <th>DatumDodavanja</th>#}
-{#            <th>GodinaIzdanja</th>#}
-{#            <th>Jezik</th>#}
-{#            <th>Zanr</th>#}
+            <th>Status</th>
+            <th>Naslov</th>
+            <th>Autori</th>
+            {% if is_granted('ROLE_USER') %}
+                <th>Ime knjižnice</th>
+            {% endif %}
+            <th>Fotografija</th>
+            <th>Opis</th>
+            <th>DatumDodavanja</th>
+            <th>GodinaIzdanja</th>
+            <th>Jezik</th>
+            <th>Zanr</th>
 
-{#            {% if is_granted('ROLE_LIBRARY') %}#}
-{#                <th>BrojInventara</th>#}
-{#            {% endif %}#}
-{#            <th>Opcije</th>#}
-{#        </tr>#}
-{#        </thead>#}
-{#        <tbody>#}
-{#        {% for gradja in gradjas %}#}
-{#            <tr>#}
-{#                {% if is_granted('ROLE_LIBRARY') %}#}
-{#                    <td>{{ gradja.id }}</td>#}
-{#                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.ISBN  , "Isbn").generate }}"#}
-{#                             alt="ISBN: {{ gradja.ISBN }} "/></td>#}
-{#                {% endif %}#}
-{#                <td>{{ gradja.status }}</td>#}
-{#                <td>{{ gradja.naslov }}</td>#}
-{#                {% for autor in gradja.autori %}#}
-{#                    <td>{{ autor }}</td>#}
-{#                {% endfor %}#}
+            {% if is_granted('ROLE_LIBRARY') %}
+                <th>BrojInventara</th>
+            {% endif %}
+            <th>Opcije</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for gradja in gradjas %}
+            <tr>
+                {% if is_granted('ROLE_LIBRARY') %}
+                    <td>{{ gradja.id }}</td>
+                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.ISBN  , "Isbn").generate }}"
+                             alt="ISBN: {{ gradja.ISBN }} "/></td>
+                {% endif %}
+                <td>{{ gradja.status }}</td>
+                <td>{{ gradja.naslov }}</td>
+                {% for autor in gradja.autori %}
+                    <td>{{ autor }}</td>
+                {% endfor %}
 
-{#                {% if is_granted('ROLE_USER') %}#}
-{#                    <td>{{ gradja.knjiznicaVlasnik }}</td>#}
-{#                {% endif %}#}
-{#                <td><img width="100px" src="{{ gradja.fotografija }}"></td>#}
-{#                <td>{{ gradja.opis }}</td>#}
-{#                <td>{{ gradja.datumDodavanja ? gradja.datumDodavanja|date('Y-m-d') : '' }}</td>#}
-{#                <td>{{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('Y-m-d') : '' }}</td>#}
-{#                <td>{{ gradja.jezici ? gradja.jezici.ime : '' }}</td>#}
-{#                {% for zanr in gradja.zanrovi %}#}
-{#                    <td>{{ zanr }}</td>#}
-{#                {% endfor %}#}
-{#                {% if is_granted('ROLE_LIBRARY') %}#}
-{#                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.brojInventara  , "Code39").generate }}"#}
-{#                             alt="ISBN: {{ gradja.brojInventara }} "/></td>#}
-{#                {% endif %}#}
+                {% if is_granted('ROLE_USER') %}
+                    <td>{{ gradja.knjiznicaVlasnik }}</td>
+                {% endif %}
+                <td><img width="100px" src="{{ gradja.fotografija }}"></td>
+                <td>{{ gradja.opis }}</td>
+                <td>{{ gradja.datumDodavanja ? gradja.datumDodavanja|date('Y-m-d') : '' }}</td>
+                <td>{{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('Y-m-d') : '' }}</td>
+                <td>{{ gradja.jezici ? gradja.jezici.ime : '' }}</td>
+                {% for zanr in gradja.zanrovi %}
+                    <td>{{ zanr }}</td>
+                {% endfor %}
+                {% if is_granted('ROLE_LIBRARY') %}
+                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.brojInventara  , "Code39").generate }}"
+                             alt="ISBN: {{ gradja.brojInventara }} "/></td>
+                {% endif %}
 
-{#                <td>#}
-{#                    {% if is_granted('ROLE_LIBRARY') %}#}
-{#                        <a href="{{ path('gradja_show', {'id': gradja.id}) }}">show</a>#}
-{#                        <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">edit</a>#}
-{#                    {% elseif gradja.status == 'Dostupno' %}#}
-{#                        <a href="{{ path('posudbe_new', {'id': gradja.id}) }}">Rezerviraj</a>#}
-{#                    {% endif %}#}
-{#                </td>#}
+                <td>
+                    {% if is_granted('ROLE_LIBRARY') %}
+                        <a href="{{ path('gradja_show', {'id': gradja.id}) }}">show</a>
+                        <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">edit</a>
+                    {% elseif gradja.status == 'Dostupno' %}
+                        <a href="{{ path('posudbe_new', {'id': gradja.id}) }}">Rezerviraj</a>
+                    {% endif %}
+                </td>
 
-{#            </tr>#}
-{#        {% else %}#}
-{#            <tr>#}
-{#                <td colspan="11">no records found</td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#        </tbody>#}
-{#    </table>#}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     {% if is_granted('ROLE_LIBRARY') %}
     <a href="{{ path('gradja_new') }}">Create new</a>
 
