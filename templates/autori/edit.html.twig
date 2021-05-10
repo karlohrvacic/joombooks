@@ -13,17 +13,16 @@
 
     <div class="postavke">
         <div class="container">
-            <div class="row">
+            <div class="row" style="margin-bottom: 10px;">
                 {{ include('autori/_form.html.twig', {'button_label': 'Spremi'}) }}
-
-                    <a href="{{ path('autori_index') }}" style="margin-top: 10px;">
-                        <button class="knjiznice-btn btn">
-                            Natrag na popis autora
-                        </button>
-                    </a>
-
-                {{ include('autori/_delete_form.html.twig') }}
             </div>
+            <a href="{{ path('autori_index') }}" style="margin-top: 10px;">
+                <button class="knjiznice-btn btn">
+                    Natrag na popis autora
+                </button>
+            </a>
+
+            {{ include('autori/_delete_form.html.twig') }}
         </div>
     </div>
 {% endblock %}

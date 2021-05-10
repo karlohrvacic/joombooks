@@ -3,9 +3,18 @@
 {% block title %}Dodavanje autora{% endblock %}
 
 {% block body %}
-    <h1>Upišite novog autora</h1>
 
-    {{ include('autori/_form.html.twig') }}
+    <div class="postavke">
+        <div class="container">
+            <div class="row">
+                {{ include('autori/_form.html.twig') }}
 
-    <a href="{{ path('autori_index') }}">natrag na popis autora</a>
+                <a href="{{ path('autori_index') }}">
+                    <button class="btn knjiznice-btn" style="margin-top: 10px;">
+                        Natrag na popis autora
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

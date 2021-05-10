@@ -2,29 +2,42 @@
 
 {% block title %}Autori{% endblock %}
 
+{% block nazivTrenutneStraniceKnjiznice %}
+    <img src="/files/pitcures/icons/pisciround.png">
+    <h1>POPIS AUTORA</h1>
+{% endblock %}
+
 {% block body %}
-    <h1>Pregled autora</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ autori.id }}</td>
-            </tr>
-            <tr>
-                <th>Ime</th>
-                <td>{{ autori.ime }}</td>
-            </tr>
-            <tr>
-                <th>Prezime</th>
-                <td>{{ autori.prezime }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('autori_index') }}">natrag na popis autora</a>
-
-    <a href="{{ path('autori_edit', {'id': autori.id}) }}">Uredi</a>
-
-    {{ include('autori/_delete_form.html.twig') }}
+    <div class="postavke">
+        <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ autori.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ime</th>
+                        <td>{{ autori.ime }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prezime</th>
+                        <td>{{ autori.prezime }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+        <a href="{{ path('autori_index') }}">
+            <button class="btn knjiznice-btn">
+                Natrag na popis autora
+            </button>
+        </a>
+        <a href="{{ path('autori_edit', {'id': autori.id}) }}">
+            <button class="btn knjiznice-btn">
+                Uredi
+            </button>
+        </a>
+        {{ include('autori/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

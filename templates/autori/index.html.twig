@@ -28,12 +28,19 @@
                         <td>{{ autori.drzava }}</td>
 
                         <td>
-                            <button class="btn knjiznice-btn">
-                                <a href="{{ path('autori_show', {'id': autori.id}) }}">Prikaži</a>
-                            </button>
-                            <button class="btn knjiznice-btn">
-                                <a href="{{ path('autori_edit', {'id': autori.id}) }}">Uredi</a>
-                            </button>
+
+                                <a href="{{ path('autori_show', {'id': autori.id}) }}">
+                                    <button class="btn knjiznice-btn">
+                                        Prikaži
+                                    </button>
+                                </a>
+
+                                <a href="{{ path('autori_edit', {'id': autori.id}) }}">
+                                    <button class="btn knjiznice-btn">
+                                        Uredi
+                                    </button>
+                                </a>
+
                         </td>
                     </tr>
                 {% else %}
@@ -44,8 +51,11 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn">
-            <a href="{{ path('autori_new') }}">Dodaj</a>
-        </button>
+
+            <a href="{{ path('autori_new') }}">
+                <button class="btn">
+                    Dodaj
+                </button>
+            </a>
     </div>
 {% endblock %}
