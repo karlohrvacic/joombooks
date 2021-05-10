@@ -108,7 +108,7 @@ class ProfilKnjiznicaController extends AbstractController
             $rezervacija->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
 
             $entityManager->flush();
-            $this->addFlash('success', 'Građa uspješno posuđena!');
+            $this->addFlash('success', 'Knjiga uspješno posuđena!');
 
             return $this->redirectToRoute('posudbe_korisnika');
         }
@@ -154,7 +154,7 @@ class ProfilKnjiznicaController extends AbstractController
             $entityManager->flush();
 
 
-            $this->addFlash('success', 'Građa uspješno posuđena!');
+            $this->addFlash('success', 'Knjiga uspješno posuđena!');
 
         } else {
             $borrowed = $korisnik->getBrojTrenutnoPosudenih();
