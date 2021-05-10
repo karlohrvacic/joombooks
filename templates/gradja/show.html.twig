@@ -1,58 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gradja{% endblock %}
+{% block title %}Pregled knjiga{% endblock %}
+
+{% block nazivTrenutneStraniceKnjiznice %}
+    <div class="look">
+        <img src="/files/pitcures/icons/pretraziIcon.png">
+        <h1>PREGLED KNJIGA</h1>
+    </div>
+{% endblock %}
 
 {% block body %}
-    <h1>Gradja</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ gradja.id }}</td>
-            </tr>
-            <tr>
-                <th>ISBN</th>
-                <td>{{ gradja.ISBN }}</td>
-            </tr>
-            <tr>
-                <th>Naslov</th>
-                <td>{{ gradja.naslov }}</td>
-            </tr>
-            <tr>
-                <th>OibKnjiznice</th>
-                <td>{{ gradja.knjiznicaVlasnik.oibKnjiznice }}</td>
-            </tr>
-            <tr>
-                <th>Fotografija</th>
-                <td>{{ gradja.fotografija }}</td>
-            </tr>
-            <tr>
-                <th>Opis</th>
-                <td>{{ gradja.opis }}</td>
-            </tr>
-            <tr>
-                <th>DatumDodavanja</th>
-                <td>{{ gradja.datumDodavanja ? gradja.datumDodavanja|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>GodinaIzdanja</th>
-                <td>{{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Jezik</th>
-                <td>{{ gradja.jezici.ime }}</td>
-            </tr>
-            <tr>
-                <th>BrojInventara</th>
-                <td>{{ gradja.brojInventara }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="postavke">
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>ISBN</th>
+                    <td>{{ gradja.ISBN }}</td>
+                </tr>
+                <tr>
+                    <th>Naslov</th>
+                    <td>{{ gradja.naslov }}</td>
+                </tr>
+                <tr>
+                    <th>Oib knjiznice</th>
+                    <td>{{ gradja.knjiznicaVlasnik.oibKnjiznice }}</td>
+                </tr>
+                <tr>
+                    <th>Fotografija</th>
+                    <td>{{ gradja.fotografija }}</td>
+                </tr>
+                <tr>
+                    <th>Opis</th>
+                    <td>{{ gradja.opis }}</td>
+                </tr>
+                <tr>
+                    <th>Datum dodavanja</th>
+                    <td>{{ gradja.datumDodavanja ? gradja.datumDodavanja|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Godina izdanja</th>
+                    <td>{{ gradja.godinaIzdanja ? gradja.godinaIzdanja|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Jezik</th>
+                    <td>{{ gradja.jezici.ime }}</td>
+                </tr>
+                <tr>
+                    <th>Broj inventara</th>
+                    <td>{{ gradja.brojInventara }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="btn knjiznice-btn">
+            <a href="{{ path('gradja_index') }}">Povratak na popis knjiga</a>
+        </button>
 
-    <a href="{{ path('gradja_index') }}">back to list</a>
+        <button class="btn knjiznice-btn">
+            <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">Uredi</a>
+        </button>
 
-    <a href="{{ path('gradja_edit', {'id': gradja.id}) }}">edit</a>
-
-    {{ include('gradja/_delete_form.html.twig') }}
+        {{ include('gradja/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

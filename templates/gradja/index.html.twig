@@ -2,7 +2,7 @@
 
 {% block title %}Pregled knjiga{% endblock %}
 
-{% block nazivTrenutneStranice %}
+{% block nazivTrenutneStraniceKnjiznice %}
     <div class="look">
         <img src="/files/pitcures/icons/pretraziIcon.png">
         <h1>PREGLED KNJIGA</h1>
@@ -17,7 +17,6 @@
                 <thead>
                 <tr>
                     {% if is_granted('ROLE_LIBRARY') %}
-                        <th>Id</th>
                         <th>ISBN</th>
                     {% endif %}
 
@@ -44,7 +43,6 @@
                 {% for gradja in gradjas %}
                     <tr>
                         {% if is_granted('ROLE_LIBRARY') %}
-                            <td>{{ gradja.id }}</td>
                             <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.ISBN  , "Isbn", "#FFF").generate }}"
                                      alt="ISBN: {{ gradja.ISBN }} "/></td>
                         {% endif %}

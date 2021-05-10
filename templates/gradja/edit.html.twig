@@ -2,12 +2,26 @@
 
 {% block title %}Edit Gradja{% endblock %}
 
+{% block nazivTrenutneStraniceKnjiznice %}
+    <div class="look">
+        <img src="/files/pitcures/icons/pretraziIcon.png">
+        <h1>PREGLED KNJIGA</h1>
+    </div>
+{% endblock %}
+
 {% block body %}
-    <h1>Edit Gradja</h1>
 
-    {{ include('gradja/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="postavke">
+        <div class="container">
+            <div class="row">
+                {{ include('gradja/_form.html.twig', {'button_label': 'Pohrani promjene'}) }}
 
-    <a href="{{ path('gradja_index') }}">back to list</a>
+                <button class="btn knjiznice-btn" style="margin-top: 10px;">
+                    <a href="{{ path('gradja_index') }}">Povratak na popis knjiga</a>
+                </button>
 
-    {{ include('gradja/_delete_form.html.twig') }}
+                {{ include('gradja/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

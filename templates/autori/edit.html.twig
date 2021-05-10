@@ -2,12 +2,28 @@
 
 {% block title %}Uređivanje autora{% endblock %}
 
+{% block nazivTrenutneStraniceKnjiznice %}
+    <div class="look">
+        <img src="/files/pitcures/icons/pisciround.png">
+        <h1>PREGLED AUTORA</h1>
+    </div>
+{% endblock %}
+
 {% block body %}
-    <h1>Uređivanje autora</h1>
 
-    {{ include('autori/_form.html.twig', {'button_label': 'Spremi'}) }}
+    <div class="postavke">
+        <div class="container">
+            <div class="row">
+                {{ include('autori/_form.html.twig', {'button_label': 'Spremi'}) }}
 
-    <a href="{{ path('autori_index') }}">natrag na popis autora</a>
+                    <a href="{{ path('autori_index') }}" style="margin-top: 10px;">
+                        <button class="knjiznice-btn btn">
+                            Natrag na popis autora
+                        </button>
+                    </a>
 
-    {{ include('autori/_delete_form.html.twig') }}
+                {{ include('autori/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
