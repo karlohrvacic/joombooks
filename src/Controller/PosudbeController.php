@@ -71,7 +71,7 @@ class PosudbeController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Uspješno ste rezervirali građu!');
+            $this->addFlash('success', 'Uspješno ste rezervirali knjigu!');
             } else{
                 $this->addFlash('alert', "Već ste rezervirali $maxRezerviranih knjige!");
             }

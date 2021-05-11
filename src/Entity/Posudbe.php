@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PosudbeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=PosudbeRepository::class)
@@ -133,7 +134,7 @@ class Posudbe
     }
 
     public function zakasnina(){
-        $daniKasnjenja = $this->getDatumRokaVracanja()->diff($this->getDatumPosudbe())->format('%r%a');
+        $daniKasnjenja = $this->getDatumRokaVracanja()->diff(new \DateTime('today'))->format('%r%a');
         $cijenaZakasnine = $this->getKorisnici()->getKnjiznice()->getCijenaZakasnine();
         if($daniKasnjenja <= 0){
             return 0;
@@ -142,7 +143,7 @@ class Posudbe
     }
 
     public function brojDanaIsteka(){
-        return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a'));
+        return ((new \DateTime('today'))->diff($this->getDatumRokaVracanja())->format('%r%a'));
     }
 
     public function getKnjiznica(): ?Knjiznice
