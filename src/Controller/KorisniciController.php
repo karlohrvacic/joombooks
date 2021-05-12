@@ -38,11 +38,14 @@ class KorisniciController extends AbstractController
             $korisnici->setRoles(["ROLE_USER"]);
 
             if(is_a($this->getUser(), Knjiznice::class)){
+                /**
+                 * @var Knjiznice $knjiznica
+                 */
                 $knjiznica = $this->getUser();
                 $korisnici->setKnjiznice($knjiznica);
             }
 
-            if($request->files->get('fotografija') !== null){
+            if($request->files->get('korisnici')['fotografija'] !== null){
                 $korisnici->setFotografija($this->tempUploadAction($request));
             }
 
