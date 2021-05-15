@@ -21,7 +21,7 @@ class Knjiznice implements UserInterface
     private ?int $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $oibKnjiznice;
 
@@ -41,7 +41,7 @@ class Knjiznice implements UserInterface
     private $cijenaZakasnine;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
 

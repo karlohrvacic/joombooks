@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ActivateController extends AbstractController
 {
@@ -44,14 +45,14 @@ class ActivateController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             $korisnik = $this->getDoctrine()
                 ->getRepository(Korisnici::class)
                 ->findOneBy([
                     'email' => $form->get('email')->getData(),
-                    'lozinka' => $form->get('code')->getData()
                 ]);
 
-            if (!$korisnik) {
+            if (!$korisnik && ($this->passwordEncoder->isPasswordValid($korisnik, $form->get('password')->getData()))) {
                 throw $this->createNotFoundException(
                     'Nema pronađenog korisnika!'
                 );

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
+use App\Entity\Posudbe;
 use App\Form\KorisniciType;
 use App\Repository\KorisniciRepository;
 use App\Service\MailerSender;
@@ -12,10 +13,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 #[Route('/knjiznica/korisnici')]
 class KorisniciController extends AbstractController
 {
+
+    private UserPasswordEncoderInterface $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     #[Route('/', name: 'korisnici_index', methods: ['GET'])]
     public function index(KorisniciRepository $korisniciRepository): Response
     {
@@ -35,6 +45,7 @@ class KorisniciController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
             $korisnici->setRoles(["ROLE_USER"]);
 
             if(is_a($this->getUser(), Knjiznice::class)){
@@ -50,13 +61,14 @@ class KorisniciController extends AbstractController
             }
 
             // Save random string as activation code
-            $korisnici->setLozinka(uniqid());
+            $code = uniqid();
+            $korisnici->setLozinka($this->passwordEncoder->encodePassword($korisnici, $code));
 
             $entityManager->persist($korisnici);
             $entityManager->flush();
 
             // Send user activation code via email
-            $mailerSender->sendActivationEmail($korisnici);
+            $mailerSender->sendActivationEmail($korisnici, $code);
 
             $this->addFlash('success', 'Novi korisnik uspješno pohranjen!');
             $this->addFlash('success', 'Aktivacijski kod je korisniku poslan putem e-maila!');

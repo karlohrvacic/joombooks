@@ -18,9 +18,8 @@ class MailerSender
         $this->router = $router;
     }
 
-    public function sendActivationEmail(Korisnici $user)
+    public function sendActivationEmail(Korisnici $user, $code)
     {
-        $code = $user->getLozinka();
         $signUpPage = $this->router->generate("activation_index", ['code' => $code] , UrlGenerator::ABSOLUTE_URL);
         $ime = $user->getIme();
         $email = (new TemplatedEmail())
