@@ -2,8 +2,6 @@
 
 <img src="https://travis-ci.com/karlohrvacic/jumkabooks.svg?branch=master">
 
-MC2 competition entry by BookExchangers
-
 Helps connecting Independent libraries with their users. 
 
 
