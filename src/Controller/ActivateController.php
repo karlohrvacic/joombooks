@@ -45,17 +45,23 @@ class ActivateController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
+            /**
+             * @var $korisnik Korisnici
+             */
             $korisnik = $this->getDoctrine()
                 ->getRepository(Korisnici::class)
                 ->findOneBy([
                     'email' => $form->get('email')->getData(),
                 ]);
 
-            if (!$korisnik && ($this->passwordEncoder->isPasswordValid($korisnik, $form->get('password')->getData()))) {
-                throw $this->createNotFoundException(
-                    'Nema pronađenog korisnika!'
-                );
+            if (!$korisnik) {
+                    throw $this->createNotFoundException(
+                        'Nema pronađenog korisnika!'
+                    );
+            } elseif (($this->passwordEncoder->isPasswordValid($korisnik, $form->get('password')->getData()))){
+                    throw $this->createNotFoundException(
+                        'Nema pronađenog korisnika!'
+                    );
             }
 
             $hash = $this->passwordEncoder->encodePassword($korisnik, $form->get('password')->getData());

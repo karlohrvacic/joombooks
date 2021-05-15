@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Gradja;
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Entity\Posudbe;
+use App\Entity\Statusi;
 use App\Form\KorisniciType;
 use App\Repository\KorisniciRepository;
 use App\Service\MailerSender;
@@ -125,6 +127,48 @@ class KorisniciController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$korisnici->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            /**
+             * @var $posudbe Posudbe
+             */
+            $posudbe = $this->getDoctrine()->getManager()->getRepository(Posudbe::class)->findBy([
+                'korisnici' => $korisnici,
+            ]);
+
+            /**
+             * @var $posudba Posudbe
+             */
+            foreach ($posudbe as $posudba)  {
+                $statusId = $posudba->getStatus()->getId();
+                if ($statusId == 6){
+                    $entityManager->remove($posudba);
+                } elseif ($statusId == 5){
+                    /**
+                     * @var $rezervacija Gradja
+                     */
+                    $rezervacija = $this->getDoctrine()->getManager()->getRepository(Gradja::class)->findOneBy([
+                        'id' => $posudba->getGradja()->getId(),
+                    ]);
+
+                    /**
+                     * @var $status Statusi
+                     */
+
+                    $status = $this->getDoctrine()->getManager()->getRepository(Statusi::class)->findOneBy(['id' => 1]);
+
+                    $rezervacija->setStatus($status);
+
+                    $this->getDoctrine()->getManager()->persist($rezervacija);
+                    $this->getDoctrine()->getManager()->flush();
+                    $entityManager->remove($posudba);
+
+                } elseif ($statusId == 3 || $statusId == 9){
+                    $this->addFlash('alert', 'Korisnik ima posuđenih knjiga!');
+                    $this->addFlash('alert', 'Korisnik nije obrisan!');
+                    return $this->redirectToRoute('korisnici_index');
+                }
+            }
+
             $entityManager->remove($korisnici);
             $entityManager->flush();
             $this->addFlash('success', 'Korisnik uspješno uklonjen!');
