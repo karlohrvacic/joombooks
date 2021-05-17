@@ -41,7 +41,7 @@ class Knjiznice implements UserInterface
     private $cijenaZakasnine;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=191, unique=true)
      */
     private $email;
 
