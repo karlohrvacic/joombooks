@@ -21,7 +21,7 @@ class Knjiznice implements UserInterface
     private ?int $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     private $oibKnjiznice;
 
