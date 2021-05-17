@@ -32,7 +32,7 @@ class Korisnici implements UserInterface
     private $prezime;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=191, unique=true)
      */
     private $email;
 
@@ -42,7 +42,7 @@ class Korisnici implements UserInterface
     private $lozinka;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
+     * @ORM\Column(type="string", length=191, nullable=true, unique=true)
      */
     private $brojTelefona;
 
@@ -52,7 +52,7 @@ class Korisnici implements UserInterface
     private $fotografija;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=191, unique=true)
      */
     private $brojIskazniceKorisnika;
 
