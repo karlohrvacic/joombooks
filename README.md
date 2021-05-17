@@ -1,8 +1,6 @@
 # jumkabooks - Library in your pocket
 
-<img src="https://travis-ci.com/karlohrvacic/jumkabooks.svg?branch=master">
-
-MC2 competition entry by BookExchangers
+<img src="https://travis-ci.com/karlohrvacic/joombooks.svg?branch=master">
 
 Helps connecting Independent libraries with their users. 
 
