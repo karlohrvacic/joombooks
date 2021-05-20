@@ -76,7 +76,6 @@ class AutoriController extends AbstractController
 
             $this->addFlash('success', 'Promjene uspješno pohranjene!');
 
-
             return $this->redirectToRoute('autori_index');
         }
 
