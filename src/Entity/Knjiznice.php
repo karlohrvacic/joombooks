@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=KnjizniceRepository::class)
@@ -22,11 +23,14 @@ class Knjiznice implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
+     * @Assert\NotBlank
+     *
      */
     private $oibKnjiznice;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $naziv;
 
@@ -42,16 +46,20 @@ class Knjiznice implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=191, unique=true)
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotCompromisedPassword()
+     *
      */
     private $lozinka;
 
     /**
      * @ORM\Column(type="integer")
+     *
      */
     private $maxPosudjenih;
 

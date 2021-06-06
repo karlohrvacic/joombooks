@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=KorisniciRepository::class)
@@ -23,21 +24,30 @@ class Korisnici implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $ime;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $prezime;
 
     /**
      * @ORM\Column(type="string", length=191, unique=true)
+     * @Assert\Email
+     * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Lozinka mora imati barem {{ limit }} znakova! ",
+     * )
+     * @Assert\NotCompromisedPassword
      */
     private $lozinka;
 
@@ -48,6 +58,7 @@ class Korisnici implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=2048, nullable=true)
+     * @Assert\Image
      */
     private $fotografija;
 

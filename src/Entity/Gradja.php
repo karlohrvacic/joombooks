@@ -6,6 +6,7 @@ use App\Repository\GradjaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=GradjaRepository::class)
@@ -21,16 +22,19 @@ class Gradja
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Isbn
      */
     private $ISBN;
 
     /**
      * @ORM\Column(type="string", length=512)
+     * @Assert\NotBlank
      */
     private $naslov;
 
     /**
      * @ORM\Column(type="string", length=2048, nullable=true)
+     * @Assert\Image()
      */
     private $fotografija;
 
@@ -41,17 +45,20 @@ class Gradja
 
     /**
      * @ORM\Column(type="date")
+     *
      */
     private $datumDodavanja;
 
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     *
      */
     private $godinaIzdanja;
 
     /**
      * @ORM\Column(type="string", length=191, unique=true)
+     *
      */
     private $brojInventara;
 
