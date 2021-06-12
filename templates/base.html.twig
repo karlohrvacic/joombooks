@@ -112,8 +112,10 @@
     {% block body %}
     {% endblock %}
     {% if (app.request.get('_route') != 'korisnicki_izbornik') and (app.request.get('_route') != 'activation_index') %}
-    <footer style="color: black;">
-        © JoomBooks 2021.
+    <footer class="footer">
+        <a class="float-right" href="https://github.com/karlohrvacic/joombooks">
+            <p style="color: black;">© JoomBooks 2021. <img src="/files/pitcures/icons/github_logo.png" alt="Github" width="25px"></p>
+        </a>
     </footer>
     {% endif %}
     {% block javascripts %}
