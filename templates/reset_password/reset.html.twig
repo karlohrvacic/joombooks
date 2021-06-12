@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ponovo postavljanje lozinke{% endblock %}
+
+{% block body %}
+    <h1>Ponovo postavite svoju lozinku</h1>
+
+    {{ form_start(resetForm) }}
+        {{ form_row(resetForm.plainPassword) }}
+        <button class="btn btn-primary">Pošalji</button>
+    {{ form_end(resetForm) }}
+{% endblock %}

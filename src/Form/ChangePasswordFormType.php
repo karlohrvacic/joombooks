@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,29 +10,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-
-class ActivationType extends AbstractType
+class ChangePasswordFormType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
-                'row_attr' => [
-                    'class' => 'knjiznica-label'
-                ],
-                'attr' => [
-                    'class' => 'form-control'
-                ]
-            ])
-            ->add('password', RepeatedType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [
-                    'attr' => ['autocomplete' => 'new-password',
-                        'class' => 'form-control'
-                    ],
-                    'row_attr' => [
-                        'class' => 'knjiznica-label'
-                    ],
+                    'attr' => ['autocomplete' => 'new-password'],
                     'constraints' => [
                         new NotBlank([
                             'message' => 'Molimo unesite lozinku',
@@ -48,27 +33,19 @@ class ActivationType extends AbstractType
                     'label' => 'New password',
                 ],
                 'second_options' => [
-                    'attr' => ['autocomplete' => 'new-password',
-                        'class' => 'form-control'],
+                    'attr' => ['autocomplete' => 'new-password'],
                     'label' => 'Ponovite Lozinku',
-                    'row_attr' => [
-                        'class' => 'knjiznica-label'
-                    ],
                 ],
                 'invalid_message' => 'The password fields must match.',
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-
-
-                ])
+            ])
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            // Configure your form options here
-        ]);
+        $resolver->setDefaults([]);
     }
 }

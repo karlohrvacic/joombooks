@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email za ponovo postavljanje lozinke je poslan!{% endblock %}
+
+{% block body %}
+
+    <header>Email poslan</header>
+
+<div class="aktivacija postavke">
+    <div class="container">
+        <div class="row">
+            <p>
+                Ako postoji račun s navedim e-mailom, poslan je e-mail s poveznicom koju možete iskoristiti za ponovo postavljanje lozinke.
+                Ova poveznica će isteći {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            </p>
+            <p>Ako ne zaprimite e-mail molimo pogledajte u neželjenu poštu ili <a href="{{ path('app_forgot_password_request') }}">pokušajte ponovo</a>.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
