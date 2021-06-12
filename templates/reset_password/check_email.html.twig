@@ -11,7 +11,7 @@
         <div class="row">
             <p>
                 Ako postoji račun s navedim e-mailom, poslan je e-mail s poveznicom koju možete iskoristiti za ponovo postavljanje lozinke.
-                Ova poveznica će isteći {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+                Ova poveznica će isteći za {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
             </p>
             <p>Ako ne zaprimite e-mail molimo pogledajte u neželjenu poštu ili <a href="{{ path('app_forgot_password_request') }}">pokušajte ponovo</a>.</p>
         </div>
