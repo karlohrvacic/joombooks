@@ -73,9 +73,11 @@ class GradjaController extends AbstractController
     #[Route('/{id}', name: 'gradja_show', methods: ['GET'])]
     public function show(Gradja $gradja): Response
     {
+        $code = new BarcodeController();
         return $this->render('gradja/show.html.twig', [
             'gradja' => $gradja,
             'knjiznica' => $this->getUser(),
+            'code' => $code,
 
         ]);
     }

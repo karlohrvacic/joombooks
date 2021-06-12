@@ -17,7 +17,8 @@
                 <tbody>
                 <tr>
                     <th>ISBN</th>
-                    <td>{{ gradja.ISBN }}</td>
+                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.ISBN  , "Isbn", "#D1FDFE").generate }}"
+                             alt="ISBN: {{ gradja.ISBN }} "/></td>
                 </tr>
                 <tr>
                     <th>Naslov</th>
@@ -29,7 +30,7 @@
                 </tr>
                 <tr>
                     <th>Fotografija</th>
-                    <td>{{ gradja.fotografija }}</td>
+                    <td><img width="100px" src="{{ gradja.fotografija }}"></td>
                 </tr>
                 <tr>
                     <th>Opis</th>
@@ -49,7 +50,8 @@
                 </tr>
                 <tr>
                     <th>Broj inventara</th>
-                    <td>{{ gradja.brojInventara }}</td>
+                    <td><img src="data:image/png;base64,{{ code.makeBarcode(  gradja.brojInventara  , "Code39", "#D1FDFE").generate }}"
+                             alt="ISBN: {{ gradja.brojInventara }} "/></td>
                 </tr>
                 </tbody>
             </table>
