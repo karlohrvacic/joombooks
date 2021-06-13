@@ -34,7 +34,7 @@ class Gradja
 
     /**
      * @ORM\Column(type="string", length=2048, nullable=true)
-     * @Assert\Image()
+     *
      */
     private $fotografija;
 
