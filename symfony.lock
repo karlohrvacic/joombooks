@@ -109,6 +109,12 @@
     "php": {
         "version": "8.0"
     },
+    "php-flasher/flasher": {
+        "version": "v0.4.7"
+    },
+    "php-flasher/flasher-symfony": {
+        "version": "v0.4.7"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
     },
