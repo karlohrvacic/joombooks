@@ -18,20 +18,20 @@ class Autori
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $ime;
+    private ?string $ime;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
 
      */
-    private $prezime;
+    private ?string $prezime;
 
 
     /**
@@ -42,7 +42,7 @@ class Autori
     /**
      * @ORM\ManyToOne(targetEntity=Drzave::class, inversedBy="autori")
      */
-    private $drzava;
+    private ?Drzave $drzava;
 
     public function __construct()
     {

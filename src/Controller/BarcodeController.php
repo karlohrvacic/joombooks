@@ -9,7 +9,6 @@ class BarcodeController
 
     public static function makeBarcode($text, $typeExt, $colour)
     {
-        $colour == "" ? $colour : "#ffffff";
 
         $barcode = new BarcodeGenerator();
         $barcode->setText($text);

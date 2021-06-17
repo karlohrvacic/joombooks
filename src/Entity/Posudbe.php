@@ -3,8 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\PosudbeRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=PosudbeRepository::class)
@@ -16,81 +17,81 @@ class Posudbe
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $datumPosudbe;
+    private ?DateTimeInterface $datumPosudbe;
 
     /**
      * @ORM\Column(type="date")
      */
-    private $datumRokaVracanja;
+    private ?DateTimeInterface $datumRokaVracanja;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $datumVracanja;
+    private ?DateTimeInterface $datumVracanja;
 
     /**
      * @ORM\ManyToOne(targetEntity=Gradja::class, inversedBy="posudbe")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $gradja;
+    private ?Gradja $gradja;
 
     /**
      * @ORM\ManyToOne(targetEntity=Statusi::class, inversedBy="posudbe")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $status;
+    private ?Statusi $status;
 
     /**
      * @ORM\ManyToOne(targetEntity=Korisnici::class, inversedBy="posudbe")
      */
-    private $korisnici;
+    private ?Korisnici $korisnici;
 
     /**
      * @ORM\ManyToOne(targetEntity=Knjiznice::class, inversedBy="posudbe")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $knjiznica;
+    private ?Knjiznice $knjiznica;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDatumPosudbe(): ?\DateTimeInterface
+    public function getDatumPosudbe(): ?DateTimeInterface
     {
         return $this->datumPosudbe;
     }
 
-    public function setDatumPosudbe(\DateTimeInterface $datumPosudbe): self
+    public function setDatumPosudbe(DateTimeInterface $datumPosudbe): self
     {
         $this->datumPosudbe = $datumPosudbe;
 
         return $this;
     }
 
-    public function getDatumRokaVracanja(): ?\DateTimeInterface
+    public function getDatumRokaVracanja(): ?DateTimeInterface
     {
         return $this->datumRokaVracanja;
     }
 
-    public function setDatumRokaVracanja(\DateTimeInterface $datumRokaVracanja): self
+    public function setDatumRokaVracanja(DateTimeInterface $datumRokaVracanja): self
     {
         $this->datumRokaVracanja = $datumRokaVracanja;
 
         return $this;
     }
 
-    public function getDatumVracanja(): ?\DateTimeInterface
+    public function getDatumVracanja(): ?DateTimeInterface
     {
         return $this->datumVracanja;
     }
 
-    public function setDatumVracanja(?\DateTimeInterface $datumVracanja): self
+    public function setDatumVracanja(?DateTimeInterface $datumVracanja): self
     {
         $this->datumVracanja = $datumVracanja;
 
@@ -133,8 +134,9 @@ class Posudbe
         return $this;
     }
 
-    public function zakasnina(){
-        $daniKasnjenja = $this->getDatumRokaVracanja()->diff(new \DateTime('today'))->format('%r%a');
+    public function zakasnina(): float|int
+    {
+        $daniKasnjenja = $this->getDatumRokaVracanja()->diff(new DateTime('today'))->format('%r%a');
         $cijenaZakasnine = $this->getKorisnici()->getKnjiznice()->getCijenaZakasnine();
         if($daniKasnjenja <= 0){
             return 0;
@@ -142,8 +144,9 @@ class Posudbe
         return $daniKasnjenja * $cijenaZakasnine;
     }
 
-    public function brojDanaIsteka(){
-        return ((new \DateTime('today'))->diff($this->getDatumRokaVracanja())->format('%r%a'));
+    public function brojDanaIsteka(): string
+    {
+        return ((new DateTime('today'))->diff($this->getDatumRokaVracanja())->format('%r%a'));
     }
 
     public function getKnjiznica(): ?Knjiznice
@@ -158,7 +161,8 @@ class Posudbe
         return $this;
     }
 
-    public function getBrojPutaProduljenjaRezervacije(){
+    public function getBrojPutaProduljenjaRezervacije(): float|int
+    {
         if($this->getStatus()->getId() == 5){
             return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a')
                 / $this->getKnjiznica()->getDaniRezervacije());
@@ -167,7 +171,8 @@ class Posudbe
         }
     }
 
-    public function getBrojPutaProduljenjaPosudbe(){
+    public function getBrojPutaProduljenjaPosudbe(): float|int
+    {
         if($this->getStatus()->getId() == 3){
             return ($this->getDatumPosudbe()->diff($this->getDatumRokaVracanja())->format('%r%a')
                 / $this->getKnjiznica()->getDaniPosudbe());

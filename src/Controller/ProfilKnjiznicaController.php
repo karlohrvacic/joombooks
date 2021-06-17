@@ -10,6 +10,7 @@ use App\Entity\Statusi;
 use App\Service\RezervacijaVerify;
 use DateInterval;
 use DateTime;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -105,7 +106,10 @@ class ProfilKnjiznicaController extends AbstractController
             $daniPosudbe = $knjiznicar->getDaniPosudbe();
             $duration = "P" . $daniPosudbe . "D";
 
-            $rezervacija->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
+            try {
+                $rezervacija->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
+            } catch (Exception $e) {
+            }
 
             $entityManager->flush();
             $this->addFlash('success', 'Knjiga uspješno posuđena!');
@@ -144,7 +148,10 @@ class ProfilKnjiznicaController extends AbstractController
             $daniPosudbe = $knjiznicar->getDaniPosudbe();
             $duration = "P".$daniPosudbe."D";
 
-            $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
+            try {
+                $posudbe->setDatumRokaVracanja((new DateTime())->add(new DateInterval($duration)));
+            } catch (Exception $e) {
+            }
             $gradja->setStatus($entityManager->getRepository(Statusi::class)->find(3));
             $korisnik->addPosudbe($posudbe);
 
@@ -165,7 +172,7 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
     #[Route('/gradja/vrati/{id}', name: 'vrati_gradju', methods: ['GET'])]
-    public function vracanje($id, RezervacijaVerify $verify)
+    public function vracanje($id, RezervacijaVerify $verify): RedirectResponse|Response
     {
         $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
@@ -201,7 +208,7 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
     #[Route('/gradja/produlji-posudbu/{id}', name: 'odobri-produljenje', methods: ['GET'])]
-    public function extendAccept($id, RezervacijaVerify $verify)
+    public function extendAccept($id, RezervacijaVerify $verify): RedirectResponse|Response
     {
         $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
@@ -224,7 +231,11 @@ class ProfilKnjiznicaController extends AbstractController
             $duration = "P".$daniPosudbe."D";
 
             $newDate = clone $rezervacija->getDatumRokaVracanja();
-            $newDate->add(new DateInterval($duration));
+            try {
+                $newDate->add(new DateInterval($duration));
+            } catch (Exception $e) {
+
+            }
 
             $rezervacija->setDatumRokaVracanja($newDate);
             $entityManager->persist($rezervacija);
@@ -240,7 +251,7 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
     #[Route('/gradja/odbij-produljenje-posudbe/{id}', name: 'odbij-produljenje', methods: ['GET'])]
-    public function extendDeny($id, RezervacijaVerify $verify)
+    public function extendDeny($id, RezervacijaVerify $verify): RedirectResponse|Response
     {
         $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();

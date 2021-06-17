@@ -17,17 +17,17 @@ class Statusi
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $naziv;
+    private ?string $naziv;
 
     /**
      * @ORM\OneToMany(targetEntity=Gradja::class, mappedBy="status")
      */
-    private $gradje;
+    private  $gradje;
 
     /**
      * @ORM\OneToMany(targetEntity=Posudbe::class, mappedBy="status")

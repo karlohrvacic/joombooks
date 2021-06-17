@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=KnjizniceRepository::class)
+ * @method string getUserIdentifier()
  */
 class Knjiznice implements UserInterface
 {
@@ -26,18 +27,18 @@ class Knjiznice implements UserInterface
      * @Assert\NotBlank
      *
      */
-    private $oibKnjiznice;
+    private ?string $oibKnjiznice;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    private $naziv;
+    private ?string $naziv;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $adresa;
+    private ?string $adresa;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2)
@@ -48,25 +49,25 @@ class Knjiznice implements UserInterface
      * @ORM\Column(type="string", length=191, unique=true)
      * @Assert\Email()
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotCompromisedPassword()
      *
      */
-    private $lozinka;
+    private ?string $lozinka;
 
     /**
      * @ORM\Column(type="integer")
      *
      */
-    private $maxPosudjenih;
+    private ?int $maxPosudjenih;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $maxRezerviranih;
+    private ?int $maxRezerviranih;
 
     /**
      * @ORM\OneToMany(targetEntity=Gradja::class, mappedBy="knjiznicaVlasnik")
@@ -77,7 +78,7 @@ class Knjiznice implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @ORM\OneToMany(targetEntity=Korisnici::class, mappedBy="knjiznice")
@@ -87,7 +88,7 @@ class Knjiznice implements UserInterface
     /**
      * @ORM\Column(type="integer")
      */
-    private $daniRezervacije;
+    private ?int $daniRezervacije;
 
     /**
      * @ORM\OneToMany(targetEntity=Posudbe::class, mappedBy="knjiznica")
@@ -97,7 +98,7 @@ class Knjiznice implements UserInterface
     /**
      * @ORM\Column(type="integer")
      */
-    private $daniPosudbe;
+    private ?int $daniPosudbe;
 
     public function __construct()
     {
@@ -208,7 +209,7 @@ class Knjiznice implements UserInterface
     }
 
     /**
-     * @return Collection|Gradja[]
+     * @return Collection
      */
     public function getGradje(): Collection
     {
@@ -237,7 +238,7 @@ class Knjiznice implements UserInterface
         return $this;
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
@@ -253,7 +254,7 @@ class Knjiznice implements UserInterface
         return $this;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return (string) $this->lozinka;
     }
@@ -270,7 +271,7 @@ class Knjiznice implements UserInterface
         return null;
     }
 
-    public function getUsername()
+    public function getUsername(): string
     {
         return (string) $this->email;
     }
@@ -282,7 +283,7 @@ class Knjiznice implements UserInterface
     }
 
     /**
-     * @return Collection|Korisnici[]
+     * @return Collection
      */
     public function getKorisnici(): Collection
     {
@@ -328,7 +329,7 @@ class Knjiznice implements UserInterface
     }
 
     /**
-     * @return Collection|Posudbe[]
+     * @return Collection
      */
     public function getPosudbe(): Collection
     {
@@ -367,6 +368,11 @@ class Knjiznice implements UserInterface
         $this->daniPosudbe = $daniPosudbe;
 
         return $this;
+    }
+
+    public function __call(string $name, array $arguments)
+    {
+        // TODO: Implement @method string getUserIdentifier()
     }
 }
 

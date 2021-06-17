@@ -9,22 +9,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class ActivateController extends AbstractController
 {
-    private UserPasswordEncoderInterface $passwordEncoder;
+    private UserPasswordHasherInterface $passwordEncoder;
     private $session;
 
-    public function __construct(SessionInterface $session, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(SessionInterface $session, UserPasswordHasherInterface $passwordEncoder)
     {
         $this->session = $session;
         $this->passwordEncoder = $passwordEncoder;
     }
 
     #[Route('/aktivacija/{code}', name: 'activation_index')]
-    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder, string $code = null): Response
+    public function index(Request $request, string $code = null): Response
     {
         
 
@@ -82,7 +82,7 @@ class ActivateController extends AbstractController
                     );
             }
 
-            $hash = $this->passwordEncoder->encodePassword($korisnik, $form->get('password')->getData());
+            $hash = $this->passwordEncoder->hashPassword($korisnik, $form->get('password')->getData());
 
             $korisnik->setLozinka($hash);
 

@@ -17,12 +17,12 @@ class Zanrovi
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $naziv;
+    private ?string $naziv;
 
     /**
      * @ORM\ManyToMany(targetEntity=Gradja::class, mappedBy="zanrovi")

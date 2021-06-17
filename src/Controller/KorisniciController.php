@@ -14,16 +14,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 #[Route('/knjiznica/korisnici')]
 class KorisniciController extends AbstractController
 {
 
-    private UserPasswordEncoderInterface $passwordEncoder;
+    private UserPasswordHasherInterface $passwordEncoder;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordHasherInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
     }
@@ -64,7 +64,7 @@ class KorisniciController extends AbstractController
 
             // Save random string as activation code
             $code = uniqid();
-            $korisnici->setLozinka($this->passwordEncoder->encodePassword($korisnici, $code));
+            $korisnici->setLozinka($this->passwordEncoder->hashPassword($korisnici, $code));
 
             $entityManager->persist($korisnici);
             $entityManager->flush();

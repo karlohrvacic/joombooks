@@ -41,7 +41,7 @@ class ObavijestiController extends AbstractController
         ]);
     }
 
-    public function notifyCheck(Korisnici $korisnik)
+    public function notifyCheck(Korisnici $korisnik): array
     {
         $array = [];
         foreach ($korisnik->getPosudbe() as $posudba){
@@ -63,9 +63,7 @@ class ObavijestiController extends AbstractController
             }
         }
 
-        if (!empty($array)){
-            return $array;
-        }
+        return $array;
     }
 
 

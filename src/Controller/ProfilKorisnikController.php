@@ -132,8 +132,6 @@ class ProfilKorisnikController extends AbstractController
          */
         $korisnik = $this->getUser();
 
-        $postavke = $korisnik->getPostavke();
-
         return $this->render('korisnickiProfil/postavke.html.twig', [
             'korisnik' => $korisnik
         ]);
@@ -142,7 +140,7 @@ class ProfilKorisnikController extends AbstractController
     /**
      * @Route("/postavke/spremi", name="spremi_postavke")
      */
-    public function spremiPostavke(Request $request): Response
+    public function spremiPostavke(): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();

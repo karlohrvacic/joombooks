@@ -18,23 +18,23 @@ class Izdavaci
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    private $naziv;
+    private ?string $naziv;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $adresa;
+    private ?string $adresa;
 
     /**
      * @ORM\ManyToOne(targetEntity=Drzave::class, inversedBy="izdavaci")
      */
-    private $drzava;
+    private ?Drzave $drzava;
 
     /**
      * @ORM\OneToMany(targetEntity=Gradja::class, mappedBy="izdavac")

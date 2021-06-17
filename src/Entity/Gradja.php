@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\GradjaRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,43 +19,43 @@ class Gradja
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Isbn
      */
-    private $ISBN;
+    private ?string $ISBN;
 
     /**
      * @ORM\Column(type="string", length=512)
      * @Assert\NotBlank
      */
-    private $naslov;
+    private ?string $naslov;
 
     /**
      * @ORM\Column(type="string", length=2048, nullable=true)
      *
      */
-    private $fotografija;
+    private ?string $fotografija;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $opis;
+    private ?string $opis;
 
     /**
      * @ORM\Column(type="date")
      *
      */
-    private $datumDodavanja;
+    private ?DateTimeInterface $datumDodavanja;
 
 
     /**
      * @ORM\Column(type="date", nullable=true)
      *
      */
-    private $godinaIzdanja;
+    private ?DateTimeInterface $godinaIzdanja;
 
     /**
      * @ORM\Column(type="string", length=191, unique=true)
@@ -71,7 +72,7 @@ class Gradja
      * @ORM\ManyToOne(targetEntity=Statusi::class, inversedBy="gradje")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $status;
+    private ?Statusi $status;
 
     /**
      * @ORM\ManyToMany(targetEntity=Zanrovi::class, inversedBy="gradje")
@@ -82,7 +83,7 @@ class Gradja
      * @ORM\ManyToOne(targetEntity=Knjiznice::class, inversedBy="gradje")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $knjiznicaVlasnik;
+    private ?Knjiznice $knjiznicaVlasnik;
 
     /**
      * @ORM\OneToMany(targetEntity=Posudbe::class, mappedBy="gradja")
@@ -92,12 +93,12 @@ class Gradja
     /**
      * @ORM\ManyToOne(targetEntity=Izdavaci::class, inversedBy="gradje")
      */
-    private $izdavac;
+    private ?Izdavaci $izdavac;
 
     /**
      * @ORM\ManyToOne(targetEntity=Jezici::class, inversedBy="gradje")
      */
-    private $jezici;
+    private ?Jezici $jezici;
 
     public function __construct()
     {
@@ -159,12 +160,12 @@ class Gradja
         return $this;
     }
 
-    public function getDatumDodavanja(): ?\DateTimeInterface
+    public function getDatumDodavanja(): ?DateTimeInterface
     {
         return $this->datumDodavanja;
     }
 
-    public function setDatumDodavanja(\DateTimeInterface $datumDodavanja): self
+    public function setDatumDodavanja(DateTimeInterface $datumDodavanja): self
     {
         $this->datumDodavanja = $datumDodavanja;
 
@@ -172,12 +173,12 @@ class Gradja
     }
 
 
-    public function getGodinaIzdanja(): ?\DateTimeInterface
+    public function getGodinaIzdanja(): ?DateTimeInterface
     {
         return $this->godinaIzdanja;
     }
 
-    public function setGodinaIzdanja(?\DateTimeInterface $godinaIzdanja): self
+    public function setGodinaIzdanja(?DateTimeInterface $godinaIzdanja): self
     {
         $this->godinaIzdanja = $godinaIzdanja;
 

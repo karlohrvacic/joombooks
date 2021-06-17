@@ -18,13 +18,13 @@ class Jezici
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
-    private $ime;
+    private ?string $ime;
 
     /**
      * @ORM\OneToMany(targetEntity=Gradja::class, mappedBy="jezici")
