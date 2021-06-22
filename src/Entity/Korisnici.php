@@ -326,7 +326,7 @@ class Korisnici implements UserInterface
 
     }
 
-    public function getNotifications(): array
+    public function getNotifications(): ?array
     {
 
         return $this->notifications;
