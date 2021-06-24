@@ -55,7 +55,7 @@ class ActivationType extends AbstractType
                         'class' => 'knjiznica-label'
                     ],
                 ],
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Lozinke se moraju podudarati.',
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
