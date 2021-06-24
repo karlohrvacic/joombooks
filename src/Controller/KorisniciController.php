@@ -6,6 +6,7 @@ use App\Entity\Gradja;
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Entity\Posudbe;
+use App\Entity\ResetPasswordRequest;
 use App\Entity\Statusi;
 use App\Form\KorisniciType;
 use App\Repository\KorisniciRepository;
@@ -135,7 +136,9 @@ class KorisniciController extends AbstractController
                 'korisnici' => $korisnici,
             ]);
 
+
             /**
+             * Removes all Posudbe from Korisnik, all history is deleted before user
              * @var $posudba Posudbe
              */
             foreach ($posudbe as $posudba)  {
@@ -163,10 +166,19 @@ class KorisniciController extends AbstractController
                     $entityManager->remove($posudba);
 
                 } elseif ($statusId == 3 || $statusId == 9){
-                    $this->addFlash('alert', 'Korisnik ima posuđenih knjiga!');
-                    $this->addFlash('alert', 'Korisnik nije obrisan!');
+                    $this->addFlash('alert', 'Korisnik ima posuđenih knjiga! Korisnik nije obrisan!');
                     return $this->redirectToRoute('korisnici_index');
                 }
+            }
+
+            /**
+             * @var $passwordRequest ResetPasswordRequest
+             */
+                $passwordRequest = $this->getDoctrine()->getManager()->getRepository(ResetPasswordRequest::class)->
+                findBy(['user' => $korisnici]);
+
+            foreach ($passwordRequest as $requ) {
+                $entityManager->remove($requ);
             }
 
             $entityManager->remove($korisnici);
