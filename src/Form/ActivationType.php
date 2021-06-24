@@ -45,7 +45,7 @@ class ActivationType extends AbstractType
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'New password',
+                    'label' => 'Lozinka',
                 ],
                 'second_options' => [
                     'attr' => ['autocomplete' => 'new-password',
