@@ -39,6 +39,9 @@ class ActivateController extends AbstractController
             $this->session->set('code', $code);
             
             return $this->redirectToRoute('activation_index');
+        } elseif (! $this->session->get('code')){
+            $this->flasher->addError('Nemate pravo pristupa!');
+            return $this->redirectToRoute('app_login');
         }
 
 
