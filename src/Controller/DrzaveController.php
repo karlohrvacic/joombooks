@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Drzave;
 use App\Form\DrzaveType;
 use App\Repository\DrzaveRepository;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DrzaveController extends AbstractController
 {
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+
     /**
      * @Route("/", name="drzave_index", methods={"GET"})
      */
@@ -29,7 +37,7 @@ class DrzaveController extends AbstractController
     /**
      * @Route("/new", name="drzave_new", methods={"GET", "POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ToastrFactory $flasher): Response
     {
         $drzave = new Drzave();
         $form = $this->createForm(DrzaveType::class, $drzave);
@@ -40,7 +48,7 @@ class DrzaveController extends AbstractController
             $entityManager->persist($drzave);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Nova država uspješno pohranjena!');
+            $this->flasher->addSuccess('Nova država uspješno pohranjena!');
 
             return $this->redirectToRoute('drzave_index');
         }
@@ -66,7 +74,7 @@ class DrzaveController extends AbstractController
     /**
      * @Route("/{id}/edit", name="drzave_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Drzave $drzave): Response
+    public function edit(Request $request, Drzave $drzave, ToastrFactory $flasher): Response
     {
         $form = $this->createForm(DrzaveType::class, $drzave);
         $form->handleRequest($request);
@@ -74,7 +82,7 @@ class DrzaveController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+            $this->flasher->addSuccess('Promjene uspješno pohranjene!');
 
             return $this->redirectToRoute('drzave_index');
         }
@@ -95,7 +103,7 @@ class DrzaveController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($drzave);
             $entityManager->flush();
-            $this->addFlash('success', 'Država uspješno uklonjena!');
+            $this->flasher->addSuccess('Država uspješno uklonjena!');
 
         }
         return $this->redirectToRoute('drzave_index');

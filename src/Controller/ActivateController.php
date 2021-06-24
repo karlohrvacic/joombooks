@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Knjiznice;
 use App\Entity\Korisnici;
 use App\Form\ActivationType;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -16,11 +17,14 @@ class ActivateController extends AbstractController
 {
     private UserPasswordHasherInterface $passwordEncoder;
     private $session;
+    private $flasher;
 
-    public function __construct(SessionInterface $session, UserPasswordHasherInterface $passwordEncoder)
+    public function __construct(SessionInterface $session, UserPasswordHasherInterface $passwordEncoder, ToastrFactory $flasher)
     {
         $this->session = $session;
         $this->passwordEncoder = $passwordEncoder;
+        $this->flasher = $flasher;
+
     }
 
     #[Route('/aktivacija/{code}', name: 'activation_index')]
@@ -41,14 +45,14 @@ class ActivateController extends AbstractController
         /** @var $user Korisnici */
         $user = $this->getUser();
         if($user instanceof Korisnici){
-            $this->addFlash('alert', 'Ne možete aktivirati račun dok ste prijavljeni, prvo se odjavite!');
+            $this->flasher->addInfo('Ne možete aktivirati račun dok ste prijavljeni, prvo se odjavite!');
             return $this->redirectToRoute('korisnicki_izbornik');
         }
 
         /** @var $user Knjiznice */
         $user = $this->getUser();
         if($user instanceof Knjiznice){
-            $this->addFlash('alert', 'Ne možete aktivirati račun dok ste prijavljeni, prvo se odjavite!');
+            $this->flasher->addInfo('Ne možete aktivirati račun dok ste prijavljeni, prvo se odjavite!');
             return $this->redirectToRoute('knjiznica_izbornik');
         }
 
@@ -90,7 +94,7 @@ class ActivateController extends AbstractController
             $entityManager->persist($korisnik);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Uspješno ste aktivirali svoj račun!');
+            $this->flasher->addSuccess( 'Uspješno ste aktivirali svoj račun!');
 
             return $this->redirectToRoute('app_login');
         }

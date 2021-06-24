@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Jezici;
 use App\Form\JeziciType;
 use App\Repository\JeziciRepository;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/knjiznica/jezici')]
 class JeziciController extends AbstractController
 {
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+
     #[Route('/', name: 'jezici_index', methods: ['GET'])]
     public function index(JeziciRepository $jeziciRepository): Response
     {
@@ -34,7 +42,7 @@ class JeziciController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($jezici);
             $entityManager->flush();
-            $this->addFlash('success', 'Novi jezik uspješno pohranjen!');
+            $this->flasher->addSuccess('Novi jezik uspješno pohranjen!');
             return $this->redirectToRoute('jezici_index');
         }
 
@@ -65,7 +73,7 @@ class JeziciController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+            $this->flasher->addSuccess('Promjene uspješno pohranjene!');
 
             return $this->redirectToRoute('jezici_index');
         }
@@ -86,7 +94,7 @@ class JeziciController extends AbstractController
             $entityManager->remove($jezici);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Autor uspješno uklonjen!');
+            $this->flasher->addSuccess('Autor uspješno uklonjen!');
 
         }
 

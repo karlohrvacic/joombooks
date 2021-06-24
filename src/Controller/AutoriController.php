@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Autori;
 use App\Form\AutoriType;
 use App\Repository\AutoriRepository;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AutoriController extends AbstractController
 {
+
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+
     /**
      * @Route("/", name="autori_index", methods={"GET"})
      */
@@ -40,7 +49,7 @@ class AutoriController extends AbstractController
             $entityManager->persist($autori);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Novi autor uspješno pohranjen!');
+            $this->flasher->addSuccess( 'Novi autor uspješno pohranjen!');
 
             return $this->redirectToRoute('autori_index');
         }
@@ -74,7 +83,7 @@ class AutoriController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+            $this->flasher->addSuccess('Promjene uspješno pohranjene!');
 
             return $this->redirectToRoute('autori_index');
         }
@@ -89,13 +98,13 @@ class AutoriController extends AbstractController
     /**
      * @Route("/{id}", name="autori_delete", methods={"POST"})
      */
-    public function delete(Request $request, Autori $autori): Response
+    public function delete(Request $request, Autori $autori ): Response
     {
         if ($this->isCsrfTokenValid('delete'.$autori->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($autori);
             $entityManager->flush();
-            $this->addFlash('success', 'Autor uspješno uklonjen!');
+            $this->flasher->addSuccess('Autor uspješno uklonjen!');
 
         }
 

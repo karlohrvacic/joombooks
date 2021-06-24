@@ -11,6 +11,7 @@ use App\Entity\Statusi;
 use App\Form\KorisniciType;
 use App\Repository\KorisniciRepository;
 use App\Service\MailerSender;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,13 +22,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/knjiznica/korisnici')]
 class KorisniciController extends AbstractController
 {
-
+    private $flasher;
     private UserPasswordHasherInterface $passwordEncoder;
 
-    public function __construct(UserPasswordHasherInterface $passwordEncoder)
+
+    public function __construct(ToastrFactory $flasher, UserPasswordHasherInterface $passwordEncoder)
     {
+        $this->flasher = $flasher;
         $this->passwordEncoder = $passwordEncoder;
+
     }
+
+
 
     #[Route('/', name: 'korisnici_index', methods: ['GET'])]
     public function index(KorisniciRepository $korisniciRepository): Response
@@ -73,8 +79,8 @@ class KorisniciController extends AbstractController
             // Send user activation code via email
             $mailerSender->sendActivationEmail($korisnici, $code);
 
-            $this->addFlash('success', 'Novi korisnik uspješno pohranjen!');
-            $this->addFlash('success', 'Aktivacijski kod je korisniku poslan putem e-maila!');
+            $this->flasher->addSuccess('Novi korisnik uspješno pohranjen!');
+            $this->flasher->addInfo('Aktivacijski kod je korisniku poslan putem e-maila!');
 
             return $this->redirectToRoute('korisnici_index');
         }
@@ -112,7 +118,7 @@ class KorisniciController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+            $this->flasher->addSuccess('Promjene uspješno pohranjene!');
 
             return $this->redirectToRoute('korisnici_index');
         }
@@ -166,7 +172,7 @@ class KorisniciController extends AbstractController
                     $entityManager->remove($posudba);
 
                 } elseif ($statusId == 3 || $statusId == 9){
-                    $this->addFlash('alert', 'Korisnik ima posuđenih knjiga! Korisnik nije obrisan!');
+                    $this->flasher->addWarning('Korisnik ima posuđenih knjiga! Korisnik nije obrisan!');
                     return $this->redirectToRoute('korisnici_index');
                 }
             }
@@ -183,7 +189,7 @@ class KorisniciController extends AbstractController
 
             $entityManager->remove($korisnici);
             $entityManager->flush();
-            $this->addFlash('success', 'Korisnik uspješno uklonjen!');
+            $this->flasher->addSuccess('Korisnik uspješno uklonjen!');
         }
 
         return $this->redirectToRoute('korisnici_index');

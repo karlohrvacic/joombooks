@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Korisnici;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,13 +23,16 @@ use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 #[Route('/reset-password')]
 class ResetPasswordController extends AbstractController
 {
+    private $flasher;
+
     use ResetPasswordControllerTrait;
 
     private $resetPasswordHelper;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper)
+    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, ToastrFactory $flasher)
     {
         $this->resetPasswordHelper = $resetPasswordHelper;
+        $this->flasher = $flasher;
     }
 
     /**
@@ -91,7 +95,7 @@ class ResetPasswordController extends AbstractController
         try {
             $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
         } catch (ResetPasswordExceptionInterface $e) {
-            $this->addFlash('reset_password_error', sprintf(
+            $this->flasher->addError(sprintf(
                 'Dogodio se problem - %s',
                 $e->getReason()
             ));

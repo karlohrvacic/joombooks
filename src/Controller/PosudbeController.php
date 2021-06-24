@@ -12,6 +12,7 @@ use App\Service\RezervacijaVerify;
 use DateInterval;
 use DateTime;
 use Exception;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,14 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/korisnik/posudbe')]
 class PosudbeController extends AbstractController
 {
+
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+    
     #[Route('/', name: 'posudbe_index', methods: ['GET'])]
     public function index(PosudbeRepository $posudbeRepository, RezervacijaVerify $verify): Response
     {
@@ -71,9 +80,9 @@ class PosudbeController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Uspješno ste rezervirali knjigu!');
+            $this->flasher->addSuccess('Uspješno ste rezervirali knjigu!');
             } else{
-                $this->addFlash('alert', "Već ste rezervirali $maxRezerviranih knjige!");
+                $this->flasher->addWarning("Već ste rezervirali $maxRezerviranih knjige!");
             }
 
         return $this->redirectToRoute('rezervirane_knjige_korisnika');
@@ -98,7 +107,7 @@ class PosudbeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+            $this->flasher->addSuccess('Promjene uspješno pohranjene!');
 
             return $this->redirectToRoute('posudbe_index');
         }
@@ -117,7 +126,7 @@ class PosudbeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($posudbe);
             $entityManager->flush();
-            $this->addFlash('success', 'Uspješno uklonjeo!');
+            $this->flasher->addSuccess('Uspješno uklonjeo!');
         }
 
         return $this->redirectToRoute('posudbe_index');
@@ -141,7 +150,7 @@ class PosudbeController extends AbstractController
 
         $daniRezervacije = $user->getKnjiznice()->getDaniRezervacije();
         if($user->getBrojIskazniceKorisnika() != $rezervacija->getKorisnici()->getBrojIskazniceKorisnika()){
-            $this->addFlash('alert', 'Knjiga nije zadužena na vas!');
+            $this->flasher->addError('Knjiga nije zadužena na vas!');
         }
         if($rezervacija->getDatumPosudbe()->diff($rezervacija->getDatumRokaVracanja())->format('%r%a') <
             ($daniRezervacije * 2) && $rezervacija->getStatus()->getId() == 5){
@@ -154,9 +163,9 @@ class PosudbeController extends AbstractController
             $entityManager->persist($rezervacija);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Uspješno ste produžili rezervaciju!');
+            $this->flasher->addSuccess('Uspješno ste produžili rezervaciju!');
         } else{
-            $this->addFlash('alert', "Rezervaciju ste već jednom produžili!");
+            $this->flasher->addWarning("Rezervaciju ste već jednom produžili!");
         }
 
         return $this->redirectToRoute('rezervirane_knjige_korisnika');
@@ -175,17 +184,17 @@ class PosudbeController extends AbstractController
          */
         $user = $this->getUser();
         if($user->getBrojIskazniceKorisnika() != $rezervacija->getKorisnici()->getBrojIskazniceKorisnika()){
-            $this->addFlash('alert', 'Knjiga nije zadužena na vas!');
+            $this->flasher->addError('Knjiga nije zadužena na vas!');
         }
         else if ($rezervacija->getStatus()->getId() == 3) {
 
             $rezervacija->setStatus($entityManager->getRepository(Statusi::class)->find(9));
             $entityManager->flush();
 
-            $this->addFlash('success', 'Zahtjev za produljenje posudbe uspješno poslan!');
+            $this->flasher->addSuccess('Zahtjev za produljenje posudbe uspješno poslan!');
         }
         else{
-            $this->addFlash('alert', 'Vaš zahtjev za produljenje posudbe još uvijek čeka odluku knjižničara!');
+            $this->flasher->addWarning('Vaš zahtjev za produljenje posudbe još uvijek čeka odluku knjižničara!');
         }
         return $this->redirectToRoute('posudjene_knjige_korisnika');
     }

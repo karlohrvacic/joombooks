@@ -7,6 +7,7 @@ use App\Entity\Korisnici;
 use App\Entity\Posudbe;
 use App\Entity\Statusi;
 use App\Service\RezervacijaVerify;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
+
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
 
     /**
      * @Route("/")
@@ -39,7 +47,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/radno_vrijeme", name="radno_vrijeme")
+     * @Route("radno_vrijeme", name="radno_vrijeme")
      */
     public function radnovrijeme(): Response
     {
@@ -75,7 +83,7 @@ class MainController extends AbstractController
 
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Rezervacija uspješno otkazana!');
+                $this->flasher->addSuccess('Rezervacija uspješno otkazana!');
 
             }
 
@@ -96,7 +104,7 @@ class MainController extends AbstractController
 
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Rezervacija uspješno otkazana!');
+                $this->flasher->addSuccess('Rezervacija uspješno otkazana!');
 
             }
             return $this->redirectToRoute('rezervacije_korisnika');

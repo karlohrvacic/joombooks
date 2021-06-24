@@ -9,6 +9,7 @@ use App\Entity\Statusi;
 use App\Form\GradjaType;
 use App\Repository\GradjaRepository;
 use App\Service\RezervacijaVerify;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/knjiznica/gradja')]
 class GradjaController extends AbstractController
 {
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+
     #[Route('/', name: 'gradja_index', methods: ['GET'])]
     public function index(GradjaRepository $gradjaRepository): Response
     {
@@ -58,7 +66,7 @@ class GradjaController extends AbstractController
             $entityManager->persist($gradja);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Nova knjiga uspješno pohranjena!');
+            $this->flasher->addSuccess('Nova knjiga uspješno pohranjena!');
 
             return $this->redirectToRoute('gradja_index');
         }
@@ -99,7 +107,7 @@ class GradjaController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+            $this->flasher->addSuccess('Promjene uspješno pohranjene!');
 
             return $this->redirectToRoute('gradja_index');
         }
@@ -121,7 +129,7 @@ class GradjaController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->addFlash('success', 'Knjiga uspješno uklonjena!');
+        $this->flasher->addSuccess('Knjiga uspješno uklonjena!');
 
         return $this->redirectToRoute('gradja_index');
     }
@@ -161,7 +169,7 @@ class GradjaController extends AbstractController
                         ->find(3));
 
                 $entityManager->flush();
-                $this->addFlash('success', 'Knjiga uspješno posuđena!');
+                $this->flasher->addSuccess('Knjiga uspješno posuđena!');
 
             }
 

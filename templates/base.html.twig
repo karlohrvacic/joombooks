@@ -15,6 +15,7 @@
         {% endblock %}
     </head>
     <body>
+
     {% if is_granted('ROLE_USER') %}
         <header>
             <div class="home-container">
@@ -89,19 +90,21 @@
             </div>
         </section>
     {% endif %}
+    {{ flasher_render() }}
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endfor %}
-    {% for message in app.flashes('alert') %}
-        <div class="alert alert-danger">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endfor %}
+
+    {#    {% for message in app.flashes('success') %}#}
+{#        <div class="alert alert-success">#}
+{#            {{ message }}#}
+{#            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
+{#        </div>#}
+{#    {% endfor %}#}
+{#    {% for message in app.flashes('alert') %}#}
+{#        <div class="alert alert-danger">#}
+{#            {{ message }}#}
+{#            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
+{#        </div>#}
+{#    {% endfor %}#}
 
     {% block body %}
     {% endblock %}
@@ -111,6 +114,7 @@
             <p style="color: black;">© JoomBooks {{ 'now' | date('Y') }}. <img src="/files/pitcures/icons/github_logo.png" alt="Github" width="25px"></p>
         </a>
     </footer>
+
     {% endif %}
     {% block javascripts %}
         <script src="https://code.jquery.com/jquery.js"></script>
@@ -118,6 +122,5 @@
         <script src="{{ asset('js/index.js') }}"></script>
     {% endblock %}
     </body>
-
 
 </html>

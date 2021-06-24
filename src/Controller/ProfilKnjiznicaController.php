@@ -11,6 +11,7 @@ use App\Service\RezervacijaVerify;
 use DateInterval;
 use DateTime;
 use Exception;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/knjiznica')]
 class ProfilKnjiznicaController extends AbstractController
 {
+
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
 
     /**
      * @Route("/", name="knjiznica_izbornik")
@@ -112,11 +120,11 @@ class ProfilKnjiznicaController extends AbstractController
             }
 
             $entityManager->flush();
-            $this->addFlash('success', 'Knjiga uspješno posuđena!');
+            $this->flasher->addSuccess('Knjiga uspješno posuđena!');
 
             return $this->redirectToRoute('posudbe_korisnika');
         }
-        $this->addFlash('alert', 'Nije vam dozvoljeno posuđivati tuđe knjige!');
+        $this->flasher->addError('Nije vam dozvoljeno posuđivati tuđe knjige!');
 
         return $this->redirectToRoute('app_login');
     }
@@ -161,11 +169,11 @@ class ProfilKnjiznicaController extends AbstractController
             $entityManager->flush();
 
 
-            $this->addFlash('success', 'Knjiga uspješno posuđena!');
+            $this->flasher->addSuccess('Knjiga uspješno posuđena!');
 
         } else {
             $borrowed = $korisnik->getBrojTrenutnoPosudenih();
-            $this->addFlash('alert', "Korisnik ima već $borrowed posudbe!");
+            $this->flasher->addWarning("Korisnik ima već $borrowed posudbe!");
         }
 
         return $this->redirectToRoute('posudbe_korisnika');
@@ -196,7 +204,7 @@ class ProfilKnjiznicaController extends AbstractController
 
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Knjiga uspješno vraćena!');
+                $this->flasher->addSuccess('Knjiga uspješno vraćena!');
 
             }
             return $this->redirectToRoute('posudbe_korisnika');
@@ -242,7 +250,7 @@ class ProfilKnjiznicaController extends AbstractController
 
             $entityManager->flush();
 
-            $this->addFlash('success', 'Posudba uspješno produžena!');
+            $this->flasher->addSuccess('Posudba uspješno produžena!');
 
             return $this->redirectToRoute('posudbe_korisnika');
 
@@ -273,7 +281,7 @@ class ProfilKnjiznicaController extends AbstractController
 
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Zahtjev za produljivanje posudbe uspješno odbijen!');
+                $this->flasher->addSuccess('Zahtjev za produljivanje posudbe uspješno odbijen!');
 
             }
             return $this->redirectToRoute('posudbe_korisnika');

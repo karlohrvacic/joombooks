@@ -6,6 +6,7 @@ use App\Entity\Korisnici;
 use App\Entity\Posudbe;
 use App\Repository\GradjaRepository;
 use App\Service\RezervacijaVerify;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/korisnik')]
 class ProfilKorisnikController extends AbstractController
 {
+
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+
     /**
      * @Route("/", name="korisnicki_izbornik")
      */
@@ -150,7 +159,7 @@ class ProfilKorisnikController extends AbstractController
 
         $entity->setPostavke($_POST);
         $entityManager->flush();
-        $this->addFlash('success', 'Postavke uspješno spremljene!');
+        $this->flasher->addSuccess('Postavke uspješno spremljene!');
 
         return $this->redirectToRoute('korisnicke_postavke');
     }

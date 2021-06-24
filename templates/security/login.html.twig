@@ -13,19 +13,6 @@
                     {% if error %}
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
-
-                    {% if app.user %}
-                        <div class="mb-3 mt-3">
-                            {% if is_granted('ROLE_LIBRARY') %}
-                                <a href="{{ path('knjiznica_izbornik') }}">Povratak u izbornik</a>
-                            {% endif %}
-                            {% if is_granted('ROLE_USER') %}
-                                <a href="{{ path('korisnicki_izbornik') }}">Povratak u izbornik</a>
-                            {% endif %}
-
-                            Prijavljeni ste kao {{ app.user.username }} <a href="{{ path('app_logout') }}"><button class="btn">Odjava</button></a>
-                        </div>
-                    {% endif %}
                 <form method="post" class="login">
                     <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
                            class="form-control" placeholder="e-mail:" required autofocus>

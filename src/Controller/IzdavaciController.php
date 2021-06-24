@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Izdavaci;
 use App\Form\IzdavaciType;
 use App\Repository\IzdavaciRepository;
+use Flasher\Toastr\Prime\ToastrFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/knjiznica/izdavaci')]
 class IzdavaciController extends AbstractController
 {
+
+    private $flasher;
+
+    public function __construct(ToastrFactory $flasher)
+    {
+        $this->flasher = $flasher;
+    }
+
     #[Route('/', name: 'izdavaci_index', methods: ['GET'])]
     public function index(IzdavaciRepository $izdavaciRepository): Response
     {
@@ -34,7 +43,7 @@ class IzdavaciController extends AbstractController
             $entityManager->persist($izdavaci);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Novi izdavač uspješno pohranjen!');
+            $this->flasher->addSuccess('Novi izdavač uspješno pohranjen!');
 
             return $this->redirectToRoute('izdavaci_index');
         }
@@ -66,7 +75,7 @@ class IzdavaciController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Promjene uspješno pohranjene!');
+            $this->flasher->addSuccess('Promjene uspješno pohranjene!');
 
             return $this->redirectToRoute('izdavaci_index');
         }
@@ -86,7 +95,7 @@ class IzdavaciController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($izdavaci);
             $entityManager->flush();
-            $this->addFlash('success', 'Izdavač uspješno uklonjen!');
+            $this->flasher->addSuccess('Izdavač uspješno uklonjen!');
         }
 
 
