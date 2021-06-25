@@ -18,17 +18,18 @@ class ProfilKorisnikController extends AbstractController
 
     private $flasher;
 
-    public function __construct(ToastrFactory $flasher)
+    public function __construct(ToastrFactory $flasher, RezervacijaVerify $verify)
     {
         $this->flasher = $flasher;
+        $verify->rezervacijaExpirationCheck();
+
     }
 
     /**
      * @Route("/", name="korisnicki_izbornik")
      */
-    public function korisnickiIzbornik(RezervacijaVerify $verify): Response
+    public function korisnickiIzbornik(): Response
     {
-        $verify->rezervacijaExpirationCheck();
 
         /**
          * @var $korisnik Korisnici
@@ -66,9 +67,8 @@ class ProfilKorisnikController extends AbstractController
 
 
     #[Route('/gradja', name: 'pregled_knjiga', methods: ['GET', 'POST'])]
-    public function pregledKnjiga(Request $request, GradjaRepository $gradjaRepository, RezervacijaVerify $verify): Response
+    public function pregledKnjiga(Request $request, GradjaRepository $gradjaRepository): Response
     {
-        $verify->rezervacijaExpirationCheck();
         /**
          * @var $korisnik Korisnici
          */
@@ -94,9 +94,8 @@ class ProfilKorisnikController extends AbstractController
     /**
      * @Route("/rezervirano", name="rezervirane_knjige_korisnika")
      */
-    public function pregledRezerviranih(RezervacijaVerify $verify): Response
+    public function pregledRezerviranih(): Response
     {
-        $verify->rezervacijaExpirationCheck();
         /**
          * @var $korisnik Korisnici
          */

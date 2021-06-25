@@ -24,15 +24,16 @@ class PosudbeController extends AbstractController
 
     private $flasher;
 
-    public function __construct(ToastrFactory $flasher)
+    public function __construct(ToastrFactory $flasher, RezervacijaVerify $verify)
     {
         $this->flasher = $flasher;
+        $verify->rezervacijaExpirationCheck();
+
     }
     
     #[Route('/', name: 'posudbe_index', methods: ['GET'])]
-    public function index(PosudbeRepository $posudbeRepository, RezervacijaVerify $verify): Response
+    public function index(PosudbeRepository $posudbeRepository): Response
     {
-        $verify->rezervacijaExpirationCheck();
         return $this->render('posudbe/index.html.twig', [
             'posudbes' => $posudbeRepository->findAll(),
         ]);
@@ -42,9 +43,8 @@ class PosudbeController extends AbstractController
      * @throws Exception
      */
     #[Route('/new/{id}', name: 'posudbe_new', methods: ['GET'])]
-    public function new($id, RezervacijaVerify $verify): Response
+    public function new($id): Response
     {
-        $verify->rezervacijaExpirationCheck();
 
         //Rezervacije
         $posudbe = new Posudbe();
@@ -89,18 +89,16 @@ class PosudbeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'posudbe_show', methods: ['GET'])]
-    public function show(Posudbe $posudbe, RezervacijaVerify $verify): Response
+    public function show(Posudbe $posudbe): Response
     {
-        $verify->rezervacijaExpirationCheck();
         return $this->render('posudbe/show.html.twig', [
             'posudbe' => $posudbe,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'posudbe_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Posudbe $posudbe, RezervacijaVerify $verify): Response
+    public function edit(Request $request, Posudbe $posudbe): Response
     {
-        $verify->rezervacijaExpirationCheck();
         $form = $this->createForm(PosudbeType::class, $posudbe);
         $form->handleRequest($request);
 
@@ -119,9 +117,8 @@ class PosudbeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'posudbe_delete', methods: ['POST'])]
-    public function delete(Request $request, Posudbe $posudbe, RezervacijaVerify $verify): Response
+    public function delete(Request $request, Posudbe $posudbe): Response
     {
-        $verify->rezervacijaExpirationCheck();
         if ($this->isCsrfTokenValid('delete'.$posudbe->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($posudbe);
@@ -136,9 +133,8 @@ class PosudbeController extends AbstractController
      * @throws Exception
      */
     #[Route('/produlji-rezervaciju/{id}', name: 'rezervacija_extend', methods: ['GET'])]
-    public function extension($id, RezervacijaVerify $verify): Response
+    public function extension($id): Response
     {
-        $verify->rezervacijaExpirationCheck();
 
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
@@ -173,9 +169,8 @@ class PosudbeController extends AbstractController
     }
 
     #[Route('/zatrazi-produljenje/{id}', name: 'zatrazi_produljenje_posudbe', methods: ['GET'])]
-    public function zatraziProduljenjePosudbe($id, RezervacijaVerify $verify): Response
+    public function zatraziProduljenjePosudbe($id): Response
     {
-        $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
 

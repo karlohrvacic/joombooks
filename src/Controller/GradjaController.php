@@ -21,9 +21,10 @@ class GradjaController extends AbstractController
 {
     private $flasher;
 
-    public function __construct(ToastrFactory $flasher)
+    public function __construct(ToastrFactory $flasher, RezervacijaVerify $verify)
     {
         $this->flasher = $flasher;
+        $verify->rezervacijaExpirationCheck();
     }
 
     #[Route('/', name: 'gradja_index', methods: ['GET'])]
@@ -149,9 +150,8 @@ class GradjaController extends AbstractController
     }
 
     #[Route('gradja/posudi/{id}', name: 'posudi_gradju', methods: ['GET'])]
-    public function posudiKnjigu($id, RezervacijaVerify $verify): Response
+    public function posudiKnjigu($id): Response
     {
-        $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
 

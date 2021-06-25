@@ -23,9 +23,10 @@ class ProfilKnjiznicaController extends AbstractController
 
     private $flasher;
 
-    public function __construct(ToastrFactory $flasher)
+    public function __construct(ToastrFactory $flasher, RezervacijaVerify $verify)
     {
         $this->flasher = $flasher;
+        $verify->rezervacijaExpirationCheck();
     }
 
     /**
@@ -42,9 +43,8 @@ class ProfilKnjiznicaController extends AbstractController
     /**
      * @Route("/rezervirano", name="rezervacije_korisnika")
      */
-    public function pregledRezervacija(RezervacijaVerify $verify): Response
+    public function pregledRezervacija(): Response
     {
-        $verify->rezervacijaExpirationCheck();
         /**
          * @var $knjiznica Knjiznice
          */
@@ -68,9 +68,8 @@ class ProfilKnjiznicaController extends AbstractController
     /**
      * @Route("/posudjeno", name="posudbe_korisnika")
      */
-    public function pregledPosudbi(RezervacijaVerify $verify): Response
+    public function pregledPosudbi(): Response
     {
-        $verify->rezervacijaExpirationCheck();
         /**
          * @var $knjiznica Knjiznice
          */
@@ -94,9 +93,8 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
     #[Route('/gradja/posudi/{id}', name: 'posudi_rezerviranu_gradju', methods: ['GET'])]
-    public function posudba($id, RezervacijaVerify $verify): RedirectResponse
+    public function posudba($id): RedirectResponse
     {
-        $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
 
@@ -131,9 +129,8 @@ class ProfilKnjiznicaController extends AbstractController
 
 
     #[Route('/gradja/posudi/{idGradja}/{idKorisnika}', name: 'posudi_gradju', methods: ['GET'])]
-    public function posudbaBezRezervacije($idGradja, $idKorisnika, RezervacijaVerify $verify): RedirectResponse
+    public function posudbaBezRezervacije($idGradja, $idKorisnika): RedirectResponse
     {
-        $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
         $korisnik = $entityManager->getRepository(Korisnici::class)->find($idKorisnika);
 
@@ -180,9 +177,8 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
     #[Route('/gradja/vrati/{id}', name: 'vrati_gradju', methods: ['GET'])]
-    public function vracanje($id, RezervacijaVerify $verify): RedirectResponse|Response
+    public function vracanje($id): RedirectResponse|Response
     {
-        $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
 
@@ -216,9 +212,8 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
     #[Route('/gradja/produlji-posudbu/{id}', name: 'odobri-produljenje', methods: ['GET'])]
-    public function extendAccept($id, RezervacijaVerify $verify): RedirectResponse|Response
+    public function extendAccept($id): RedirectResponse|Response
     {
-        $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
 
@@ -259,9 +254,8 @@ class ProfilKnjiznicaController extends AbstractController
     }
 
     #[Route('/gradja/odbij-produljenje-posudbe/{id}', name: 'odbij-produljenje', methods: ['GET'])]
-    public function extendDeny($id, RezervacijaVerify $verify): RedirectResponse|Response
+    public function extendDeny($id): RedirectResponse|Response
     {
-        $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
 

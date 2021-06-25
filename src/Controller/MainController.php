@@ -19,17 +19,17 @@ class MainController extends AbstractController
 
     private $flasher;
 
-    public function __construct(ToastrFactory $flasher)
+    public function __construct(ToastrFactory $flasher, RezervacijaVerify $verify)
     {
         $this->flasher = $flasher;
+        $verify->rezervacijaExpirationCheck();
     }
 
     /**
      * @Route("/")
      */
-    public function index(RezervacijaVerify $verify): RedirectResponse
+    public function index(): RedirectResponse
     {
-        $verify->rezervacijaExpirationCheck();
 
         /** @var $user Korisnici */
         $user = $this->getUser();
@@ -62,9 +62,8 @@ class MainController extends AbstractController
     }
 
     #[Route('gradja/cancel/{id}', name: 'rezervacija_cancel', methods: ['GET'])]
-    public function cancelation($id, RezervacijaVerify $verify): Response
+    public function cancelation($id): Response
     {
-        $verify->rezervacijaExpirationCheck();
         $entityManager = $this->getDoctrine()->getManager();
         $rezervacija = $entityManager->getRepository(Posudbe::class)->find($id);
 
