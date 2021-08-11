@@ -30,9 +30,7 @@ class ActivateController extends AbstractController
     #[Route('/aktivacija/{code}', name: 'activation_index')]
     public function index(Request $request, string $code = null): Response
     {
-        
 
-        
         if ($code) {
             // We store the token in session and remove it from the URL, to avoid the URL being
             // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
