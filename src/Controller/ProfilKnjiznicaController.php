@@ -233,7 +233,7 @@ class ProfilKnjiznicaController extends AbstractController
             $daniPosudbe = $knjiznicar->getDaniPosudbe();
             $duration = "P".$daniPosudbe."D";
 
-            $newDate = clone $rezervacija->getDatumRokaVracanja();
+            $newDate = new DateTime('Now');
             try {
                 $newDate->add(new DateInterval($duration));
             } catch (Exception $e) {
