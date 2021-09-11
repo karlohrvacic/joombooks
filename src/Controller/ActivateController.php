@@ -31,13 +31,15 @@ class ActivateController extends AbstractController
     public function index(Request $request, string $code = null): Response
     {
 
-        if ($code) {
+        if ($code) 
+        {
             // We store the token in session and remove it from the URL, to avoid the URL being
             // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
             $this->session->set('code', $code);
             
             return $this->redirectToRoute('activation_index');
-        } elseif (! $this->session->get('code')){
+        } elseif (! $this->session->get('code'))
+        {
             $this->flasher->addError('Nemate pravo pristupa!');
             return $this->redirectToRoute('app_login');
         }
@@ -45,20 +47,23 @@ class ActivateController extends AbstractController
 
         /** @var $user Korisnici */
         $user = $this->getUser();
-        if($user instanceof Korisnici){
+        if($user instanceof Korisnici)
+        {
             $this->flasher->addInfo('Ne možete aktivirati račun dok ste prijavljeni, prvo se odjavite!');
             return $this->redirectToRoute('korisnicki_izbornik');
         }
 
         /** @var $user Knjiznice */
         $user = $this->getUser();
-        if($user instanceof Knjiznice){
+        if($user instanceof Knjiznice)
+        {
             $this->flasher->addInfo('Ne možete aktivirati račun dok ste prijavljeni, prvo se odjavite!');
             return $this->redirectToRoute('knjiznica_izbornik');
         }
 
         $code = $this->session->get('code');
-        if (null === $code) {
+        if (null === $code) 
+        {
             throw $this->createNotFoundException('Nema tokena u URL-u ili u sesiji.');
         }
 
@@ -66,7 +71,8 @@ class ActivateController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
 
             /**
              * @var $korisnik Korisnici
@@ -77,11 +83,13 @@ class ActivateController extends AbstractController
                     'email' => $form->get('email')->getData(),
                 ]);
 
-            if (!$korisnik) {
+            if (!$korisnik) 
+            {
                     throw $this->createNotFoundException(
                         'Nema pronađenog korisnika!'
                     );
-            } elseif (($this->passwordEncoder->isPasswordValid($korisnik, $form->get('password')->getData()))){
+            } elseif (($this->passwordEncoder->isPasswordValid($korisnik, $form->get('password')->getData())))
+            {
                     throw $this->createNotFoundException(
                         'Nema pronađenog korisnika!'
                     );
