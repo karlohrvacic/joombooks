@@ -1,11 +1,12 @@
-# jumkabooks - Library in your pocket
+# joombooks - Library in your pocket
 
 <img src="https://travis-ci.com/karlohrvacic/joombooks.svg?branch=master">
 
 Helps connecting Independent libraries with their users. 
 
 
-<a href="https://joombooks.karlo.codes">Live version</a><br>
+<a style="text-decoration-line: line-through;" href="https://joombooks.karlo.codes">Live version</a>
+<p>Shut down as of 15.02.2022.</p><br>
 
 
 Technologies: 
