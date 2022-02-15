@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5149bf4c25652d76c729e94e981d1ad",
+    "content-hash": "c875b73656bd5a35b43f2ad0003e1b5c",
     "packages": [
         {
             "name": "codeitnowin/barcode",
@@ -5892,16 +5892,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.3.14",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "8bbae08c19308b9493ad235386144cbefec83cb0"
+                "reference": "553f50487389a977eb31cf6b37faae56da00f753"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/8bbae08c19308b9493ad235386144cbefec83cb0",
-                "reference": "8bbae08c19308b9493ad235386144cbefec83cb0",
+                "url": "https://api.github.com/repos/symfony/process/zipball/553f50487389a977eb31cf6b37faae56da00f753",
+                "reference": "553f50487389a977eb31cf6b37faae56da00f753",
                 "shasum": ""
             },
             "require": {
@@ -5934,7 +5934,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v5.3.14"
+                "source": "https://github.com/symfony/process/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -5950,7 +5950,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-24T19:35:44+00:00"
+            "time": "2022-01-26T16:28:35+00:00"
         },
         {
             "name": "symfony/property-access",
@@ -8856,5 +8856,5 @@
         "ext-iconv": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
