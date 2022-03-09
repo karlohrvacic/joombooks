@@ -9,7 +9,7 @@
         "ext-gd": "*",
         "ext-iconv": "*",
         "codeitnowin/barcode": "^3.0",
-        "composer/package-versions-deprecated": "1.11.99.1",
+        "composer/package-versions-deprecated": "1.11.99.5",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^3.1",
